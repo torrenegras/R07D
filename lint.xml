@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<lint>
+    <issue id="CutPasteId" severity="ignore" />
+    <issue id="SimpleDateFormat">
+        <ignore path="src/com/xoaquin/r07d/CalendarioActivity.java" />
+    </issue>
+</lint>

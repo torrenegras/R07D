@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.xoaquin.r07d"
+    android:versionCode="5"
+    android:versionName="1.4" >
+
+    <uses-sdk
+        android:minSdkVersion="11"
+        android:targetSdkVersion="17" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_INTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name="com.xoaquin.r07d.MainActivity"
+            android:label="@string/app_name"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.xoaquin.r07d.LoginActivity"
+            android:label="@string/title_activity_login" >
+        </activity>
+        <activity
+            android:name="com.xoaquin.r07d.CalendarioActivity"
+            android:label="@string/title_activity_calendario" >
+        </activity>
+        <activity
+            android:name="com.xoaquin.r07d.RecdiaActivity"
+            android:label="@string/title_activity_recdia" >
+        </activity>
+        <activity
+            android:name="com.xoaquin.r07d.ReporteActivity"
+            android:label="@string/title_activity_reporte" >
+        </activity>
+        <activity
+            android:name="com.xoaquin.r07d.InstActivity"
+            android:label="@string/title_activity_inst" >
+        </activity>
+        <activity
+            android:name="com.xoaquin.r07d.AboutActivity"
+            android:label="@string/title_activity_about" >
+        </activity>
+        <activity
+            android:name="com.xoaquin.r07d.CalendarioActivity2"
+            android:label="@string/title_activity_calendario_activity2" >
+        </activity>
+    
+    
+    <service android:name="com.parse.PushService" />
+<receiver android:name="com.parse.ParseBroadcastReceiver">
+  <intent-filter>
+    <action android:name="android.intent.action.BOOT_COMPLETED" />
+    <action android:name="android.intent.action.USER_PRESENT" />
+  </intent-filter>
+</receiver>
+
+
+    
+    </application>
+
+</manifest>

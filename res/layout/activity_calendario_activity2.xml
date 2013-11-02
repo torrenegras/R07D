@@ -1,0 +1,97 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/scrollView1"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#ffe2d8" >
+
+<LinearLayout
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="#ffe2d8"
+    android:orientation="vertical" >
+    
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:background="#ffe2d8"
+        android:orientation="horizontal" >
+
+        <ImageButton
+            android:id="@+id/imageButton2"
+            android:layout_width="63dp"
+            android:layout_height="fill_parent"
+            android:background="@drawable/fi"
+            android:contentDescription="@string/cboilabel"
+            android:onClick="clickfleizq" />
+    
+     <TextView
+         android:id="@+id/textView1"
+         android:layout_width="75dp"
+         android:layout_height="30dp"
+         android:layout_gravity="center_vertical|center_horizontal"
+         android:layout_marginLeft="40dp"
+         android:layout_weight="1"
+         android:textColor="#8d665f"
+         android:textSize="20sp" />
+    
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="40dp"
+        android:layout_height="30dp"
+        android:layout_gravity="center_vertical|center_horizontal"
+        android:layout_weight="1"
+        android:textColor="#8d665f"
+        android:textSize="20sp" />
+     
+     <ImageButton
+         android:id="@+id/imageButton1"
+         android:layout_width="63dp"
+         android:layout_height="fill_parent"
+         android:background="@drawable/fd"
+         android:contentDescription="@string/cbolabel"
+         android:onClick="clickfleder" />
+   
+     </LinearLayout>
+
+    <GridView
+        android:id="@+id/gridView1"
+        android:layout_width="fill_parent"
+        android:layout_height="400dp"
+        android:background="#ffe2d8"
+        android:numColumns="7"
+        android:scrollbars="none" >
+   </GridView>
+    
+<LinearLayout
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content" >
+     
+<Button
+    android:id="@+id/button1"
+    android:layout_width="260dp"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="55dp"
+    android:background="@drawable/b1"
+    android:onClick="onclickgenrepo"
+    android:text="@string/crblabel"
+    android:textColor="#ffffff"
+    android:textSize="22sp" />
+
+<Button
+    android:id="@+id/button2"
+    style="?android:attr/buttonStyleSmall"
+    android:layout_width="30dp"
+    android:layout_height="30dp"
+    android:layout_gravity="right|center_vertical|end"
+    android:layout_marginLeft="25dp"
+    android:background="@drawable/s"
+    android:onClick="onclickFB" />
+
+</LinearLayout>
+
+</LinearLayout>
+
+    
+
+
+</ScrollView>

@@ -1,0 +1,50 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".CalendarioActivity" 
+    android:id="@+id/LinearLayout01">
+
+    <com.squareup.timessquare.CalendarPickerView
+      android:id="@+id/calendar_view"
+      android:layout_width="match_parent"
+      android:layout_height="0dp"
+      android:layout_weight="1"
+      android:paddingLeft="16dp"
+      android:paddingRight="16dp"
+      android:paddingBottom="16dp"
+      android:scrollbarStyle="outsideOverlay"
+      android:clipToPadding="false"
+      android:background="#FFFFFF"
+      />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="260dp"
+        android:layout_gravity="center"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/activity_horizontal_margin"
+        android:background="@drawable/b1"
+        android:onClick="onclicksfecha"
+        android:text="@string/sfecha"
+        android:textColor="#ffffff" 
+        android:textSize="22sp" />
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="260dp"
+        android:layout_gravity="center"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/activity_horizontal_margin"
+        android:background="@drawable/b1"
+        android:onClick="onclickgenrepo"
+        android:text="@string/crblabel"
+        android:textColor="#ffffff" 
+        android:textSize="22sp" />
+
+</LinearLayout>
