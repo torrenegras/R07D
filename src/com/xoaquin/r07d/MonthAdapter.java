@@ -1,5 +1,6 @@
 package com.xoaquin.r07d;
 
+// ADAPTADOR PRESTADO EN INVESTIGACION  MODIFICADO CUSTOM MADE...
 
 
 import java.util.ArrayList;
@@ -9,12 +10,14 @@ import java.util.List;
  
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+
  
 class MonthAdapter extends BaseAdapter {
         private GregorianCalendar mCalendar;
@@ -30,7 +33,9 @@ class MonthAdapter extends BaseAdapter {
         private int mTitleHeight, mDayHeight;
         private final String[] mDays = { "LUN", "MAR", "MIE", "JUE", "VIE", "SAB", "DOM" };
         private final int[] mDaysInMonth = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
-       
+        
+        
+               
         public MonthAdapter(Context c, int month, int year, DisplayMetrics metrics) {
                 mContext = c;
                 mMonth = month;
@@ -41,6 +46,9 @@ class MonthAdapter extends BaseAdapter {
                 populateMonth();
         }
        
+        
+        //LLENADO DE ELEMENTOS EN LISTA PARA INFLAR EL GRIDVIEW
+        
         private void populateMonth() {
                 mItems = new ArrayList<String>();              
                 for (String day : mDays) {
@@ -78,7 +86,7 @@ class MonthAdapter extends BaseAdapter {
                 //mDayHeight = (mDisplayMetrics.heightPixels - mTitleHeight
                     //            - (rows * 3) - getBarHeight())/ (rows - 1);
                 //mDayHeight=mDayHeight-100;
-                mDayHeight=120;
+                mDayHeight=120;  //modificaion de separacion o altura de filas 
         }
        
         private int daysInMonth(int month) {
@@ -128,6 +136,9 @@ class MonthAdapter extends BaseAdapter {
                 }
         }
        
+        
+        //funcion para verificar si fecha es HOY
+        
         private boolean isToday(int day, int month, int year) {
                 if (mCalendarToday.get(Calendar.MONTH) == month
                                 && mCalendarToday.get(Calendar.YEAR) == year
@@ -137,6 +148,10 @@ class MonthAdapter extends BaseAdapter {
                 return false;
         }
        
+        
+        
+        //funcion principal para cambios en layout de gridview
+        
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
                 final TextView view = new TextView(mContext);
@@ -145,18 +160,25 @@ class MonthAdapter extends BaseAdapter {
               //  view.setBackgroundColor(Color.rgb(244, 244, 244));
                //view.setTextColor(Color.BLACK);
  
+                
                 if (position <= 6) {
                         // names
                         view.setBackgroundColor(Color.rgb(141, 102, 95));
                         view.setTextColor(Color.WHITE);
                         view.setHeight(mTitleHeight+2);
                         view.setClickable(true);
+                        Typeface kepf = Typeface.createFromAsset(view.getContext().getAssets(),"Kepler-Std-Black_26074.ttf");
+                    	view.setTypeface(kepf);
+                      
+    	
                 } else if (position <= mDaysLastMonth + 6) {
                         // previous month
                         view.setBackgroundColor(Color.WHITE);
                         view.setTextColor(Color.rgb(141, 102, 95));
                         view.setHeight(mDayHeight);
                         view.setClickable(true);
+               
+                
                 } else if (position <= mDaysShown - mDaysNextMonth  ) {
                         // current month
                         view.setHeight(mDayHeight);
@@ -168,8 +190,7 @@ class MonthAdapter extends BaseAdapter {
                                 view.setBackgroundColor(Color.rgb(141, 102, 95));
                         }
                         
-                        
-                        
+                       
                         /* lo mio
                         Calendar now = Calendar.getInstance();
                         int day = now.get(Calendar.DAY_OF_MONTH);
@@ -191,7 +212,9 @@ class MonthAdapter extends BaseAdapter {
                 return view;
         }
        
-        @Override
+      
+
+		@Override
         public int getCount() {
                 return mItems.size();
         }

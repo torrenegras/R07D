@@ -60,6 +60,7 @@
         android:background="#ffe2d8"
         android:numColumns="7"
         android:scrollbars="none" >
+
    </GridView>
     
 <LinearLayout
@@ -75,6 +76,7 @@
     android:onClick="onclickgenrepo"
     android:text="@string/crblabel"
     android:textColor="#ffffff"
+    style="?android:attr/borderlessButtonStyle"
     android:textSize="22sp" />
 
 <Button

@@ -10,6 +10,7 @@ import com.parse.PushService;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.util.DisplayMetrics;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -23,49 +24,55 @@ public class CalendarioActivity2 extends Activity {
 
 	
 	
-	public int diacal,mescal,aniocal,diatmp;   //falta el Static???  ojo!!  
-	public static String fecha,nombredia,dia,mes,anio;
+	 
+	public static String fecha,nombredia,dia,mes,anio; //variables globales para toda la app
 	
 	
-	private TextView tvmes,tvanio,diatv; //variables globales dentro de la actividad 
-    
-	private GridView gv;
-    
+	private TextView tvmes,tvanio,diatv; //variables globales dentro de esta actividad 
+    private GridView gv;
+    public int diacal,mescal,aniocal,diatmp;  
 	
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_calendario_activity2);
-		setTitle("CALENDARIO");
+		setTitle("CALENDARIO");//cambiando titulo a actividad por codigo
 		
-		//comandos para notificaciones push
+		//comandos para notificaciones push activados en esta actividad   proximamente investigar para hacerlo como servicio background
 		PushService.setDefaultPushCallback(this, CalendarioActivity2.class);
 		ParseInstallation.getCurrentInstallation().saveInBackground();
 		ParseAnalytics.trackAppOpened(getIntent());
 		
-		
+		//cargando variables
 		tvmes = (TextView) findViewById(R.id.textView1);
 		tvanio = (TextView) findViewById(R.id.textView2);
-		
 		gv= (GridView) findViewById(R.id.gridView1);
-		
+		Typeface kepf = Typeface.createFromAsset(getAssets(),"Kepler-Std-Black_26074.ttf");
+    	
 	
+		//iniciando calendario en fecha de hoy
 		 Calendar now = Calendar.getInstance(); //calendario, trayendo fecha de hoy
-         
          diacal = now.get(Calendar.DAY_OF_MONTH);
          mescal=now.get(Calendar.MONTH);
          aniocal=now.get(Calendar.YEAR);
 
+        
+        //inflando gridview 
         final DisplayMetrics metrics = new DisplayMetrics();  //contruyendo el adaptador 
      	getWindowManager().getDefaultDisplay().getMetrics(metrics);
      	
      	MonthAdapter mgva= new MonthAdapter(this,mescal,aniocal,metrics ); 
 		gv.setAdapter(mgva);
 		
+		//inicializando variables 
 		String nmes= nombremes(mescal);	
 		tvmes.setText(nmes);
 		tvanio.setText(String.valueOf(aniocal));
+		tvmes.setTypeface(kepf);
+		tvanio.setTypeface(kepf);
+		
+		//onclick gridview
 	
 		gv.setOnItemClickListener(new OnItemClickListener() {
 			public void onItemClick(AdapterView<?> parent, View v,
@@ -106,27 +113,18 @@ public class CalendarioActivity2 extends Activity {
 		    	 if(dayofweek==5){nombredia="Jueves";}
 		    	 if(dayofweek==6){nombredia="Viernes";}
 		    	 if(dayofweek==7){nombredia="Sabado";}
-		    	 
-		    	 
-		    	 
+		    
 		    	 startActivity(new Intent(CalendarioActivity2.this, RecdiaActivity.class));  //llamando la actividad de registro acorde a fecha seleccionada
-		    	 
-				
-			
-			
-			
-			
-			
+		  
 			}
 		});
-	
-		
-	
 	
 	
 	}
 
 	
+	
+	//onclick para boton reportes
 	
 public void onclickgenrepo(View v) { //boton inicio actividad MENU de generacion reportes
 		
@@ -136,7 +134,7 @@ public void onclickgenrepo(View v) { //boton inicio actividad MENU de generacion
 	
 	
 	
-	
+	//felcha derecha
 	
 public void clickfleder(View v) { //boton flecha derecha calendario
 		
@@ -160,7 +158,7 @@ public void clickfleder(View v) { //boton flecha derecha calendario
 	}
 	
 	
-
+//flecha izquierda
 
 public void clickfleizq(View v) { //boton flecha derecha calendario
 	
@@ -185,7 +183,8 @@ public void clickfleizq(View v) { //boton flecha derecha calendario
 	
 	}
 	
-	
+
+	//funcion para obtener nombre del mes
 
 public String nombremes(int nummes){
 		
@@ -207,6 +206,9 @@ public String nombremes(int nummes){
 		return nommes;
 	}
 	
+
+//funcion para el sharing intent
+
 public void onclickFB(View view) {
 	Intent intent = new Intent(Intent.ACTION_SEND);
 	intent.setType("text/plain");
@@ -216,6 +218,8 @@ public void onclickFB(View view) {
 
 	
 	
+
+//inflado del menu
 	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -242,9 +246,7 @@ public void onclickFB(View view) {
 	    case R.id.item3:
 		startActivity(new Intent(this, AboutActivity.class));
 		return true;
-		   
-	    
-	    
+	 
 	    
 	    default:
 	    return super.onOptionsItemSelected(item);

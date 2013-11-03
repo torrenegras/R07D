@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <lint>
     <issue id="CutPasteId" severity="ignore" />
+    <issue id="NestedScrolling">
+        <ignore path="res/layout/activity_calendario_activity2.xml" />
+    </issue>
     <issue id="SimpleDateFormat">
         <ignore path="src/com/xoaquin/r07d/CalendarioActivity.java" />
     </issue>
