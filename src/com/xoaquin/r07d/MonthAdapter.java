@@ -209,16 +209,18 @@ class MonthAdapter extends BaseAdapter {
                             if (networkInfo != null && networkInfo.isConnected()) { //chequeo RED
                                                   
                        
-                		
-                      //snippet coloreado de rojo dias sin hacer R07 
-                        Calendar now = Calendar.getInstance();
-                        int hoy = now.get(Calendar.DAY_OF_MONTH);
-                        int mesrojo=now.get(Calendar.MONTH);
-                        int aniorojo=now.get(Calendar.YEAR);
-                        if(mYear<aniorojo){view.setTextColor(Color.RED);}
-                        if(mMonth<mesrojo && mYear<=aniorojo){view.setTextColor(Color.RED);}
-                        if(mMonth==mesrojo && mYear==aniorojo && Integer.valueOf(view.getText().toString())<=hoy){view.setTextColor(Color.RED);}
-                        
+                            	   
+           	        		 //snippet coloreado de rojo dias sin hacer R07 
+                                  Calendar now = Calendar.getInstance();
+                                  int hoy = now.get(Calendar.DAY_OF_MONTH);
+                                  int mesrojo=now.get(Calendar.MONTH);
+                                  int aniorojo=now.get(Calendar.YEAR);
+                                  if(mYear<aniorojo){view.setTextColor(Color.RED);}
+                                  if(mMonth<mesrojo && mYear<=aniorojo){view.setTextColor(Color.RED);}
+                                  if(mMonth==mesrojo && mYear==aniorojo && Integer.valueOf(view.getText().toString())<=hoy){view.setTextColor(Color.RED);}
+                                  
+           	        	      
+                      
                     
                         
                         String nmcomp=String.valueOf(mMonth+1);
@@ -247,13 +249,16 @@ class MonthAdapter extends BaseAdapter {
             	        	   
             	        	   {
             	        	   
+            	        	               	        		   
             	        	   String obj=objects.get(i).getString("diadbp");
             	        	  
             	        	   if(Integer.valueOf(obj)<10){obj=obj.replaceAll("0", "");} //quitandole los 0's iniciales a dias PARSE
             	        	   
             	        	   if(obj.equals(view.getText().toString()) ){view.setTextColor(Color.rgb(47, 143, 54));}
             	        	   
+            	        	   
             	        	   }
+            	        		   
             	        	   
             	        	   i++;
             	           }
