@@ -16,6 +16,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.GridView;
 import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -39,6 +40,7 @@ public class CalendarioActivity2 extends Activity {
 		setContentView(R.layout.activity_calendario_activity2);
 		setTitle("CALENDARIO");//cambiando titulo a actividad por codigo
 		
+		
 		//comandos para notificaciones push activados en esta actividad   proximamente investigar para hacerlo como servicio background
 		PushService.setDefaultPushCallback(this, CalendarioActivity2.class);
 		ParseInstallation.getCurrentInstallation().saveInBackground();
@@ -47,6 +49,7 @@ public class CalendarioActivity2 extends Activity {
 		//cargando variables
 		tvmes = (TextView) findViewById(R.id.textView1);
 		tvanio = (TextView) findViewById(R.id.textView2);
+		Button brep=(Button) findViewById(R.id.button1);
 		gv= (GridView) findViewById(R.id.gridView1);
 		Typeface kepf = Typeface.createFromAsset(getAssets(),"Kepler-Std-Black_26074.ttf");
     	
@@ -71,6 +74,8 @@ public class CalendarioActivity2 extends Activity {
 		tvanio.setText(String.valueOf(aniocal));
 		tvmes.setTypeface(kepf);
 		tvanio.setTypeface(kepf);
+		brep.setTypeface(kepf);
+		
 		
 		//onclick gridview
 	

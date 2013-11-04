@@ -136,7 +136,7 @@ public class LoginActivity extends Activity {
 							pb.setVisibility(View.INVISIBLE); 
 						}
 						
-						Log.d("score", "Retrieved " + clavedb + " scores");  //para aprendizaje de DEBUG
+						
 			        
 					
 					

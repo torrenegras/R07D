@@ -7,10 +7,17 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
+
+import com.parse.FindCallback;
+import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
  
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.View;
@@ -157,8 +164,7 @@ class MonthAdapter extends BaseAdapter {
                 final TextView view = new TextView(mContext);
                 view.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL);
                 view.setText(mItems.get(position));
-              //  view.setBackgroundColor(Color.rgb(244, 244, 244));
-               //view.setTextColor(Color.BLACK);
+                Typeface kepf = Typeface.createFromAsset(view.getContext().getAssets(),"Kepler-Std-Black_26074.ttf");
  
                 
                 if (position <= 6) {
@@ -167,47 +173,113 @@ class MonthAdapter extends BaseAdapter {
                         view.setTextColor(Color.WHITE);
                         view.setHeight(mTitleHeight+2);
                         view.setClickable(true);
-                        Typeface kepf = Typeface.createFromAsset(view.getContext().getAssets(),"Kepler-Std-Black_26074.ttf");
                     	view.setTypeface(kepf);
                       
     	
                 } else if (position <= mDaysLastMonth + 6) {
                         // previous month
-                        view.setBackgroundColor(Color.WHITE);
-                        view.setTextColor(Color.rgb(141, 102, 95));
+                	 view.setBackgroundColor(Color.rgb(255, 241, 231));
+                        view.setTextColor(Color.rgb(221, 182, 175));
                         view.setHeight(mDayHeight);
                         view.setClickable(true);
-               
-                
+                        view.setTypeface(kepf);
+                        
+                        
                 } else if (position <= mDaysShown - mDaysNextMonth  ) {
                         // current month
                         view.setHeight(mDayHeight);
                         view.setTextColor(Color.rgb(141, 102, 95));
+                        view.setTypeface(kepf);
+                        
                         
                         int day = position - (mDaysLastMonth + 6);
                         if (isToday(day, mMonth, mYear)) {
                                 view.setTextColor(Color.WHITE);
                                 view.setBackgroundColor(Color.rgb(141, 102, 95));
                         }
+                    
+                      
                         
+                        //Color Rojo y Verde con chequeo de base de datos
+                      
+                        ConnectivityManager connMgr = (ConnectivityManager) 
+                                view.getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+                            NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+                           
+                            if (networkInfo != null && networkInfo.isConnected()) { //chequeo RED
+                                                  
                        
-                        /* lo mio
+                		
+                      //snippet coloreado de rojo dias sin hacer R07 
                         Calendar now = Calendar.getInstance();
-                        int day = now.get(Calendar.DAY_OF_MONTH);
-                         if(position< day +7){
-                        	view.setTextColor(Color.WHITE);
-                        }*/
+                        int hoy = now.get(Calendar.DAY_OF_MONTH);
+                        int mesrojo=now.get(Calendar.MONTH);
+                        int aniorojo=now.get(Calendar.YEAR);
+                        if(mYear<aniorojo){view.setTextColor(Color.RED);}
+                        if(mMonth<mesrojo && mYear<=aniorojo){view.setTextColor(Color.RED);}
+                        if(mMonth==mesrojo && mYear==aniorojo && Integer.valueOf(view.getText().toString())<=hoy){view.setTextColor(Color.RED);}
                         
+                    
                         
-                        // check db and colour for shifts
-                        // ...
+                        String nmcomp=String.valueOf(mMonth+1);
+                        if((mMonth+1)<10){nmcomp="0"+nmcomp;}
+                        
+                        String nycomp=String.valueOf(mYear);
+                        
+                        String nombretablausuario=MainActivity.correoglobal;
+                 		nombretablausuario=nombretablausuario.replaceAll("\\.", "");
+                 		nombretablausuario=nombretablausuario.replaceAll("@", "");
+                 		
+                 		ParseQuery<ParseObject> query = ParseQuery.getQuery(nombretablausuario); //query para buscar records de ese mes y año en orden ascendente
+                 		
+                 		query.whereEqualTo("mesdbp", nmcomp);
+            	        query.whereEqualTo("aniodbp", nycomp);
+              	        query.orderByAscending("diadbp");
+                        
+            	        query.findInBackground(new FindCallback<ParseObject>() {
+            	            public void done(List<ParseObject> objects, ParseException e) {
+            	                  	             	
+            	           int i=0;
+            	           
+            	           while(i<objects.size()){
+            	        	   
+            	        	   if(objects.get(i).getString("lbdbp").length()>0)   //si se ha hecho lectura biblica
+            	        	   
+            	        	   {
+            	        	   
+            	        	   String obj=objects.get(i).getString("diadbp");
+            	        	  
+            	        	   if(Integer.valueOf(obj)<10){obj=obj.replaceAll("0", "");} //quitandole los 0's iniciales a dias PARSE
+            	        	   
+            	        	   if(obj.equals(view.getText().toString()) ){view.setTextColor(Color.rgb(47, 143, 54));}
+            	        	   
+            	        	   }
+            	        	   
+            	        	   i++;
+            	           }
+            	            
+            	            }
+
+							
+            	        });
+   
+               	    
+            	       
+                            }
+                
+                            
+                            
+                            
+                            
                                
+              
                 } else {
                         // next month
                         view.setHeight(mDayHeight);
-                        view.setBackgroundColor(Color.WHITE);
-                        view.setTextColor(Color.rgb(141, 102, 95));
+                        view.setBackgroundColor(Color.rgb(255, 241, 231));
+                        view.setTextColor(Color.rgb(221, 182, 175));
                         view.setClickable(true);
+                        view.setTypeface(kepf);
                 }
                 return view;
         }
@@ -228,4 +300,8 @@ class MonthAdapter extends BaseAdapter {
         public long getItemId(int position) {
                 return position;
         }
+       
+        
+        
+       
 }

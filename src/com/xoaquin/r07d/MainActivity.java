@@ -117,12 +117,10 @@ public class MainActivity extends Activity {
 	
 					}
 					
-					Log.e("score", "Retrieved " + clavedb + " scores"); //aprendizaje DEBUG
-		    
+					    
 				} else { //error tipo excepcion en query
 		            Log.e("score", "Error: " + e.getMessage());
-		            //int code=e.getCode(); 
-		       	    //Log.e("4",String.valueOf(code));
+		           
 		        }
         		
        
