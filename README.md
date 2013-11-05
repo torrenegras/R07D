@@ -8,4 +8,14 @@ Se puede generar y enviar un reporte mensual al líder del grupo conexión.
 
 Descargar App en GP: https://play.google.com/store/apps/details?id=com.xoaquin.r07d
 
-Bendiciones.
+Bendiciones!!
+
+
+Futuras adiciones:
+
+Reporte en formato PDF.
+
+Comunidad R07D para publicar peticiones de oracion.
+
+
+
