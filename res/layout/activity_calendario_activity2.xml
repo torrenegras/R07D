@@ -63,9 +63,7 @@
 
    </GridView>
     
-<LinearLayout
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content" >
+
      
 <Button
     android:id="@+id/button1"
@@ -89,7 +87,7 @@
     android:background="@drawable/s"
     android:onClick="onclickFB" />
 
-</LinearLayout>
+
 
 </LinearLayout>
 

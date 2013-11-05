@@ -127,7 +127,18 @@ public class CalendarioActivity2 extends Activity {
 	
 	}
 
-	
+	@Override
+	public void onResume()
+	    {  // After a pause OR at startup
+	    super.onResume();
+	  //inflando gridview 
+        final DisplayMetrics metrics = new DisplayMetrics();  //contruyendo el adaptador 
+     	getWindowManager().getDefaultDisplay().getMetrics(metrics);
+     	
+     	MonthAdapter mgva= new MonthAdapter(this,mescal,aniocal,metrics ); 
+		gv.setAdapter(mgva);
+		
+	     }
 	
 	//onclick para boton reportes
 	
