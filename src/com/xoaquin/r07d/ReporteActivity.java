@@ -1,13 +1,31 @@
 package com.xoaquin.r07d;
 
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.io.OutputStreamWriter;
 import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+
+import com.cete.dynamicpdf.Color;
+import com.cete.dynamicpdf.Document;
+import com.cete.dynamicpdf.Font;
+import com.cete.dynamicpdf.Page;
+import com.cete.dynamicpdf.PageDimensions;
+import com.cete.dynamicpdf.TextAlign;
+import com.cete.dynamicpdf.UrlAction;
+import com.cete.dynamicpdf.VAlign;
+import com.cete.dynamicpdf.pageelements.Cell2;
+import com.cete.dynamicpdf.pageelements.Image;
+import com.cete.dynamicpdf.pageelements.Label;
+import com.cete.dynamicpdf.pageelements.Link;
+import com.cete.dynamicpdf.pageelements.Row2;
+import com.cete.dynamicpdf.pageelements.Table2;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
@@ -24,7 +42,11 @@ import android.app.Dialog;
 import android.app.DatePickerDialog.OnDateSetListener;
 import android.content.Context;
 import android.content.Intent;
+
+import android.graphics.Bitmap;
 import android.graphics.Typeface;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
@@ -34,6 +56,7 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
+
 
 public class ReporteActivity extends Activity {
 
@@ -46,8 +69,8 @@ private int mMonth;
 private int mDay;
 
 
-
-
+private static String FILE;
+private String spdfop="",spdfopi="";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -246,6 +269,7 @@ private int mDay;
 		EditText et3=(EditText) findViewById(R.id.editText5);
 		
 		
+		
 		//guardando campos en DB para nombres
 		final DBAdapter2 db2 = new DBAdapter2(this);
 		db2.open(); 
@@ -309,9 +333,12 @@ private int mDay;
 	    		String sraopi=" ";
 	    		String srpl="",srco="",srmdg="",srpd="",srplco="";
 	    		
+	    			
+	    		
 	    		//Comprobando Boton 
 	    		if(b1.isChecked()){
 	    			cmdl = "<b>"+"¿CUMPLI LA META DE LECTURA?: SI"+"</b>";
+	    		
 	    		}
 	    		
 	        	  if(os>0){ //si el query es exitoso
@@ -342,26 +369,36 @@ private int mDay;
              		    	if(sopl.equals("true")){
              		    		  //si encuentra algun true para oracion por pastores y lideres se infla String resultante en HTML
              		    		srpl = "<b>"+"| Pastores y Líderes | "+"</b>";
-             		    	 }
+             		    		
+ 
+             		    	}
              		    	 
              		    	if(scoo.equals("true")){
              		    		  //si encuentra algun true para oracion por coordinadores se infla String resultante en HTML
              		    	   srco = "<b>"+"| Coordinadores | "+"</b>";
+             		    	 
+
              		    	 }
              		    	 
              		    	if(smgc.equals("true")){
              		    		  //si encuentra algun true para oracion por miembros grupo conexion se infla String resultante en HTML
              		    		srmdg = "<b>"+"| Miembros de Grupo de Conexión | "+"</b>";
+             		    		
+
              		    	 }
              		    	 
              		    	if(sopd.equals("true")){
              		    		 //si encuentra algun true para oracion por discipulos se infla String resutlante en HTML
              		    		srpd = "<b>"+"| Discipulos | "+"</b>";
+             		    		
+
              		    	 }
              		    	
              		    	if(soplco.equals("true")){
              		    		  //si encuentra algun true para oracion por la cosecha se infla String resultante en HTML
              		    	   srplco = "<b>"+"| La Cosecha | "+"</b>";
+             		    	 
+
              		    	 }
              		    	 
              		    	Log.e("dia",sdia); 
@@ -373,8 +410,13 @@ private int mDay;
 	        			    sraop="<b>"+"¿CUANTAS VECES ASISTI A ORACION PRESENCIAL?: "+String.valueOf(s)+"</b>";
 	        	   		    sraopi="<b>"+"¿CUANTAS VECES ASISTI A ORACION POR INTERNET?: "+String.valueOf(si)+"</b>";
 	        		       
-	        	   		   
+	        	   		 spdfop="¿CUANTAS VECES ASISTI A ORACION PRESENCIAL?: "+String.valueOf(s);
+	        	   	   	spdfopi="¿CUANTAS VECES ASISTI A ORACION POR INTERNET?: "+String.valueOf(si);
 	        		  
+	        	   		    
+	        	   		    
+	        	   		    
+	        	   		    
 					
 					} else { //error tipo excepcion en query
 			           			           
@@ -399,7 +441,8 @@ private int mDay;
 	                  FileOutputStream fOut = new FileOutputStream(file);
 	                  OutputStreamWriter osw = new OutputStreamWriter(fOut,"latin1");   //ESTAR PENDIENDTE TEMA UTF-8 ISO NOSEQUE!!!  ENCODING
 	                  
-	                  
+	                 
+      	   		     
 	                  //Creando bloque encabezado reporte HTML
 	                  cuerpocorreo= "<!DOCTYPE html>\n"+"<html>\n"+"<body>\n"+"<p>\n"+fecha+"<br />"+nombre+"<br />"+nombrecg+"<br /><br />"+mdl+"<br />"+cmdl+"<br /><br />"+sraop+"<br />"+sraopi+"<br /><br />"+"<b>ORACION POR:</B> "+srpl+srco+srmdg+srpd+srplco+"<br /><br /><br /><br />"+"</p>\n";
       	    		
@@ -420,6 +463,7 @@ private int mDay;
 	                  
 	                  
 	                  //creando tabla HTML
+	                  
 	                  i=0;
 	                  while(i<os){
 	                	  String sfecha=objects.get(i).getString("fechadbp");
@@ -431,8 +475,7 @@ private int mDay;
 	                	  String sldn=objects.get(i).getString("ldndbp");
 	                	  String spei=objects.get(i).getString("peidbp");
 	                	 
-	                	Log.e("ini3",String.valueOf(hi.length()));
-	                  	Log.e("fin3",String.valueOf(hf.length()));
+	                	
 	                	  
 	                	  osw.write("<tr>\n");
 	                	  osw.write("<td width=\"100\" style=\"text-align:center\" >"+  sfecha   +" </td>\n");
@@ -444,6 +487,8 @@ private int mDay;
 	                	  osw.write("<td>"+  sldn   +" </td>\n");
 	                	  osw.write("<td>"+  spei   +" </td>\n");
 	                	  osw.write(" </tr>\n");
+	                	  
+	                	 
 	                	  
 	                	  i++;
 	                  }
@@ -461,7 +506,171 @@ private int mDay;
 	                  
 	                  osw.flush();
 	                  osw.close();
-	         
+	                  
+	                  
+	                  
+	                  
+	                  
+	                  
+	                  
+	                  //GENERACION REPORTE PDF
+	          	    
+	          	    FILE=Environment.getExternalStorageDirectory()	+ "/R07D/REPR07D-"+mes+"-"+anio+".pdf";
+	          	    
+	          	    RadioButton rb1=(RadioButton) findViewById(R.id.radioButton1);
+	          	    
+	          	      // Create a document and set it's properties
+	                  Document objDocument = new Document();
+	                  objDocument.setCreator("DynamicPDFHelloWorld.java");
+	                  objDocument.setAuthor("XoaquinSoft");
+	                  objDocument.setTitle("REPR07D-"+mes+"-"+anio);
+	           
+	                  // Create a page to add to the document
+	                  Page objPage = new Page(1570,2000,30.0f);
+	           
+	                  // Create a strings para labels
+	                  String tit= "REPORTE R07D";
+	                  String sr = "REPORTE: "+mes+"/"+anio;
+	                  String sn = "NOMBRE: "+et1.getText().toString();
+	                  String snc= "NOMBRE COORDINADOR DE GRUPO CONEXION: "+et2.getText().toString();
+	                  String sml= "META DE LECTURA: "+et3.getText().toString();
+	                  String scm= "¿CUMPLI LA META DE LECTURA?: NO"; if(rb1.isChecked()){scm ="¿CUMPLI LA META DE LECTURA?: SI";}
+	                  String sopre=spdfop;
+	                  String sopoin=spdfopi;
+	                  String sop= "ORACION POR: "+srpl+srco+srmdg+srpd+srplco;
+	                  String rg= "Reporte Generado por R07D";
+	                                    
+	                  //crear labels iniciales
+	                  Label objLabelt = new Label(tit, 635, 0, 1000, 100, Font.getCourierBoldOblique(),40, TextAlign.LEFT);
+	                  Label objLabelr = new Label(sr, 0, 25, 1000, 100, Font.getHelvetica(), 12, TextAlign.LEFT);
+	                  Label objLabeln = new Label(sn, 0, 50, 1000, 100, Font.getHelvetica(), 12, TextAlign.LEFT);
+	                  Label objLabelnc = new Label(snc, 0, 75, 1000, 100, Font.getHelvetica(), 12, TextAlign.LEFT);
+	                  Label objLabelml = new Label(sml, 0, 100, 1000, 100, Font.getHelvetica(), 12, TextAlign.LEFT);
+	                  Label objLabelcm = new Label(scm, 0, 125, 1000, 100, Font.getHelvetica(), 12, TextAlign.LEFT);
+	                  Label objLabelop = new Label(sopre, 0, 150, 1000, 100, Font.getHelvetica(), 12, TextAlign.LEFT);
+	                  Label objLabeloi = new Label(sopoin, 0, 175, 1000, 100, Font.getHelvetica(), 12, TextAlign.LEFT);
+	                  Label objLabelor = new Label(sop, 0, 200, 1000, 100, Font.getHelvetica(), 12, TextAlign.LEFT);
+	                 
+	           
+	                  // Add labels to page
+	                  objPage.getElements().add(objLabelt);
+	                  objPage.getElements().add(objLabelr);
+	                  objPage.getElements().add(objLabeln);
+	                  objPage.getElements().add(objLabelnc);
+	                  objPage.getElements().add(objLabelml);
+	                  objPage.getElements().add(objLabelcm);
+	                  objPage.getElements().add(objLabelop);
+	                  objPage.getElements().add(objLabeloi);
+	                  objPage.getElements().add(objLabelor);
+	                  
+	                  
+	                  Table2 table2 = new Table2(0, 225, 1520, 2000);
+	                  
+	                  // Add columns to the table
+	                  table2.getColumns().add(90);
+	                  table2.getColumns().add(110);
+	                  table2.getColumns().add(90);
+	                  table2.getColumns().add(180);
+	                  table2.getColumns().add(350);
+	                  table2.getColumns().add(230);
+	                  table2.getColumns().add(210);
+	                  table2.getColumns().add(250);
+	                  
+	                  
+	               // Add rows to the table and add cells to the rows
+	                  Row2 row1 = table2.getRows().add(40, Font.getHelveticaBold(), 16, Color.a("Black"), Color.a("Gray"));
+	                  
+	                  
+	                 
+	                  Cell2 cell1=row1.getCells().add("FECHA");  cell1.setAlign(TextAlign.CENTER);  cell1.setVAlign(VAlign.CENTER);
+	                  Cell2 cell2=row1.getCells().add("HORA INICIO");  cell2.setAlign(TextAlign.CENTER);  cell2.setVAlign(VAlign.CENTER);
+	                  Cell2 cell3=row1.getCells().add("HORA FIN");  cell3.setAlign(TextAlign.CENTER);  cell3.setVAlign(VAlign.CENTER);
+	                  Cell2 cell4=row1.getCells().add("LECTURA BIBLICA");  cell4.setAlign(TextAlign.CENTER);  cell4.setVAlign(VAlign.CENTER);
+	                  Cell2 cell5=row1.getCells().add("¿QUE ME HABLO DIOS?");  cell5.setAlign(TextAlign.CENTER);  cell5.setVAlign(VAlign.CENTER);
+	                  Cell2 cell6=row1.getCells().add("ACCION DE GRACIAS");  cell6.setAlign(TextAlign.CENTER);  cell6.setVAlign(VAlign.CENTER);
+	                  Cell2 cell7=row1.getCells().add("LISTA DE NUEVOS");  cell7.setAlign(TextAlign.CENTER);  cell7.setVAlign(VAlign.CENTER);
+	                  Cell2 cell8=row1.getCells().add("PETICIONES/INTERCESION");  cell8.setAlign(TextAlign.CENTER);  cell8.setVAlign(VAlign.CENTER);
+	                  
+	                  
+	                  
+	                //creando tabla PDF
+	                  float aqmhD=0,atotmax=0;
+	                  i=0;
+	                  while(i<os){
+	                	  String sfecha=objects.get(i).getString("fechadbp");
+	                	  String hi=objects.get(i).getString("horaidbp");
+	                	  String hf=objects.get(i).getString("horafdbp");
+	                	  String slb=objects.get(i).getString("lbdbp");
+	                	  String sqmhD=objects.get(i).getString("qmhDdbp");
+	                	  String sadg=objects.get(i).getString("adgdbp");
+	                	  String sldn=objects.get(i).getString("ldndbp");
+	                	  String spei=objects.get(i).getString("peidbp");
+	                	 
+	                	  Row2 row = table2.getRows().add(30);
+		                  
+	                	  
+	                	  Cell2 cell11=row.getCells().add(sfecha);  cell11.setAlign(TextAlign.CENTER);  cell11.setVAlign(VAlign.CENTER);
+		                  Cell2 cell12=row.getCells().add(hi);  cell12.setAlign(TextAlign.CENTER);  cell12.setVAlign(VAlign.CENTER);
+		                  Cell2 cell13=row.getCells().add(hf);  cell13.setAlign(TextAlign.CENTER);  cell13.setVAlign(VAlign.CENTER);
+		                  Cell2 cell14=row.getCells().add(slb);  cell14.setAlign(TextAlign.JUSTIFY);  cell14.setVAlign(VAlign.TOP);
+		                  Cell2 cell15=row.getCells().add(sqmhD);  cell15.setAlign(TextAlign.JUSTIFY);  cell15.setVAlign(VAlign.TOP);
+		                  Cell2 cell16=row.getCells().add(sadg);  cell16.setAlign(TextAlign.JUSTIFY);  cell16.setVAlign(VAlign.TOP);
+		                  Cell2 cell17=row.getCells().add(sldn);  cell17.setAlign(TextAlign.JUSTIFY);  cell17.setVAlign(VAlign.TOP);
+		                  Cell2 cell18=row.getCells().add(spei);  cell18.setAlign(TextAlign.JUSTIFY);  cell18.setVAlign(VAlign.TOP);
+		              
+		                  
+		                  aqmhD=aqmhD+cell15.getHeight();
+  	                	 
+	                	  atotmax= aqmhD;
+		                  
+	                	  
+	                	  i++;
+	                  }
+	                  
+	                  //label para link
+	                  Label objLabelrg = new Label(rg, 1350, (atotmax+440), 1000, 100, Font.getHelvetica(), 12, TextAlign.LEFT);
+	                  objLabelrg.setTextColor(Color.a("Blue"));
+	                  objLabelrg.setUnderline(true);
+	                  objPage.getElements().add(objLabelrg);
+	                  
+	                  //link
+	                  Link objLink = new Link(1350,(atotmax+440),1000,100, new UrlAction("https://play.google.com/store/apps/details?id=com.xoaquin.r07d"));
+	                  objPage.getElements().add(objLink);
+	                  
+	                  //cargando imagenes desde assets
+	                  InputStream ims = getAssets().open("goo.jpg");
+	                  Drawable d = Drawable.createFromStream(ims, null);
+	                  Bitmap bitmap = ((BitmapDrawable)d).getBitmap();
+	                  ByteArrayOutputStream stream = new ByteArrayOutputStream();
+	                  bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+	                  byte[] bitmapdata = stream.toByteArray();
+	                  objPage.getElements().add(new Image(bitmapdata, 1390, 4, 0.24f));
+	                  
+	                  InputStream ims2 = getAssets().open("port.png");
+	                  Drawable d2 = Drawable.createFromStream(ims2, null);
+	                  Bitmap bitmap2 = ((BitmapDrawable)d2).getBitmap();
+	                  ByteArrayOutputStream stream2 = new ByteArrayOutputStream();
+	                  bitmap2.compress(Bitmap.CompressFormat.PNG, 100, stream2);
+	                  byte[] bitmapdata2 = stream2.toByteArray();
+	                  objPage.getElements().add(new Image(bitmapdata2, 1300, 0, 0.24f));
+	                  
+	                  
+	                  table2.setHeight(atotmax+140);  //reset altura tabla
+	                 	                   
+	                  // Add the table to the page
+	                  objPage.getElements().add(table2); 
+	                  
+	                  
+	                  PageDimensions ps=new PageDimensions(1570,atotmax+140+(9*30)+100);  //reset dinamico altura pagina
+	                  objPage.setDimensions(ps);
+	                  
+	                  
+	                  // Add page to document
+	                  objDocument.getPages().add(objPage);
+	           
+	                  // Outputs the document to file
+                      objDocument.draw(FILE);
+              	         
 	                  
 	                } 
 
@@ -471,24 +680,56 @@ private int mDay;
 	      
 	        	
 	        	
-	        	//Creando el EMAIL intent 
-		      		
 	        	  String strFile = Environment.getExternalStorageDirectory().getAbsolutePath() + "/R07D"+"/REPR07D-"+mes+"-"+anio+".html";
+	        	  String strFilepdf = Environment.getExternalStorageDirectory().getAbsolutePath() + "/R07D"+"/REPR07D-"+mes+"-"+anio+".pdf";
 	        		
 	        	  
-	        	  //Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts("mailto","", null));
-	        	     Intent emailIntent = new Intent(Intent.ACTION_SEND);
-	        	    emailIntent.setType("application/image");
-		      	    emailIntent.putExtra(Intent.EXTRA_SUBJECT, "REPORTE MENSUAL R07D: "+et1.getText().toString()+" "+mes+"/"+anio);
-		      	    emailIntent.putExtra(Intent.EXTRA_TEXT, "REPORTE R07D ADJUNTO");
-		      	    emailIntent.putExtra(Intent.EXTRA_STREAM,Uri.parse("file://" + strFile)); 
-		      			 
-		      	    startActivity(Intent.createChooser(emailIntent, "Send email..."));
+	        	  final Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND_MULTIPLE);
+	        	  //emailIntent.setType("plain/text");
+	        	  emailIntent.setType("application/image");
+
+
+	        	  ArrayList<Uri> uris = new ArrayList<Uri>();
+
+	        	  String[] filePaths = new String[] {strFile,strFilepdf};
+	        	  for (String file : filePaths) {
+	        	      File fileIn = new File(file);
+	        	      Uri u = Uri.fromFile(fileIn);
+	        	      uris.add(u);
+	        	  }
+
+	        	 // if ( !(app_preferences.getString("email", "") == null || app_preferences.getString("email", "").equals(""))) {
+	        	   //   emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[] {app_preferences.getString("email", "")});    
+	        	  //}
+
+	        	  emailIntent.putExtra(Intent.EXTRA_SUBJECT,"REPORTE MENSUAL R07D: "+et1.getText().toString()+" "+mes+"/"+anio);
+	        	  emailIntent.putExtra(Intent.EXTRA_TEXT, "\n\nREPORTE R07D ADJUNTO\n\n\n");
+	        	  emailIntent.putParcelableArrayListExtra(Intent.EXTRA_STREAM, uris);
+
+	        	  startActivity(Intent.createChooser(emailIntent, "Email:"));
 		    
-		      	//Html.fromHtml(yourHtml)  para poner en EXTRA_TEXT html sencillo
-		      	    
-		    
-	          
+	        	  
+	        	  
+	        	  /*
+		        	//Creando el EMAIL intent  ANTIGUO, DEJADO POR REFERENCIA FUTURA 
+			      		
+		        	  String strFile = Environment.getExternalStorageDirectory().getAbsolutePath() + "/R07D"+"/REPR07D-"+mes+"-"+anio+".html";
+		        	  String strFilepdf = Environment.getExternalStorageDirectory().getAbsolutePath() + "/R07D"+"/REPR07D-"+mes+"-"+anio+".pdf";
+		        		
+		        	  
+		        	  //Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts("mailto","", null));
+		        	     Intent emailIntent = new Intent(Intent.ACTION_SEND);
+		        	    emailIntent.setType("application/image");
+			      	    emailIntent.putExtra(Intent.EXTRA_SUBJECT, "REPORTE MENSUAL R07D: "+et1.getText().toString()+" "+mes+"/"+anio);
+			      	    emailIntent.putExtra(Intent.EXTRA_TEXT, "REPORTE R07D ADJUNTO");
+			      	    emailIntent.putExtra(Intent.EXTRA_STREAM,Uri.parse("file://" + strFile)); 
+			      	    emailIntent.putExtra(Intent.EXTRA_STREAM,Uri.parse("file://" + strFilepdf));
+			      	  
+			      	    startActivity(Intent.createChooser(emailIntent, "Send email..."));
+			    
+			      	//Html.fromHtml(yourHtml)  para poner en EXTRA_TEXT html sencillo
+			      	  */
+		        	  
 	          
 	          
 	          }//done
@@ -497,9 +738,8 @@ private int mDay;
 	
 	    }//cierre else check internet
 	    
-	    
-	    
-	    }//cierre onclick
+	
+	}//cierre onclick
 	
 	
 	

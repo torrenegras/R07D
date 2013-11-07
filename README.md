@@ -13,7 +13,6 @@ Bendiciones!!
 
 Futuras adiciones:
 
-Reporte en formato PDF.
 
 Comunidad R07D para publicar peticiones de oracion.
 
