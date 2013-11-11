@@ -634,8 +634,11 @@ private String spdfop="",spdfopi="";
 	                  objPage.getElements().add(objLabelrg);
 	                  
 	                  //link
-	                  Link objLink = new Link(1350,(atotmax+440),1000,100, new UrlAction("https://play.google.com/store/apps/details?id=com.xoaquin.r07d"));
+	                  Link objLink = new Link(1350,(atotmax+440),155,15, new UrlAction("https://play.google.com/store/apps/details?id=com.xoaquin.r07d"));
 	                  objPage.getElements().add(objLink);
+	                  
+	                  Link objLink2 = new Link(1390,4,114,64, new UrlAction("https://play.google.com/store/apps/details?id=com.xoaquin.r07d"));
+	                  objPage.getElements().add(objLink2);
 	                  
 	                  //cargando imagenes desde assets
 	                  InputStream ims = getAssets().open("goo.jpg");
@@ -652,7 +655,7 @@ private String spdfop="",spdfopi="";
 	                  ByteArrayOutputStream stream2 = new ByteArrayOutputStream();
 	                  bitmap2.compress(Bitmap.CompressFormat.PNG, 100, stream2);
 	                  byte[] bitmapdata2 = stream2.toByteArray();
-	                  objPage.getElements().add(new Image(bitmapdata2, 1300, 0, 0.24f));
+	                  objPage.getElements().add(new Image(bitmapdata2, 1230, 0, 0.24f));
 	                  
 	                  
 	                  table2.setHeight(atotmax+140);  //reset altura tabla

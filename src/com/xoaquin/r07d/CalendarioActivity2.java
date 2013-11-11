@@ -2,9 +2,14 @@ package com.xoaquin.r07d;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.List;
 
 import com.parse.ParseAnalytics;
+import com.parse.ParseException;
 import com.parse.ParseInstallation;
+import com.parse.ParseObject;
+import com.parse.ParsePush;
+import com.parse.ParseQuery;
 import com.parse.PushService;
 
 import android.os.Bundle;
@@ -42,10 +47,18 @@ public class CalendarioActivity2 extends Activity {
 		
 		
 		//comandos para notificaciones push activados en esta actividad   proximamente investigar para hacerlo como servicio background
-		PushService.setDefaultPushCallback(this, CalendarioActivity2.class);
+		PushService.setDefaultPushCallback(this, MainActivity.class);
 		ParseInstallation.getCurrentInstallation().saveInBackground();
 		ParseAnalytics.trackAppOpened(getIntent());
+		PushService.subscribe(this, "todos", MainActivity.class);
+		ParseInstallation installation = ParseInstallation.getCurrentInstallation();
 		
+		String nombretablausuario=MainActivity.correoglobal;//usando un tipo de nombretablausuario para canal PARSE dedicado a cada instalacion
+		nombretablausuario=nombretablausuario.replaceAll("\\.", "");
+		nombretablausuario=nombretablausuario.replaceAll("@", "");
+		
+		PushService.subscribe(this, nombretablausuario,MainActivity.class);
+			
 		//cargando variables
 		tvmes = (TextView) findViewById(R.id.textView1);
 		tvanio = (TextView) findViewById(R.id.textView2);
@@ -60,8 +73,124 @@ public class CalendarioActivity2 extends Activity {
          mescal=now.get(Calendar.MONTH);
          aniocal=now.get(Calendar.YEAR);
 
+         //dia fin de mes para activar push de envio de reporte
+         Calendar finmes= Calendar.getInstance();
+         finmes.add(Calendar.MONTH, 1);  
+         finmes.set(Calendar.DAY_OF_MONTH, 1);  
+         finmes.add(Calendar.DATE, -1);  
+
+         int diafm=finmes.get(Calendar.DAY_OF_MONTH);
+         
+        //push progreso fin de mes informe de nivel
+         if(diacal==diafm||diacal==diafm-1||diacal==diafm-2||diacal==diafm-3){
+        	
+        	 String m=" ";
+        	 
+        	 m=Integer.toString(mescal+1);
+        	 if(Integer.valueOf(m)<10){
+	    		 m="0"+m;
+	    	 } 
         
-        //inflando gridview 
+        	 
+        	String chk=installation.getString("mesaniochk"); 
+        	
+        	  	if(chk==null){// en caso de ser la primera vez que se lanza un mensaje push de este tipo
+        		
+        		ParseQuery<ParseObject> query = ParseQuery.getQuery(nombretablausuario); //query para buscar records de ese mes y año en orden ascendente
+          		query.whereEqualTo("mesdbp", m);
+     	        query.whereEqualTo("aniodbp", Integer.toString(aniocal)); 
+            	
+     	       try {
+    			List<ParseObject> objects= query.find();
+    			
+    			if(objects.size()>=5){
+    				ParsePush push = new ParsePush();
+    	            push.setChannel(nombretablausuario);
+    	       	    push.setMessage("Usted ha hecho un buen esfuerzo, siga avanzando! Bendiciones! (R07D Nivel Principiante)");
+    	       	    push.sendInBackground();
+    	       	    installation.put("mesaniochk",m+Integer.toString(aniocal));
+    	         	installation.saveInBackground();	
+    			}
+    			
+    			if(objects.size()>=15){
+    			ParsePush push = new ParsePush();
+                push.setChannel(nombretablausuario);
+           	    push.setMessage("Usted ha hecho un buen trabajo, siga avanzando! Bendiciones! (R07D Nivel Intermedio)");
+           	    push.sendInBackground();
+           	    installation.put("mesaniochk",m+Integer.toString(aniocal));
+          	    installation.saveInBackground();	
+    			}
+    			
+    			if(objects.size()>=24){
+    				ParsePush push = new ParsePush();
+    	            push.setChannel(nombretablausuario);
+    	       	    push.setMessage("Usted ha hecho un excelente trabajo, siga avanzando! Bendiciones! (R07D Nivel Avanzado)");
+    	       	    push.sendInBackground();
+    	       	    installation.put("mesaniochk",m+Integer.toString(aniocal));
+    	         	installation.saveInBackground();	
+    				}
+           	 
+    		} catch (ParseException e) {
+    			// TODO Auto-generated catch block
+    			e.printStackTrace();
+    		}
+     	       
+        		
+        	}else{
+        	
+        	
+        	if(chk.equals(m+Integer.toString(aniocal))){}//nada ya se lanzo en este mes el push message  
+        		else{
+        	 
+      		ParseQuery<ParseObject> query = ParseQuery.getQuery(nombretablausuario); //query para buscar records de ese mes y año en orden ascendente
+      		query.whereEqualTo("mesdbp", m);
+ 	        query.whereEqualTo("aniodbp", Integer.toString(aniocal)); 
+        	
+ 	       try {
+			List<ParseObject> objects= query.find();
+			
+			if(objects.size()>=5){
+				ParsePush push = new ParsePush();
+	            push.setChannel(nombretablausuario);
+	       	    push.setMessage("Usted ha hecho un buen esfuerzo, siga avanzando! Bendiciones! (R07D Nivel Principiante)");
+	       	    push.sendInBackground();
+	       	    installation.put("mesaniochk",m+Integer.toString(aniocal));
+	         	installation.saveInBackground();	
+			}
+			
+			if(objects.size()>=15){
+			ParsePush push = new ParsePush();
+            push.setChannel(nombretablausuario);
+       	    push.setMessage("Usted ha hecho un buen trabajo, siga avanzando! Bendiciones! (R07D Nivel Intermedio)");
+       	    push.sendInBackground();
+       	    installation.put("mesaniochk",m+Integer.toString(aniocal));
+      	    installation.saveInBackground();	
+			}
+			
+			if(objects.size()>=24){
+				ParsePush push = new ParsePush();
+	            push.setChannel(nombretablausuario);
+	       	    push.setMessage("Usted ha hecho un excelente trabajo, siga avanzando! Bendiciones! (R07D Nivel Avanzado)");
+	       	    push.sendInBackground();
+	            installation.put("mesaniochk",m+Integer.toString(aniocal));
+	         	installation.saveInBackground();	
+				}
+       	 
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        
+        	}//IF para check de que ya este mes habia lanzado una vez el mensaje push
+ 	       
+      }//else null, por si no es la primera vez que en la historia que se lanza el mensaje push
+
+ } //IF dias finales del mes lance mensaje push      
+        
+      
+         
+         
+         //inflando gridview 
         final DisplayMetrics metrics = new DisplayMetrics();  //contruyendo el adaptador 
      	getWindowManager().getDefaultDisplay().getMetrics(metrics);
      	
@@ -82,9 +211,7 @@ public class CalendarioActivity2 extends Activity {
 		gv.setOnItemClickListener(new OnItemClickListener() {
 			public void onItemClick(AdapterView<?> parent, View v,
 				int position, long id) {
-			   //Toast.makeText(getApplicationContext(),
-				//((TextView) v).getText(), Toast.LENGTH_SHORT).show();
-			
+			   
 			     diatv=(TextView) v;
 			     dia=diatv.getText().toString();
 			     diatmp=Integer.valueOf(dia);

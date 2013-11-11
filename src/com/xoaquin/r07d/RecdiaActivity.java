@@ -80,11 +80,11 @@ public static String shorafin="SD",shoraini="SD",objectid; //declarando variable
 		et2.setTypeface(kepf);
 		et2.setTextColor(Color.rgb(141, 102, 95));
 		b1.setTypeface(kepf);
-		//b1.setTextColor(Color.rgb(141, 102, 95));
+
 		b2.setTypeface(kepf);
-		//b2.setTextColor(Color.rgb(141, 102, 95));
+		
 		b3.setTypeface(kepf);
-		//b3.setTextColor(Color.rgb(141, 102, 95));
+		
 		EditText et3=(EditText) findViewById(R.id.editText3);
 		et3.setTypeface(kepf);
 		et3.setTextColor(Color.rgb(141, 102, 95));

@@ -5,7 +5,9 @@ import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
+import com.parse.ParseUser;
 import com.parse.SaveCallback;
+import com.parse.SignUpCallback;
 
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -37,8 +39,6 @@ public class LoginActivity extends Activity {
 		t1.setTypeface(kepf);
 		TextView t2=(TextView) findViewById(R.id.textView2);
 		t2.setTypeface(kepf);
-		//TextView t3=(TextView) findViewById(R.id.textView3);
-		//t3.setTypeface(kepf);
 		EditText et1=(EditText) findViewById(R.id.editText1);
 		et1.setTypeface(kepf);
 		EditText et2=(EditText) findViewById(R.id.editText2);
@@ -208,14 +208,35 @@ public class LoginActivity extends Activity {
 	        		db.open(); 
 	                db.insertTitle(etcorreo, etclave);
 	                
-	                //Creacion de objeto en PARSE
+	                //Creacion de objeto en PARSE TablaAut Original
 	                ParseObject TablaAut = new ParseObject("TablaAut"); //Creando Class o tabla de autenticacion de usuarios
 	                TablaAut.put("correodb", etcorreo); //creando campo o columna en clase
 	                TablaAut.put("clavedb", etclave);//creando campo o columna en clase
 	                
 	                
-	                TablaAut.saveInBackground();
+	                //Creacion de Usuario en PARSE 
 	                
+	                String email= MainActivity.correoglobal; //creando username con primera parte de email
+	                String usr[]=email.split("@");
+	                
+	                ParseUser user = new ParseUser();
+	                user.setUsername(usr[0]);
+	                user.setPassword(etclave);
+	                user.setEmail(etcorreo);
+	               
+	                //no lo uso por ahora para nada dada la arquitectura inicial(ignorancia).
+	                user.signUpInBackground(new SignUpCallback() {
+	                  public void done(ParseException e) {
+	                    if (e == null) {
+	                      // Hooray! Let them use the app now.
+	                    } else {
+	                      // Sign up didn't succeed. Look at the ParseException
+	                      // to figure out what went wrong
+	                    }
+	                  }
+	                });
+	                
+	            	                
 	                
 	              //registra el usuario y activa el boton cuando finaliza correctamente
     		        TablaAut.saveInBackground(new SaveCallback() {
