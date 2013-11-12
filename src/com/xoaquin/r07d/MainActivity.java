@@ -77,7 +77,8 @@ public class MainActivity extends Activity {
    	if(nr>0){  //si SQLITE no esta vacia
          String correo= new String (db.getTitle(nri).getString(1)); //saca el correo de ultima fila SQLITE   
          correoglobal=correo;
-          
+   
+         
       //Query para buscar correo electronico y retornar clave DESDE PARSE
         ParseQuery<ParseObject> query = ParseQuery.getQuery("TablaAut");
         query.whereEqualTo("correodb", correo);
@@ -98,7 +99,12 @@ public class MainActivity extends Activity {
 						       int secondsDelayed = 1;
 						        new Handler().postDelayed(new Runnable() {
 						                public void run() {
-						                        startActivity(new Intent(MainActivity.this, CalendarioActivity2.class));
+						                        
+						                	
+						                	Intent i = new Intent(getApplicationContext(), CalendarioActivity2.class);
+						                	i.putExtra("correog",correoglobal);//pasando la variable correo a la siguiente actividad
+						                	Log.e("cgma",correoglobal);
+						                	    startActivity(new Intent(i));
 						                        finish();
 						                }
 						        }, secondsDelayed * 1500);

@@ -126,8 +126,11 @@ public class LoginActivity extends Activity {
 							int secondsDelayed = 1;
 						        new Handler().postDelayed(new Runnable() {
 						                public void run() {
-						                        startActivity(new Intent(LoginActivity.this, CalendarioActivity2.class));
-						                        finish();
+						                	Intent i = new Intent(getApplicationContext(), CalendarioActivity2.class);
+						                	i.putExtra("correog",etcorreo);//pasando la variable correo a la siguiente actividad
+						                	Log.e("cglacon",etcorreo);
+						                	startActivity(new Intent(i));
+						                    finish();
 						                }
 						        }, secondsDelayed * 1000);
 							
@@ -246,7 +249,10 @@ public class LoginActivity extends Activity {
     		        	    	 int secondsDelayed = 1;
     		 	                new Handler().postDelayed(new Runnable() {
     		 	                        public void run() {
-    		 	                                startActivity(new Intent(LoginActivity.this, CalendarioActivity2.class));
+    		 	                        	Intent i = new Intent(getApplicationContext(), CalendarioActivity2.class);
+						                	i.putExtra("correog",etcorreo);//pasando la variable correo a la siguiente actividad
+						                	Log.e("cgclareg",etcorreo);
+						                	    startActivity(new Intent(i));
     		 	                                finish();
     		 	                        }
     		 	                }, secondsDelayed * 1000);

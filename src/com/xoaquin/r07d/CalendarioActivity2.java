@@ -17,6 +17,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -37,7 +38,7 @@ public class CalendarioActivity2 extends Activity {
 	private TextView tvmes,tvanio,diatv; //variables globales dentro de esta actividad 
     private GridView gv;
     public int diacal,mescal,aniocal,diatmp;  
-	
+	private String nombretablausuario="";
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -53,11 +54,17 @@ public class CalendarioActivity2 extends Activity {
 		PushService.subscribe(this, "todos", MainActivity.class);
 		ParseInstallation installation = ParseInstallation.getCurrentInstallation();
 		
-		String nombretablausuario=MainActivity.correoglobal;//usando un tipo de nombretablausuario para canal PARSE dedicado a cada instalacion
-		nombretablausuario=nombretablausuario.replaceAll("\\.", "");
-		nombretablausuario=nombretablausuario.replaceAll("@", "");
+		//trayendo correo de la anterior actividad usando intent y no variable global.. manera correcta. 
+		Bundle extras = getIntent().getExtras();
+		if (extras != null) {
+		    nombretablausuario = extras.getString("correog");
+		    
+		    nombretablausuario=nombretablausuario.replaceAll("\\.", "");
+			nombretablausuario=nombretablausuario.replaceAll("@", "");
+	 		PushService.subscribe(this, nombretablausuario,MainActivity.class); //suscripcion a canal dedicado para cada instalacion.
+		}
 		
-		PushService.subscribe(this, nombretablausuario,MainActivity.class);
+		Log.e("cgca2",nombretablausuario);	
 			
 		//cargando variables
 		tvmes = (TextView) findViewById(R.id.textView1);
