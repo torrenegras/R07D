@@ -252,8 +252,16 @@ public class CalendarioActivity2 extends Activity {
 		    	 if(dayofweek==5){nombredia="Jueves";}
 		    	 if(dayofweek==6){nombredia="Viernes";}
 		    	 if(dayofweek==7){nombredia="Sabado";}
-		    
-		    	 startActivity(new Intent(CalendarioActivity2.this, RecdiaActivity.class));  //llamando la actividad de registro acorde a fecha seleccionada
+		    	 
+		    	 Intent i = new Intent(getApplicationContext(), RecdiaActivity.class);
+             	 i.putExtra("correog",nombretablausuario);//pasando la variable correo a la siguiente actividad
+             	 i.putExtra("fca",fecha);//pasando la variable correo a la siguiente actividad
+               	i.putExtra("ndca",nombredia);//pasando la variable correo a la siguiente actividad
+            	i.putExtra("dca",dia);//pasando la variable correo a la siguiente actividad
+            	i.putExtra("mca",mes);//pasando la variable correo a la siguiente actividad
+            	i.putExtra("aca",anio);//pasando la variable correo a la siguiente actividad
+            	
+             	 startActivity(new Intent(i));  //llamando la actividad de registro acorde a fecha seleccionada
 		  
 			}
 		});
@@ -279,7 +287,10 @@ public class CalendarioActivity2 extends Activity {
 public void onclickgenrepo(View v) { //boton inicio actividad MENU de generacion reportes
 		
 		
-		startActivity(new Intent(CalendarioActivity2.this, ReporteActivity.class));
+	 Intent i = new Intent(getApplicationContext(), ReporteActivity.class);
+ 	 i.putExtra("correog",nombretablausuario);//pasando la variable correo a la siguiente actividad
+	 
+ 	 startActivity(new Intent(i));  //llamando la actividad de registro acorde a fecha seleccionada
 	}
 	
 	

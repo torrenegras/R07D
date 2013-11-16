@@ -36,7 +36,6 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 
-
 //Actividad principal de registro diario
 
 public class RecdiaActivity extends Activity {
@@ -44,11 +43,27 @@ public class RecdiaActivity extends Activity {
 public static Button b1,b2,b3;  //declarando variables globales para los 2 botones de las horas
 public static String shorafin="SD",shoraini="SD",objectid; //declarando variables globales para text en botones de horas y objectid de los queries
 
+private String ntu="",fca="",ndca="",dca="",mca="",aca="";
+
+
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_recdia);
 	
+		Bundle extras = getIntent().getExtras();
+		if (extras != null) {
+		    ntu = extras.getString("correog");
+		    fca = extras.getString("fca");
+		    ndca = extras.getString("ndca");
+		    
+		    dca = extras.getString("dca");
+		    mca = extras.getString("mca");
+		    aca = extras.getString("aca");
+		    
+		}
+
 		//inicializando variables
 		b1=(Button) findViewById(R.id.button1); 
 		b2=(Button) findViewById(R.id.button2);
@@ -125,8 +140,8 @@ public static String shorafin="SD",shoraini="SD",objectid; //declarando variable
 		
 		
 		//Declarando fecha y dia traidos de Calendario
-		String fecha= CalendarioActivity2.fecha;
-		String nomdia= CalendarioActivity2.nombredia;
+		String fecha= fca;
+		String nomdia= ndca;
 		
 		//Poniendo fecha y dia en textviews onset
 		fechatv.setText(fecha);
@@ -178,9 +193,8 @@ public static String shorafin="SD",shoraini="SD",objectid; //declarando variable
 		//Buscando registro en FECHA para llenar formulario si existe  //DOBLE QUERY SUJETO A ESTUDIO Y OPTIMIZACION
 		
 		//Query para buscar object ID segun fecha
-		String nombretablausuario=MainActivity.correoglobal;
-		nombretablausuario=nombretablausuario.replaceAll("\\.", "");
-		nombretablausuario=nombretablausuario.replaceAll("@", "");
+		String nombretablausuario=ntu;
+		
 		
 		ParseQuery<ParseObject> query = ParseQuery.getQuery(nombretablausuario);
         query.whereEqualTo("fechadbp", fecha);
@@ -195,9 +209,8 @@ public static String shorafin="SD",shoraini="SD",objectid; //declarando variable
         	    objectid = objects.get(0).getObjectId(); //Se obtiene el ID de ese registro
         	         //objects.get(0).getString(key)	****OJO CLAVE DE OPTIMIZACION PARA EVITAR DOBLE QUERY
         	    
-        	    String nombretablausuario=MainActivity.correoglobal;
-        		nombretablausuario=nombretablausuario.replaceAll("\\.", "");
-        		nombretablausuario=nombretablausuario.replaceAll("@", "");
+        	    String nombretablausuario=ntu;
+        		
         	    
         		//Query especifico con ese ID
                 ParseQuery<ParseObject> query2 = ParseQuery.getQuery(nombretablausuario);
@@ -301,10 +314,9 @@ public static String shorafin="SD",shoraini="SD",objectid; //declarando variable
 		final EditText et5;
 		
 		//acomodando nombre para la tabla de usuario
-		String nombretablausuario=MainActivity.correoglobal;
-		String fecha= CalendarioActivity2.fecha;
-		nombretablausuario=nombretablausuario.replaceAll("\\.", "");
-		nombretablausuario=nombretablausuario.replaceAll("@", "");
+		String nombretablausuario=ntu;
+		String fecha= fca;   
+		
 				
 		//trayendo los edittexts
 		et1= (EditText) findViewById(R.id.editText1);
@@ -343,9 +355,8 @@ public static String shorafin="SD",shoraini="SD",objectid; //declarando variable
             	
         		objectid = objects.get(0).getObjectId(); //obtiene objectid del registro con esa fecha
         	
-        	    String nombretablausuario=MainActivity.correoglobal;
-        		nombretablausuario=nombretablausuario.replaceAll("\\.", "");
-        		nombretablausuario=nombretablausuario.replaceAll("@", "");
+        	    String nombretablausuario=ntu;
+        		
         	    
         		//Query segun el objectID correspondiente para actualizar el record de esa fecha
                 ParseQuery<ParseObject> query2 = ParseQuery.getQuery(nombretablausuario);
@@ -353,10 +364,10 @@ public static String shorafin="SD",shoraini="SD",objectid; //declarando variable
                   public void done(ParseObject object, ParseException e) {
                     if (e == null) {
                   
-        	    		object.put("fechadbp", CalendarioActivity2.fecha); 
-        		        object.put("diadbp", CalendarioActivity2.dia);
-        		        object.put("mesdbp", CalendarioActivity2.mes);
-        		        object.put("aniodbp", CalendarioActivity2.anio);
+        	    		object.put("fechadbp", fca); 
+        		        object.put("diadbp", dca);
+        		        object.put("mesdbp", mca);
+        		        object.put("aniodbp", aca);
         		        object.put("horaidbp", shoraini); 
         		        object.put("horafdbp", shorafin); 
         		        object.put("lbdbp", et1.getText().toString());
@@ -406,17 +417,16 @@ public static String shorafin="SD",shoraini="SD",objectid; //declarando variable
         		
         		
             	
-    			String nombretablausuario=MainActivity.correoglobal;
-    			nombretablausuario=nombretablausuario.replaceAll("\\.", "");
-    			nombretablausuario=nombretablausuario.replaceAll("@", "");
+    			String nombretablausuario=ntu;
+    			
     			
     			ParseObject TablaUsr = new ParseObject(nombretablausuario);//se crea un nuevo elemento para introducir nuevo record en PARSE
     	        
     			
-    			TablaUsr.put("fechadbp", CalendarioActivity2.fecha); 
-    	        TablaUsr.put("diadbp", CalendarioActivity2.dia);
-    	        TablaUsr.put("mesdbp", CalendarioActivity2.mes);
-    	        TablaUsr.put("aniodbp", CalendarioActivity2.anio);
+    			TablaUsr.put("fechadbp", fca); 
+    	        TablaUsr.put("diadbp", dca);
+    	        TablaUsr.put("mesdbp", mca);
+    	        TablaUsr.put("aniodbp", aca);
     	        TablaUsr.put("horaidbp", shoraini); 
     	        TablaUsr.put("horafdbp", shorafin); 
     	        TablaUsr.put("lbdbp", et1.getText().toString());

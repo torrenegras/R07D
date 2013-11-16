@@ -70,13 +70,20 @@ private int mDay;
 
 
 private static String FILE;
-private String spdfop="",spdfopi="";
+private String spdfop="",spdfopi="",ntu="";;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_reporte);
-	
+
+		Bundle extras = getIntent().getExtras();
+		if (extras != null) {
+		    ntu = extras.getString("correog");
+		    
+		}
+
+		
 		String nombre="",nombreli="",mdl="";
 		EditText etnombre,etnombreli,etmdl;
 		
@@ -282,9 +289,8 @@ private String spdfop="",spdfopi="";
 		
 		
 		
-		 String nombretablausuario=MainActivity.correoglobal;
- 		nombretablausuario=nombretablausuario.replaceAll("\\.", "");
- 		nombretablausuario=nombretablausuario.replaceAll("@", "");
+		 String nombretablausuario=ntu;
+ 		
  		
  		
  		 Boolean b;
