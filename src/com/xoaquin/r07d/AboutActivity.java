@@ -2,6 +2,9 @@ package com.xoaquin.r07d;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.graphics.Typeface;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
@@ -36,7 +39,18 @@ public class AboutActivity extends Activity {
 	
 	       ab.setTypeface(kepf);
 	       aut.setTypeface(kepf);
-	
+	       
+	       //automatizacion de la escritura de la version en app
+	       PackageManager manager = this.getPackageManager();
+	       try {
+			PackageInfo info = manager.getPackageInfo(this.getPackageName(), 0);
+			ab.setText("R07D Ver:"+info.versionName+"  © 2013 XoaquinSoft");
+		} catch (NameNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	       
+	      
 	
 	}
 

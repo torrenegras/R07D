@@ -476,7 +476,7 @@ private String ntu="",fca="",ndca="",dca="",mca="",aca="";
              
         if(cb8.isChecked()){
         	
-        	
+        	//si no esta vacio 
         	if(!et3.getText().toString().isEmpty()){
         		
         		
@@ -488,9 +488,11 @@ private String ntu="",fca="",ndca="",dca="",mca="",aca="";
         		    public void done(List<ParseObject> o, ParseException e) {
         		        if (e == null) {
         		            
+        		        	//si existe actualiza
         		        	if(o.size()>0){
         		        		o.get(0).put("texto", et3.getText().toString());
         		        		o.get(0).saveInBackground();
+        		        	//o crea uno nuevo
         		        	}else{
         		        		ParseObject ag = new ParseObject("Muro");
         		        		ag.put("fecha",fca);
@@ -509,7 +511,7 @@ private String ntu="",fca="",ndca="",dca="",mca="",aca="";
         		
            		
         	}
-        	
+        	//si no esta vacio
         	if(!et5.getText().toString().isEmpty()){
         	
         	

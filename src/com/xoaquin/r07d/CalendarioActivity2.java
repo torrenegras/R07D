@@ -296,13 +296,13 @@ public void onclickgenrepo(View v) { //boton inicio actividad MENU de generacion
 
 
 
-public void onclickmuro(View v) { //boton inicio actividad MENU de generacion reportes
+public void onclickmuro(View v) { //boton inicio actividad MURO
 	
 	
 	 Intent i = new Intent(getApplicationContext(), MuroActivity.class);
 	 //i.putExtra("correog",nombretablausuario);//pasando la variable correo a la siguiente actividad
 	 
-	 startActivity(new Intent(i));  //llamando la actividad de registro acorde a fecha seleccionada
+	 startActivity(new Intent(i));  
 	}
 
 

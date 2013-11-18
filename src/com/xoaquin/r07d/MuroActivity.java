@@ -10,22 +10,19 @@ import com.parse.ParseQuery;
 import android.os.Bundle;
 import android.app.ListActivity;
 import android.view.Menu;
-import android.view.View;
-import android.widget.ListView;
-import android.widget.Toast;
 
 public class MuroActivity extends ListActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		//setContentView(R.layout.activity_muro);
 		
 		
+		//Creando lista de objetos CUSTOM
 		ArrayList<CustomObject> objects = new ArrayList<CustomObject>();
 		
 		
-		
+		//Query de toda la clase en Parse
 		ParseQuery<ParseObject> q = ParseQuery.getQuery("Muro");
 		q.orderByDescending("fecha");
 		try {
@@ -33,9 +30,11 @@ public class MuroActivity extends ListActivity {
 			
 			if(o.size()>0){
         		
+				//llenando la lista de objetos custom
 				int i=0;
         		while(i<o.size()){
-        		CustomObject co=new CustomObject(o.get(i).getString("correo"),o.get(i).getString("tipo"),o.get(i).getString("fecha"),o.get(i).getString("texto"));
+        		//declarando el objeto custom y usandolo para llenar lista custom
+        			CustomObject co=new CustomObject(o.get(i).getString("correo"),o.get(i).getString("tipo"),o.get(i).getString("fecha"),o.get(i).getString("texto"));
         		objects.add(co);
         		i++;
         		
@@ -46,7 +45,7 @@ public class MuroActivity extends ListActivity {
             		objects.add(co2);
         		}
         		
-        		
+        		//usando la lista para llamar el adaptador e inflar el listview
         		CustomAdapter customAdapter = new CustomAdapter(this, objects);
         		setListAdapter(customAdapter);
         		
@@ -66,12 +65,6 @@ public class MuroActivity extends ListActivity {
 
 	
 	
-	
-	@Override
-	  protected void onListItemClick(ListView l, View v, int position, long id) {
-	    String item = (String) getListAdapter().getItem(position);
-	    Toast.makeText(this, item + " selected", Toast.LENGTH_LONG).show();
-	  }
 	
 	
 	

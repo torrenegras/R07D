@@ -11,6 +11,8 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+//ADAPTADOR CUSTOM PARA INFLAR LISTVIEW CON 4 TEXTBOXS EN LAYOUT. RECIBE UNA LISTA DE OBJETOS CUSTOM CON 4 TB CADA UNO.
+
 public class CustomAdapter extends BaseAdapter {
 
 	   private LayoutInflater inflater;
