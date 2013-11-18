@@ -14,7 +14,10 @@ Bendiciones!!
 Futuras adiciones:
 
 
-Comunidad R07D para publicar peticiones de oracion.
+Devocional Diaro...Alguien ofrece contenido?  
+Una reflexion diaria(365 en total) 
+Maximo 300 palabras c/u. 
+Maximo 6 versiculos de soporte.
 
 
 

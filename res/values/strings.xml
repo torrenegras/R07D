@@ -70,5 +70,8 @@
     <string name="r07dspalsh">R07D</string>
     <string name="BYJ">by XoaquinSoft</string>
     <string name="title_activity_calendario_activity2">CALENDARIO</string>
+    <string name="title_activity_muro">MURO</string>
+    <string name="muro">MURO R07D</string>
+    <string name="pubmuro">Publicar P&amp;AG en Muro</string>
 
 </resources>

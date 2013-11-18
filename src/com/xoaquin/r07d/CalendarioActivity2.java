@@ -70,6 +70,7 @@ public class CalendarioActivity2 extends Activity {
 		tvmes = (TextView) findViewById(R.id.textView1);
 		tvanio = (TextView) findViewById(R.id.textView2);
 		Button brep=(Button) findViewById(R.id.button1);
+		Button bmur=(Button) findViewById(R.id.button3);
 		gv= (GridView) findViewById(R.id.gridView1);
 		Typeface kepf = Typeface.createFromAsset(getAssets(),"Kepler-Std-Black_26074.ttf");
     	
@@ -211,7 +212,7 @@ public class CalendarioActivity2 extends Activity {
 		tvmes.setTypeface(kepf);
 		tvanio.setTypeface(kepf);
 		brep.setTypeface(kepf);
-		
+		bmur.setTypeface(kepf);
 		
 		//onclick gridview
 	
@@ -292,7 +293,19 @@ public void onclickgenrepo(View v) { //boton inicio actividad MENU de generacion
 	 
  	 startActivity(new Intent(i));  //llamando la actividad de registro acorde a fecha seleccionada
 	}
+
+
+
+public void onclickmuro(View v) { //boton inicio actividad MENU de generacion reportes
 	
+	
+	 Intent i = new Intent(getApplicationContext(), MuroActivity.class);
+	 //i.putExtra("correog",nombretablausuario);//pasando la variable correo a la siguiente actividad
+	 
+	 startActivity(new Intent(i));  //llamando la actividad de registro acorde a fecha seleccionada
+	}
+
+
 	
 	
 	//felcha derecha

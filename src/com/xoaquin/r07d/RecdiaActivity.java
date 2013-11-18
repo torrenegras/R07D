@@ -8,6 +8,7 @@ import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
+import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
 import android.net.ConnectivityManager;
@@ -52,6 +53,7 @@ private String ntu="",fca="",ndca="",dca="",mca="",aca="";
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_recdia);
 	
+		
 		Bundle extras = getIntent().getExtras();
 		if (extras != null) {
 		    ntu = extras.getString("correog");
@@ -70,7 +72,7 @@ private String ntu="",fca="",ndca="",dca="",mca="",aca="";
 		b3=(Button) findViewById(R.id.button3);
 		
 		
-		CheckBox cb1,cb2,cb3,cb4,cb5,cb6,cb7;
+		CheckBox cb1,cb2,cb3,cb4,cb5,cb6,cb7,cb8;
 		TextView fechatv = (TextView) findViewById(R.id.textView9);
 		TextView diatv = (TextView) findViewById(R.id.textView8);
 		
@@ -133,6 +135,8 @@ private String ntu="",fca="",ndca="",dca="",mca="",aca="";
 		cb5 = (CheckBox) findViewById(R.id.checkBox5); 
 		cb5.setTypeface(kepf);
 		cb5.setTextColor(Color.rgb(141, 102, 95));
+		cb8 = (CheckBox) findViewById(R.id.checkBox8); 
+		cb8.setTypeface(kepf);
 		
 		
 		LinearLayout l1 = (LinearLayout) findViewById(R.id.LinearLayout01); //background del linear layout tambien se puede hacer en layout
@@ -464,6 +468,88 @@ private String ntu="",fca="",ndca="",dca="",mca="",aca="";
       	});	//query externa 1
 	
  
+       
+        //para publicacion en muro
+        CheckBox cb8 = (CheckBox) findViewById(R.id.checkBox8); 
+        final ParseUser cu = ParseUser.getCurrentUser();
+        
+             
+        if(cb8.isChecked()){
+        	
+        	
+        	if(!et3.getText().toString().isEmpty()){
+        		
+        		
+        		ParseQuery<ParseObject> q = ParseQuery.getQuery("Muro");
+        		q.whereEqualTo("correo", cu.getEmail().toString());
+        		q.whereEqualTo("fecha", fca);
+        		q.whereEqualTo("tipo", "(AG)");
+        		q.findInBackground(new FindCallback<ParseObject>() {
+        		    public void done(List<ParseObject> o, ParseException e) {
+        		        if (e == null) {
+        		            
+        		        	if(o.size()>0){
+        		        		o.get(0).put("texto", et3.getText().toString());
+        		        		o.get(0).saveInBackground();
+        		        	}else{
+        		        		ParseObject ag = new ParseObject("Muro");
+        		        		ag.put("fecha",fca);
+        		        		ag.put("correo", cu.getEmail().toString());
+        		            	ag.put("tipo", "(AG)");
+        		            	ag.put("texto", et3.getText().toString());
+        		            	ag.saveInBackground();	
+        		        	}
+        		        	
+        		        	
+        		        } else {
+        		            
+        		        }
+        		    }
+        		});
+        		
+           		
+        	}
+        	
+        	if(!et5.getText().toString().isEmpty()){
+        	
+        	
+        		ParseQuery<ParseObject> q = ParseQuery.getQuery("Muro");
+        		q.whereEqualTo("correo", cu.getEmail().toString());
+        		q.whereEqualTo("fecha", fca);
+        		q.whereEqualTo("tipo", "(P)");
+        		q.findInBackground(new FindCallback<ParseObject>() {
+        		    public void done(List<ParseObject> o, ParseException e) {
+        		        if (e == null) {
+        		            
+        		        	if(o.size()>0){
+        		        		o.get(0).put("texto", et5.getText().toString());
+        		        		o.get(0).saveInBackground();
+        		        	}else{
+        		        		ParseObject pet = new ParseObject("Muro");
+        		            	pet.put("fecha",fca);
+        		            	pet.put("correo", cu.getEmail().toString());
+        		            	pet.put("tipo", "(P)");
+        		            	pet.put("texto", et5.getText().toString());
+        		               	pet.saveInBackground();	
+        		        	}
+        		        	
+        		        	
+        		        } else {
+        		            
+        		        }
+        		    }
+        		});
+        		
+        
+        	
+        	}
+           	
+        }
+        
+        
+        
+      
+        
 	}//onclickguardar
 	
 	

@@ -1,7 +1,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/scrollView1"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:background="#ffe2d8" >
 
 <LinearLayout
@@ -63,18 +63,30 @@
 
    </GridView>
     
-
-     
 <Button
     android:id="@+id/button1"
+    style="?android:attr/borderlessButtonStyle"
     android:layout_width="260dp"
     android:layout_height="wrap_content"
-    android:layout_marginLeft="55dp"
+    android:layout_gravity="center"
+    android:layout_marginLeft="0dp"
     android:background="@drawable/b1"
     android:onClick="onclickgenrepo"
     android:text="@string/crblabel"
     android:textColor="#ffffff"
+    android:textSize="22sp" />
+
+<Button
+    android:id="@+id/button3"
     style="?android:attr/borderlessButtonStyle"
+    android:layout_width="260dp"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layout_marginTop="10dp"
+    android:background="@drawable/b1"
+    android:onClick="onclickmuro"
+    android:text="@string/muro"
+    android:textColor="#ffffff"
     android:textSize="22sp" />
 
 <Button

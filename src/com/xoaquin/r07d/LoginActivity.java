@@ -2,6 +2,7 @@ package com.xoaquin.r07d;
 
 import java.util.List;
 import com.parse.FindCallback;
+import com.parse.LogInCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
@@ -32,7 +33,7 @@ public class LoginActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_login);
-		
+	
 		//poniendo tipo de letra
 		Typeface kepf = Typeface.createFromAsset(getAssets(),"Kepler-Std-Black_26074.ttf");
     	TextView t1=(TextView) findViewById(R.id.textView1);
@@ -123,6 +124,23 @@ public class LoginActivity extends Activity {
 			        		db.open(); 
 			                db.insertTitle(etcorreo, etclave);
 							
+			                
+			                //loggeando usuario existente
+			                String email= etcorreo; //creando username con primera parte de email
+			                String usr[]=email.split("@");
+			                
+			                ParseUser.logInInBackground(usr[0], etclave, new LogInCallback() {
+			                	  public void done(ParseUser user, ParseException e) {
+			                	    if (user != null) {
+			                	      // Hooray! The user is logged in.
+			                	    } else {
+			                	      // Signup failed. Look at the ParseException to see what happened.
+			                	    }
+			                	  }
+			                	});
+			                
+			                
+			                //llamando actividad calendario principal
 							int secondsDelayed = 1;
 						        new Handler().postDelayed(new Runnable() {
 						                public void run() {

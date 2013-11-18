@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <lint>
     <issue id="CutPasteId" severity="ignore" />
+    <issue id="HardcodedText">
+        <ignore path="res/layout/rowlayout.xml" />
+    </issue>
+    <issue id="InefficientWeight">
+        <ignore path="res/layout/rowlayout.xml" />
+    </issue>
     <issue id="NestedScrolling">
         <ignore path="res/layout/activity_calendario_activity2.xml" />
     </issue>

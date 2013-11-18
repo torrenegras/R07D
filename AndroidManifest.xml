@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.xoaquin.r07d"
-    android:versionCode="13"
-    android:versionName="2.2" >
+    android:versionCode="14"
+    android:versionName="2.3" >
 
     <uses-sdk
         android:minSdkVersion="11"
@@ -58,18 +58,20 @@
             android:name="com.xoaquin.r07d.CalendarioActivity2"
             android:label="@string/title_activity_calendario_activity2" >
         </activity>
-    
-    
-    <service android:name="com.parse.PushService" />
-<receiver android:name="com.parse.ParseBroadcastReceiver">
-  <intent-filter>
-    <action android:name="android.intent.action.BOOT_COMPLETED" />
-    <action android:name="android.intent.action.USER_PRESENT" />
-  </intent-filter>
-</receiver>
 
+        <service android:name="com.parse.PushService" />
 
-    
+        <receiver android:name="com.parse.ParseBroadcastReceiver" >
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.USER_PRESENT" />
+            </intent-filter>
+        </receiver>
+
+        <activity
+            android:name="com.xoaquin.r07d.MuroActivity"
+            android:label="@string/title_activity_muro" >
+        </activity>
     </application>
 
 </manifest>

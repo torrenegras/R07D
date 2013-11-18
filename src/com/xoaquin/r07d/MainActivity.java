@@ -17,11 +17,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.parse.FindCallback;
+import com.parse.LogInCallback;
 import com.parse.Parse;
 import com.parse.ParseAnalytics;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
+import com.parse.ParseUser;
 
 
 
@@ -94,6 +96,27 @@ public class MainActivity extends Activity {
 					String clave=new String(db.getTitle(nri).getString(2)); //sacando string de clave desde SQLITE
 					
 					if(clavedb.equals(clave)){ //comparando claves
+	
+						 String email= MainActivity.correoglobal; //creando username con primera parte de email
+			             String usr[]=email.split("@");
+						
+						//loggeando usuario existente
+		                ParseUser.logInInBackground(usr[0], clave, new LogInCallback() {
+
+		                		 public void done(ParseUser user, ParseException e) {
+		                			 
+		                			 if (user != null) {
+		                	      // Hooray! The user is logged in.
+		                	    
+		                	    } else {
+		                	      // Signup failed. Look at the ParseException to see what happened.
+		                	    	
+		                	    }
+		                	  }
+		                	});
+		                
+						
+						
 						
 						// Timer que cambia de actividad  a Calendario si match de claves
 						       int secondsDelayed = 1;
