@@ -13,13 +13,16 @@ import com.parse.SaveCallback;
 
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.TimePickerDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -41,7 +44,7 @@ import android.widget.Toast;
 
 public class RecdiaActivity extends Activity {
 
-public static Button b1,b2,b3;  //declarando variables globales para los 2 botones de las horas
+public static Button b1,b2,b3,b5;  //declarando variables globales para los 2 botones de las horas
 public static String shorafin="SD",shoraini="SD",objectid; //declarando variables globales para text en botones de horas y objectid de los queries
 
 private String ntu="",fca="",ndca="",dca="",mca="",aca="";
@@ -70,7 +73,7 @@ private String ntu="",fca="",ndca="",dca="",mca="",aca="";
 		b1=(Button) findViewById(R.id.button1); 
 		b2=(Button) findViewById(R.id.button2);
 		b3=(Button) findViewById(R.id.button3);
-		
+		b5=(Button) findViewById(R.id.button5);
 		
 		CheckBox cb1,cb2,cb3,cb4,cb5,cb6,cb7,cb8;
 		TextView fechatv = (TextView) findViewById(R.id.textView9);
@@ -101,6 +104,8 @@ private String ntu="",fca="",ndca="",dca="",mca="",aca="";
 		b2.setTypeface(kepf);
 		
 		b3.setTypeface(kepf);
+		
+		b5.setTypeface(kepf);
 		
 		EditText et3=(EditText) findViewById(R.id.editText3);
 		et3.setTypeface(kepf);
@@ -679,7 +684,46 @@ String ampm="AM",sminute,shour;
 
 	
 	
-	
+	public void onclickdev(View v) {
+		AlertDialog.Builder alertDialog2 = new AlertDialog.Builder(
+		        RecdiaActivity.this);
+		 
+		// Setting Dialog Title
+		alertDialog2.setTitle("En Construcción...");
+		 
+		// Setting Dialog Message
+		alertDialog2.setMessage("Conoces a alguien que pueda aportar un devocional diario para esta sección?");
+		 
+		// Setting Icon to Dialog
+		alertDialog2.setIcon(R.drawable.uc);
+		 
+		// Setting Positive "Yes" Btn
+		alertDialog2.setPositiveButton("Escríbeme",
+		        new DialogInterface.OnClickListener() {
+		            public void onClick(DialogInterface dialog, int which) {
+		            	 
+		            	Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
+		 			            "mailto","xoaquin@outlook.com", null));
+		 			emailIntent.putExtra(Intent.EXTRA_SUBJECT, "CONOZCO A ALGUIEN PARA APORTAR DEVOCIONAL A R07D");
+		 			
+		 			startActivity(Intent.createChooser(emailIntent, "Send email..."));
+		 	        	  
+		 			
+		            }
+		        });
+		// Setting Negative "NO" Btn
+		alertDialog2.setNegativeButton("No",
+		        new DialogInterface.OnClickListener() {
+		            public void onClick(DialogInterface dialog, int which) {
+		                
+		                dialog.cancel();
+		            }
+		        });
+		 
+		// Showing Alert Dialog
+		alertDialog2.show();
+		
+	}
 	
 	
 	

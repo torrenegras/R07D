@@ -34,16 +34,18 @@ public final class R {
         public static final int s=0x7f020005;
         public static final int splash=0x7f020006;
         public static final int t2=0x7f020007;
+        public static final int uc=0x7f020008;
     }
     public static final class id {
         public static final int LinearLayout01=0x7f090017;
         public static final int LinearLayout1=0x7f090014;
         public static final int TextView01=0x7f090000;
-        public static final int action_settings=0x7f09002b;
+        public static final int action_settings=0x7f09002c;
         public static final int button1=0x7f090008;
         public static final int button2=0x7f09000a;
         public static final int button3=0x7f090009;
         public static final int button4=0x7f090019;
+        public static final int button5=0x7f090025;
         public static final int checkBox1=0x7f09001f;
         public static final int checkBox2=0x7f090020;
         public static final int checkBox3=0x7f090021;
@@ -60,15 +62,15 @@ public final class R {
         public static final int gridView1=0x7f090007;
         public static final int imageButton1=0x7f090006;
         public static final int imageButton2=0x7f090005;
-        public static final int item1=0x7f090028;
-        public static final int item2=0x7f090029;
-        public static final int item3=0x7f09002a;
+        public static final int item1=0x7f090029;
+        public static final int item2=0x7f09002a;
+        public static final int item3=0x7f09002b;
         public static final int linearLayout1=0x7f090010;
         public static final int list=0x7f090016;
         public static final int progressBar1=0x7f090013;
-        public static final int radioButton1=0x7f090026;
-        public static final int radioButton2=0x7f090027;
-        public static final int radioSINO=0x7f090025;
+        public static final int radioButton1=0x7f090027;
+        public static final int radioButton2=0x7f090028;
+        public static final int radioSINO=0x7f090026;
         public static final int rl=0x7f090015;
         public static final int scrollView1=0x7f090004;
         public static final int textView1=0x7f090002;
@@ -130,6 +132,7 @@ public final class R {
         public static final int coordgclabel=0x7f060025;
         public static final int crblabel=0x7f060023;
         public static final int desconectarse=0x7f060035;
+        public static final int dev=0x7f060048;
         public static final int dialabel=0x7f06001a;
         public static final int emaillabel=0x7f060006;
         public static final int fechalabel=0x7f06001b;
