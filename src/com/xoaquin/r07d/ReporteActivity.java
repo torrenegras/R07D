@@ -694,52 +694,28 @@ private String spdfop="",spdfopi="",ntu="";;
 	        		
 	        	  
 	        	  final Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND_MULTIPLE);
-	        	  //emailIntent.setType("plain/text");
+	        	 
 	        	  emailIntent.setType("application/image");
-
+	        	 
 
 	        	  ArrayList<Uri> uris = new ArrayList<Uri>();
 
-	        	  String[] filePaths = new String[] {strFile,strFilepdf};
+	        	  String[] filePaths = new String[] {strFilepdf,strFile};
 	        	  for (String file : filePaths) {
 	        	      File fileIn = new File(file);
 	        	      Uri u = Uri.fromFile(fileIn);
 	        	      uris.add(u);
 	        	  }
 
-	        	 // if ( !(app_preferences.getString("email", "") == null || app_preferences.getString("email", "").equals(""))) {
-	        	   //   emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[] {app_preferences.getString("email", "")});    
-	        	  //}
+	        	
 
 	        	  emailIntent.putExtra(Intent.EXTRA_SUBJECT,"REPORTE MENSUAL R07D: "+et1.getText().toString()+" "+mes+"/"+anio);
 	        	  emailIntent.putExtra(Intent.EXTRA_TEXT, "\n\nREPORTE R07D ADJUNTO\n\n\n");
 	        	  emailIntent.putParcelableArrayListExtra(Intent.EXTRA_STREAM, uris);
 
 	        	  startActivity(Intent.createChooser(emailIntent, "Email:"));
-		    
-	        	  
-	        	  
-	        	  /*
-		        	//Creando el EMAIL intent  ANTIGUO, DEJADO POR REFERENCIA FUTURA 
-			      		
-		        	  String strFile = Environment.getExternalStorageDirectory().getAbsolutePath() + "/R07D"+"/REPR07D-"+mes+"-"+anio+".html";
-		        	  String strFilepdf = Environment.getExternalStorageDirectory().getAbsolutePath() + "/R07D"+"/REPR07D-"+mes+"-"+anio+".pdf";
-		        		
-		        	  
-		        	  //Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts("mailto","", null));
-		        	     Intent emailIntent = new Intent(Intent.ACTION_SEND);
-		        	    emailIntent.setType("application/image");
-			      	    emailIntent.putExtra(Intent.EXTRA_SUBJECT, "REPORTE MENSUAL R07D: "+et1.getText().toString()+" "+mes+"/"+anio);
-			      	    emailIntent.putExtra(Intent.EXTRA_TEXT, "REPORTE R07D ADJUNTO");
-			      	    emailIntent.putExtra(Intent.EXTRA_STREAM,Uri.parse("file://" + strFile)); 
-			      	    emailIntent.putExtra(Intent.EXTRA_STREAM,Uri.parse("file://" + strFilepdf));
-			      	  
-			      	    startActivity(Intent.createChooser(emailIntent, "Send email..."));
-			    
-			      	//Html.fromHtml(yourHtml)  para poner en EXTRA_TEXT html sencillo
-			      	  */
-		        	  
-	          
+	        	  	  
+	        	
 	          
 	          }//done
 	   

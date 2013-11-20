@@ -7,9 +7,15 @@ import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.app.ListActivity;
+import android.content.Intent;
 import android.view.Menu;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemLongClickListener;
+import android.widget.ListView;
 
 public class MuroActivity extends ListActivity {
 
@@ -57,14 +63,40 @@ public class MuroActivity extends ListActivity {
 			e.printStackTrace();
 		}
 		
-		
-		
+		//implementacion de longclick en lista con intent para correo electronico al usuario
+		ListView lv = getListView();
+		  
+		  lv.setOnItemLongClickListener(new OnItemLongClickListener() {
+		     
+
+			@Override
+			public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
+					int arg2, long arg3) {
+				// TODO Auto-generated method stub
+				
+				CustomObject item = (CustomObject) getListAdapter().getItem(arg2);
+			    String c=item.getProp1();
+			    String t=item.getProp2();
+			    String f=item.getProp3();
+			    String te=item.getProp4();
+			  
+			    
+			    Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
+			            "mailto",c, null));
+			emailIntent.putExtra(Intent.EXTRA_SUBJECT, "COMENTARIO ACERCA DE "+t+" EN MURO R07D ("+f+")");
+			emailIntent.putExtra(Intent.EXTRA_TEXT, "\n\n\n\n\n\n"+t+"\n"+te);
+			startActivity(Intent.createChooser(emailIntent, "Send email..."));
+	        	  
+			
+	        	  
+
+				return false;
+			}
+		  });
 		
 		   
 	}
 
-	
-	
 	
 	
 	
