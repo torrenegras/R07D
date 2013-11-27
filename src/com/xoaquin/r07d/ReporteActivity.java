@@ -157,7 +157,7 @@ private String spdfop="",spdfopi="",ntu="";;
 			anio=String.valueOf(y); //variable para query
 	
 			t1.setText("MES: "+mes);
-			t2.setText("A„O: "+anio);
+			t2.setText("A\u00D1O: "+anio);
 	
 	
 			final Calendar c2 = Calendar.getInstance();
@@ -220,7 +220,7 @@ private String spdfop="",spdfopi="",ntu="";;
 		TextView t2= (TextView) findViewById(R.id.textView4);
 		
 		t1.setText("MES: "+monthString); //DONDE SE PONEN EN LAYOUT
-		t2.setText("A„O: "+localYear);   //DONDE SE PONEN EN LAYOUT
+		t2.setText("A\u00D1O: "+localYear);   //DONDE SE PONEN EN LAYOUT
 		mes=monthString;
 		anio=localYear;
 		
