@@ -4,6 +4,9 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import com.parse.ParseAnalytics;
 import com.parse.ParseException;
 import com.parse.ParseInstallation;
@@ -24,6 +27,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
 
@@ -89,6 +93,26 @@ public class CalendarioActivity2 extends Activity {
 
          int diafm=finmes.get(Calendar.DAY_OF_MONTH);
          
+         
+         if (diacal==27){
+        	 
+        	 try {
+        		 JSONObject data = new JSONObject("{\"action\": \"com.xoaquin.r07d.NIVEL\",\"mensaje\": \"Usted ha hecho un buen esfuerzo, siga avanzando! Bendiciones! (R07D Nivel Principiante) +5 PUNTOS \"}");
+				
+        		ParsePush push = new ParsePush();
+ 	            push.setChannel(nombretablausuario);
+ 	       	    push.setData(data);
+ 	       	    push.sendInBackground();
+ 	       	 
+				
+        	 } catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+         
+         }
+         
+         
         //push progreso fin de mes informe de nivel
          if(diacal==diafm||diacal==diafm-1||diacal==diafm-2||diacal==diafm-3){
         	
@@ -111,7 +135,7 @@ public class CalendarioActivity2 extends Activity {
      	       try {
     			List<ParseObject> objects= query.find();
     			
-    			if(objects.size()>=5){
+    			if( objects.size()>=5 && objects.size()<15 ){
     				ParsePush push = new ParsePush();
     	            push.setChannel(nombretablausuario);
     	       	    push.setMessage("Usted ha hecho un buen esfuerzo, siga avanzando! Bendiciones! (R07D Nivel Principiante)");
@@ -120,7 +144,7 @@ public class CalendarioActivity2 extends Activity {
     	         	installation.saveInBackground();	
     			}
     			
-    			if(objects.size()>=15){
+    			if(objects.size()>=15 && objects.size()<24){
     			ParsePush push = new ParsePush();
                 push.setChannel(nombretablausuario);
            	    push.setMessage("Usted ha hecho un buen trabajo, siga avanzando! Bendiciones! (R07D Nivel Intermedio)");
@@ -129,7 +153,7 @@ public class CalendarioActivity2 extends Activity {
           	    installation.saveInBackground();	
     			}
     			
-    			if(objects.size()>=24){
+    			if(objects.size()>=24 && objects.size()<=diafm){
     				ParsePush push = new ParsePush();
     	            push.setChannel(nombretablausuario);
     	       	    push.setMessage("Usted ha hecho un excelente trabajo, siga avanzando! Bendiciones! (R07D Nivel Avanzado)");
@@ -157,7 +181,7 @@ public class CalendarioActivity2 extends Activity {
  	       try {
 			List<ParseObject> objects= query.find();
 			
-			if(objects.size()>=5){
+			if(objects.size()>=5 && objects.size()<15){
 				ParsePush push = new ParsePush();
 	            push.setChannel(nombretablausuario);
 	       	    push.setMessage("Usted ha hecho un buen esfuerzo, siga avanzando! Bendiciones! (R07D Nivel Principiante)");
@@ -166,7 +190,7 @@ public class CalendarioActivity2 extends Activity {
 	         	installation.saveInBackground();	
 			}
 			
-			if(objects.size()>=15){
+			if(objects.size()>=15 && objects.size()<24){
 			ParsePush push = new ParsePush();
             push.setChannel(nombretablausuario);
        	    push.setMessage("Usted ha hecho un buen trabajo, siga avanzando! Bendiciones! (R07D Nivel Intermedio)");
@@ -175,7 +199,7 @@ public class CalendarioActivity2 extends Activity {
       	    installation.saveInBackground();	
 			}
 			
-			if(objects.size()>=24){
+			if(objects.size()>=24 && objects.size()<=diafm){
 				ParsePush push = new ParsePush();
 	            push.setChannel(nombretablausuario);
 	       	    push.setMessage("Usted ha hecho un excelente trabajo, siga avanzando! Bendiciones! (R07D Nivel Avanzado)");
@@ -274,6 +298,9 @@ public class CalendarioActivity2 extends Activity {
 	public void onResume()
 	    {  // After a pause OR at startup
 	    super.onResume();
+	    ProgressBar pb=(ProgressBar) findViewById(R.id.progressBar1);
+		pb.setVisibility(View.INVISIBLE);
+
 	  //inflando gridview 
         final DisplayMetrics metrics = new DisplayMetrics();  //contruyendo el adaptador 
      	getWindowManager().getDefaultDisplay().getMetrics(metrics);
@@ -298,10 +325,9 @@ public void onclickgenrepo(View v) { //boton inicio actividad MENU de generacion
 
 public void onclickmuro(View v) { //boton inicio actividad MURO
 	
-	
+	ProgressBar pb=(ProgressBar) findViewById(R.id.progressBar1);
+	pb.setVisibility(View.VISIBLE);
 	 Intent i = new Intent(getApplicationContext(), MuroActivity.class);
-	 //i.putExtra("correog",nombretablausuario);//pasando la variable correo a la siguiente actividad
-	 
 	 startActivity(new Intent(i));  
 	}
 

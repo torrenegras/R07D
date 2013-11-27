@@ -1,7 +1,5 @@
 package com.xoaquin.r07d;
 
-import java.util.List;
-
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -16,20 +14,17 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.parse.FindCallback;
 import com.parse.LogInCallback;
 import com.parse.Parse;
 import com.parse.ParseAnalytics;
 import com.parse.ParseException;
-import com.parse.ParseObject;
-import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
 
 
 public class MainActivity extends Activity {
 
-	//private List<ParseObject> todos;
+	
 	public static String correoglobal; 
 	
 	
@@ -41,6 +36,7 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
     
         
+           
         Typeface kepf = Typeface.createFromAsset(getAssets(),"Kepler-Std-Black_26074.ttf");
 	    Button b1=(Button) findViewById(R.id.button1);
 	    TextView t= (TextView) findViewById(R.id.textView4);
@@ -78,97 +74,48 @@ public class MainActivity extends Activity {
         
    	if(nr>0){  //si SQLITE no esta vacia
          String correo= new String (db.getTitle(nri).getString(1)); //saca el correo de ultima fila SQLITE   
-         correoglobal=correo;
-   
-         
-      //Query para buscar correo electronico y retornar clave DESDE PARSE
-        ParseQuery<ParseObject> query = ParseQuery.getQuery("TablaAut");
-        query.whereEqualTo("correodb", correo);
-   	
-        query.findInBackground(new FindCallback<ParseObject>() {
-          public void done(List<ParseObject> objects, ParseException e) {
-        	
-        	if(objects.size()>0){ //si el query es exitoso
-        		
-        		if (e == null) {
-					
-					String clavedb=objects.get(0).getString("clavedb"); //sacando el string de la clave desde PARSE 
-					String clave=new String(db.getTitle(nri).getString(2)); //sacando string de clave desde SQLITE
-					
-					if(clavedb.equals(clave)){ //comparando claves
-	
-						 String email= MainActivity.correoglobal; //creando username con primera parte de email
+         String clave=new String(db.getTitle(nri).getString(2)); //sacando string de clave desde SQLITE
+         correoglobal=correo; 
+     					
+						//loggeando usuario existente {
+						 String email= correo; //creando username con primera parte de email
 			             String usr[]=email.split("@");
-						
-						//loggeando usuario existente
+												
 		                ParseUser.logInInBackground(usr[0], clave, new LogInCallback() {
 
 		                		 public void done(ParseUser user, ParseException e) {
 		                			 
-		                			 if (user != null) {
-		                	      // Hooray! The user is logged in.
+		                			 if (user != null) {//si login exitoso
+		                
+		                				// Timer que cambia de actividad  a Calendario si match de claves
+		  						       int secondsDelayed = 1;
+		  						        new Handler().postDelayed(new Runnable() {
+		  						                public void run() {
+		  						                   	Intent i = new Intent(getApplicationContext(), CalendarioActivity2.class);
+		  						                	i.putExtra("correog",correoglobal);//pasando la variable correo a la siguiente actividad
+		  						                	Log.e("cgma",correoglobal);
+		  						                	    startActivity(new Intent(i));
+		  						                        finish();
+		  						                }
+		  						        }, secondsDelayed * 1500);
+		                				 
 		                	    
-		                	    } else {
-		                	      // Signup failed. Look at the ParseException to see what happened.
+		                	    } else {//si falla login
 		                	    	
+		                	    	int secondsDelayed = 1;
+		                	        new Handler().postDelayed(new Runnable() {
+		                	                public void run() {
+		                	                        startActivity(new Intent(MainActivity.this, LoginActivity.class));
+		                	                        finish();
+		                	                }
+		                	        }, secondsDelayed * 1500);
+
+		                	      
 		                	    }
 		                	  }
-		                	});
-		                
-						
-						
-						
-						// Timer que cambia de actividad  a Calendario si match de claves
-						       int secondsDelayed = 1;
-						        new Handler().postDelayed(new Runnable() {
-						                public void run() {
-						                        
-						                	
-						                	Intent i = new Intent(getApplicationContext(), CalendarioActivity2.class);
-						                	i.putExtra("correog",correoglobal);//pasando la variable correo a la siguiente actividad
-						                	Log.e("cgma",correoglobal);
-						                	    startActivity(new Intent(i));
-						                        finish();
-						                }
-						        }, secondsDelayed * 1500);
-		
-						
-					}else{  //si clave falla, muy raro ya que existe porque ha habido un registro previo de un usuario
-						
-						// Timer que cambia de actividad a Login si no match
-					       int secondsDelayed = 1;
-					        new Handler().postDelayed(new Runnable() {
-					                public void run() {
-					                        startActivity(new Intent(MainActivity.this, LoginActivity.class));
-					                        finish();
-					                }
-					        }, secondsDelayed * 1500);
+		                	});//   }  logincallback
 	
-					}
 					
-					    
-				} else { //error tipo excepcion en query
-		            Log.e("score", "Error: " + e.getMessage());
-		           
-		        }
-        		
-       
-        	}else{ // si el query no es exitoso en PARSE
-        		
-        		// Timer que cambia de actividad a Login si no hay resultado de query
-			       int secondsDelayed = 1;
-			        new Handler().postDelayed(new Runnable() {
-			                public void run() {
-			                        startActivity(new Intent(MainActivity.this, LoginActivity.class));
-			                        finish();
-			                }
-			        }, secondsDelayed * 1500);
-
-        	}
-       
-        	}//done
-   
-        });
    
  
    	}    else{ //si SQLITE vacia, uso primera vez...
@@ -184,17 +131,19 @@ public class MainActivity extends Activity {
    	}
         
  
-    }
+   	
+ }//oncreate
 	
 	
+	
+	
+	//funcion conectividad de red
 	private boolean isNetworkAvailable() {
 	    ConnectivityManager connectivityManager 
 	          = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
 	    NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
 	    return activeNetworkInfo != null && activeNetworkInfo.isConnected();
 	}
-	
-	
 	
 	
 	

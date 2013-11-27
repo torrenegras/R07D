@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <lint>
     <issue id="CutPasteId" severity="ignore" />
+    <issue id="ExportedReceiver">
+        <ignore path="AndroidManifest.xml" />
+    </issue>
     <issue id="HardcodedText">
         <ignore path="res/layout/rowlayout.xml" />
     </issue>

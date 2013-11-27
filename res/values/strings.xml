@@ -74,5 +74,10 @@
     <string name="muro">MURO R07D</string>
     <string name="pubmuro">Publicar P&amp;AG en Muro</string>
     <string name="dev">DEVOCIONALES</string>
+    <string name="title_activity_nivel">NivelActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="titlenivel">NIVEL R07D</string>
+    <string name="title_activity_niveles">NivelesActivity</string>
 
 </resources>

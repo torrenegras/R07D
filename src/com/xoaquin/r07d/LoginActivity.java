@@ -1,13 +1,8 @@
 package com.xoaquin.r07d;
 
-import java.util.List;
-import com.parse.FindCallback;
 import com.parse.LogInCallback;
 import com.parse.ParseException;
-import com.parse.ParseObject;
-import com.parse.ParseQuery;
 import com.parse.ParseUser;
-import com.parse.SaveCallback;
 import com.parse.SignUpCallback;
 
 import android.net.ConnectivityManager;
@@ -103,28 +98,6 @@ public class LoginActivity extends Activity {
 			    }else{
 			        
 			
-			    //query basada en el correo dado por usuario
-	        ParseQuery<ParseObject> query = ParseQuery.getQuery("TablaAut");
-	        query.whereEqualTo("correodb", etcorreo);
-	        query.findInBackground(new FindCallback<ParseObject>() {
-	        @Override
-				public void done(List<ParseObject> objects, ParseException e) {
-					
-				//si existe resultado positivo de query se compara clave dada por usuario y la de PARSE
-	        	if(objects.size()>0){
-	        	
-					if (e == null) {
-						String clavedb=objects.get(0).getString("clavedb"); //sacando el string de la clave 
-						
-						if(clavedb.equals(etclave)){ //si clave positiva
-							
-							Toast.makeText(LoginActivity.this, "Conectando.......", Toast.LENGTH_LONG).show(); 
-							
-							//insertando en DB LOC SQLITE
-			        		db.open(); 
-			                db.insertTitle(etcorreo, etclave);
-							
-			                
 			                //loggeando usuario existente
 			                String email= etcorreo; //creando username con primera parte de email
 			                String usr[]=email.split("@");
@@ -132,51 +105,38 @@ public class LoginActivity extends Activity {
 			                ParseUser.logInInBackground(usr[0], etclave, new LogInCallback() {
 			                	  public void done(ParseUser user, ParseException e) {
 			                	    if (user != null) {
-			                	      // Hooray! The user is logged in.
+			                	      
+			                	    	//insertando en DB LOC SQLITE
+						        		db.open(); 
+						                db.insertTitle(etcorreo, etclave);
+									
+						                
+						                Toast.makeText(LoginActivity.this, "Conectando.......", Toast.LENGTH_LONG).show(); 
+						                
+						                
+						                //llamando actividad calendario principal
+										int secondsDelayed = 1;
+									        new Handler().postDelayed(new Runnable() {
+									                public void run() {
+									                	Intent i = new Intent(getApplicationContext(), CalendarioActivity2.class);
+									                	i.putExtra("correog",etcorreo);//pasando la variable correo a la siguiente actividad
+									                	Log.e("cglacon",etcorreo);
+									                	startActivity(new Intent(i));
+									                    finish();
+									                }
+									        }, secondsDelayed * 1000);
+						          
+			                	    	
 			                	    } else {
-			                	      // Signup failed. Look at the ParseException to see what happened.
+			                	    	Toast.makeText(LoginActivity.this, "Usuario/Clave Errados....Intente de Nuevo..", Toast.LENGTH_LONG).show(); 					
+										pb.setVisibility(View.INVISIBLE); 
 			                	    }
 			                	  }
 			                	});
-			                
-			                
-			                //llamando actividad calendario principal
-							int secondsDelayed = 1;
-						        new Handler().postDelayed(new Runnable() {
-						                public void run() {
-						                	Intent i = new Intent(getApplicationContext(), CalendarioActivity2.class);
-						                	i.putExtra("correog",etcorreo);//pasando la variable correo a la siguiente actividad
-						                	Log.e("cglacon",etcorreo);
-						                	startActivity(new Intent(i));
-						                    finish();
-						                }
-						        }, secondsDelayed * 1000);
-							
-						}else{//si clave negativa
-							Toast.makeText(LoginActivity.this, "Clave Errada..Intente de Nuevo..", Toast.LENGTH_LONG).show(); 					
-							pb.setVisibility(View.INVISIBLE); 
-						}
-						
-						
 			        
-					
-					
-					} else {//si hay un problema con el query tipo excepcion
-			            Log.d("score", "Error: " + e.getMessage());
-			        }
-			 
-	        	}else{ //si no existe resulado de query porque no existe usuario
-	        		Toast.makeText(LoginActivity.this, "Usuario No Existe..Intente de Nuevo", Toast.LENGTH_LONG).show();
-	        		pb.setVisibility(View.INVISIBLE); 
-	        	}
-	        
-	        }
-				
-	        });
-	        
-			    }
+			    }//else conexion
 			    
-	}
+	}//conectarse
 	
 	
 	
@@ -212,98 +172,85 @@ public class LoginActivity extends Activity {
 		if(etcorreo.length()>0 && etclave.length()>=4){  //si hay un correo valido y clave(mas de 4 char) validos
 		
 			
-		//query basada en el correo dado por usuario
-	        ParseQuery<ParseObject> query = ParseQuery.getQuery("TablaAut");
-	        query.whereEqualTo("correodb", etcorreo);
-	        query.findInBackground(new FindCallback<ParseObject>() {
-	      	@Override
-				public void done(List<ParseObject> objects, ParseException e) {
-					
-				//si existe ya un usuario con ese correo en PARSE
-	        	if(objects.size()>0){
-	        		Toast.makeText(LoginActivity.this, "Usuario Existente...Conectarse", Toast.LENGTH_LONG).show();
-	        	
-	        	}else{ //si no existe el usuario en PARSE entonces se crea
-	        		
-	        		//insertando en DB LOC SQLITE
-	        		db.open(); 
-	                db.insertTitle(etcorreo, etclave);
-	                
-	                //Creacion de objeto en PARSE TablaAut Original
-	                ParseObject TablaAut = new ParseObject("TablaAut"); //Creando Class o tabla de autenticacion de usuarios
-	                TablaAut.put("correodb", etcorreo); //creando campo o columna en clase
-	                TablaAut.put("clavedb", etclave);//creando campo o columna en clase
-	                
-	                
-	                //Creacion de Usuario en PARSE 
-	                
-	                String email= MainActivity.correoglobal; //creando username con primera parte de email
-	                String usr[]=email.split("@");
-	                
-	                ParseUser user = new ParseUser();
-	                user.setUsername(usr[0]);
-	                user.setPassword(etclave);
-	                user.setEmail(etcorreo);
-	               
-	                //no lo uso por ahora para nada dada la arquitectura inicial(ignorancia).
-	                user.signUpInBackground(new SignUpCallback() {
-	                  public void done(ParseException e) {
-	                    if (e == null) {
-	                      // Hooray! Let them use the app now.
-	                    } else {
-	                      // Sign up didn't succeed. Look at the ParseException
-	                      // to figure out what went wrong
-	                    }
-	                  }
-	                });
-	                
-	            	                
-	                
-	              //registra el usuario y activa el boton cuando finaliza correctamente
-    		        TablaAut.saveInBackground(new SaveCallback() {
-    		        	   public void done(ParseException e) {
-    		        	     if (e == null) {
-    		        	    	    		        	   
-    		        	    	 int secondsDelayed = 1;
-    		 	                new Handler().postDelayed(new Runnable() {
-    		 	                        public void run() {
-    		 	                        	Intent i = new Intent(getApplicationContext(), CalendarioActivity2.class);
-						                	i.putExtra("correog",etcorreo);//pasando la variable correo a la siguiente actividad
-						                	Log.e("cgclareg",etcorreo);
-						                	    startActivity(new Intent(i));
-    		 	                                finish();
-    		 	                        }
-    		 	                }, secondsDelayed * 1000);
-    		 	                
-    		 	                Toast.makeText(LoginActivity.this, "Registro Exitoso", Toast.LENGTH_LONG).show();
-    		 	               b2.setEnabled(true);//success
-  		        	    	 pb.setVisibility(View.INVISIBLE);
-
-    		        	     
-    		        	     } else {
-    		        	       //fail
-    		        	     }
-    		        	   }
-    		        	 });
-	                
-	    
-	        	
-	        	}
-	       
-	        }	
-	        });	
+			
+			//check usuario existente
+            String email= etcorreo; //creando username con primera parte de email
+            String usr[]=email.split("@");
+            
+            ParseUser.logInInBackground(usr[0], etclave, new LogInCallback() {
+            	  public void done(ParseUser userl, ParseException e) {
+            	    if (userl != null) {
+            	      
+            	    	Toast.makeText(LoginActivity.this, "Usuario Existente...Conectarse", Toast.LENGTH_LONG).show();
+            	    	 b2.setEnabled(true);//success
+		        	    	 pb.setVisibility(View.INVISIBLE);
+            	    	
+            	    } else {
+            	    	
+            	    	//insertando en DB LOC SQLITE
+    	        		db.open(); 
+    	                db.insertTitle(etcorreo, etclave);
+    	                
+    	                //Creacion de Usuario en PARSE 
+    	                String email= etcorreo; //creando username con primera parte de email
+    	                String usr[]=email.split("@");
+    	                            
+    	               
+    	                
+    	                ParseUser user = new ParseUser();
+    	                user.setUsername(usr[0]);
+    	                user.setPassword(etclave);
+    	                user.setEmail(etcorreo);
+    	               
+    	                
+    	                user.signUpInBackground(new SignUpCallback() {
+    	                 
+    	                	public void done(ParseException e) {
+    	                    if (e == null) {
+    	                    	 
+    	                    	int secondsDelayed = 1;
+     		 	                new Handler().postDelayed(new Runnable() {
+     		 	                        public void run() {
+     		 	                        	Intent i = new Intent(getApplicationContext(), CalendarioActivity2.class);
+ 						                	i.putExtra("correog",etcorreo);//pasando la variable correo a la siguiente actividad
+ 						                	Log.e("cgclareg",etcorreo);
+ 						                	    startActivity(new Intent(i));
+     		 	                                finish();
+     		 	                        }
+     		 	                }, secondsDelayed * 1000);
+     		 	                
+     		 	                Toast.makeText(LoginActivity.this, "Registro Exitoso", Toast.LENGTH_LONG).show();
+     		 	               b2.setEnabled(true);//success
+   		        	    	 pb.setVisibility(View.INVISIBLE);
+   		        	    	 
+   		        	    	 
+    	                    } else {
+    	                    	 Toast.makeText(LoginActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
+    	                    	 b2.setEnabled(true);//success
+       		        	    	 pb.setVisibility(View.INVISIBLE);
+    	                    }
+    	                  }
+    	                });
+            	    	
+            	    	
+            	    
+            	    }
+            	  }
+            	});
+			
 	
-		
 		}else{//si no hay correo valido proporcionado por usuario
 			Toast.makeText(LoginActivity.this, "Ingrese Email y Contraseña Válidos..", Toast.LENGTH_LONG).show();			
+			 b2.setEnabled(true);//success
+   	    	 pb.setVisibility(View.INVISIBLE);
 		}
 		
 		
 		
-			    }
-		
-		
 	}
+		
+		
+}//registrarse
 	
 	
 	
@@ -314,6 +261,9 @@ public class LoginActivity extends Activity {
 		db.open(); 
         db.insertTitle("", "desc");
         
+        ParseUser.logOut();//logout usuario
+        
+        
         //Para llamar el HOME y salir de APP
         Intent intent = new Intent(Intent.ACTION_MAIN);
         intent.addCategory(Intent.CATEGORY_HOME);
@@ -321,6 +271,9 @@ public class LoginActivity extends Activity {
         startActivity(intent);
 		
 	}
+	
+	
+	
 	
 	
 	private boolean isNetworkAvailable() {
