@@ -4,4 +4,39 @@
     android:background="#ffe2d8"
     android:orientation="vertical" >
 
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="@string/adglabel"
+        android:textAlignment="center"
+        android:textColor="#8d665f" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="@string/puntaje"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#8d665f"
+        android:textSize="50sp" />
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="4"
+        android:background="#8d665f"
+        android:gravity="center"
+        android:text="@string/hash"
+        android:textColor="#ffffff"
+        android:textSize="100sp" />
+
 </LinearLayout>

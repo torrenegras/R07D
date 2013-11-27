@@ -27,7 +27,6 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.text.format.DateFormat;
-import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
@@ -359,8 +358,7 @@ private String ntu="",fca="",ndca="",dca="",mca="",aca="";
         		//al actualizar no existe inicializacion de shorani y shorafin, por eso se hace aqui
         		shoraini=b1.getText().toString();
             	shorafin=b2.getText().toString();
-            	Log.e("ini2",String.valueOf(shoraini.length()));
-            	Log.e("fin2",String.valueOf(shorafin.length()));
+            	
             	
         		objectid = objects.get(0).getObjectId(); //obtiene objectid del registro con esa fecha
         	
@@ -617,7 +615,7 @@ public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
 	//Cambiando Texto Boton con Hora Inicio
 	shoraini=shour+":"+sminute+" "+ampm;
 	b1.setText(shoraini);
-	Log.e("ini",String.valueOf(shoraini.length()));
+	
 	
 }
 	}
@@ -674,7 +672,7 @@ String ampm="AM",sminute,shour;
 	//texto boton con hora fin
 	shorafin=shour+":"+sminute+" "+ampm;
 	b2.setText(shorafin);
-	Log.e("fin",String.valueOf(shorafin.length()));
+	
 }
 
 

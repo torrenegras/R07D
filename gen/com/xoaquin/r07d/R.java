@@ -152,6 +152,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int fechalabel=0x7f06001b;
         public static final int guargarblabel=0x7f060020;
         public static final int hablolabel=0x7f060010;
+        public static final int hash=0x7f060050;
         public static final int hello_world=0x7f060002;
         public static final int hfinlabel=0x7f06000f;
         public static final int hihfins=0x7f06003b;
@@ -175,6 +176,8 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int pilabel=0x7f060013;
         public static final int plcblabel=0x7f060014;
         public static final int pubmuro=0x7f060047;
+        public static final int pun=0x7f06004f;
+        public static final int puntaje=0x7f06004e;
         public static final int qmhDins=0x7f06003c;
         public static final int r07dabout=0x7f060040;
         public static final int r07dspalsh=0x7f060042;

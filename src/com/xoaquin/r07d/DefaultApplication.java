@@ -1,5 +1,6 @@
 package com.xoaquin.r07d;
 
+import com.parse.Parse;
 import com.parse.ParseInstallation;
 import com.parse.PushService;
 
@@ -12,12 +13,18 @@ import android.content.Context;
 public class DefaultApplication extends Application{ 
 	
 	
-	private static Context context;
+	private static Context context; //iniciando variable context para toda app
 	
 	@Override
     public void onCreate() {
         super.onCreate();
-
+        
+        
+        //Inicializacion de Parse DB  y demas para toda la app
+        
+        Parse.initialize(this, "KfBj6ivkLAaLTXhssMZkjp0MTp5DWhezdpprtYqo", "ePZ6T7RmvGGW87nNO0Oe9Th23H0Je7dwLyTOY4w3"); 
+        
+        
       //comandos para notificaciones push activados en esta clase
       		PushService.setDefaultPushCallback(this, MainActivity.class);
       		ParseInstallation.getCurrentInstallation().saveInBackground();
@@ -29,7 +36,7 @@ public class DefaultApplication extends Application{
 
    
 	
-      		 context=getApplicationContext();
+      		 context=getApplicationContext();//para tener context en toda la app y llamarlo desde cualquier class
 	
 	}
 
@@ -39,7 +46,7 @@ public class DefaultApplication extends Application{
 
 
 
-    public static Context getCustomAppContext(){
+    public static Context getCustomAppContext(){ //llamar context en todas partes de la app  
       return context;
     }
   

@@ -79,5 +79,8 @@
     <string name="dummy_content">DUMMY\nCONTENT</string>
     <string name="titlenivel">NIVEL R07D</string>
     <string name="title_activity_niveles">NivelesActivity</string>
+    <string name="puntaje">PUNTAJE</string>
+    <string name="pun">1000</string>
+    <string name="hash">#</string>
 
 </resources>

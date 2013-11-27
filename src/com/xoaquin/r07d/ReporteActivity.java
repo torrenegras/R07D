@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-
 import com.cete.dynamicpdf.Color;
 import com.cete.dynamicpdf.Document;
 import com.cete.dynamicpdf.Font;
@@ -42,12 +41,10 @@ import android.app.Dialog;
 import android.app.DatePickerDialog.OnDateSetListener;
 import android.content.Context;
 import android.content.Intent;
-
 import android.graphics.Bitmap;
 import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
@@ -82,7 +79,8 @@ private String spdfop="",spdfopi="",ntu="";;
 		    ntu = extras.getString("correog");
 		    
 		}
-
+		
+		
 		
 		String nombre="",nombreli="",mdl="";
 		EditText etnombre,etnombreli,etmdl;
@@ -159,7 +157,7 @@ private String spdfop="",spdfopi="",ntu="";;
 			anio=String.valueOf(y); //variable para query
 	
 			t1.setText("MES: "+mes);
-			t2.setText("AÑO: "+anio);
+			t2.setText("A„O: "+anio);
 	
 	
 			final Calendar c2 = Calendar.getInstance();
@@ -222,7 +220,7 @@ private String spdfop="",spdfopi="",ntu="";;
 		TextView t2= (TextView) findViewById(R.id.textView4);
 		
 		t1.setText("MES: "+monthString); //DONDE SE PONEN EN LAYOUT
-		t2.setText("AÑO: "+localYear);   //DONDE SE PONEN EN LAYOUT
+		t2.setText("A„O: "+localYear);   //DONDE SE PONEN EN LAYOUT
 		mes=monthString;
 		anio=localYear;
 		
@@ -313,7 +311,7 @@ private String spdfop="",spdfopi="",ntu="";;
 	        query.findInBackground(new FindCallback<ParseObject>() {
 	          public void done(List<ParseObject> objects, ParseException e) {
 	          	  int os=objects.size();//  es 3
-	        	  Log.e("os",String.valueOf(os));
+	        	  
 	        	
 	        	int i = 0; //contadores de booleans en parse
 	      		int s=0;
@@ -361,7 +359,8 @@ private String spdfop="",spdfopi="",ntu="";;
              		    	String sopd=objects.get(i).getString("opddbp"); //sacando el string de oracion por discipulos por cada record diario 
              		    	String soplco=objects.get(i).getString("oplcodbp"); //sacando el string de oracion por la cosecha por cada record diario 
             		    	   
-             		    	String sdia=objects.get(i).getString("diadbp"); //sacando String del dia para DEBUG nada mas
+             		    	@SuppressWarnings("unused")
+							String sdia=objects.get(i).getString("diadbp"); //sacando String del dia para DEBUG nada mas
              		    	 
              		    	 if(saop.equals("true")){
              		    		s++;  //si encuentra algun true para asistencia a oracion presencial aumenta este contador
@@ -407,7 +406,7 @@ private String spdfop="",spdfopi="",ntu="";;
 
              		    	 }
              		    	 
-             		    	Log.e("dia",sdia); 
+             		    	
              		    	
              		    	i++;
              		    }//  While de booleans en PARSE

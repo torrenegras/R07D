@@ -28,13 +28,13 @@ private static final String TAG = "MyCustomReceiver";
 	                	Intent i = new Intent(context,NivelesActivity.class);
 	                	
 	                	i.putExtra("msj",json.getString("mensaje"));//pasando la variable correo a la siguiente actividad
-	                	 i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK); 
+	                	i.putExtra("pun",json.getString("puntos"));//pasando la variable correo a la siguiente actividad
+	                	i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK); 
 	                	context.startActivity(i);
 	                   
 	        
       
-      //Log.e("ggg",json.getString("mensaje"));
-      
+   
  
      
     } catch (JSONException e) {

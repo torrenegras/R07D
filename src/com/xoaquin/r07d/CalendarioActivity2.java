@@ -20,7 +20,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -58,6 +57,8 @@ public class CalendarioActivity2 extends Activity {
 		PushService.subscribe(this, "todos", MainActivity.class);
 		ParseInstallation installation = ParseInstallation.getCurrentInstallation();
 		
+		
+		
 		//trayendo correo de la anterior actividad usando intent y no variable global.. manera correcta. 
 		Bundle extras = getIntent().getExtras();
 		if (extras != null) {
@@ -68,7 +69,7 @@ public class CalendarioActivity2 extends Activity {
 	 		PushService.subscribe(this, nombretablausuario,MainActivity.class); //suscripcion a canal dedicado para cada instalacion.
 		}
 		
-		Log.e("cgca2",nombretablausuario);	
+		
 			
 		//cargando variables
 		tvmes = (TextView) findViewById(R.id.textView1);
@@ -94,23 +95,9 @@ public class CalendarioActivity2 extends Activity {
          int diafm=finmes.get(Calendar.DAY_OF_MONTH);
          
          
-         if (diacal==27){
-        	 
-        	 try {
-        		 JSONObject data = new JSONObject("{\"action\": \"com.xoaquin.r07d.NIVEL\",\"mensaje\": \"Usted ha hecho un buen esfuerzo, siga avanzando! Bendiciones! (R07D Nivel Principiante) +5 PUNTOS \"}");
-				
-        		ParsePush push = new ParsePush();
- 	            push.setChannel(nombretablausuario);
- 	       	    push.setData(data);
- 	       	    push.sendInBackground();
- 	       	 
-				
-        	 } catch (JSONException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
          
-         }
+        	 
+        	 
          
          
         //push progreso fin de mes informe de nivel
@@ -138,28 +125,76 @@ public class CalendarioActivity2 extends Activity {
     			if( objects.size()>=5 && objects.size()<15 ){
     				ParsePush push = new ParsePush();
     	            push.setChannel(nombretablausuario);
-    	       	    push.setMessage("Usted ha hecho un buen esfuerzo, siga avanzando! Bendiciones! (R07D Nivel Principiante)");
+    	       	    push.setMessage("Puntaje Mes: +5 PUNTOS (R07D Principiante)");
     	       	    push.sendInBackground();
     	       	    installation.put("mesaniochk",m+Integer.toString(aniocal));
     	         	installation.saveInBackground();	
+    	         	
+    	         	try {
+    	        		 JSONObject data = new JSONObject("{\"action\": \"com.xoaquin.r07d.NIVEL\",\"mensaje\": \"Usted ha hecho un buen esfuerzo, siga avanzando! Bendiciones! (R07D Nivel Principiante) +5 PUNTOS \",\"puntos\": \"5\"    }");
+    					
+    	        		ParsePush pushj = new ParsePush();
+    	 	            pushj.setChannel(nombretablausuario);
+    	 	       	    pushj.setData(data);
+    	 	       	    pushj.sendInBackground();	 
+    					
+    	        	 } catch (JSONException e) {
+    					// TODO Auto-generated catch block
+    					e.printStackTrace();
+    				}
+    	         
+    	         	
+    	         	
     			}
     			
     			if(objects.size()>=15 && objects.size()<24){
     			ParsePush push = new ParsePush();
                 push.setChannel(nombretablausuario);
-           	    push.setMessage("Usted ha hecho un buen trabajo, siga avanzando! Bendiciones! (R07D Nivel Intermedio)");
+           	    push.setMessage("Puntaje Mes: +15 PUNTOS (R07D Intermedio)");
            	    push.sendInBackground();
            	    installation.put("mesaniochk",m+Integer.toString(aniocal));
           	    installation.saveInBackground();	
+          	    
+          	    
+          	  try {
+	        		 JSONObject data = new JSONObject("{\"action\": \"com.xoaquin.r07d.NIVEL\",\"mensaje\": \"Usted ha hecho un buen trabajo, siga avanzando! Bendiciones! (R07D Nivel Intermedio) +15 PUNTOS \",\"puntos\": \"15\"    }");
+					
+	        		ParsePush pushj = new ParsePush();
+	 	            pushj.setChannel(nombretablausuario);
+	 	       	    pushj.setData(data);
+	 	       	    pushj.sendInBackground();	 
+					
+	        	 } catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+	         
+          	    
     			}
     			
     			if(objects.size()>=24 && objects.size()<=diafm){
     				ParsePush push = new ParsePush();
     	            push.setChannel(nombretablausuario);
-    	       	    push.setMessage("Usted ha hecho un excelente trabajo, siga avanzando! Bendiciones! (R07D Nivel Avanzado)");
+    	       	    push.setMessage("Puntaje Mes: +25 PUNTOS (R07D Avanzado)");
     	       	    push.sendInBackground();
     	       	    installation.put("mesaniochk",m+Integer.toString(aniocal));
     	         	installation.saveInBackground();	
+    	         	
+    	         	
+    	         	
+    	         	try {
+   	        		 JSONObject data = new JSONObject("{\"action\": \"com.xoaquin.r07d.NIVEL\",\"mensaje\": \"Usted ha hecho un excelente trabajo, siga avanzando! Bendiciones! (R07D Nivel Avanzado) +25 PUNTOS \",\"puntos\": \"25\"    }");
+   					
+   	        		ParsePush pushj = new ParsePush();
+   	 	            pushj.setChannel(nombretablausuario);
+   	 	       	    pushj.setData(data);
+   	 	       	    pushj.sendInBackground();	 
+   					
+   	        	 } catch (JSONException e) {
+   					// TODO Auto-generated catch block
+   					e.printStackTrace();
+   				}
+   	         
     				}
            	 
     		} catch (ParseException e) {
@@ -184,28 +219,76 @@ public class CalendarioActivity2 extends Activity {
 			if(objects.size()>=5 && objects.size()<15){
 				ParsePush push = new ParsePush();
 	            push.setChannel(nombretablausuario);
-	       	    push.setMessage("Usted ha hecho un buen esfuerzo, siga avanzando! Bendiciones! (R07D Nivel Principiante)");
+	       	    push.setMessage("Puntaje Mes: +5 PUNTOS (R07D Principiante)");
 	       	    push.sendInBackground();
 	       	    installation.put("mesaniochk",m+Integer.toString(aniocal));
 	         	installation.saveInBackground();	
+	         	
+	         	
+	         	try {
+	        		 JSONObject data = new JSONObject("{\"action\": \"com.xoaquin.r07d.NIVEL\",\"mensaje\": \"Usted ha hecho un buen esfuerzo, siga avanzando! Bendiciones! (R07D Nivel Principiante) +5 PUNTOS \",\"puntos\": \"5\"    }");
+					
+	        		ParsePush pushj = new ParsePush();
+	 	            pushj.setChannel(nombretablausuario);
+	 	       	    pushj.setData(data);
+	 	       	    pushj.sendInBackground();	 
+					
+	        	 } catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+	         
+	         	
 			}
 			
 			if(objects.size()>=15 && objects.size()<24){
 			ParsePush push = new ParsePush();
             push.setChannel(nombretablausuario);
-       	    push.setMessage("Usted ha hecho un buen trabajo, siga avanzando! Bendiciones! (R07D Nivel Intermedio)");
+       	    push.setMessage("Puntaje Mes: +15 PUNTOS (R07D Intermedio)");
        	    push.sendInBackground();
        	    installation.put("mesaniochk",m+Integer.toString(aniocal));
       	    installation.saveInBackground();	
+      	    
+      	    
+      	  try {
+     		 JSONObject data = new JSONObject("{\"action\": \"com.xoaquin.r07d.NIVEL\",\"mensaje\": \"Usted ha hecho un buen trabajo, siga avanzando! Bendiciones! (R07D Nivel Intermedio) +15 PUNTOS \",\"puntos\": \"15\"    }");
+				
+     		ParsePush pushj = new ParsePush();
+	            pushj.setChannel(nombretablausuario);
+	       	    pushj.setData(data);
+	       	    pushj.sendInBackground();	 
+				
+     	 } catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+      
 			}
 			
 			if(objects.size()>=24 && objects.size()<=diafm){
 				ParsePush push = new ParsePush();
 	            push.setChannel(nombretablausuario);
-	       	    push.setMessage("Usted ha hecho un excelente trabajo, siga avanzando! Bendiciones! (R07D Nivel Avanzado)");
+	       	    push.setMessage("Puntaje Mes: +25 PUNTOS (R07D Avanzado)");
 	       	    push.sendInBackground();
 	            installation.put("mesaniochk",m+Integer.toString(aniocal));
 	         	installation.saveInBackground();	
+	         	
+	         	
+	         	
+	         	try {
+  	        		 JSONObject data = new JSONObject("{\"action\": \"com.xoaquin.r07d.NIVEL\",\"mensaje\": \"Usted ha hecho un excelente trabajo, siga avanzando! Bendiciones! (R07D Nivel Avanzado) +25 PUNTOS \",\"puntos\": \"25\"    }");
+  					
+  	        		ParsePush pushj = new ParsePush();
+  	 	            pushj.setChannel(nombretablausuario);
+  	 	       	    pushj.setData(data);
+  	 	       	    pushj.sendInBackground();	 
+  					
+  	        	 } catch (JSONException e) {
+  					// TODO Auto-generated catch block
+  					e.printStackTrace();
+  				}
+	         	
+	         	
 				}
        	 
 		} catch (ParseException e) {

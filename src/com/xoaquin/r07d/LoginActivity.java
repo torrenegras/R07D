@@ -201,6 +201,8 @@ public class LoginActivity extends Activity {
     	                user.setUsername(usr[0]);
     	                user.setPassword(etclave);
     	                user.setEmail(etcorreo);
+    	                user.put("puntaje", 0);
+    	                
     	               
     	                
     	                user.signUpInBackground(new SignUpCallback() {
@@ -213,7 +215,7 @@ public class LoginActivity extends Activity {
      		 	                        public void run() {
      		 	                        	Intent i = new Intent(getApplicationContext(), CalendarioActivity2.class);
  						                	i.putExtra("correog",etcorreo);//pasando la variable correo a la siguiente actividad
- 						                	Log.e("cgclareg",etcorreo);
+ 						                	
  						                	    startActivity(new Intent(i));
      		 	                                finish();
      		 	                        }

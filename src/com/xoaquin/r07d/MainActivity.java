@@ -8,7 +8,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
-import android.util.Log;
 import android.view.Menu;
 import android.widget.Button;
 import android.widget.TextView;
@@ -93,7 +92,7 @@ public class MainActivity extends Activity {
 		  						                public void run() {
 		  						                   	Intent i = new Intent(getApplicationContext(), CalendarioActivity2.class);
 		  						                	i.putExtra("correog",correoglobal);//pasando la variable correo a la siguiente actividad
-		  						                	Log.e("cgma",correoglobal);
+		  						                	
 		  						                	    startActivity(new Intent(i));
 		  						                        finish();
 		  						                }
