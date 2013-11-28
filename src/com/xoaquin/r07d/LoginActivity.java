@@ -3,6 +3,7 @@ package com.xoaquin.r07d;
 import com.parse.LogInCallback;
 import com.parse.ParseException;
 import com.parse.ParseUser;
+import com.parse.RequestPasswordResetCallback;
 import com.parse.SignUpCallback;
 
 import android.net.ConnectivityManager;
@@ -45,6 +46,8 @@ public class LoginActivity extends Activity {
 		b2.setTypeface(kepf);
 		Button b3=(Button) findViewById(R.id.button3); 
 		b3.setTypeface(kepf);
+		TextView t3=(TextView) findViewById(R.id.textView3);
+		t3.setTypeface(kepf);
 		
 		
 		
@@ -137,6 +140,9 @@ public class LoginActivity extends Activity {
 			    }//else conexion
 			    
 	}//conectarse
+	
+	
+	
 	
 	
 	
@@ -274,7 +280,37 @@ public class LoginActivity extends Activity {
 		
 	}
 	
-	
+	public void olvidoclave(View view) {
+
+		
+		
+		final TextView tv3=(TextView) findViewById (R.id.textView3);
+		final ProgressBar pb = (ProgressBar) findViewById(R.id.progressBar1);
+		
+		pb.setVisibility(View.VISIBLE);
+		tv3.setEnabled(false);
+		  
+		
+		EditText correo=(EditText) findViewById(R.id.editText1);
+				
+		ParseUser.requestPasswordResetInBackground(correo.getText().toString(),
+                new RequestPasswordResetCallback() {
+                public void done(ParseException e) {
+                      if (e == null) {
+                                          	  
+                    	  Toast.makeText(LoginActivity.this, "Se ha enviado correo para resetear la clave..", Toast.LENGTH_LONG).show();
+                    	  pb.setVisibility(View.INVISIBLE);
+                  		tv3.setEnabled(true);
+                  		  
+                          } else {
+                        	  Toast.makeText(LoginActivity.this, "Ups! Algo pasó: "+e.getMessage(), Toast.LENGTH_LONG).show();	
+                        	  pb.setVisibility(View.INVISIBLE);
+                        		tv3.setEnabled(true);
+                           }
+                        }
+                        });
+		
+	}
 	
 	
 	

@@ -36,14 +36,15 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
     }
     public static final class drawable {
         public static final int b1=0x7f020000;
-        public static final int fd=0x7f020001;
-        public static final int fi=0x7f020002;
-        public static final int ic_launcher=0x7f020003;
-        public static final int marcosplash=0x7f020004;
-        public static final int s=0x7f020005;
-        public static final int splash=0x7f020006;
-        public static final int t2=0x7f020007;
-        public static final int uc=0x7f020008;
+        public static final int cfb=0x7f020001;
+        public static final int fd=0x7f020002;
+        public static final int fi=0x7f020003;
+        public static final int ic_launcher=0x7f020004;
+        public static final int marcosplash=0x7f020005;
+        public static final int s=0x7f020006;
+        public static final int splash=0x7f020007;
+        public static final int t2=0x7f020008;
+        public static final int uc=0x7f020009;
     }
     public static final class id {
         public static final int LinearLayout01=0x7f090018;
@@ -172,6 +173,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int mesanioreport=0x7f060027;
         public static final int muro=0x7f060046;
         public static final int nombrerep=0x7f060024;
+        public static final int ol=0x7f060051;
         public static final int peiins=0x7f06003f;
         public static final int pilabel=0x7f060013;
         public static final int plcblabel=0x7f060014;

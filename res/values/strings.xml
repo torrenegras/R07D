@@ -82,5 +82,8 @@
     <string name="puntaje">PUNTAJE</string>
     <string name="pun">1000</string>
     <string name="hash">#</string>
+    <string name="ol">¿Olvidó su Clave?</string>
+    
+    
 
 </resources>

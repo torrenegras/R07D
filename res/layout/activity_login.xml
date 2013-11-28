@@ -101,6 +101,8 @@
             android:textColor="#ffffff"
             android:textSize="22sp" />
 
+       
+
         <Button
             android:id="@+id/button2"
             android:layout_width="190dp"
@@ -124,6 +126,18 @@
             android:text="@string/desconectarse"
             android:textColor="#ffffff"
             android:textSize="22sp" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="32dp"
+            android:clickable="true"
+            android:onClick="olvidoclave"
+            android:text="@string/ol"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="#8d665f" />
     
 </LinearLayout>
 
