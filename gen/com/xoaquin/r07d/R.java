@@ -98,25 +98,27 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int activity_about=0x7f030000;
         public static final int activity_calendario_activity2=0x7f030001;
         public static final int activity_inst=0x7f030002;
-        public static final int activity_login=0x7f030003;
-        public static final int activity_main=0x7f030004;
-        public static final int activity_muro=0x7f030005;
-        public static final int activity_niveles=0x7f030006;
-        public static final int activity_recdia=0x7f030007;
-        public static final int activity_reporte=0x7f030008;
-        public static final int rowlayout=0x7f030009;
+        public static final int activity_jalert=0x7f030003;
+        public static final int activity_login=0x7f030004;
+        public static final int activity_main=0x7f030005;
+        public static final int activity_muro=0x7f030006;
+        public static final int activity_niveles=0x7f030007;
+        public static final int activity_recdia=0x7f030008;
+        public static final int activity_reporte=0x7f030009;
+        public static final int rowlayout=0x7f03000a;
     }
     public static final class menu {
         public static final int about=0x7f080000;
         public static final int calendario=0x7f080001;
         public static final int calendario_activity2=0x7f080002;
         public static final int inst=0x7f080003;
-        public static final int login=0x7f080004;
-        public static final int main=0x7f080005;
-        public static final int muro=0x7f080006;
-        public static final int niveles=0x7f080007;
-        public static final int recdia=0x7f080008;
-        public static final int reporte=0x7f080009;
+        public static final int jalert=0x7f080004;
+        public static final int login=0x7f080005;
+        public static final int main=0x7f080006;
+        public static final int muro=0x7f080007;
+        public static final int niveles=0x7f080008;
+        public static final int recdia=0x7f080009;
+        public static final int reporte=0x7f08000a;
     }
     public static final class string {
         public static final int BYJ=0x7f060043;
@@ -191,6 +193,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int title_activity_calendario=0x7f060004;
         public static final int title_activity_calendario_activity2=0x7f060044;
         public static final int title_activity_inst=0x7f060033;
+        public static final int title_activity_jalert=0x7f060052;
         public static final int title_activity_login=0x7f060003;
         public static final int title_activity_muro=0x7f060045;
         public static final int title_activity_nivel=0x7f060049;

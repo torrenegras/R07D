@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.xoaquin.r07d"
-    android:versionCode="20"
+    android:versionCode="21"
     android:versionName="2.6" >
 
     <uses-sdk
@@ -79,13 +79,16 @@
             android:name="com.xoaquin.r07d.MuroActivity"
             android:label="@string/title_activity_muro" >
         </activity>
-       
         <activity
             android:name="com.xoaquin.r07d.NivelesActivity"
             android:label="@string/title_activity_niveles"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
         </activity>
-        
+        <activity
+            android:name="com.xoaquin.r07d.JalertActivity"
+            android:label="@string/title_activity_jalert" 
+            android:theme="@android:style/Theme.NoDisplay">
+        </activity>
     </application>
 
 </manifest>

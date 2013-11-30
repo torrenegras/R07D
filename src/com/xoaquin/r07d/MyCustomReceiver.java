@@ -10,7 +10,7 @@ import android.util.Log;
 
 
 
-//receptor de JSON de Mensajes Push
+//Receptor de JSON de Mensajes Push Niveles y Puntajes personales
 
 
 public class MyCustomReceiver extends BroadcastReceiver {
@@ -32,10 +32,7 @@ private static final String TAG = "MyCustomReceiver";
 	                	i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK); 
 	                	context.startActivity(i);
 	                   
-	        
-      
-   
- 
+	 
      
     } catch (JSONException e) {
       Log.e(TAG, "JSONException: " + e.getMessage());

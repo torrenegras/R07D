@@ -33,6 +33,7 @@ public class DefaultApplication extends Application{
       	
       		//ParseAnalytics.trackAppOpened(I);//  interrogante lo del intent aqui..........
       		PushService.subscribe(this, "todos", MainActivity.class);
+      		PushService.subscribe(this, "jalert", JalertActivity.class);	
       		//ParseInstallation installation = ParseInstallation.getCurrentInstallation();  //lo quite por ahora...?
 
    
