@@ -50,7 +50,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int LinearLayout01=0x7f090018;
         public static final int LinearLayout1=0x7f090015;
         public static final int TextView01=0x7f090000;
-        public static final int action_settings=0x7f09002d;
+        public static final int action_settings=0x7f090030;
         public static final int button1=0x7f090009;
         public static final int button2=0x7f09000b;
         public static final int button3=0x7f09000a;
@@ -70,21 +70,24 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int editText4=0x7f09001e;
         public static final int editText5=0x7f09001f;
         public static final int fl1=0x7f090005;
+        public static final int fragments_container=0x7f090029;
         public static final int gridView1=0x7f090008;
         public static final int imageButton1=0x7f090007;
         public static final int imageButton2=0x7f090006;
-        public static final int item1=0x7f09002a;
-        public static final int item2=0x7f09002b;
-        public static final int item3=0x7f09002c;
+        public static final int item1=0x7f09002d;
+        public static final int item2=0x7f09002e;
+        public static final int item3=0x7f09002f;
         public static final int linearLayout1=0x7f090012;
         public static final int list=0x7f090017;
         public static final int progressBar1=0x7f09000c;
-        public static final int radioButton1=0x7f090028;
-        public static final int radioButton2=0x7f090029;
-        public static final int radioSINO=0x7f090027;
+        public static final int radioButton1=0x7f09002b;
+        public static final int radioButton2=0x7f09002c;
+        public static final int radioSINO=0x7f09002a;
         public static final int rl=0x7f090016;
         public static final int scrollView1=0x7f090004;
         public static final int textView1=0x7f090002;
+        public static final int textView10=0x7f090027;
+        public static final int textView11=0x7f090028;
         public static final int textView2=0x7f090003;
         public static final int textView3=0x7f090001;
         public static final int textView4=0x7f09000d;
@@ -104,8 +107,11 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int activity_muro=0x7f030006;
         public static final int activity_niveles=0x7f030007;
         public static final int activity_recdia=0x7f030008;
-        public static final int activity_reporte=0x7f030009;
-        public static final int rowlayout=0x7f03000a;
+        public static final int activity_recdia_activity2=0x7f030009;
+        public static final int activity_reporte=0x7f03000a;
+        public static final int fragment_devocional=0x7f03000b;
+        public static final int fragment_registro=0x7f03000c;
+        public static final int rowlayout=0x7f03000d;
     }
     public static final class menu {
         public static final int about=0x7f080000;
@@ -118,7 +124,8 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int muro=0x7f080007;
         public static final int niveles=0x7f080008;
         public static final int recdia=0x7f080009;
-        public static final int reporte=0x7f08000a;
+        public static final int recdia_activity2=0x7f08000a;
+        public static final int reporte=0x7f08000b;
     }
     public static final class string {
         public static final int BYJ=0x7f060043;
@@ -148,6 +155,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int crblabel=0x7f060023;
         public static final int desconectarse=0x7f060035;
         public static final int dev=0x7f060048;
+        public static final int devo=0x7f060054;
         public static final int dialabel=0x7f06001a;
         public static final int dummy_button=0x7f06004a;
         public static final int dummy_content=0x7f06004b;
@@ -186,6 +194,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int r07dabout=0x7f060040;
         public static final int r07dspalsh=0x7f060042;
         public static final int recdialabel=0x7f06000b;
+        public static final int reg=0x7f060053;
         public static final int regis=0x7f060029;
         public static final int sep=0x7f060005;
         public static final int sfecha=0x7f060026;
@@ -199,6 +208,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int title_activity_nivel=0x7f060049;
         public static final int title_activity_niveles=0x7f06004d;
         public static final int title_activity_recdia=0x7f06000a;
+        public static final int title_activity_recdia_activity2=0x7f060055;
         public static final int title_activity_reporte=0x7f060022;
         public static final int titlenivel=0x7f06004c;
         public static final int twitter1=0x7f060037;

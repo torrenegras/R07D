@@ -84,5 +84,8 @@
     <string name="hash">#</string>
     <string name="ol">¿Olvidó su Clave?</string>
     <string name="title_activity_jalert">JalertActivity</string>
+    <string name="reg">REGISTRO</string>
+    <string name="devo">DEVOCIONAL</string>
+    <string name="title_activity_recdia_activity2">REGISTRO DIARIO</string>
 
 </resources>

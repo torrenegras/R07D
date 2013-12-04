@@ -86,8 +86,12 @@
         </activity>
         <activity
             android:name="com.xoaquin.r07d.JalertActivity"
-            android:label="@string/title_activity_jalert" 
-            android:theme="@android:style/Theme.NoDisplay">
+            android:label="@string/title_activity_jalert"
+            android:theme="@android:style/Theme.NoDisplay" >
+        </activity>
+        <activity
+            android:name="com.xoaquin.r07d.RecdiaActivity2"
+            android:label="@string/title_activity_recdia_activity2" >
         </activity>
     </application>
 

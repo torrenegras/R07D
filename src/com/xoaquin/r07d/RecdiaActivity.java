@@ -27,6 +27,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.text.format.DateFormat;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
@@ -37,7 +38,6 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
-
 
 //Actividad principal de registro diario
 
@@ -683,6 +683,15 @@ String ampm="AM",sminute,shour;
 	
 	
 	public void onclickdev(View v) {
+		
+		Intent i = new Intent(getApplicationContext(), RecdiaActivity2.class);
+    	
+    	startActivity(new Intent(i));
+        finish();
+		
+		
+		/*
+		
 		AlertDialog.Builder alertDialog2 = new AlertDialog.Builder(
 		        RecdiaActivity.this);
 		 
@@ -720,11 +729,11 @@ String ampm="AM",sminute,shour;
 		 
 		// Showing Alert Dialog
 		alertDialog2.show();
-		
+		*/
 	}
 	
 	
-	
+		
 	
 
 private boolean isNetworkAvailable() {
