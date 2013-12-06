@@ -11,6 +11,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.app.ListActivity;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
@@ -30,7 +31,7 @@ public class MuroActivity extends ListActivity {
 		
 		//Query de toda la clase en Parse
 		ParseQuery<ParseObject> q = ParseQuery.getQuery("Muro");
-		q.orderByDescending("fecha");
+		q.orderByDescending("createdAt");
 		try {
 			List<ParseObject> o=q.find();
 			
@@ -65,7 +66,9 @@ public class MuroActivity extends ListActivity {
 		
 		//implementacion de longclick en lista con intent para correo electronico al usuario
 		ListView lv = getListView();
-		  
+		lv.setDivider(new ColorDrawable(getResources().getColor(R.color.marron)));
+		lv.setDividerHeight(1);
+		
 		  lv.setOnItemLongClickListener(new OnItemLongClickListener() {
 		     
 

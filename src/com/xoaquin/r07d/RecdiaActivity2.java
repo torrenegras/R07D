@@ -11,10 +11,11 @@ import android.support.v4.app.FragmentActivity;
 import android.view.Menu;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class RecdiaActivity2 extends FragmentActivity {
 	
-	
+		
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -26,6 +27,8 @@ public class RecdiaActivity2 extends FragmentActivity {
 		t10.setTypeface(kepf);
 		t11.setTypeface(kepf);
 		
+			
+				
 		RegistroFragment rf=new RegistroFragment();
 		rf.setArguments(getIntent().getExtras()); //pasando los extras como argumentos al fragmento...
 		getFragmentManager().beginTransaction().add(R.id.fragments_container, rf).commit();
@@ -36,6 +39,13 @@ public class RecdiaActivity2 extends FragmentActivity {
 	
 	
 	public void onclickdevo(View v) {
+		
+		
+		RegistroFragment rf=new RegistroFragment();
+		rf.guardar();
+		
+		Toast.makeText(RecdiaActivity2.this, "Auto-Guardando...", Toast.LENGTH_LONG).show();
+		
 		DevocionalFragment df=new DevocionalFragment();
 
 		FragmentTransaction transaction = getFragmentManager().beginTransaction();

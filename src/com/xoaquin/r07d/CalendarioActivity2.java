@@ -361,7 +361,7 @@ public class CalendarioActivity2 extends Activity {
 		    	 if(dayofweek==6){nombredia="Viernes";}
 		    	 if(dayofweek==7){nombredia="Sabado";}
 		    	 
-		    	 Intent i = new Intent(getApplicationContext(), RecdiaActivity.class);
+		    	 Intent i = new Intent(getApplicationContext(), RecdiaActivity2.class);
              	 i.putExtra("correog",nombretablausuario);//pasando la variable correo a la siguiente actividad
              	 i.putExtra("fca",fecha);//pasando la variable correo a la siguiente actividad
                	i.putExtra("ndca",nombredia);//pasando la variable correo a la siguiente actividad
