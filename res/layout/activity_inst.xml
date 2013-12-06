@@ -91,5 +91,13 @@
         android:textColor="#8d665f"
         android:textSize="15sp" />
 
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:text="@string/pub"
+        android:textColor="#8d665f" />
+
 </LinearLayout>
 </ScrollView>

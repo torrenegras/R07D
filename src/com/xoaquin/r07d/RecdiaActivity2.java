@@ -1,7 +1,11 @@
 package com.xoaquin.r07d;
 
+import android.app.AlertDialog;
 import android.app.FragmentTransaction;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Typeface;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.Menu;
@@ -38,9 +42,52 @@ public class RecdiaActivity2 extends FragmentActivity {
 		transaction.replace(R.id.fragments_container, df);
 		transaction.addToBackStack(null);
     	transaction.commit();
-	
+    	
+    	AlertDialog.Builder alertDialog2 = new AlertDialog.Builder(RecdiaActivity2.this);
+		 
+		// Setting Dialog Title
+		alertDialog2.setTitle("En Construcción...");
+		 
+		// Setting Dialog Message
+		alertDialog2.setMessage("Conoces a alguien que pueda aportar un devocional diario para esta sección?");
+		 
+		// Setting Icon to Dialog
+		alertDialog2.setIcon(R.drawable.uc);
+		 
+		// Setting Positive "Yes" Btn
+		alertDialog2.setPositiveButton("Escríbeme",
+		        new DialogInterface.OnClickListener() {
+		            public void onClick(DialogInterface dialog, int which) {
+		            	 
+		            	Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
+		 			            "mailto","xoaquin@outlook.com", null));
+		 			emailIntent.putExtra(Intent.EXTRA_SUBJECT, "CONOZCO A ALGUIEN PARA APORTAR DEVOCIONAL A R07D");
+		 			
+		 			startActivity(Intent.createChooser(emailIntent, "Send email..."));
+		 	        	  
+		 			
+		            }
+		        });
+		// Setting Negative "NO" Btn
+		alertDialog2.setNegativeButton("No",
+		        new DialogInterface.OnClickListener() {
+		            public void onClick(DialogInterface dialog, int which) {
+		                
+		                dialog.cancel();
+		                RegistroFragment rf=new RegistroFragment();
+		        		
+		        		FragmentTransaction transaction = getFragmentManager().beginTransaction();
+		        		transaction.replace(R.id.fragments_container, rf);
+		        		transaction.addToBackStack(null);
+		            	transaction.commit();
+		            }
+		        });
+		 
+		// Showing Alert Dialog
+		alertDialog2.show();
 		
-	}
+    }
+	
 	
 	
 	public void onclickreg(View v) {

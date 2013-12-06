@@ -6,11 +6,11 @@
     android:onClick="onclickdevo"
     android:orientation="vertical" >
    
-    
 <LinearLayout
     android:id="@+id/LinearLayout01"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="#ffe2d8"
     android:orientation="vertical" >
 
      <LinearLayout
@@ -25,6 +25,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/dialabel"
+            android:textColor="#8d665f"
             android:textSize="22sp" />
 
   <TextView
@@ -33,6 +34,7 @@
       android:layout_height="wrap_content"
       android:layout_marginLeft="@dimen/activity_horizontal_margin"
       android:text="@string/fechalabel"
+      android:textColor="#8d665f"
       android:textSize="22sp" />
     
          </LinearLayout>
@@ -89,6 +91,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/lecbiblilabel"
+            android:textColor="#8d665f"
             android:textSize="22sp" />
 
         <EditText
@@ -97,6 +100,8 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="@string/hintlb"
+            android:textColor="#8d665f"
+            android:textColorHint="#8d665f"
             android:textSize="16sp" >
 
             <requestFocus />
@@ -111,6 +116,7 @@
              android:layout_height="wrap_content"
              android:layout_marginTop="@dimen/activity_horizontal_margin"
              android:text="@string/hablolabel"
+             android:textColor="#8d665f"
              android:textSize="22sp" />
 
          <EditText
@@ -119,6 +125,7 @@
              android:layout_height="wrap_content"
              android:ems="10"
              android:inputType="textMultiLine"
+             android:textColor="#8d665f"
              android:textSize="16sp" />
 
          <CheckBox
@@ -127,14 +134,18 @@
              android:layout_height="wrap_content"
              android:layout_marginTop="@dimen/activity_horizontal_margin"
              android:text="@string/cbolabel"
-             android:textSize="22sp" />
+             android:textColor="#8d665f"
+             android:textSize="20sp"
+             android:visibility="gone" />
    
   <CheckBox
       android:id="@+id/checkBox7"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:text="@string/cboilabel"
-      android:textSize="22sp" />
+      android:textColor="#8d665f"
+      android:textSize="20sp"
+      android:visibility="gone" />
 
   <ProgressBar
       android:id="@+id/progressBar1"
@@ -148,6 +159,18 @@
       android:minHeight="30dp"
       android:minWidth="30dp"
       android:visibility="invisible" />
+
+  <ToggleButton
+      android:id="@+id/toggleButton1"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginLeft="@dimen/activity_horizontal_margin"
+      android:layout_weight="1"
+      android:background="@drawable/b1off"
+      android:onClick="onclicktb"
+      android:textColor="#ffffff"
+      android:textOff="@string/tbtext"
+      android:textOn="@string/tbtext" />
       
         <LinearLayout
             android:layout_width="fill_parent"
@@ -158,16 +181,22 @@
              android:id="@+id/textView5"
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"
+             android:layout_marginTop="@dimen/activity_vertical_margin"
              android:text="@string/adglabel"
-             android:textSize="22sp" />
+             android:textColor="#8d665f"
+             android:textSize="20sp"
+             android:visibility="gone" />
 
          <EditText
              android:id="@+id/editText3"
              android:layout_width="match_parent"
              android:layout_height="wrap_content"
+             android:layout_marginTop="@dimen/activity_vertical_margin"
              android:ems="10"
              android:inputType="textMultiLine"
-             android:textSize="16sp" />
+             android:textColor="#8d665f"
+             android:textSize="16sp"
+             android:visibility="gone" />
       
     </LinearLayout>
     
@@ -181,7 +210,9 @@
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"
              android:text="@string/ldnlabel"
-             android:textSize="22sp" />
+             android:textColor="#8d665f"
+             android:textSize="20sp"
+             android:visibility="gone" />
 
          <EditText
              android:id="@+id/editText4"
@@ -189,7 +220,9 @@
              android:layout_height="wrap_content"
              android:ems="10"
              android:inputType="textMultiLine"
-             android:textSize="16sp" />
+             android:textColor="#8d665f"
+             android:textSize="16sp"
+             android:visibility="gone" />
       
     </LinearLayout>
     
@@ -204,7 +237,9 @@
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"
              android:text="@string/pilabel"
-             android:textSize="22sp" />
+             android:textColor="#8d665f"
+             android:textSize="20sp"
+             android:visibility="gone" />
 
          <EditText
              android:id="@+id/editText5"
@@ -212,7 +247,9 @@
              android:layout_height="wrap_content"
              android:ems="10"
              android:inputType="textMultiLine"
-             android:textSize="16sp" />
+             android:textColor="#8d665f"
+             android:textSize="16sp"
+             android:visibility="gone" />
       
     </LinearLayout>
       
@@ -227,14 +264,18 @@
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:text="@string/plcblabel"
-      android:textSize="20sp" />
+      android:textColor="#8d665f"
+      android:textSize="20sp"
+      android:visibility="gone" />
         
   <CheckBox
       android:id="@+id/checkBox2"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:text="@string/cbcoordlabel"
-      android:textSize="20sp" />
+      android:textColor="#8d665f"
+      android:textSize="20sp"
+      android:visibility="gone" />
   
     </LinearLayout>
 
@@ -248,7 +289,9 @@
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:text="@string/mdgccblabel"
-      android:textSize="20sp" />
+      android:textColor="#8d665f"
+      android:textSize="20sp"
+      android:visibility="gone" />
   
     </LinearLayout>
     
@@ -263,14 +306,18 @@
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:text="@string/cbdisclabel"
-      android:textSize="20sp" />
+      android:textColor="#8d665f"
+      android:textSize="20sp"
+      android:visibility="gone" />
         
   <CheckBox
       android:id="@+id/checkBox5"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:text="@string/cboplclabel"
-      android:textSize="20sp" />
+      android:textColor="#8d665f"
+      android:textSize="20sp"
+      android:visibility="gone" />
   
     </LinearLayout>
 
@@ -278,10 +325,12 @@
           android:id="@+id/checkBox8"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
+          android:layout_marginBottom="@dimen/activity_vertical_margin"
           android:layout_weight="1"
           android:text="@string/pubmuro"
           android:textColor="#8d665f"
-          android:textSize="20sp" />
+          android:textSize="20sp"
+          android:visibility="gone" />
    
 <Button
     android:id="@+id/button3"
@@ -290,7 +339,6 @@
     android:layout_height="wrap_content"
     android:layout_gravity="center_vertical|center_horizontal"
     android:layout_marginBottom="@dimen/activity_horizontal_margin"
-    android:layout_marginTop="@dimen/activity_horizontal_margin"
     android:layout_weight="1"
     android:background="@drawable/b1"
     android:onClick="onclickguardar"

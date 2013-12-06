@@ -13,31 +13,26 @@ import com.parse.SaveCallback;
 
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.TimePickerDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
 import android.graphics.Typeface;
 import android.text.format.DateFormat;
-import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 //Actividad principal de registro diario
 
@@ -48,6 +43,11 @@ public static String shorafin="SD",shoraini="SD",objectid; //declarando variable
 
 private String ntu="",fca="",ndca="",dca="",mca="",aca="";
 
+private CheckBox cb1,cb2,cb3,cb4,cb5,cb6,cb7,cb8;
+
+private TextView t5,t6,t7;
+
+private EditText et3,et4,et5;
 
 
 	@Override
@@ -68,84 +68,44 @@ private String ntu="",fca="",ndca="",dca="",mca="",aca="";
 		    
 		}
 
-		//inicializando variables
+		//declarando e inicializando variables
 		b1=(Button) findViewById(R.id.button1); 
 		b2=(Button) findViewById(R.id.button2);
 		b3=(Button) findViewById(R.id.button3);
 		b5=(Button) findViewById(R.id.button5);
 		
-		CheckBox cb1,cb2,cb3,cb4,cb5,cb6,cb7,cb8;
+		
 		TextView fechatv = (TextView) findViewById(R.id.textView9);
 		TextView diatv = (TextView) findViewById(R.id.textView8);
+		TextView t1=(TextView) findViewById(R.id.textView1);
+		TextView t4=(TextView) findViewById(R.id.textView4);
+		EditText et1=(EditText) findViewById(R.id.editText1);
+		EditText et2=(EditText) findViewById(R.id.editText2);
+		et3=(EditText) findViewById(R.id.editText3);
+		et4=(EditText) findViewById(R.id.editText4);
+		et5=(EditText) findViewById(R.id.editText5);
+		t5=(TextView) findViewById(R.id.textView5);
+		t6=(TextView) findViewById(R.id.textView6);
+		t7=(TextView) findViewById(R.id.textView7);
+		cb1 = (CheckBox) findViewById(R.id.checkBox1);
+		cb2 = (CheckBox) findViewById(R.id.checkBox2); 
+		cb3 = (CheckBox) findViewById(R.id.checkBox3); 
+		cb4 = (CheckBox) findViewById(R.id.checkBox4); 
+		cb6 = (CheckBox) findViewById(R.id.checkBox6); 
+		cb7 = (CheckBox) findViewById(R.id.checkBox7); 
+		cb5 = (CheckBox) findViewById(R.id.checkBox5); 
+		cb8 = (CheckBox) findViewById(R.id.checkBox8); 
 		
+		ToggleButton tb= (ToggleButton) findViewById(R.id.toggleButton1);
 		
 		//cuadrando fonts y themes  //Luego Aprendí que todo se puede hacer en layout, excepto tipo de letra externa CUSTOM Typeface
 		Typeface kepf = Typeface.createFromAsset(getAssets(),"Kepler-Std-Black_26074.ttf");
-    	TextView t1=(TextView) findViewById(R.id.textView1);
-		t1.setTypeface(kepf);
-		t1.setTextColor(Color.rgb(141, 102, 95));
-		fechatv.setTypeface(kepf);
-		fechatv.setTextColor(Color.rgb(141, 102, 95));
-		diatv.setTypeface(kepf);
-		diatv.setTextColor(Color.rgb(141, 102, 95));
-		TextView t4=(TextView) findViewById(R.id.textView4);
-		t4.setTypeface(kepf);
-		t4.setTextColor(Color.rgb(141, 102, 95));
-		EditText et1=(EditText) findViewById(R.id.editText1);
-		et1.setTypeface(kepf);
-		et1.setTextColor(Color.rgb(141, 102, 95));
-		et1.setHintTextColor(Color.rgb(141, 102, 95));
-		EditText et2=(EditText) findViewById(R.id.editText2);
-		et2.setTypeface(kepf);
-		et2.setTextColor(Color.rgb(141, 102, 95));
-		b1.setTypeface(kepf);
-
-		b2.setTypeface(kepf);
-		
-		b3.setTypeface(kepf);
-		
-		b5.setTypeface(kepf);
-		
-		EditText et3=(EditText) findViewById(R.id.editText3);
-		et3.setTypeface(kepf);
-		et3.setTextColor(Color.rgb(141, 102, 95));
-		EditText et4=(EditText) findViewById(R.id.editText4);
-		et4.setTypeface(kepf);
-		et4.setTextColor(Color.rgb(141, 102, 95));
-		EditText et5=(EditText) findViewById(R.id.editText5);
-		et5.setTypeface(kepf);
-		et5.setTextColor(Color.rgb(141, 102, 95));
-		TextView t5=(TextView) findViewById(R.id.textView5);
-		t5.setTypeface(kepf);
-		t5.setTextColor(Color.rgb(141, 102, 95));
-		TextView t6=(TextView) findViewById(R.id.textView6);
-		t6.setTypeface(kepf);
-		t6.setTextColor(Color.rgb(141, 102, 95));
-		TextView t7=(TextView) findViewById(R.id.textView7);
-		t7.setTypeface(kepf);
-		t7.setTextColor(Color.rgb(141, 102, 95));
-		cb1 = (CheckBox) findViewById(R.id.checkBox1); 
-		cb1.setTypeface(kepf);
-		cb1.setTextColor(Color.rgb(141, 102, 95));
-		cb2 = (CheckBox) findViewById(R.id.checkBox2); 
-		cb2.setTypeface(kepf);
-		cb2.setTextColor(Color.rgb(141, 102, 95));
-		cb3 = (CheckBox) findViewById(R.id.checkBox3); 
-		cb3.setTypeface(kepf);
-		cb3.setTextColor(Color.rgb(141, 102, 95));
-		cb4 = (CheckBox) findViewById(R.id.checkBox4); 
-		cb4.setTypeface(kepf);
-		cb4.setTextColor(Color.rgb(141, 102, 95));
-		cb5 = (CheckBox) findViewById(R.id.checkBox5); 
-		cb5.setTypeface(kepf);
-		cb5.setTextColor(Color.rgb(141, 102, 95));
-		cb8 = (CheckBox) findViewById(R.id.checkBox8); 
-		cb8.setTypeface(kepf);
-		
-		
-		LinearLayout l1 = (LinearLayout) findViewById(R.id.LinearLayout01); //background del linear layout tambien se puede hacer en layout
-		l1.setBackgroundColor(Color.rgb(255, 226, 216));
-		
+    	
+		t1.setTypeface(kepf);fechatv.setTypeface(kepf);diatv.setTypeface(kepf);t4.setTypeface(kepf);et1.setTypeface(kepf);
+		et2.setTypeface(kepf);b1.setTypeface(kepf);	b2.setTypeface(kepf);b3.setTypeface(kepf);	b5.setTypeface(kepf);
+		et3.setTypeface(kepf);	et4.setTypeface(kepf);	et5.setTypeface(kepf);	t5.setTypeface(kepf);	t6.setTypeface(kepf);
+		t7.setTypeface(kepf);	cb1.setTypeface(kepf);	cb2.setTypeface(kepf);	cb3.setTypeface(kepf);	cb4.setTypeface(kepf);
+		cb5.setTypeface(kepf); cb8.setTypeface(kepf);     cb6.setTypeface(kepf);cb7.setTypeface(kepf);tb.setTypeface(kepf);	
 		
 		//Declarando fecha y dia traidos de Calendario
 		String fecha= fca;
@@ -155,21 +115,16 @@ private String ntu="",fca="",ndca="",dca="",mca="",aca="";
 		fechatv.setText(fecha);
 		diatv.setText(nomdia);
 		
-		//Habilitando checkbox de oracion solo martes y jueves
-		cb6 = (CheckBox) findViewById(R.id.checkBox6); 
-		cb7 = (CheckBox) findViewById(R.id.checkBox7); 
-		cb6.setEnabled(false);
-		cb7.setEnabled(false);
-		cb6.setTypeface(kepf);
-		cb6.setTextColor(Color.rgb(141, 102, 95));
-		cb7.setTypeface(kepf);
-		cb7.setTextColor(Color.rgb(141, 102, 95));
 		
+		//Habilitando checkbox de oracion solo martes y jueves
+		
+	
+				
 		if(nomdia==null){}else{
 		
 		if(nomdia.equals("Martes")||nomdia.equals("Jueves")){ //habilitando checkbox de oracion 
-		cb6.setEnabled(true);
-		cb7.setEnabled(true);
+		cb6.setVisibility(0);
+		cb7.setVisibility(0);
 		}
 	
 		}
@@ -689,51 +644,49 @@ String ampm="AM",sminute,shour;
     	startActivity(new Intent(i));
         finish();
 		
-		
-		/*
-		
-		AlertDialog.Builder alertDialog2 = new AlertDialog.Builder(
-		        RecdiaActivity.this);
-		 
-		// Setting Dialog Title
-		alertDialog2.setTitle("En Construcción...");
-		 
-		// Setting Dialog Message
-		alertDialog2.setMessage("Conoces a alguien que pueda aportar un devocional diario para esta sección?");
-		 
-		// Setting Icon to Dialog
-		alertDialog2.setIcon(R.drawable.uc);
-		 
-		// Setting Positive "Yes" Btn
-		alertDialog2.setPositiveButton("Escríbeme",
-		        new DialogInterface.OnClickListener() {
-		            public void onClick(DialogInterface dialog, int which) {
-		            	 
-		            	Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
-		 			            "mailto","xoaquin@outlook.com", null));
-		 			emailIntent.putExtra(Intent.EXTRA_SUBJECT, "CONOZCO A ALGUIEN PARA APORTAR DEVOCIONAL A R07D");
-		 			
-		 			startActivity(Intent.createChooser(emailIntent, "Send email..."));
-		 	        	  
-		 			
-		            }
-		        });
-		// Setting Negative "NO" Btn
-		alertDialog2.setNegativeButton("No",
-		        new DialogInterface.OnClickListener() {
-		            public void onClick(DialogInterface dialog, int which) {
-		                
-		                dialog.cancel();
-		            }
-		        });
-		 
-		// Showing Alert Dialog
-		alertDialog2.show();
-		*/
 	}
 	
 	
-		
+	public void onclicktb(View view) {
+	    // Is the toggle on?
+	    boolean on = ((ToggleButton) view).isChecked();
+	    
+	    if (on) {
+	        
+	    	t5.setVisibility(View.VISIBLE);
+	    	t6.setVisibility(View.VISIBLE);
+	    	t7.setVisibility(View.VISIBLE);
+	    	
+	    	et3.setVisibility(View.VISIBLE);
+	    	et4.setVisibility(View.VISIBLE);
+	    	et5.setVisibility(View.VISIBLE);
+	    	
+	    	cb1.setVisibility(View.VISIBLE);
+	        cb2.setVisibility(View.VISIBLE);
+	        cb3.setVisibility(View.VISIBLE);
+	        cb4.setVisibility(View.VISIBLE);
+	        cb5.setVisibility(View.VISIBLE);
+	        cb8.setVisibility(View.VISIBLE);
+	        view.setBackgroundResource(0x7f020002);
+	        
+	    } else {
+	    	t5.setVisibility(View.GONE);
+	    	t6.setVisibility(View.GONE);
+	    	t7.setVisibility(View.GONE);
+	    	
+	    	et3.setVisibility(View.GONE);
+	    	et4.setVisibility(View.GONE);
+	    	et5.setVisibility(View.GONE);
+	    	
+	    	cb1.setVisibility(View.GONE);
+	        cb2.setVisibility(View.GONE);
+	        cb3.setVisibility(View.GONE);
+	        cb4.setVisibility(View.GONE);
+	        cb5.setVisibility(View.GONE);
+	        cb8.setVisibility(View.GONE);
+	        view.setBackgroundResource(0x7f020001);
+	    }
+	}
 	
 
 private boolean isNetworkAvailable() {

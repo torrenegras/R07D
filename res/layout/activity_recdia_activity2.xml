@@ -1,6 +1,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    android:background="#ffe2d8"
     android:orientation="vertical" >
 
     <LinearLayout
@@ -13,6 +14,8 @@
             android:id="@+id/textView10"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
             android:layout_weight="1"
             android:clickable="true"
             android:gravity="center"
@@ -25,7 +28,9 @@
       android:id="@+id/textView11"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
+      android:layout_marginBottom="10dp"
       android:layout_marginLeft="@dimen/activity_horizontal_margin"
+      android:layout_marginTop="10dp"
       android:layout_weight="1"
       android:clickable="true"
       android:gravity="center"
@@ -39,6 +44,7 @@
      <LinearLayout
          android:layout_width="match_parent"
          android:layout_height="3dp"
+         android:layout_marginBottom="5dp"
          android:background="#8d665f"
          android:orientation="horizontal" >
 
