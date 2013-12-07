@@ -22,8 +22,8 @@ public class RecdiaActivity2 extends FragmentActivity {
 		setContentView(R.layout.activity_recdia_activity2);
 			
 		Typeface kepf = Typeface.createFromAsset(getAssets(),"Kepler-Std-Black_26074.ttf");
-    	TextView t10=(TextView) findViewById(R.id.textView10);
-    	TextView t11=(TextView) findViewById(R.id.textView11);
+    	TextView t10=(TextView) findViewById(R.id.textViewv8);
+    	TextView t11=(TextView) findViewById(R.id.textViewv9);
 		t10.setTypeface(kepf);
 		t11.setTypeface(kepf);
 		

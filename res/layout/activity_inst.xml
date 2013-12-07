@@ -12,7 +12,7 @@
     android:orientation="vertical" >
     
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/textViewt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -22,7 +22,7 @@
         android:textSize="15sp" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/textViewtxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/activity_horizontal_margin"
@@ -32,7 +32,7 @@
         android:textSize="15sp" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/textViewv1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/activity_horizontal_margin"
@@ -42,7 +42,7 @@
         android:textSize="15sp" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/textViewv2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/activity_horizontal_margin"
@@ -52,7 +52,7 @@
         android:textSize="15sp" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/textViewv3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/activity_horizontal_margin"
@@ -62,7 +62,7 @@
         android:textSize="15sp" />
 
     <TextView
-        android:id="@+id/textView6"
+        android:id="@+id/textViewv4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/activity_horizontal_margin"
@@ -72,7 +72,7 @@
         android:textSize="15sp" />
 
     <TextView
-        android:id="@+id/textView7"
+        android:id="@+id/textViewv5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/activity_horizontal_margin"
@@ -82,7 +82,7 @@
         android:textSize="15sp" />
 
     <TextView
-        android:id="@+id/textView8"
+        android:id="@+id/textViewv6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/activity_horizontal_margin"
@@ -92,7 +92,7 @@
         android:textSize="15sp" />
 
     <TextView
-        android:id="@+id/textView9"
+        android:id="@+id/textViewv7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/activity_vertical_margin"

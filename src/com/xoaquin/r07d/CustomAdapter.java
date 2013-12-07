@@ -47,10 +47,10 @@ public class CustomAdapter extends BaseAdapter {
 	      if(convertView == null) {
 	         holder = new ViewHolder();
 	         convertView = inflater.inflate(R.layout.rowlayout, null);
-	         holder.textView1 = (TextView) convertView.findViewById(R.id.textView1);
-	         holder.textView2 = (TextView) convertView.findViewById(R.id.textView2);
-	         holder.textView3 = (TextView) convertView.findViewById(R.id.textView3);
-	         holder.textView4 = (TextView) convertView.findViewById(R.id.textView4);
+	         holder.textView1 = (TextView) convertView.findViewById(R.id.textViewt);
+	         holder.textView2 = (TextView) convertView.findViewById(R.id.textViewtxt);
+	         holder.textView3 = (TextView) convertView.findViewById(R.id.textViewv1);
+	         holder.textView4 = (TextView) convertView.findViewById(R.id.textViewv2);
 	         
 	         convertView.setTag(holder);
 	      } else {

@@ -1,17 +1,124 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:orientation="vertical" >
+   
+    
+    <LinearLayout
+    android:id="@+id/LinearLayout01"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:background="#ffe2d8"
     android:orientation="vertical" >
+    
+    <TextView
+        android:id="@+id/textViewt"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="10dp"
+        android:textColor="#8d665f"
+        android:textSize="20sp" />
 
-    <ImageView
-        android:id="@+id/imageView1"
-        android:layout_width="300dp"
-        android:layout_height="0dp"
-        android:layout_gravity="center"
-        android:layout_weight="1"
-        android:contentDescription="@string/cbolabel"
-        android:src="@drawable/pec" />
+    <TextView
+        android:id="@+id/textViewtxt"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:textColor="#8d665f"
+        android:textSize="16sp" />
 
-</LinearLayout>
+    <TextView
+        android:id="@+id/textViewl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        android:text="@string/lec"
+        android:textColor="#8d665f"
+        android:textSize="12sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textViewv1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        android:clickable="true"
+        android:textColor="#004CFF"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/textViewv2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        android:textColor="#004CFF"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/textViewv3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        android:textColor="#004CFF"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/textViewv4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        android:textColor="#004CFF"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/textViewv5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        android:textColor="#004CFF"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/textViewv6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        android:textColor="#004CFF"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/textViewv7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        android:textColor="#004CFF"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/textViewv8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        android:textColor="#004CFF"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/textViewv9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        android:textColor="#004CFF"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/textViewv10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#004CFF"
+        android:textSize="12sp" />
+    
+    </LinearLayout>
+
+</ScrollView>

@@ -32,9 +32,9 @@ public class LoginActivity extends Activity {
 	
 		//poniendo tipo de letra
 		Typeface kepf = Typeface.createFromAsset(getAssets(),"Kepler-Std-Black_26074.ttf");
-    	TextView t1=(TextView) findViewById(R.id.textView1);
+    	TextView t1=(TextView) findViewById(R.id.textViewt);
 		t1.setTypeface(kepf);
-		TextView t2=(TextView) findViewById(R.id.textView2);
+		TextView t2=(TextView) findViewById(R.id.textViewtxt);
 		t2.setTypeface(kepf);
 		EditText et1=(EditText) findViewById(R.id.editText1);
 		et1.setTypeface(kepf);
@@ -46,7 +46,7 @@ public class LoginActivity extends Activity {
 		b2.setTypeface(kepf);
 		Button b3=(Button) findViewById(R.id.button3); 
 		b3.setTypeface(kepf);
-		TextView t3=(TextView) findViewById(R.id.textView3);
+		TextView t3=(TextView) findViewById(R.id.textViewv1);
 		t3.setTypeface(kepf);
 		
 		
@@ -284,7 +284,7 @@ public class LoginActivity extends Activity {
 
 		
 		
-		final TextView tv3=(TextView) findViewById (R.id.textView3);
+		final TextView tv3=(TextView) findViewById (R.id.textViewv1);
 		final ProgressBar pb = (ProgressBar) findViewById(R.id.progressBar1);
 		
 		pb.setVisibility(View.VISIBLE);

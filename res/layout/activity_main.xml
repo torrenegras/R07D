@@ -12,14 +12,14 @@
     tools:context=".MainActivity" >
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/textViewt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:textColor="#ffe2d8" />
 
      <TextView
-         android:id="@+id/textView2"
+         android:id="@+id/textViewtxt"
          android:layout_width="wrap_content"
          android:layout_height="wrap_content"
          android:layout_weight="1"
@@ -37,14 +37,14 @@
         android:textSize="100sp" />
     
      <TextView
-         android:id="@+id/textView3"
+         android:id="@+id/textViewv1"
          android:layout_width="wrap_content"
          android:layout_height="wrap_content"
          android:layout_weight="1"
          android:textColor="#ffe2d8" />
 
       <TextView
-          android:id="@+id/textView4"
+          android:id="@+id/textViewv2"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_gravity="end"

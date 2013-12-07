@@ -72,8 +72,8 @@ public class CalendarioActivity2 extends Activity {
 		
 			
 		//cargando variables
-		tvmes = (TextView) findViewById(R.id.textView1);
-		tvanio = (TextView) findViewById(R.id.textView2);
+		tvmes = (TextView) findViewById(R.id.textViewt);
+		tvanio = (TextView) findViewById(R.id.textViewtxt);
 		Button brep=(Button) findViewById(R.id.button1);
 		Button bmur=(Button) findViewById(R.id.button3);
 		gv= (GridView) findViewById(R.id.gridView1);

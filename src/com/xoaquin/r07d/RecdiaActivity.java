@@ -75,18 +75,18 @@ private EditText et3,et4,et5;
 		b5=(Button) findViewById(R.id.button5);
 		
 		
-		TextView fechatv = (TextView) findViewById(R.id.textView9);
-		TextView diatv = (TextView) findViewById(R.id.textView8);
-		TextView t1=(TextView) findViewById(R.id.textView1);
-		TextView t4=(TextView) findViewById(R.id.textView4);
+		TextView fechatv = (TextView) findViewById(R.id.textViewv7);
+		TextView diatv = (TextView) findViewById(R.id.textViewv6);
+		TextView t1=(TextView) findViewById(R.id.textViewt);
+		TextView t4=(TextView) findViewById(R.id.textViewv2);
 		EditText et1=(EditText) findViewById(R.id.editText1);
 		EditText et2=(EditText) findViewById(R.id.editText2);
 		et3=(EditText) findViewById(R.id.editText3);
 		et4=(EditText) findViewById(R.id.editText4);
 		et5=(EditText) findViewById(R.id.editText5);
-		t5=(TextView) findViewById(R.id.textView5);
-		t6=(TextView) findViewById(R.id.textView6);
-		t7=(TextView) findViewById(R.id.textView7);
+		t5=(TextView) findViewById(R.id.textViewv3);
+		t6=(TextView) findViewById(R.id.textViewv4);
+		t7=(TextView) findViewById(R.id.textViewv5);
 		cb1 = (CheckBox) findViewById(R.id.checkBox1);
 		cb2 = (CheckBox) findViewById(R.id.checkBox2); 
 		cb3 = (CheckBox) findViewById(R.id.checkBox3); 

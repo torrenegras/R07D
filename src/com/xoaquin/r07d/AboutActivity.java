@@ -19,12 +19,12 @@ public class AboutActivity extends Activity {
 		setContentView(R.layout.activity_about);
 	
 	
-		   TextView link = (TextView) findViewById(R.id.textView2);
+		   TextView link = (TextView) findViewById(R.id.textViewtxt);
 	       String linkText = " "+"<a href='https://twitter.com/AngelicaMaCruz'>@AngelicaMaCruz</a>";
 	       link.setText(Html.fromHtml(linkText));
 	       link.setMovementMethod(LinkMovementMethod.getInstance());
 	
-	       TextView link2 = (TextView) findViewById(R.id.textView1);
+	       TextView link2 = (TextView) findViewById(R.id.textViewt);
 	       String linkText2 = " "+"<a href='https://twitter.com/torrenegras'>@torrenegras</a>";
 	       link2.setText(Html.fromHtml(linkText2));
 	       link2.setMovementMethod(LinkMovementMethod.getInstance());
@@ -35,7 +35,7 @@ public class AboutActivity extends Activity {
 	       link2.setTypeface(kepf);
 	
 	       TextView ab = (TextView) findViewById(R.id.TextView01);
-	       TextView aut = (TextView) findViewById(R.id.textView3);
+	       TextView aut = (TextView) findViewById(R.id.textViewv1);
 	
 	       ab.setTypeface(kepf);
 	       aut.setTypeface(kepf);

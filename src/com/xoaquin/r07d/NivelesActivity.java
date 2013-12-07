@@ -27,8 +27,8 @@ public class NivelesActivity extends Activity {
 		  
 		}
 	
-		TextView tv=(TextView) findViewById(R.id.textView1);
-		TextView tv2=(TextView) findViewById(R.id.textView2);
+		TextView tv=(TextView) findViewById(R.id.textViewt);
+		TextView tv2=(TextView) findViewById(R.id.textViewtxt);
 		Button b=(Button) findViewById(R.id.button1);
 		
 		Typeface kepf = Typeface.createFromAsset(getAssets(),"Kepler-Std-Black_26074.ttf");

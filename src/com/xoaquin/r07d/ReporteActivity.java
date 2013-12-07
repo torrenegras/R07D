@@ -87,17 +87,17 @@ private String spdfop="",spdfopi="",ntu="";;
 		
 		//poniendo tipo de letra especial
 		Typeface kepf = Typeface.createFromAsset(getAssets(),"Kepler-Std-Black_26074.ttf");
-    	TextView t1f=(TextView) findViewById(R.id.textView1);
+    	TextView t1f=(TextView) findViewById(R.id.textViewt);
 		t1f.setTypeface(kepf);
-		TextView t2f=(TextView) findViewById(R.id.textView2);
+		TextView t2f=(TextView) findViewById(R.id.textViewtxt);
 		t2f.setTypeface(kepf);
-		TextView t3=(TextView) findViewById(R.id.textView3);
+		TextView t3=(TextView) findViewById(R.id.textViewv1);
 		t3.setTypeface(kepf);
-		TextView t4=(TextView) findViewById(R.id.textView4);
+		TextView t4=(TextView) findViewById(R.id.textViewv2);
 		t4.setTypeface(kepf);
-		TextView t5=(TextView) findViewById(R.id.textView5);
+		TextView t5=(TextView) findViewById(R.id.textViewv3);
 		t5.setTypeface(kepf);
-		TextView t6=(TextView) findViewById(R.id.textView6);
+		TextView t6=(TextView) findViewById(R.id.textViewv4);
 		t6.setTypeface(kepf);
 		
 		EditText et1=(EditText) findViewById(R.id.editText1);
@@ -149,8 +149,8 @@ private String spdfop="",spdfopi="",ntu="";;
 			int m = c.get(Calendar.MONTH);
 			m=m+1;
 			
-			TextView t1= (TextView) findViewById(R.id.textView3);//cambiando textviews segun mes y año actual
-			TextView t2= (TextView) findViewById(R.id.textView4);
+			TextView t1= (TextView) findViewById(R.id.textViewv1);//cambiando textviews segun mes y año actual
+			TextView t2= (TextView) findViewById(R.id.textViewv2);
 			
 			mes=String.valueOf(m); //variable para query
 			if(m<10){mes="0"+String.valueOf(m);}
@@ -216,8 +216,8 @@ private String spdfop="",spdfopi="",ntu="";;
 		.toString(localMonth);
 		String localYear = Integer.toString(mYear);
 		
-		TextView t1= (TextView) findViewById(R.id.textView3);//cambiando textviews segun seleccion de usuario
-		TextView t2= (TextView) findViewById(R.id.textView4);
+		TextView t1= (TextView) findViewById(R.id.textViewv1);//cambiando textviews segun seleccion de usuario
+		TextView t2= (TextView) findViewById(R.id.textViewv2);
 		
 		t1.setText("MES: "+monthString); //DONDE SE PONEN EN LAYOUT
 		t2.setText("A\u00D1O: "+localYear);   //DONDE SE PONEN EN LAYOUT

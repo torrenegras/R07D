@@ -33,7 +33,7 @@
             android:onClick="clickfleizq" />
     
      <TextView
-         android:id="@+id/textView1"
+         android:id="@+id/textViewt"
          android:layout_width="75dp"
          android:layout_height="30dp"
          android:layout_gravity="center_vertical|center_horizontal"
@@ -43,7 +43,7 @@
          android:textSize="20sp" />
     
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/textViewtxt"
         android:layout_width="40dp"
         android:layout_height="30dp"
         android:layout_gravity="center_vertical|center_horizontal"

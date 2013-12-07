@@ -16,7 +16,7 @@
         android:layout_height="wrap_content" >
         
          <TextView
-             android:id="@+id/textView1"
+             android:id="@+id/textViewt"
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"
              android:text="@string/nombrerep"
@@ -40,7 +40,7 @@
     </LinearLayout>
     
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/textViewtxt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="25dp"
@@ -60,7 +60,7 @@
         android:textSize="16sp" />
     
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/textViewv3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/activity_horizontal_margin"
@@ -85,7 +85,7 @@
         android:layout_height="wrap_content" >
         
          <TextView
-             android:id="@+id/textView6"
+             android:id="@+id/textViewv4"
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"
              android:layout_gravity="center_vertical"
@@ -126,7 +126,7 @@
     </LinearLayout>
     
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/textViewv1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -134,7 +134,7 @@
         android:textColor="#8d665f" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/textViewv2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/activity_horizontal_margin"

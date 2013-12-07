@@ -38,7 +38,7 @@ public class MainActivity extends Activity {
            
         Typeface kepf = Typeface.createFromAsset(getAssets(),"Kepler-Std-Black_26074.ttf");
 	    Button b1=(Button) findViewById(R.id.button1);
-	    TextView t= (TextView) findViewById(R.id.textView4);
+	    TextView t= (TextView) findViewById(R.id.textViewv2);
 		b1.setTypeface(kepf);
 		t.setTypeface(kepf);
         

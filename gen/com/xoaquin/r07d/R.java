@@ -54,7 +54,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int LinearLayout01=0x7f090019;
         public static final int LinearLayout1=0x7f090016;
         public static final int TextView01=0x7f090000;
-        public static final int action_settings=0x7f090032;
+        public static final int action_settings=0x7f090033;
         public static final int button1=0x7f090009;
         public static final int button2=0x7f09000b;
         public static final int button3=0x7f09000a;
@@ -78,10 +78,9 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int gridView1=0x7f090008;
         public static final int imageButton1=0x7f090007;
         public static final int imageButton2=0x7f090006;
-        public static final int imageView1=0x7f09002e;
-        public static final int item1=0x7f09002f;
-        public static final int item2=0x7f090030;
-        public static final int item3=0x7f090031;
+        public static final int item1=0x7f090030;
+        public static final int item2=0x7f090031;
+        public static final int item3=0x7f090032;
         public static final int linearLayout1=0x7f090013;
         public static final int list=0x7f090018;
         public static final int progressBar1=0x7f09000c;
@@ -90,17 +89,19 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int radioSINO=0x7f09002b;
         public static final int rl=0x7f090017;
         public static final int scrollView1=0x7f090004;
-        public static final int textView1=0x7f090002;
-        public static final int textView10=0x7f090028;
-        public static final int textView11=0x7f090029;
-        public static final int textView2=0x7f090003;
-        public static final int textView3=0x7f090001;
-        public static final int textView4=0x7f09000d;
-        public static final int textView5=0x7f09000e;
-        public static final int textView6=0x7f09000f;
-        public static final int textView7=0x7f090010;
-        public static final int textView8=0x7f090011;
-        public static final int textView9=0x7f090012;
+        public static final int textViewl=0x7f09002e;
+        public static final int textViewt=0x7f090002;
+        public static final int textViewtxt=0x7f090003;
+        public static final int textViewv1=0x7f090001;
+        public static final int textViewv10=0x7f09002f;
+        public static final int textViewv2=0x7f09000d;
+        public static final int textViewv3=0x7f09000e;
+        public static final int textViewv4=0x7f09000f;
+        public static final int textViewv5=0x7f090010;
+        public static final int textViewv6=0x7f090011;
+        public static final int textViewv7=0x7f090012;
+        public static final int textViewv8=0x7f090028;
+        public static final int textViewv9=0x7f090029;
         public static final int toggleButton1=0x7f09001d;
     }
     public static final class layout {
@@ -182,6 +183,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int lbothin=0x7f06001e;
         public static final int ldnins=0x7f06003e;
         public static final int ldnlabel=0x7f060012;
+        public static final int lec=0x7f060058;
         public static final int lecbiblilabel=0x7f06000c;
         public static final int mdgccblabel=0x7f060016;
         public static final int mdlcins=0x7f060039;

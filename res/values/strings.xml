@@ -89,5 +89,6 @@
     <string name="title_activity_recdia_activity2">REGISTRO DIARIO</string>
     <string name="tbtext">P/AG/LN</string>
     <string name="pub"><b>Publicar P&amp;AG en Muro:</b> Publicar las peticiones y acciones de gracias en el muro de la comunidad R07D.</string>
+    <string name="lec">Lectura:</string>
 
 </resources>
