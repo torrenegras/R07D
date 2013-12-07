@@ -1,20 +1,21 @@
 package com.xoaquin.r07d;
 
 import android.app.Fragment;
-import android.graphics.Typeface;
 import android.os.Bundle;
-import android.text.Html;
-import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
+import android.widget.ProgressBar;
 
 
 
 public class DevocionalFragment extends Fragment {
 	
-	private static TextView tt,ttx,t1,t2,t3,t4,t5,t6,t7,t8,t9,t10;
+	
+	private static WebView wb;
+	private static ProgressBar pb;
 	
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -22,24 +23,33 @@ public class DevocionalFragment extends Fragment {
        
     	View V=inflater.inflate(R.layout.fragment_devocional, container, false);
   	
-    	 tt=(TextView) V.findViewById(R.id.textViewt);
-    	 ttx=(TextView) V.findViewById(R.id.textViewtxt);
-    	 t1=(TextView) V.findViewById(R.id.textViewv1);
-    	 t2=(TextView) V.findViewById(R.id.textViewv2);
-    	 t3=(TextView) V.findViewById(R.id.textViewv3);
-    	 t4=(TextView) V.findViewById(R.id.textViewv4);
-    	 t5=(TextView) V.findViewById(R.id.textViewv5);
-    	 t6=(TextView) V.findViewById(R.id.textViewv6);
-    	 t7=(TextView) V.findViewById(R.id.textViewv7);
-    	 t8=(TextView) V.findViewById(R.id.textViewv8);
-    	 t9=(TextView) V.findViewById(R.id.textViewv9);
-    	 t10=(TextView) V.findViewById(R.id.textViewv10);
     	 
-    	 Typeface kepf = Typeface.createFromAsset(V.getContext().getAssets(),"Kepler-Std-Black_26074.ttf");
-    	 
-    	 tt.setTypeface(kepf);
+    	 wb=(WebView) V.findViewById(R.id.webView1);
+    	 pb=(ProgressBar) getActivity().findViewById(R.id.progressBar1);
     	 
     	 
+    	 wb.loadUrl("http://www.desarrollocristiano.com/devocionales.php");
+    	 pb.setVisibility(View.VISIBLE);
+    	 
+         wb.getSettings().setJavaScriptEnabled(true);
+         wb.setWebViewClient(new WebViewClient());
+         wb.setInitialScale(120);
+         wb.getSettings().setBuiltInZoomControls(true);
+         
+        
+         wb.setWebViewClient(new WebViewClient() {
+
+        	   public void onPageFinished(WebView view, String url) {
+        		   pb.setVisibility(View.GONE);
+        	    }
+        	});
+         
+    	 
+    	 //Typeface kepf = Typeface.createFromAsset(V.getContext().getAssets(),"Kepler-Std-Black_26074.ttf");
+    	 
+    	 
+    	 
+    	 /*
     	 tt.setText("La Biblia es el día a día");
     	 ttx.setText("Una vida cristiana fiel a Cristo no depende de respetar escrupulosamente ritos o costumbres religiosas,"
     	 		+ "sino que esta arraigada en la relacion viva y personal que cada cristiano debe tener con su Salvador"
@@ -72,7 +82,7 @@ public class DevocionalFragment extends Fragment {
     	 t9.setText("");
     	 t10.setText("");
     	 
-    	 
+    	 */
     	 
     	 /*INTENT YOUVERSION NATIVO
     	 t1.setOnClickListener(new OnClickListener()

@@ -41,7 +41,7 @@ public class RegistroFragment extends Fragment {
 	private static Button bhi,bhf,bg;
 	private static String shoraini,shorafin,ntu="",fca="",ndca="",dca="",mca="",aca="";
 	private static ToggleButton tb;
-	private static TextView t1,t4,t5,t6,t7,t8,t9;
+	private static TextView t1,t4,t5,t6,t7,t8,t9,tdrc;
 	private static EditText et1,et2,et3,et4,et5;
 	private static CheckBox cb1,cb2,cb3,cb4,cb5,cb6,cb7,cb8;
 	private static ProgressBar pb;
@@ -54,8 +54,7 @@ public class RegistroFragment extends Fragment {
         
 		// INFLANDO VIEW DEL FRAGMENTO
         View V= inflater.inflate(R.layout.fragment_registro, container, false);
-        
-        
+                
         //INICIALIZANDO VARIABLES
         bhi=(Button) V.findViewById(R.id.button1);
         bhf=(Button) V.findViewById(R.id.button2);
@@ -83,6 +82,9 @@ public class RegistroFragment extends Fragment {
         cb7=(CheckBox) V.findViewById(R.id.checkBox7);
         pb=(ProgressBar) V.findViewById(R.id.progressBar1);
         
+        tdrc=(TextView) getActivity().findViewById(R.id.textViewv9);//textview de activity
+        tdrc.setClickable(false);
+        pb.setVisibility(View.VISIBLE);
         
         //TRAYENDO VARIABLES DE ACTIVIDAD 
         Bundle extras = getArguments();
@@ -142,7 +144,8 @@ public class RegistroFragment extends Fragment {
 	        query.findInBackground(new FindCallback<ParseObject>() {
 	            public void done(List<ParseObject> obs, ParseException e) {
 	                if (e == null) {
-	                   if (obs.size()>0)
+	                   
+	                	if (obs.size()>0)
 	                   {   	                   
 	                	bhi.setText(obs.get(0).getString("horaidbp"));
 	                	bhf.setText(obs.get(0).getString("horafdbp"));   
@@ -152,14 +155,24 @@ public class RegistroFragment extends Fragment {
 	                	et4.setText(obs.get(0).getString("ldndbp"));   
 	                	et5.setText(obs.get(0).getString("peidbp"));
 	                	
+	                	if(et3.getText().toString().length()>0||et4.getText().toString().length()>0||et5.getText().toString().length()>0){visibles();tb.setChecked(true);}
+	                	
 	                	if(obs.get(0).getString("aopdbp").equals("true")){cb6.setChecked(true);}else{cb6.setChecked(false);}  
 	                	if(obs.get(0).getString("aopidbp").equals("true")){cb7.setChecked(true);}else{cb7.setChecked(false);}   
-	                	if (obs.get(0).getString("opldbp").equals("true")){cb1.setChecked(true);}else{cb1.setChecked(false);}   
-	                	if (obs.get(0).getString("coodbp").equals("true")){cb2.setChecked(true);}else{cb2.setChecked(false);}   
-	                	if (obs.get(0).getString("mgcdbp").equals("true")){cb3.setChecked(true);}else{cb3.setChecked(false);}   
-	                	if(obs.get(0).getString("opddbp").equals("true")){ cb4.setChecked(true);}else{cb4.setChecked(false);}
-	                	if (obs.get(0).getString("oplcodbp").equals("true")){cb5.setChecked(true);}else{cb5.setChecked(false);}   
+	                	if (obs.get(0).getString("opldbp").equals("true")){cb1.setChecked(true);visibles();tb.setChecked(true);}else{cb1.setChecked(false);}   
+	                	if (obs.get(0).getString("coodbp").equals("true")){cb2.setChecked(true);visibles();tb.setChecked(true);}else{cb2.setChecked(false);}   
+	                	if (obs.get(0).getString("mgcdbp").equals("true")){cb3.setChecked(true);visibles();tb.setChecked(true);}else{cb3.setChecked(false);}   
+	                	if(obs.get(0).getString("opddbp").equals("true")){ cb4.setChecked(true);visibles();tb.setChecked(true);}else{cb4.setChecked(false);}
+	                	if (obs.get(0).getString("oplcodbp").equals("true")){cb5.setChecked(true);visibles();tb.setChecked(true);}else{cb5.setChecked(false);}   
+	                   
+	                	
+	                    pb.setVisibility(View.GONE);
+	                    tdrc.setClickable(true);
+	                   }else{
+	                	pb.setVisibility(View.GONE);
+		                tdrc.setClickable(true);
 	                   }
+	                   
 	                } else {
 	                //Error en Query  
 	                }
@@ -202,10 +215,7 @@ public class RegistroFragment extends Fragment {
         	    
         	    if (on) {
         	        
-        	    	t5.setVisibility(View.VISIBLE);	t6.setVisibility(View.VISIBLE);	t7.setVisibility(View.VISIBLE);	et3.setVisibility(View.VISIBLE);
-        	    	et4.setVisibility(View.VISIBLE);et5.setVisibility(View.VISIBLE);cb1.setVisibility(View.VISIBLE); cb2.setVisibility(View.VISIBLE);
-        	        cb3.setVisibility(View.VISIBLE);cb4.setVisibility(View.VISIBLE);cb5.setVisibility(View.VISIBLE); cb8.setVisibility(View.VISIBLE);
-        	        view.setBackgroundResource(0x7f020002);
+        	    	visibles();
         	        
         	    } else {
         	    	t5.setVisibility(View.GONE);t6.setVisibility(View.GONE);t7.setVisibility(View.GONE);et3.setVisibility(View.GONE);
@@ -216,6 +226,10 @@ public class RegistroFragment extends Fragment {
             }       
         }
         );
+        
+        
+             
+        
         
        
      // GUARDAR
@@ -256,6 +270,15 @@ public class RegistroFragment extends Fragment {
         return V;
 }//FIN ONCREATE()
 	
+	
+	
+	public void visibles(){
+		t5.setVisibility(View.VISIBLE);	t6.setVisibility(View.VISIBLE);	t7.setVisibility(View.VISIBLE);	et3.setVisibility(View.VISIBLE);
+    	et4.setVisibility(View.VISIBLE);et5.setVisibility(View.VISIBLE);cb1.setVisibility(View.VISIBLE); cb2.setVisibility(View.VISIBLE);
+        cb3.setVisibility(View.VISIBLE);cb4.setVisibility(View.VISIBLE);cb5.setVisibility(View.VISIBLE); cb8.setVisibility(View.VISIBLE);
+        tb.setBackgroundResource(0x7f020002);
+    	
+    }
 	
 	
    

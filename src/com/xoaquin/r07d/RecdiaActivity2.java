@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.FragmentActivity;
 import android.view.Menu;
 import android.view.View;
@@ -28,7 +29,7 @@ public class RecdiaActivity2 extends FragmentActivity {
 		t11.setTypeface(kepf);
 		
 			
-				
+		//INFLANDO FRAGMENTO REGISTRO		
 		RegistroFragment rf=new RegistroFragment();
 		rf.setArguments(getIntent().getExtras()); //pasando los extras como argumentos al fragmento...
 		getFragmentManager().beginTransaction().add(R.id.fragments_container, rf).commit();
@@ -40,20 +41,30 @@ public class RecdiaActivity2 extends FragmentActivity {
 	
 	public void onclickdevo(View v) {
 		
-		
+		//LLAMANDO FUNCION AUTOGUARDADO PARA CUANDO CAMBIO DE TAB
 		RegistroFragment rf=new RegistroFragment();
 		rf.guardar();
 		
 		Toast.makeText(RecdiaActivity2.this, "Auto-Guardando...", Toast.LENGTH_LONG).show();
+	
 		
+		//INFLANDO FRAGMENTO DEVOCIONAL 
 		DevocionalFragment df=new DevocionalFragment();
-
-		FragmentTransaction transaction = getFragmentManager().beginTransaction();
+    	FragmentTransaction transaction = getFragmentManager().beginTransaction();
 		transaction.replace(R.id.fragments_container, df);
 		transaction.addToBackStack(null);
     	transaction.commit();
     	
-    	AlertDialog.Builder alertDialog2 = new AlertDialog.Builder(RecdiaActivity2.this);
+    	
+    	
+    	
+    	//DIALOG PARA RECLUTAR DEVOCIONALES
+    	int secondsDelayed = 5;
+        new Handler().postDelayed(new Runnable() {
+                public void run() {
+                	  	
+    	
+    	    	AlertDialog.Builder alertDialog2 = new AlertDialog.Builder(RecdiaActivity2.this);
 		 
 		// Setting Dialog Title
 		alertDialog2.setTitle("En Construcción...");
@@ -84,23 +95,25 @@ public class RecdiaActivity2 extends FragmentActivity {
 		            public void onClick(DialogInterface dialog, int which) {
 		                
 		                dialog.cancel();
-		                RegistroFragment rf=new RegistroFragment();
-		        		
-		        		FragmentTransaction transaction = getFragmentManager().beginTransaction();
-		        		transaction.replace(R.id.fragments_container, rf);
-		        		transaction.addToBackStack(null);
-		            	transaction.commit();
+		                
 		            }
 		        });
 		 
 		// Showing Alert Dialog
 		alertDialog2.show();
 		
+		
+                }
+              }, secondsDelayed * 1000);
+		
+		
     }
 	
 	
 	
 	public void onclickreg(View v) {
+		
+		//INFLANDO FRAGMENTO REGISTRO
 		RegistroFragment rf=new RegistroFragment();
 		
 		FragmentTransaction transaction = getFragmentManager().beginTransaction();
