@@ -26,8 +26,10 @@
 
         <ImageButton
             android:id="@+id/imageButton2"
-            android:layout_width="63dp"
-            android:layout_height="fill_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
             android:background="@drawable/fi"
             android:contentDescription="@string/cboilabel"
             android:onClick="clickfleizq" />
@@ -38,7 +40,7 @@
          android:layout_height="30dp"
          android:layout_gravity="center_vertical|center_horizontal"
          android:layout_marginLeft="40dp"
-         android:layout_weight="1"
+         android:layout_weight="3"
          android:textColor="#8d665f"
          android:textSize="20sp" />
     
@@ -47,14 +49,16 @@
         android:layout_width="40dp"
         android:layout_height="30dp"
         android:layout_gravity="center_vertical|center_horizontal"
-        android:layout_weight="1"
+        android:layout_weight="3"
         android:textColor="#8d665f"
         android:textSize="20sp" />
      
      <ImageButton
          android:id="@+id/imageButton1"
-         android:layout_width="63dp"
-         android:layout_height="fill_parent"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_gravity="center"
+         android:layout_weight="1"
          android:background="@drawable/fd"
          android:contentDescription="@string/cbolabel"
          android:onClick="clickfleder" />
