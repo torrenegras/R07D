@@ -1,11 +1,13 @@
 package com.xoaquin.r07d;
 
 import android.os.Bundle;
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
 import android.view.Menu;
@@ -17,7 +19,11 @@ public class AboutActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_about);
-	
+		
+		   //COLOR AL ACTIONBAR
+		   ActionBar abR=getActionBar();
+		   Drawable drw = getResources().getDrawable( R.drawable.b1 );
+		   abR.setBackgroundDrawable(drw);
 	
 		   TextView link = (TextView) findViewById(R.id.textViewtxt);
 	       String linkText = " "+"<a href='https://twitter.com/AngelicaMaCruz'>@AngelicaMaCruz</a>";
@@ -44,7 +50,7 @@ public class AboutActivity extends Activity {
 	       PackageManager manager = this.getPackageManager();
 	       try {
 			PackageInfo info = manager.getPackageInfo(this.getPackageName(), 0);
-			ab.setText("R07D Ver:"+info.versionName+"  © 2013 XoaquinSoft");
+			ab.setText("R07D Ver: "+info.versionName+" © 2013");
 		} catch (NameNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

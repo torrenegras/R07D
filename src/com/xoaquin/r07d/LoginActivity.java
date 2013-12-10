@@ -10,11 +10,12 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
-import android.util.Log;
+import android.graphics.drawable.Drawable;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
@@ -29,6 +30,11 @@ public class LoginActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_login);
+		
+		//COLOR AL ACTIONBAR
+		ActionBar ab=getActionBar();
+		Drawable drw = getResources().getDrawable( R.drawable.b1 );
+		ab.setBackgroundDrawable(drw);
 	
 		//poniendo tipo de letra
 		Typeface kepf = Typeface.createFromAsset(getAssets(),"Kepler-Std-Black_26074.ttf");
@@ -123,8 +129,7 @@ public class LoginActivity extends Activity {
 									                public void run() {
 									                	Intent i = new Intent(getApplicationContext(), CalendarioActivity2.class);
 									                	i.putExtra("correog",etcorreo);//pasando la variable correo a la siguiente actividad
-									                	Log.e("cglacon",etcorreo);
-									                	startActivity(new Intent(i));
+									                   	startActivity(new Intent(i));
 									                    finish();
 									                }
 									        }, secondsDelayed * 1000);

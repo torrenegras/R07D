@@ -97,7 +97,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/activity_vertical_margin"
         android:text="@string/pub"
-        android:textColor="#8d665f" />
+        android:textColor="#8d665f"
+        android:textSize="15sp" />
 
 </LinearLayout>
 </ScrollView>

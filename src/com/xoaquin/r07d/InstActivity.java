@@ -1,8 +1,10 @@
 package com.xoaquin.r07d;
 
 import android.os.Bundle;
+import android.app.ActionBar;
 import android.app.Activity;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.view.Menu;
 import android.widget.TextView;
 
@@ -14,7 +16,10 @@ public class InstActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_inst);
 		
-		
+		//COLOR AL ACTIONBAR
+		ActionBar ab=getActionBar();
+		Drawable drw = getResources().getDrawable( R.drawable.b1 );
+		ab.setBackgroundDrawable(drw);
 		
 	}
 

@@ -124,22 +124,6 @@
                 
          
     </LinearLayout>
-    
-    <TextView
-        android:id="@+id/textViewv1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="#8d665f" />
-
-    <TextView
-        android:id="@+id/textViewv2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/activity_horizontal_margin"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="#8d665f" />
 
     <Button
         android:id="@+id/button2"
@@ -147,9 +131,9 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginBottom="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="32dp"
         android:background="@drawable/b1"
         android:onClick="onclickma"
-        android:text="@string/mesanioreport"
         android:textColor="#ffffff"
         android:textSize="22sp" />
 
@@ -160,7 +144,7 @@
         android:layout_gravity="center"
         android:background="@drawable/b1"
         android:onClick="onclickcreandorep"
-        android:text="@string/breplabel"
+        android:text="@string/env"
         android:textColor="#ffffff"
         android:textSize="22sp" />
 

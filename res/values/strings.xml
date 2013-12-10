@@ -23,7 +23,7 @@
     <string name="pilabel">Peticiones/Intercesión</string>
     <string name="plcblabel">Pastores/Líderes</string>
     <string name="cbcoordlabel">Coordinadores</string>
-    <string name="mdgccblabel">Miembros de Grupo de Conexión</string>
+    <string name="mdgccblabel">Miembros de Grupo</string>
     <string name="cbcoodlabel">Coordinadores</string>
     <string name="cbdisclabel">Discípulos</string>
     <string name="cboplclabel">Oración por la Cosecha</string>
@@ -38,7 +38,7 @@
     <string name="title_activity_reporte">REPORTE MENSUAL</string>
     <string name="crblabel">REPORTES</string>
     <string name="nombrerep">NOMBRE:</string>
-    <string name="coordgclabel">NOMBRE COORDINADOR DE GRUPO CONEXION:</string>
+    <string name="coordgclabel">NOMBRE LIDER:</string>
     <string name="sfecha">SELECCIONAR DIA</string>
     <string name="mesanioreport">SELECCIONAR MES / AÑO</string>
     <string name="con">CONECTARSE</string>
@@ -57,7 +57,7 @@
     <string name="desconectarse">DESCONECTARSE</string>
     <string name="twitter2">twitter2</string>
     <string name="twitter1">twitter1</string>
-    <string name="inscoord"><b>Nombre Coordinador de Grupo Conexion:</b> Nombre del líder o coordinador del grupo al que pertenece.</string>
+    <string name="inscoord"><b>Nombre Líder:</b> Nombre del líder o coordinador del grupo al que pertenece.</string>
     <string name="mdlcins"><b>Meta de Lectura:</b> Es una forma de esforzarse para cumplir con la lectura diaria de la Biblia. Ejemplo: Si vamos a leer 2 capitulos diarios, la meta del mes podria ser: Genesis 1\u201450 y Exodo 1\u201410.</string>
     <string name="clmins"><b>¿Cumplí la meta? :</b> Si cumplió la meta en un porcentaje superior al 90% marque SI. Si llegó al 89.9% O MENOS de la meta, NO la cumplió. Esto le llevará a generar un mayor esfuerzo para el siguiente mes.</string>
     <string name="hihfins">"<b>Hora Inicio / Hora Fin :</b> Hora en que inicia y finaliza su sesion diaria de oración y lectura de Biblia.  "</string>
@@ -65,8 +65,8 @@
     <string name="adgins"><b>Acción de Gracias:</b> Lista de respuestas a la oración. O acción de gracias por la espera de algo específico.</string>
     <string name="ldnins"><b>Lista de Nuevos:</b> Lista de personas que desea que lleguen a Cristo.</string>
     <string name="peiins"><b>Peticiones/Intercesión:</b> Las 5 opciones predefinidas en el registro son solo algunos ejemplos por los que debemos orar. Escriba adicionalmente sus propias peticiones.</string>
-    <string name="r07dabout">R07D Ver:2.2  © 2013 XoaquinSoft</string>
-    <string name="autoresabout">Autores:</string>
+    <string name="r07dabout">R07D Ver:2.2  © 2013 </string>
+    <string name="autoresabout">By XoaquinSoft:</string>
     <string name="r07dspalsh">R07D</string>
     <string name="BYJ">by XoaquinSoft</string>
     <string name="title_activity_calendario_activity2">CALENDARIO</string>
@@ -90,5 +90,8 @@
     <string name="tbtext">P/AG/LN</string>
     <string name="pub"><b>Publicar P&amp;AG en Muro:</b> Publicar las peticiones y acciones de gracias en el muro de la comunidad R07D.</string>
     <string name="lec">Lectura:</string>
+    <string name="COMP">Compartir</string>
+    <string name="mur">Muro R07D</string>
+    <string name="env">ENVIAR</string>
 
 </resources>

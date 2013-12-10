@@ -2,5 +2,17 @@
     <item android:id="@+id/item1" android:title="@string/usuario"></item>
     <item android:id="@+id/item2" android:title="@string/insmenu"></item>
     <item android:id="@+id/item3" android:title="@string/acerca"></item>
+    
+    
+    
+    <item android:id="@+id/mur"
+      android:icon="@drawable/muro"
+      android:title="@string/mur"
+      android:showAsAction="ifRoom" />
+    
+    <item android:id="@+id/shr"
+      android:icon="@drawable/s"
+      android:title="@string/COMP"
+      android:showAsAction="ifRoom" />
 
 </menu>

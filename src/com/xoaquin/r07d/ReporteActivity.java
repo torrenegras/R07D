@@ -35,6 +35,7 @@ import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
@@ -65,6 +66,8 @@ private int mYear;
 private int mMonth;
 private int mDay;
 
+private Button b2;
+
 
 private static String FILE;
 private String spdfop="",spdfopi="",ntu="";;
@@ -73,6 +76,11 @@ private String spdfop="",spdfopi="",ntu="";;
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_reporte);
+		
+		//COLOR AL ACTIONBAR
+		ActionBar ab=getActionBar();
+		Drawable drw = getResources().getDrawable( R.drawable.b1 );
+		ab.setBackgroundDrawable(drw);
 
 		Bundle extras = getIntent().getExtras();
 		if (extras != null) {
@@ -91,10 +99,6 @@ private String spdfop="",spdfopi="",ntu="";;
 		t1f.setTypeface(kepf);
 		TextView t2f=(TextView) findViewById(R.id.textViewtxt);
 		t2f.setTypeface(kepf);
-		TextView t3=(TextView) findViewById(R.id.textViewv1);
-		t3.setTypeface(kepf);
-		TextView t4=(TextView) findViewById(R.id.textViewv2);
-		t4.setTypeface(kepf);
 		TextView t5=(TextView) findViewById(R.id.textViewv3);
 		t5.setTypeface(kepf);
 		TextView t6=(TextView) findViewById(R.id.textViewv4);
@@ -115,7 +119,7 @@ private String spdfop="",spdfopi="",ntu="";;
 		
 		Button b1=(Button) findViewById(R.id.button1); 
 		b1.setTypeface(kepf);
-		Button b2=(Button) findViewById(R.id.button2); 
+		b2=(Button) findViewById(R.id.button2); 
 		b2.setTypeface(kepf);
 		
 		//trayendo valores guardados anteriormente a nivel DB local SQLite
@@ -149,16 +153,14 @@ private String spdfop="",spdfopi="",ntu="";;
 			int m = c.get(Calendar.MONTH);
 			m=m+1;
 			
-			TextView t1= (TextView) findViewById(R.id.textViewv1);//cambiando textviews segun mes y año actual
-			TextView t2= (TextView) findViewById(R.id.textViewv2);
+			
 			
 			mes=String.valueOf(m); //variable para query
 			if(m<10){mes="0"+String.valueOf(m);}
 			anio=String.valueOf(y); //variable para query
 	
-			t1.setText("MES: "+mes);
-			t2.setText("A\u00D1O: "+anio);
-	
+			
+	        b2.setText("MES "+mes+" / "+"A\u00D1O "+anio);
 	
 			final Calendar c2 = Calendar.getInstance();
 			mYear = c2.get(Calendar.YEAR);
@@ -216,11 +218,10 @@ private String spdfop="",spdfopi="",ntu="";;
 		.toString(localMonth);
 		String localYear = Integer.toString(mYear);
 		
-		TextView t1= (TextView) findViewById(R.id.textViewv1);//cambiando textviews segun seleccion de usuario
-		TextView t2= (TextView) findViewById(R.id.textViewv2);
 		
-		t1.setText("MES: "+monthString); //DONDE SE PONEN EN LAYOUT
-		t2.setText("A\u00D1O: "+localYear);   //DONDE SE PONEN EN LAYOUT
+		
+		
+		b2.setText("MES "+monthString+" / "+"A\u00D1O "+localYear);
 		mes=monthString;
 		anio=localYear;
 		

@@ -16,9 +16,11 @@ import com.parse.ParseQuery;
 import com.parse.PushService;
 
 import android.os.Bundle;
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.util.DisplayMetrics;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -46,6 +48,10 @@ public class CalendarioActivity2 extends Activity {
 		setContentView(R.layout.activity_calendario_activity2);
 		setTitle("CALENDARIO");
 		
+		//COLOR AL ACTIONBAR
+		ActionBar ab=getActionBar();
+		Drawable drw = getResources().getDrawable( R.drawable.b1 );
+		ab.setBackgroundDrawable(drw);
 		
 		PushService.setDefaultPushCallback(this, MainActivity.class);
 		ParseInstallation.getCurrentInstallation().saveInBackground();
@@ -68,7 +74,6 @@ public class CalendarioActivity2 extends Activity {
 		tvmes = (TextView) findViewById(R.id.textViewt);
 		tvanio = (TextView) findViewById(R.id.textViewtxt);
 		Button brep=(Button) findViewById(R.id.button1);
-		Button bmur=(Button) findViewById(R.id.button3);
 		gv= (GridView) findViewById(R.id.gridView1);
 		Typeface kepf = Typeface.createFromAsset(getAssets(),"Kepler-Std-Black_26074.ttf");
     	
@@ -87,7 +92,7 @@ public class CalendarioActivity2 extends Activity {
  		tvmes.setTypeface(kepf);
  		tvanio.setTypeface(kepf);
  		brep.setTypeface(kepf);
- 		bmur.setTypeface(kepf);
+ 		
          
          
          //dia fin de mes para activar push de envio de reporte
@@ -316,18 +321,7 @@ public void onclickgenrepo(View v) { //boton inicio actividad MENU de generacion
 
 
 
-//boton inicio actividad MURO
 
-public void onclickmuro(View v) { 
-	
-	ProgressBar pb=(ProgressBar) findViewById(R.id.progressBar1);
-	pb.setVisibility(View.VISIBLE);
-	 Intent i = new Intent(getApplicationContext(), MuroActivity.class);
-	 startActivity(new Intent(i));  
-	}
-
-
-	
 	
 	//felcha derecha
 	
@@ -422,24 +416,16 @@ public String nomdia(int dayofweek){
 }
 	
 
-//funcion para el sharing intent
 
-public void onclickFB(View view) {
-	Intent intent = new Intent(Intent.ACTION_SEND);
-	intent.setType("text/plain");
-	intent.putExtra(Intent.EXTRA_TEXT, "R07 On The Go! Haz tu R07 en cualquier parte! Descarga la aplicación R07D en: https://play.google.com/store/apps/details?id=com.xoaquin.r07d");
-	startActivity(Intent.createChooser(intent, "Share with"));
-}      
-
-	
 	
 
 //inflado del menu
 	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
+	
 		getMenuInflater().inflate(R.menu.calendario_activity2, menu);
+		
 		return true;
 	}
 	
@@ -462,6 +448,24 @@ public void onclickFB(View view) {
 		startActivity(new Intent(this, AboutActivity.class));
 		return true;
 	 
+		
+	   
+	    case R.id.mur:
+	    	ProgressBar pb=(ProgressBar) findViewById(R.id.progressBar1);
+	    	pb.setVisibility(View.VISIBLE);
+	    	 Intent in = new Intent(getApplicationContext(), MuroActivity.class);
+	    	 startActivity(new Intent(in));  
+			return true;
+		 	
+			
+	    case R.id.shr:
+	    	Intent intent = new Intent(Intent.ACTION_SEND);
+	    	intent.setType("text/plain");
+	    	intent.putExtra(Intent.EXTRA_TEXT, "R07 On The Go! Haz tu R07 en cualquier parte! Descarga la aplicación R07D en: https://play.google.com/store/apps/details?id=com.xoaquin.r07d");
+	    	startActivity(Intent.createChooser(intent, "Share with"));
+			return true;
+		 	
+		
 	    
 	    default:
 	    return super.onOptionsItemSelected(item);

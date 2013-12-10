@@ -89,29 +89,6 @@
     android:textColor="#ffffff"
     android:textSize="22sp" />
 
-<Button
-    android:id="@+id/button3"
-    style="?android:attr/borderlessButtonStyle"
-    android:layout_width="260dp"
-    android:layout_height="wrap_content"
-    android:layout_gravity="center"
-    android:layout_marginTop="10dp"
-    android:background="@drawable/b1"
-    android:onClick="onclickmuro"
-    android:text="@string/muro"
-    android:textColor="#ffffff"
-    android:textSize="22sp" />
-
-<Button
-    android:id="@+id/button2"
-    style="?android:attr/buttonStyleSmall"
-    android:layout_width="30dp"
-    android:layout_height="30dp"
-    android:layout_gravity="right|center_vertical|end"
-    android:layout_marginLeft="25dp"
-    android:background="@drawable/s"
-    android:onClick="onclickFB" />
-
 
 
 </LinearLayout>

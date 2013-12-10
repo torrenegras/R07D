@@ -1,10 +1,12 @@
 package com.xoaquin.r07d;
 
+import android.app.ActionBar;
 import android.app.AlertDialog;
 import android.app.FragmentTransaction;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -21,7 +23,12 @@ public class RecdiaActivity2 extends FragmentActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_recdia_activity2);
-			
+		
+		//COLOR AL ACTIONBAR
+		ActionBar ab=getActionBar();
+		Drawable drw = getResources().getDrawable( R.drawable.b1 );
+		ab.setBackgroundDrawable(drw);
+		
 		Typeface kepf = Typeface.createFromAsset(getAssets(),"Kepler-Std-Black_26074.ttf");
     	TextView t10=(TextView) findViewById(R.id.textViewv8);
     	TextView t11=(TextView) findViewById(R.id.textViewv9);

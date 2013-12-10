@@ -9,9 +9,11 @@ import com.parse.ParseQuery;
 
 import android.net.Uri;
 import android.os.Bundle;
+import android.app.ActionBar;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
@@ -24,7 +26,12 @@ public class MuroActivity extends ListActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
-		
+		//COLOR AL ACTIONBAR
+		ActionBar ab=getActionBar();
+		Drawable drw = getResources().getDrawable( R.drawable.b1 );
+		ab.setBackgroundDrawable(drw);
+				
+				
 		//Creando lista de objetos CUSTOM
 		ArrayList<CustomObject> objects = new ArrayList<CustomObject>();
 		
