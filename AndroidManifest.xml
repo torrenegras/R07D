@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.xoaquin.r07d"
-    android:versionCode="25"
+    android:versionCode="26"
     android:versionName="2.9" >
 
     <uses-sdk
@@ -92,6 +92,10 @@
         <activity
             android:name="com.xoaquin.r07d.RecdiaActivity2"
             android:label="@string/title_activity_recdia_activity2" >
+        </activity>
+        <activity
+            android:name="com.xoaquin.r07d.RecdiaActivity3"
+            android:label="@string/title_activity_recdia_activity3" >
         </activity>
     </application>
 

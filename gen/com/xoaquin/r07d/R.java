@@ -130,7 +130,8 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int niveles=0x7f080008;
         public static final int recdia=0x7f080009;
         public static final int recdia_activity2=0x7f08000a;
-        public static final int reporte=0x7f08000b;
+        public static final int recdia_activity3=0x7f08000b;
+        public static final int reporte=0x7f08000c;
     }
     public static final class string {
         public static final int BYJ=0x7f060043;
@@ -220,6 +221,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int title_activity_niveles=0x7f06004d;
         public static final int title_activity_recdia=0x7f06000a;
         public static final int title_activity_recdia_activity2=0x7f060055;
+        public static final int title_activity_recdia_activity3=0x7f06005c;
         public static final int title_activity_reporte=0x7f060022;
         public static final int titlenivel=0x7f06004c;
         public static final int twitter1=0x7f060037;

@@ -93,5 +93,6 @@
     <string name="COMP">Compartir</string>
     <string name="mur">Muro R07D</string>
     <string name="env">ENVIAR</string>
+    <string name="title_activity_recdia_activity3">RecdiaActivity3</string>
 
 </resources>

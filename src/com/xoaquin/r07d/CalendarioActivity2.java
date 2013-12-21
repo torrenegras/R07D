@@ -48,6 +48,8 @@ public class CalendarioActivity2 extends Activity {
 		setContentView(R.layout.activity_calendario_activity2);
 		setTitle("CALENDARIO");
 		
+		AppRater.app_launched(this); //LLAMANDO DIALOG PARA RATE APP
+		
 		//COLOR AL ACTIONBAR
 		ActionBar ab=getActionBar();
 		Drawable drw = getResources().getDrawable( R.drawable.b1 );
