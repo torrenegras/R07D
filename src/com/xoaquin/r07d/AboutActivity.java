@@ -50,7 +50,7 @@ public class AboutActivity extends Activity {
 	       PackageManager manager = this.getPackageManager();
 	       try {
 			PackageInfo info = manager.getPackageInfo(this.getPackageName(), 0);
-			ab.setText("R07D Ver: "+info.versionName+" © 2013");
+			ab.setText("R07D Ver: "+(float)info.versionCode/10+" "+info.versionName);
 		} catch (NameNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
