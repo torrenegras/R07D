@@ -11,6 +11,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.FragmentActivity;
+import android.text.SpannableString;
+import android.text.style.UnderlineSpan;
 import android.view.Menu;
 import android.view.View;
 import android.widget.TextView;
@@ -18,7 +20,7 @@ import android.widget.Toast;
 
 public class RecdiaActivity2 extends FragmentActivity {
 	
-		
+	private TextView t10,t11;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -30,11 +32,14 @@ public class RecdiaActivity2 extends FragmentActivity {
 		ab.setBackgroundDrawable(drw);
 		
 		Typeface kepf = Typeface.createFromAsset(getAssets(),"Kepler-Std-Black_26074.ttf");
-    	TextView t10=(TextView) findViewById(R.id.textViewv8);
-    	TextView t11=(TextView) findViewById(R.id.textViewv9);
+    	t10=(TextView) findViewById(R.id.textViewv8);
+    	t11=(TextView) findViewById(R.id.textViewv9);
 		t10.setTypeface(kepf);
 		t11.setTypeface(kepf);
 		
+		SpannableString contentUnderline = new SpannableString("REGISTRO");
+	    contentUnderline.setSpan(new UnderlineSpan(), 0, contentUnderline.length(), 0);
+	    t10.setText(contentUnderline);
 			
 		//INFLANDO FRAGMENTO REGISTRO		
 		RegistroFragment rf=new RegistroFragment();
@@ -54,6 +59,12 @@ public class RecdiaActivity2 extends FragmentActivity {
 		
 		Toast.makeText(RecdiaActivity2.this, "Auto-Guardando...", Toast.LENGTH_LONG).show();
 	
+		SpannableString contentUnderline = new SpannableString("DEVOCIONAL");
+	    contentUnderline.setSpan(new UnderlineSpan(), 0, contentUnderline.length(), 0);
+	    t11.setText(contentUnderline);
+	    
+	    t10.setText("REGISTRO");
+		
 		
 		//INFLANDO FRAGMENTO DEVOCIONAL 
 		DevocionalFragment df=new DevocionalFragment();
@@ -120,6 +131,12 @@ public class RecdiaActivity2 extends FragmentActivity {
 	
 	public void onclickreg(View v) {
 		
+		SpannableString contentUnderline = new SpannableString("REGISTRO");
+	    contentUnderline.setSpan(new UnderlineSpan(), 0, contentUnderline.length(), 0);
+	    t10.setText(contentUnderline);
+	    
+	    t11.setText("DEVOCIONAL");
+		
 		//INFLANDO FRAGMENTO REGISTRO
 		RegistroFragment rf=new RegistroFragment();
 		
@@ -130,7 +147,16 @@ public class RecdiaActivity2 extends FragmentActivity {
 		
 	}
 	
-
+	
+	//CONTROL DE BOTON BACK PARA NAVEGACION E INTEGRACION WEBVIEW
+	@Override
+	public void onBackPressed() {
+	    DevocionalFragment f= new DevocionalFragment();
+	    f.onBackPressed();
+	    int ret=f.onBackPressed();
+	    if(ret==1){finish();}
+	}
+	
 	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {

@@ -1,0 +1,14 @@
+{
+    "applications": {
+        "R07D": {
+            "applicationId": "KfBj6ivkLAaLTXhssMZkjp0MTp5DWhezdpprtYqo", 
+            "masterKey": "eVZbWxRi61n9nqu2PBqnQtFitR7bhAIL5FoOQDHh"
+        }, 
+        "_default": {
+            "link": "R07D"
+        }
+    }, 
+    "global": {
+        "parseVersion": "1.2.12"
+    }
+}
