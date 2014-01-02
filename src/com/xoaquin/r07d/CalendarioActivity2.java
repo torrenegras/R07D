@@ -28,6 +28,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -49,6 +50,7 @@ public class CalendarioActivity2 extends Activity {
 		setTitle("CALENDARIO");
 		
 		AppRater.app_launched(this); //LLAMANDO DIALOG PARA RATE APP
+		
 		
 		//COLOR AL ACTIONBAR
 		ActionBar ab=getActionBar();
@@ -135,14 +137,28 @@ public class CalendarioActivity2 extends Activity {
         
       
            
-         //inflando gridview 
+         //INFLANDO GRIDVIEW
         final DisplayMetrics metrics = new DisplayMetrics();  //contruyendo el adaptador 
      	getWindowManager().getDefaultDisplay().getMetrics(metrics);
      	
      	MonthAdapter mgva= new MonthAdapter(this,mescal,aniocal,metrics ); 
+		
+     	//CALCULANDO Y SETTEANDO ALTURA TOTAL DEL GRIDVIEW
+     	//int numfilas= mgva.getCount()/7;
+		int gridviewtot =                        (metrics.heightPixels  		//tama–o de toda la pantalla segun dispositivo
+                															//menos:
+												- getBarHeight()             //espacio de actionbar segun densidad de pantalla 		      
+												- 50                         //espacio flechas de control calendario
+												- 40                         //espacio del boton REPORTES
+												 - ( (metrics.heightPixels/100)*16 ) //offset
+												) ; 
+		
+		LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) gv.getLayoutParams();
+		lp.height = gridviewtot;
+		gv.setLayoutParams(lp);
+		
 		gv.setAdapter(mgva);
-		
-		
+			
 		
 		//onclick gridview
 	
@@ -417,7 +433,28 @@ public String nomdia(int dayofweek){
 	return nomdia;
 }
 	
-
+private int getBarHeight() {
+    
+	DisplayMetrics metrics=new DisplayMetrics();
+	
+	switch (metrics.densityDpi) {
+    case DisplayMetrics.DENSITY_HIGH:
+            return 48;
+    case DisplayMetrics.DENSITY_MEDIUM:
+            return 32;
+    case DisplayMetrics.DENSITY_LOW:
+            return 24;
+    case DisplayMetrics.DENSITY_XHIGH:
+        return 66;
+    
+    
+    default:
+            return 48;
+   
+   
+    
+    }
+}
 
 	
 

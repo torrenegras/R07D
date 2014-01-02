@@ -87,13 +87,18 @@ class MonthAdapter extends BaseAdapter {
                         mDaysShown++;
                         mDaysNextMonth++;
                 }
-               
+               //SET ALTURAS TITULO Y DIAS EN GRIDVIEW
                 mTitleHeight = 30;
-                //int rows = (mDaysShown / 7);
-                //mDayHeight = (mDisplayMetrics.heightPixels - mTitleHeight
-                    //            - (rows * 3) - getBarHeight())/ (rows - 1);
-                //mDayHeight=mDayHeight-100;
-                mDayHeight=120;  //modificaion de separacion o altura de filas 
+                int rows = (mDaysShown / 7);
+                mDayHeight = (mDisplayMetrics.heightPixels //tama–o de toda la pantalla segun dispositivo
+                		                                   //menos:
+                		      - getBarHeight()             //espacio de actionbar segun densidad de pantalla 
+                		      - mTitleHeight               //espacio nombre dias semana              		      
+                		      - 50                         //espacio flechas de control calendario
+                		      - 40                         //espacio del boton REPORTES
+                		      - (mDisplayMetrics.heightPixels/100)*22 //  22% offsett                 
+                		       ) / (rows-1); //dividido el numero de filas sin contar fila de titulo 
+               
         }
        
         private int daysInMonth(int month) {
@@ -103,8 +108,7 @@ class MonthAdapter extends BaseAdapter {
                 return daysInMonth;
         }
        
-        @SuppressWarnings("unused")
-		private int getBarHeight() {
+        private int getBarHeight() {
                 switch (mDisplayMetrics.densityDpi) {
                 case DisplayMetrics.DENSITY_HIGH:
                         return 48;
@@ -112,8 +116,15 @@ class MonthAdapter extends BaseAdapter {
                         return 32;
                 case DisplayMetrics.DENSITY_LOW:
                         return 24;
+                case DisplayMetrics.DENSITY_XHIGH:
+                    return 66;
+                
+                
                 default:
                         return 48;
+               
+               
+                
                 }
         }
        
