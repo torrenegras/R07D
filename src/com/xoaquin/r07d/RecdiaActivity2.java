@@ -85,16 +85,16 @@ public class RecdiaActivity2 extends FragmentActivity {
     	    	AlertDialog.Builder alertDialog2 = new AlertDialog.Builder(RecdiaActivity2.this);
 		 
 		// Setting Dialog Title
-		alertDialog2.setTitle("En Construcción...");
+		alertDialog2.setTitle("En Construcci\u00F3n...");
 		 
 		// Setting Dialog Message
-		alertDialog2.setMessage("Conoces a alguien que pueda aportar un devocional diario para esta sección?");
+		alertDialog2.setMessage("Conoces a alguien que pueda aportar un devocional diario para esta secci\u00F3n?");
 		 
 		// Setting Icon to Dialog
 		alertDialog2.setIcon(R.drawable.uc);
 		 
 		// Setting Positive "Yes" Btn
-		alertDialog2.setPositiveButton("Escríbeme",
+		alertDialog2.setPositiveButton("Escr\u00EDbeme",
 		        new DialogInterface.OnClickListener() {
 		            public void onClick(DialogInterface dialog, int which) {
 		            	 

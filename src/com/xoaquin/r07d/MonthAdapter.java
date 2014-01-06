@@ -12,7 +12,8 @@ import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
- 
+import com.parse.ParseUser;
+
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -221,7 +222,7 @@ class MonthAdapter extends BaseAdapter {
                                                   
                        
                             	   
-           	        		 //snippet coloreado de rojo dias sin hacer R07 
+           	         //coloreado de rojo dias sin hacer R07 
                                   Calendar now = Calendar.getInstance();
                                   int hoy = now.get(Calendar.DAY_OF_MONTH);
                                   int mesrojo=now.get(Calendar.MONTH);
@@ -233,13 +234,15 @@ class MonthAdapter extends BaseAdapter {
            	        	      
                       
                     
-                        
+                      //coloreado de verde dias OK 
                         String nmcomp=String.valueOf(mMonth+1);
                         if((mMonth+1)<10){nmcomp="0"+nmcomp;}
                         
                         String nycomp=String.valueOf(mYear);
                         
-                        String nombretablausuario=MainActivity.correoglobal;
+                        ParseUser cu = ParseUser.getCurrentUser();
+                       
+                        String nombretablausuario=cu.getEmail();
                  		nombretablausuario=nombretablausuario.replaceAll("\\.", "");
                  		nombretablausuario=nombretablausuario.replaceAll("@", "");
                  		
@@ -259,35 +262,25 @@ class MonthAdapter extends BaseAdapter {
             	        	   if(objects.get(i).getString("lbdbp").length()>0)   //si se ha hecho lectura biblica
             	        	   
             	        	   {
-            	        	   
             	        	               	        		   
             	        	   String obj=objects.get(i).getString("diadbp");
             	        	  
             	        	   if(Integer.valueOf(obj)<10){obj=obj.replaceAll("0", "");} //quitandole los 0's iniciales a dias PARSE
             	        	   
             	        	   if(obj.equals(view.getText().toString()) ){view.setTextColor(Color.rgb(47, 143, 54));}
-            	        	   
+            	       	   
             	        	   
             	        	   }
-            	        		   
             	        	   
             	        	   i++;
             	           }
             	            
             	            }
 
-							
             	        });
    
-               	    
-            	       
                             }
-                
-                            
-                            
-                            
-                            
-                               
+           
               
                 } else {
                         // next month

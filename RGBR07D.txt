@@ -1,3 +1,11 @@
 141 102 95  letra
 
 255 226 216   fondo
+
+Java unicode
+
+‡ \u00E1
+Ž \u00E9
+’ \u00ED
+— \u00F3
+œ \u00FA

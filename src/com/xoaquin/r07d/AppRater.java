@@ -66,7 +66,7 @@ public class AppRater {
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
         params.setMargins(0, 0, 0, 30);
         EditText tv= new EditText (mContext);
-        tv.setText("Si te gusta " + APP_TITLE + ", por favor tomate un segundo para calificarla. Gracias por el apoyo!\n\nCompártela!");
+        tv.setText("Si te gusta " + APP_TITLE + ", por favor tomate un segundo para calificarla. Gracias por el apoyo!\n\nComp\u00E1rtela!");
         tv.setTypeface(kepf);
         tv.setLayoutParams(params);
         tv.setTextColor(Color.rgb(141, 102, 95));
