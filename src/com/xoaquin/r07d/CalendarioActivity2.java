@@ -17,8 +17,10 @@ import com.parse.ParseUser;
 import com.parse.PushService;
 
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.app.ActionBar;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
@@ -53,7 +55,6 @@ public class CalendarioActivity2 extends Activity {
 	
 		super.onCreate(savedInstanceState);
 		
-		
 		setContentView(R.layout.activity_calendario_activity2);
 		setTitle("CALENDARIO");
 	    AppRater.app_launched(this); //LLAMANDO DIALOG PARA RATE APP
@@ -69,7 +70,6 @@ public class CalendarioActivity2 extends Activity {
 		PushService.subscribe(this, "todos", MainActivity.class);
 		installation = ParseInstallation.getCurrentInstallation();
 		
-		
 		//trayendo correo de la anterior actividad usando intent y no variable global.. manera correcta. 
 		Bundle extras = getIntent().getExtras();
 		if (extras != null) {
@@ -78,7 +78,6 @@ public class CalendarioActivity2 extends Activity {
 			nombretablausuario=nombretablausuario.replaceAll("@", "");
 	 		PushService.subscribe(this, nombretablausuario,MainActivity.class); //suscripcion a canal dedicado para cada instalacion.
 		}
-		
 					
 		//cargando variables
 		tvmes = (TextView) findViewById(R.id.textViewt);
@@ -87,16 +86,13 @@ public class CalendarioActivity2 extends Activity {
 		gv= (GridView) findViewById(R.id.gridView1);
 		pb=(ProgressBar) findViewById(R.id.progressBar1);
 		Typeface kepf = Typeface.createFromAsset(getAssets(),"Kepler-Std-Black_26074.ttf");
-    	
-	
-	        	 
+    		        	 
 		//iniciando calendario en fecha de hoy
 		 Calendar now = Calendar.getInstance(); //calendario, trayendo fecha de hoy
          diacal = now.get(Calendar.DAY_OF_MONTH);
          mescal=now.get(Calendar.MONTH);
          aniocal=now.get(Calendar.YEAR);
 
-         
        //inicializando variables 
  		String nmes= nombremes(mescal);	
  		tvmes.setText(nmes);
@@ -105,7 +101,6 @@ public class CalendarioActivity2 extends Activity {
  		tvanio.setTypeface(kepf);
  		brep.setTypeface(kepf);
  		
-         
          
          //dia fin de mes para activar push de envio de reporte
          Calendar finmes= Calendar.getInstance();
@@ -119,54 +114,51 @@ public class CalendarioActivity2 extends Activity {
     	 if(Integer.valueOf(m)<10){
     		 m="0"+m;
     	 } 
-         
-        //push progreso fin de mes informe de nivel
+        
+    	 
+ //push progreso fin de mes informe de nivel
          if(diacal==diafm||diacal==diafm-1||diacal==diafm-2||diacal==diafm-3){
         	
-        	String chk=installation.getString("mesaniochk"); 
+             	String chk=installation.getString("mesaniochk"); 
         	
         	  	if(chk==null){// en caso de ser la primera vez para el usuario que se lanza un mensaje push de este tipo
-        		
-        	  	   	pushnivel();  
-        		
+      
+        	  	   	pushnivel();  	
         	}else{
-        	
         	
         	if(chk.equals(m+Integer.toString(aniocal))){ }//nada ya se lanzo en este mes el push message  
         		else{
         	 
                      pushnivel();
  	              
-        	        }//CIERRE ELSE para check de que ya este mes habia lanzado una vez el mensaje push
- 	       
-               }//CIERRE ELSE, por si no es la primera vez que en la historia que se lanza el mensaje push
+        	        }
+               }
 
-            } //CIERRE IF dias finales del mes lance mensaje push      
+            }      
         
-        
-         
-         @SuppressWarnings("deprecation")
-			final Object data = getLastNonConfigurationInstance();
+                
+     
+   //MANEJO CAMBIO DE ORIENTACION
+            @SuppressWarnings("deprecation")
+			final Object data = getLastNonConfigurationInstance();  //variable de chequeo de cambio de orientacion
 
-	         if (data == null) { //Solo entra en la primera entrada al oncreate()
-	        	 
+	         if (data == null) { //Solo entra en la primera entrada al oncreate() 
       
         	 dcomp=listadiascompletados(mescal,aniocal); //Recuperando desde PARSE un listado de dias completados, poniendo en arreglo local solo pasa en Oncreate()
-        	 dcompp=dcomp;
-        	 
- 	    	 inflandogridview(dcomp,mescal,aniocal);
+        	 dcompp=dcomp; //asignando arreglo persistente para cada vez que hay un cambio
+ 	    	 inflandogridview(dcomp,mescal,aniocal); //funcion para llamar adaptador e inflar gridview con datos
         
          
-         }else{ //Entra cuando hay cambio en configuracion, rotacion, etc..
+             }else{ //Entra cuando hay cambio en configuracion, rotacion, etc..
         
-        	 mescal=mescalt;
-        	 aniocal=aniocalt;
-        	 inflandogridview(dcompp,mescalt,aniocalt);
+        	 mescal=mescalt; //asignacion de variables persistentes al cambio el mes en el que estaba cuando se efectuo el cambio
+        	 aniocal=aniocalt; //anio en que estaba cuando se hizo cambio
+        	 inflandogridview(dcompp,mescalt,aniocalt); //inflando con ultimos datos que habian al hacer cambio
       	 
-         }
+                 }
 	
- 	    //onclick gridview
-	
+ 	 
+ //ONCLICK GRIDVIEW
 		gv.setOnItemClickListener(new OnItemClickListener() {
 			public void onItemClick(AdapterView<?> parent, View v,
 				int position, long id) {
@@ -175,197 +167,72 @@ public class CalendarioActivity2 extends Activity {
 			     dia=diatv.getText().toString();
 			     diatmp=Integer.valueOf(dia);
 			     
-			     if(diatmp<10){
-		    		 dia="0"+dia;
-		    	 }
-		    	 
-			     
+			     if(diatmp<10){dia="0"+dia;}
+		    	 			     
 		    	 mes=Integer.toString(mescal+1);
 		    	 anio=Integer.toString(aniocal);
 		    	 
-		    	 if(Integer.valueOf(mes)<10){
-		    		 mes="0"+mes;
-		    	 }
+		    	 if(Integer.valueOf(mes)<10){ mes="0"+mes; }
 		    	 
-		    	 if(aniocal<10){
-		    		 dia="0"+dia;
-		    	 }
+		    	 if(aniocal<10){ dia="0"+dia; }
 				
 		    	 fecha=dia+"-"+mes+"-"+anio;
-		    	
-		    	 
+		    			    	 
 		    	 Calendar calendar = new GregorianCalendar(aniocal,mescal,diatmp); // Note that Month value is 0-based. e.g., 0 for January.
 		    	 int dayofweek = calendar.get(Calendar.DAY_OF_WEEK);
 		    	 
-		    	
 		    	 nombredia=nomdia(dayofweek);
-		    	 
 		    			    	 
 		    	 Intent i = new Intent(getApplicationContext(), RecdiaActivity2.class);
              	 i.putExtra("correog",nombretablausuario);
              	 i.putExtra("fca",fecha);
                	i.putExtra("ndca",nombredia);
             	i.putExtra("dca",dia);
-            	i.putExtra("mca",mes);
-            	i.putExtra("aca",anio);
-            	
+               	i.putExtra("mca",mes);
+             	i.putExtra("aca",anio);
              	 startActivity(new Intent(i));  
-		  
 			}
 		});
-	   
+	   	
+} 
 	
-	}// FIN ONCREATE 
+
 	
+ //ONRESUME() de actividad
+		@Override
+		public void onResume()
+		    {  
+		    super.onResume();
+		   
+		    pb=(ProgressBar) findViewById(R.id.progressBar1);
+			pb.setVisibility(View.INVISIBLE);
+			
+			 dcomp=listadiascompletados(mescal,aniocal);
+        	 dcompp=dcomp; 
+ 	    	
+        	 inflandogridview(dcomp,mescal,aniocal); 
+
+		     }
+		
 	
-	
-	//Verificacion de cambio en configuracion...  rotacion, etc...  
+//FUNCION LLAMADA AL EFECTUARSE CAMBIO EN CONFIGURACION, ROTACION, ETC..  
 	@Override
 	public Object onRetainNonConfigurationInstance() {
 		
-		mescalt=mescal;
-		aniocalt=aniocal;
-		
-		
+		mescalt=mescal;  //mes que hay cuando se hace cambio , persiste
+		aniocalt=aniocal; //anio que hay cuando se hace cambio, persiste
 		
 		return nombretablausuario;   //solo relleno de Retorno, no se usa...
 	    
 	}
-	
-	
-	
-	
-	//FUNCION MENSAJES PUSH NIVELES
-public void pushnivel(){
-			 	 
-		ParseQuery<ParseObject> query = ParseQuery.getQuery(nombretablausuario); 
-  		query.whereEqualTo("mesdbp", m);
-	    query.whereEqualTo("aniodbp", Integer.toString(aniocal)); 
-    	
-	       try {
-		List<ParseObject> objects= query.find();
-		
-		if(objects.size()>=5 && objects.size()<15){
-			ParsePush push = new ParsePush();
-            push.setChannel(nombretablausuario);
-       	    push.setMessage("Puntaje Mes: +5 PUNTOS (R07D Principiante)");
-       	    push.sendInBackground();
-       	    installation.put("mesaniochk",m+Integer.toString(aniocal));
-         	installation.saveInBackground();	
-         	
-         	
-         	try {
-        		 JSONObject data = new JSONObject("{\"action\": \"com.xoaquin.r07d.NIVEL\",\"mensaje\": \"Usted ha hecho un buen esfuerzo, siga avanzando! Bendiciones! (R07D Nivel Principiante) +5 PUNTOS \",\"puntos\": \"5\"    }");
-				
-        		ParsePush pushj = new ParsePush();
- 	            pushj.setChannel(nombretablausuario);
- 	       	    pushj.setData(data);
- 	       	    pushj.sendInBackground();	 
-				
-        	 } catch (JSONException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-         
-         	
-		}
-		
-		if(objects.size()>=15 && objects.size()<24){
-		ParsePush push = new ParsePush();
-        push.setChannel(nombretablausuario);
-   	    push.setMessage("Puntaje Mes: +15 PUNTOS (R07D Intermedio)");
-   	    push.sendInBackground();
-   	    installation.put("mesaniochk",m+Integer.toString(aniocal));
-  	    installation.saveInBackground();	
-  	    
-  	    
-  	  try {
- 		 JSONObject data = new JSONObject("{\"action\": \"com.xoaquin.r07d.NIVEL\",\"mensaje\": \"Usted ha hecho un buen trabajo, siga avanzando! Bendiciones! (R07D Nivel Intermedio) +15 PUNTOS \",\"puntos\": \"15\"    }");
-			
- 		ParsePush pushj = new ParsePush();
-            pushj.setChannel(nombretablausuario);
-       	    pushj.setData(data);
-       	    pushj.sendInBackground();	 
-			
- 	 } catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-  
-		}
-		
-		if(objects.size()>=24 && objects.size()<=diafm){
-			ParsePush push = new ParsePush();
-            push.setChannel(nombretablausuario);
-       	    push.setMessage("Puntaje Mes: +25 PUNTOS (R07D Avanzado)");
-       	    push.sendInBackground();
-            installation.put("mesaniochk",m+Integer.toString(aniocal));
-         	installation.saveInBackground();	
-         	
-         	
-         	
-         	try {
-	        		 JSONObject data = new JSONObject("{\"action\": \"com.xoaquin.r07d.NIVEL\",\"mensaje\": \"Usted ha hecho un excelente trabajo, siga avanzando! Bendiciones! (R07D Nivel Avanzado) +25 PUNTOS \",\"puntos\": \"25\"    }");
-					
-	        		ParsePush pushj = new ParsePush();
-	 	            pushj.setChannel(nombretablausuario);
-	 	       	    pushj.setData(data);
-	 	       	    pushj.sendInBackground();	 
-					
-	        	 } catch (JSONException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-         	
-         	
-			}
-   	 
-	} catch (ParseException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}
-	       
-		
-}
-
 
 	
-//onresume() de actividad reinflate
-	@Override
-	public void onResume()
-	    {  // After a pause OR at startup
-	    super.onResume();
-	    pb=(ProgressBar) findViewById(R.id.progressBar1);
-		pb.setVisibility(View.INVISIBLE);
-
-		/*
-	  //inflando gridview 
-        final DisplayMetrics metrics = new DisplayMetrics();  //contruyendo el adaptador 
-     	getWindowManager().getDefaultDisplay().getMetrics(metrics);
-     	
-     	MonthAdapter mgva= new MonthAdapter(this,mescal,aniocal,metrics ); 
-		gv.setAdapter(mgva);
-		*/
-	     }
-
-
-//onclick para boton reportes
-	
-public void onclickgenrepo(View v) { //boton inicio actividad MENU de generacion reportes
-		
-		
-	 Intent i = new Intent(getApplicationContext(), ReporteActivity.class);
- 	 i.putExtra("correog",nombretablausuario);//pasando la variable correo a la siguiente actividad
+//FLECHA DERECHA
+  public void clickfleder(View v) { //boton flecha derecha calendario
 	 
- 	 startActivity(new Intent(i));  //llamando la actividad de registro acorde a fecha seleccionada
-	}
-
-
-
-	//flecha derecha
-	
-public void clickfleder(View v) { //boton flecha derecha calendario
-	pb.setVisibility(View.VISIBLE);
+	  Vibrator vib = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+	  // Vibrate for x milliseconds
+	   vib.vibrate(100);
 	
 	if(mescal==11){
 		aniocal++;
@@ -382,23 +249,18 @@ public void clickfleder(View v) { //boton flecha derecha calendario
 	dcompfleder=listadiascompletados(mescal,aniocal);
 	dcompp=dcompfleder;
 	
-	final DisplayMetrics metrics = new DisplayMetrics();  //contruyendo el adaptador 
- 	getWindowManager().getDefaultDisplay().getMetrics(metrics);
- 	
- 	mgva= new MonthAdapter2(this,mescal,aniocal,metrics,dcompfleder); 
-	gv.setAdapter(mgva);
-	
-	
-	pb.setVisibility(View.GONE);
+	inflandogridview(dcompfleder,mescal,aniocal); 
 	
 	}
 	
 	
-//flecha izquierda
-
-public void clickfleizq(View v) { //boton flecha derecha calendario
-	pb.setVisibility(View.VISIBLE);
+//FLECHA IZQUIERDA
+  public void clickfleizq(View v) { //boton flecha derecha calendario
 	
+	  Vibrator vib = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+	  // Vibrate for x milliseconds
+	   vib.vibrate(100);
+	   
 	if(mescal==0){
 		aniocal--;
 		tvanio.setText(String.valueOf(aniocal));
@@ -414,19 +276,179 @@ public void clickfleizq(View v) { //boton flecha derecha calendario
 	dcompfleizq=listadiascompletados(mescal,aniocal);
     dcompp=dcompfleizq;
 	
-	final DisplayMetrics metrics = new DisplayMetrics();  //contruyendo el adaptador 
- 	getWindowManager().getDefaultDisplay().getMetrics(metrics);
- 	
- 	mgva= new MonthAdapter2(this,mescal,aniocal,metrics,dcompfleizq); 
-	gv.setAdapter(mgva);
-	
-	pb.setVisibility(View.GONE);
+    inflandogridview(dcompfleizq,mescal,aniocal); 
 	
 	}
+		
+	
+//ONCLICK REPORTES
+    public void onclickgenrepo(View v) { //boton inicio actividad MENU de generacion reportes	
+    	
+	 Intent i = new Intent(getApplicationContext(), ReporteActivity.class);
+	 i.putExtra("correog",nombretablausuario);//pasando la variable correo a la siguiente actividad
+	 
+	 startActivity(new Intent(i));  //llamando la actividad de registro acorde a fecha seleccionada
+	}
+
+
+//FUNCION MENSAJES PUSH NIVELES
+     public void pushnivel(){
+			 	 
+		ParseQuery<ParseObject> query = ParseQuery.getQuery(nombretablausuario); 
+  		query.whereEqualTo("mesdbp", m);
+	    query.whereEqualTo("aniodbp", Integer.toString(aniocal)); 
+    	
+	       try {
+		List<ParseObject> objects= query.find();
+		
+		if(objects.size()>=5 && objects.size()<15){
+			ParsePush push = new ParsePush();
+            push.setChannel(nombretablausuario);
+       	    push.setMessage("Puntaje Mes: +5 PUNTOS (R07D Principiante)");
+       	    push.sendInBackground();
+       	    installation.put("mesaniochk",m+Integer.toString(aniocal));
+         	installation.saveInBackground();	
+         	
+         	try {
+        		 JSONObject data = new JSONObject("{\"action\": \"com.xoaquin.r07d.NIVEL\",\"mensaje\": \"Usted ha hecho un buen esfuerzo, siga avanzando! Bendiciones! (R07D Nivel Principiante) +5 PUNTOS \",\"puntos\": \"5\"    }");
+				
+        		ParsePush pushj = new ParsePush();
+ 	            pushj.setChannel(nombretablausuario);
+ 	       	    pushj.setData(data);
+ 	       	    pushj.sendInBackground();	 
+				
+        	 } catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} 	
+		}
+		
+		if(objects.size()>=15 && objects.size()<24){
+		ParsePush push = new ParsePush();
+        push.setChannel(nombretablausuario);
+   	    push.setMessage("Puntaje Mes: +15 PUNTOS (R07D Intermedio)");
+   	    push.sendInBackground();
+   	    installation.put("mesaniochk",m+Integer.toString(aniocal));
+  	    installation.saveInBackground();	
+  	    
+  	  try {
+ 		 JSONObject data = new JSONObject("{\"action\": \"com.xoaquin.r07d.NIVEL\",\"mensaje\": \"Usted ha hecho un buen trabajo, siga avanzando! Bendiciones! (R07D Nivel Intermedio) +15 PUNTOS \",\"puntos\": \"15\"    }");
+			
+ 		    ParsePush pushj = new ParsePush();
+            pushj.setChannel(nombretablausuario);
+       	    pushj.setData(data);
+       	    pushj.sendInBackground();	 
+			
+ 	 } catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		}
+		
+		if(objects.size()>=24 && objects.size()<=diafm){
+			ParsePush push = new ParsePush();
+            push.setChannel(nombretablausuario);
+       	    push.setMessage("Puntaje Mes: +25 PUNTOS (R07D Avanzado)");
+       	    push.sendInBackground();
+            installation.put("mesaniochk",m+Integer.toString(aniocal));
+         	installation.saveInBackground();	
+         	
+         	try {
+	        		 JSONObject data = new JSONObject("{\"action\": \"com.xoaquin.r07d.NIVEL\",\"mensaje\": \"Usted ha hecho un excelente trabajo, siga avanzando! Bendiciones! (R07D Nivel Avanzado) +25 PUNTOS \",\"puntos\": \"25\"    }");
+					
+	        		ParsePush pushj = new ParsePush();
+	 	            pushj.setChannel(nombretablausuario);
+	 	       	    pushj.setData(data);
+	 	       	    pushj.sendInBackground();	 
+					
+	        	 } catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+	} catch (ParseException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	
+}
+
+
+
+//FUNCION LLAMADO PARSE PARA OBTENER LISTA DE DIAS COMPLETADOS EN ESE MES/AÑO
+    public String[] listadiascompletados(int mescalf,int aniocalf)
+     {
+	  String[] res= new String[31];
+	
+	 String nmcomp=String.valueOf(mescalf+1);
+     if((mescalf+1)<10){nmcomp="0"+nmcomp;}
+     String nycomp=String.valueOf(aniocalf);
+     
+     ParseUser cu = ParseUser.getCurrentUser();
+    
+     String nombretablausuario=cu.getEmail();
+     nombretablausuario=nombretablausuario.replaceAll("\\.", "");
+	 nombretablausuario=nombretablausuario.replaceAll("@", "");
+		
+	ParseQuery<ParseObject> query = ParseQuery.getQuery(nombretablausuario); //query para buscar records de ese mes y año en orden ascendente
+	 query.whereEqualTo("mesdbp", nmcomp);
+     query.whereEqualTo("aniodbp", nycomp);
+     query.orderByAscending("diadbp");
+     
+    try {
+	List<ParseObject> objects=query.find();
+    int i=0;
+       while(i<objects.size()){
+    	   if(objects.get(i).getString("lbdbp").length()>0)   //si se ha hecho lectura biblica
+    	   {            	        		   
+    	   String obj=objects.get(i).getString("diadbp");
+    	   if(Integer.valueOf(obj)<10){obj=obj.replaceAll("0", "");} //quitandole los 0's iniciales a dias PARSE
+    	   res[i]=obj;   
+    	   }
+    	   i++;
+       }
+	
+               } catch (ParseException e1 ) {
+              	// TODO Auto-generated catch block
+	          e1.printStackTrace();
+          }      
+           return res;
+           }
+
+
+
+//FUNCION INFLADO DE GRIDVIEW
+public void inflandogridview(String[] dcompl,int mescall,int aniocall){
+	
+	String nmes= nombremes(mescall);	
+	tvmes.setText(nmes);
+	tvanio.setText(String.valueOf(aniocall));
+	
+	//INFLANDO GRIDVIEW
+    final DisplayMetrics metrics = new DisplayMetrics();  //contruyendo el adaptador 
+ 	getWindowManager().getDefaultDisplay().getMetrics(metrics);
+ 
+ 	mgva= new MonthAdapter2(this,mescall,aniocall,metrics,dcompl);  
+ 	
+ 	//CALCULANDO Y SETTEANDO ALTURA TOTAL DEL GRIDVIEW
+ 	
+	int gridviewtot =                        (metrics.heightPixels  		//tama–o de toda la pantalla segun dispositivo
+            															//menos:
+											- getBarHeight()             //espacio de actionbar segun densidad de pantalla 		      
+											- 50                         //espacio flechas de control calendario
+											- 40                         //espacio del boton REPORTES
+											 - ( (metrics.heightPixels/100)*16 ) //offset
+											) ; 
+	
+	LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) gv.getLayoutParams();
+	lp.height = gridviewtot;
+	gv.setLayoutParams(lp);
+	gv.setAdapter(mgva);
+}
 	
 
-	//funcion para obtener nombre del mes
 
+//FUNCION OBTENER NOMBRE DE MES
 public String nombremes(int nummes){
 		
 		String nommes="";
@@ -448,8 +470,7 @@ public String nombremes(int nummes){
 	}
 
 
-//funcion obtener nombre de dia
-
+//FUNCION OBTENER NOMBRE DE DIA
 public String nomdia(int dayofweek){
 	
 	String nomdia="";
@@ -461,122 +482,35 @@ public String nomdia(int dayofweek){
 	 if(dayofweek==5){nomdia="Jueves";}
 	 if(dayofweek==6){nomdia="Viernes";}
 	 if(dayofweek==7){nomdia="Sabado";}
-	
-	
-	
+
 	return nomdia;
 }
 	
+
+//FUNCION OBTENER ALTURA BARRA DE PANTALLA
 private int getBarHeight() {
-    
+  
 	DisplayMetrics metrics=new DisplayMetrics();
 	
 	switch (metrics.densityDpi) {
-    case DisplayMetrics.DENSITY_HIGH:
-            return 48;
-    case DisplayMetrics.DENSITY_MEDIUM:
-            return 32;
-    case DisplayMetrics.DENSITY_LOW:
-            return 24;
-    case DisplayMetrics.DENSITY_XHIGH:
-        return 66;
-    
-    
-    default:
-            return 48;
-   
-   
-    
-    }
-}
-
-
-
-public String[] listadiascompletados(int mescalf,int aniocalf)
-{
-	String[] res= new String[31];
-	
-	 String nmcomp=String.valueOf(mescalf+1);
-     if((mescalf+1)<10){nmcomp="0"+nmcomp;}
-     String nycomp=String.valueOf(aniocalf);
-     
-     ParseUser cu = ParseUser.getCurrentUser();
-    
-     String nombretablausuario=cu.getEmail();
-     nombretablausuario=nombretablausuario.replaceAll("\\.", "");
-	 nombretablausuario=nombretablausuario.replaceAll("@", "");
-		
-	ParseQuery<ParseObject> query = ParseQuery.getQuery(nombretablausuario); //query para buscar records de ese mes y año en orden ascendente
-		
-	 query.whereEqualTo("mesdbp", nmcomp);
-     query.whereEqualTo("aniodbp", nycomp);
-     query.orderByAscending("diadbp");
-     
-     
-    try {
-	List<ParseObject> objects=query.find();
-	
-    int i=0;
-       
-       while(i<objects.size()){
-    	   
-    	   if(objects.get(i).getString("lbdbp").length()>0)   //si se ha hecho lectura biblica
-    	   
-    	   {
-    	               	        		   
-    	   String obj=objects.get(i).getString("diadbp");
-    	  
-    	   if(Integer.valueOf(obj)<10){obj=obj.replaceAll("0", "");} //quitandole los 0's iniciales a dias PARSE
-    	   
-    	   res[i]=obj;
-    	 
-   	   
-    	   }
-    	   i++;
-       }
-	
-	
-	
-} catch (ParseException e1) {
-	// TODO Auto-generated catch block
-	e1.printStackTrace();
-}
-      
-
-return res;
-}
-
-
-public void inflandogridview(String[] dcompl,int mescall,int aniocall){
-	
-	String nmes= nombremes(mescall);	
-	tvmes.setText(nmes);
-	tvanio.setText(String.valueOf(aniocall));
-	
-	//INFLANDO GRIDVIEW
-    final DisplayMetrics metrics = new DisplayMetrics();  //contruyendo el adaptador 
- 	getWindowManager().getDefaultDisplay().getMetrics(metrics);
+  case DisplayMetrics.DENSITY_HIGH:
+          return 48;
+  case DisplayMetrics.DENSITY_MEDIUM:
+          return 32;
+  case DisplayMetrics.DENSITY_LOW:
+          return 24;
+  case DisplayMetrics.DENSITY_XHIGH:
+      return 66;
  
- 	mgva= new MonthAdapter2(this,mescall,aniocall,metrics,dcompl);  
- 	
- 	//CALCULANDO Y SETTEANDO ALTURA TOTAL DEL GRIDVIEW
- 	//int numfilas= mgva.getCount()/7;
-	int gridviewtot =                        (metrics.heightPixels  		//tama–o de toda la pantalla segun dispositivo
-            															//menos:
-											- getBarHeight()             //espacio de actionbar segun densidad de pantalla 		      
-											- 50                         //espacio flechas de control calendario
-											- 40                         //espacio del boton REPORTES
-											 - ( (metrics.heightPixels/100)*16 ) //offset
-											) ; 
-	
-	LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) gv.getLayoutParams();
-	lp.height = gridviewtot;
-	gv.setLayoutParams(lp);
-	gv.setAdapter(mgva);
+  default:
+          return 48;
+  }
 }
-	
 
-//inflado del menu
+
+
+
+//INFLADO DE MENU
 	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -586,7 +520,9 @@ public void inflandogridview(String[] dcompl,int mescall,int aniocall){
 		return true;
 	}
 	
+
 	
+//TRIGGERS MENU	
 	
 	public boolean onOptionsItemSelected(MenuItem item) {
 	    //respond to menu item selection

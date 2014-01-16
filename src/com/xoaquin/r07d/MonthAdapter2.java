@@ -49,7 +49,6 @@ class MonthAdapter2 extends BaseAdapter {
        
         
         //LLENADO DE ELEMENTOS EN LISTA PARA INFLAR EL GRIDVIEW
-        
         private void populateMonth() {
                 mItems = new ArrayList<String>();              
                 for (String day : mDays) {
@@ -81,7 +80,8 @@ class MonthAdapter2 extends BaseAdapter {
                         mDaysShown++;
                         mDaysNextMonth++;
                 }
-               //SET ALTURAS TITULO Y DIAS EN GRIDVIEW
+               
+                //SET ALTURAS TITULO Y DIAS EN GRIDVIEW
                 mTitleHeight = 30;
                 int rows = (mDaysShown / 7);
                 mDayHeight = (mDisplayMetrics.heightPixels //tama–o de toda la pantalla segun dispositivo
@@ -95,6 +95,7 @@ class MonthAdapter2 extends BaseAdapter {
                
         }
        
+        
         private int daysInMonth(int month) {
                 int daysInMonth = mDaysInMonth[month];
                 if (month == 1 && mCalendar.isLeapYear(mYear))
@@ -102,6 +103,7 @@ class MonthAdapter2 extends BaseAdapter {
                 return daysInMonth;
         }
        
+        
         private int getBarHeight() {
                 switch (mDisplayMetrics.densityDpi) {
                 case DisplayMetrics.DENSITY_HIGH:
@@ -112,21 +114,14 @@ class MonthAdapter2 extends BaseAdapter {
                         return 24;
                 case DisplayMetrics.DENSITY_XHIGH:
                     return 66;
-                
-                
+                   
                 default:
                         return 48;
-               
-               
                 
                 }
         }
        
-        /**
-         * For week starting Monday
-         * @param day from Calendar.DAY_OF_WEEK
-         * @return day week starting Monday
-         */
+       
         private int getDay(int day) {
                 switch (day) {
                 case Calendar.MONDAY:
@@ -150,7 +145,6 @@ class MonthAdapter2 extends BaseAdapter {
        
         
         //funcion para verificar si fecha es HOY
-        
         private boolean isToday(int day, int month, int year) {
                 if (mCalendarToday.get(Calendar.MONTH) == month
                                 && mCalendarToday.get(Calendar.YEAR) == year
@@ -163,7 +157,6 @@ class MonthAdapter2 extends BaseAdapter {
         
         
         //funcion principal para cambios en layout de gridview
-        
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
                 final TextView view = new TextView(mContext);
@@ -203,10 +196,8 @@ class MonthAdapter2 extends BaseAdapter {
                                 view.setBackgroundColor(Color.rgb(141, 102, 95));
                         }
                     
-                      
-                        
+                         
                         //Color Rojo y Verde con chequeo de base de datos
-                      
                         ConnectivityManager connMgr = (ConnectivityManager) 
                                 view.getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
                             NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
@@ -215,7 +206,7 @@ class MonthAdapter2 extends BaseAdapter {
                                                   
                     
                             	   
-           	         //coloreado de rojo dias sin hacer R07 
+           	         //coloreado BASE de rojo dias sin hacer R07 
                                   Calendar now = Calendar.getInstance();
                                   int hoy = now.get(Calendar.DAY_OF_MONTH);
                                   int mesrojo=now.get(Calendar.MONTH);
@@ -225,31 +216,20 @@ class MonthAdapter2 extends BaseAdapter {
                                   if(mMonth==mesrojo && mYear==aniorojo && Integer.valueOf(view.getText().toString())<=hoy){view.setTextColor(Color.RED);}
                                   
            	        	      
-                      
-                   
-                      //coloreado de verde dias OK 
-                  
+                      //coloreado de verde dias OK con lista de dias completados con lectura biblica al menos 
             	           int i=0;
-            	           
-            	           while(i<dcompl.length){
-            	        	        	        		   
+            	           while(i<dcompl.length){ 	        		   
             	        	   String obj=dcompl[i];
-            	        	  
-            	        	   
-            	        	   if(obj==null){}else{
-            	        	   
+            	        	
+            	        	   if(obj==null){}else{   
             	        	   if(obj.equals(view.getText().toString()) ){view.setTextColor(Color.rgb(47, 143, 54));}
-            	        	 
-            	        	   }
-            	        	   
+            	        	   }  
             	        	   i++;
             	           }
-            	     
                             
-                            
-                            
-                            }//IF network check
+                }//IF network check
            
+                            
               
                 } else {
                         // next month
@@ -264,17 +244,20 @@ class MonthAdapter2 extends BaseAdapter {
        
       
 
-		@Override
+		
+        @Override
         public int getCount() {
                 return mItems.size();
         }
  
-        @Override
+       
+		@Override
         public Object getItem(int position) {
                 return mItems.get(position);
         }
  
-        @Override
+        
+		@Override
         public long getItemId(int position) {
                 return position;
         }
