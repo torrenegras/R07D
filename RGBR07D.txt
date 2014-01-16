@@ -9,3 +9,8 @@ Java unicode
 ’ \u00ED
 — \u00F3
 œ \u00FA
+
+– \u00F1
+„ \u00D1
+
+À \u00BF

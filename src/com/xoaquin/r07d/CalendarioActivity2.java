@@ -13,6 +13,7 @@ import com.parse.ParseInstallation;
 import com.parse.ParseObject;
 import com.parse.ParsePush;
 import com.parse.ParseQuery;
+import com.parse.ParseUser;
 import com.parse.PushService;
 
 import android.os.Bundle;
@@ -38,19 +39,24 @@ public class CalendarioActivity2 extends Activity {
 	public static String fecha,nombredia,dia,mes,anio; //variables globales para toda la app
 	private TextView tvmes,tvanio,diatv; //variables globales dentro de esta actividad 
     private GridView gv;
-    public int diacal,mescal,aniocal,diatmp,diafm;  
+    public int diacal,mescal,aniocal,diatmp,diafm;
+    public static int mescalt,aniocalt;
 	private String nombretablausuario="",m="";
 	private ParseInstallation installation;
+	private MonthAdapter2 mgva;
+	public static String[] dcomp= new String[31], dcompp= new String[31];
+	private static ProgressBar pb;
 	
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+	
 		super.onCreate(savedInstanceState);
+		
+		
 		setContentView(R.layout.activity_calendario_activity2);
 		setTitle("CALENDARIO");
-		
-		AppRater.app_launched(this); //LLAMANDO DIALOG PARA RATE APP
-		
+	    AppRater.app_launched(this); //LLAMANDO DIALOG PARA RATE APP
 		
 		//COLOR AL ACTIONBAR
 		ActionBar ab=getActionBar();
@@ -79,9 +85,11 @@ public class CalendarioActivity2 extends Activity {
 		tvanio = (TextView) findViewById(R.id.textViewtxt);
 		Button brep=(Button) findViewById(R.id.button1);
 		gv= (GridView) findViewById(R.id.gridView1);
+		pb=(ProgressBar) findViewById(R.id.progressBar1);
 		Typeface kepf = Typeface.createFromAsset(getAssets(),"Kepler-Std-Black_26074.ttf");
     	
-				
+	
+	        	 
 		//iniciando calendario en fecha de hoy
 		 Calendar now = Calendar.getInstance(); //calendario, trayendo fecha de hoy
          diacal = now.get(Calendar.DAY_OF_MONTH);
@@ -135,32 +143,29 @@ public class CalendarioActivity2 extends Activity {
 
             } //CIERRE IF dias finales del mes lance mensaje push      
         
+        
+         
+         @SuppressWarnings("deprecation")
+			final Object data = getLastNonConfigurationInstance();
+
+	         if (data == null) { //Solo entra en la primera entrada al oncreate()
+	        	 
       
-           
-         //INFLANDO GRIDVIEW
-        final DisplayMetrics metrics = new DisplayMetrics();  //contruyendo el adaptador 
-     	getWindowManager().getDefaultDisplay().getMetrics(metrics);
-     	
-     	MonthAdapter mgva= new MonthAdapter(this,mescal,aniocal,metrics ); 
-		
-     	//CALCULANDO Y SETTEANDO ALTURA TOTAL DEL GRIDVIEW
-     	//int numfilas= mgva.getCount()/7;
-		int gridviewtot =                        (metrics.heightPixels  		//tama–o de toda la pantalla segun dispositivo
-                															//menos:
-												- getBarHeight()             //espacio de actionbar segun densidad de pantalla 		      
-												- 50                         //espacio flechas de control calendario
-												- 40                         //espacio del boton REPORTES
-												 - ( (metrics.heightPixels/100)*16 ) //offset
-												) ; 
-		
-		LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) gv.getLayoutParams();
-		lp.height = gridviewtot;
-		gv.setLayoutParams(lp);
-		
-		gv.setAdapter(mgva);
-			
-		
-		//onclick gridview
+        	 dcomp=listadiascompletados(mescal,aniocal); //Recuperando desde PARSE un listado de dias completados, poniendo en arreglo local solo pasa en Oncreate()
+        	 dcompp=dcomp;
+        	 
+ 	    	 inflandogridview(dcomp,mescal,aniocal);
+        
+         
+         }else{ //Entra cuando hay cambio en configuracion, rotacion, etc..
+        
+        	 mescal=mescalt;
+        	 aniocal=aniocalt;
+        	 inflandogridview(dcompp,mescalt,aniocalt);
+      	 
+         }
+	
+ 	    //onclick gridview
 	
 		gv.setOnItemClickListener(new OnItemClickListener() {
 			public void onItemClick(AdapterView<?> parent, View v,
@@ -208,11 +213,28 @@ public class CalendarioActivity2 extends Activity {
 		  
 			}
 		});
+	   
+	
+	}// FIN ONCREATE 
 	
 	
+	
+	//Verificacion de cambio en configuracion...  rotacion, etc...  
+	@Override
+	public Object onRetainNonConfigurationInstance() {
+		
+		mescalt=mescal;
+		aniocalt=aniocal;
+		
+		
+		
+		return nombretablausuario;   //solo relleno de Retorno, no se usa...
+	    
 	}
-
-
+	
+	
+	
+	
 	//FUNCION MENSAJES PUSH NIVELES
 public void pushnivel(){
 			 	 
@@ -305,26 +327,27 @@ public void pushnivel(){
 	       
 		
 }
-	
-	
+
+
 	
 //onresume() de actividad reinflate
 	@Override
 	public void onResume()
 	    {  // After a pause OR at startup
 	    super.onResume();
-	    ProgressBar pb=(ProgressBar) findViewById(R.id.progressBar1);
+	    pb=(ProgressBar) findViewById(R.id.progressBar1);
 		pb.setVisibility(View.INVISIBLE);
 
+		/*
 	  //inflando gridview 
         final DisplayMetrics metrics = new DisplayMetrics();  //contruyendo el adaptador 
      	getWindowManager().getDefaultDisplay().getMetrics(metrics);
      	
      	MonthAdapter mgva= new MonthAdapter(this,mescal,aniocal,metrics ); 
 		gv.setAdapter(mgva);
-		
+		*/
 	     }
-	
+
 
 //onclick para boton reportes
 	
@@ -339,12 +362,11 @@ public void onclickgenrepo(View v) { //boton inicio actividad MENU de generacion
 
 
 
-
-	
-	//felcha derecha
+	//flecha derecha
 	
 public void clickfleder(View v) { //boton flecha derecha calendario
-		
+	pb.setVisibility(View.VISIBLE);
+	
 	if(mescal==11){
 		aniocal++;
 		tvanio.setText(String.valueOf(aniocal));
@@ -356,11 +378,18 @@ public void clickfleder(View v) { //boton flecha derecha calendario
 	String nmes= nombremes(mescal);	
 	tvmes.setText(nmes);
 	
+	String [] dcompfleder;
+	dcompfleder=listadiascompletados(mescal,aniocal);
+	dcompp=dcompfleder;
+	
 	final DisplayMetrics metrics = new DisplayMetrics();  //contruyendo el adaptador 
  	getWindowManager().getDefaultDisplay().getMetrics(metrics);
  	
- 	MonthAdapter mgva= new MonthAdapter(this,mescal,aniocal,metrics ); 
+ 	mgva= new MonthAdapter2(this,mescal,aniocal,metrics,dcompfleder); 
 	gv.setAdapter(mgva);
+	
+	
+	pb.setVisibility(View.GONE);
 	
 	}
 	
@@ -368,6 +397,7 @@ public void clickfleder(View v) { //boton flecha derecha calendario
 //flecha izquierda
 
 public void clickfleizq(View v) { //boton flecha derecha calendario
+	pb.setVisibility(View.VISIBLE);
 	
 	if(mescal==0){
 		aniocal--;
@@ -380,13 +410,17 @@ public void clickfleizq(View v) { //boton flecha derecha calendario
 	String nmes= nombremes(mescal);	
 	tvmes.setText(nmes);
 	
+	String [] dcompfleizq;
+	dcompfleizq=listadiascompletados(mescal,aniocal);
+    dcompp=dcompfleizq;
+	
 	final DisplayMetrics metrics = new DisplayMetrics();  //contruyendo el adaptador 
  	getWindowManager().getDefaultDisplay().getMetrics(metrics);
  	
- 	MonthAdapter mgva= new MonthAdapter(this,mescal,aniocal,metrics ); 
+ 	mgva= new MonthAdapter2(this,mescal,aniocal,metrics,dcompfleizq); 
 	gv.setAdapter(mgva);
 	
-	
+	pb.setVisibility(View.GONE);
 	
 	}
 	
@@ -456,6 +490,90 @@ private int getBarHeight() {
     }
 }
 
+
+
+public String[] listadiascompletados(int mescalf,int aniocalf)
+{
+	String[] res= new String[31];
+	
+	 String nmcomp=String.valueOf(mescalf+1);
+     if((mescalf+1)<10){nmcomp="0"+nmcomp;}
+     String nycomp=String.valueOf(aniocalf);
+     
+     ParseUser cu = ParseUser.getCurrentUser();
+    
+     String nombretablausuario=cu.getEmail();
+     nombretablausuario=nombretablausuario.replaceAll("\\.", "");
+	 nombretablausuario=nombretablausuario.replaceAll("@", "");
+		
+	ParseQuery<ParseObject> query = ParseQuery.getQuery(nombretablausuario); //query para buscar records de ese mes y año en orden ascendente
+		
+	 query.whereEqualTo("mesdbp", nmcomp);
+     query.whereEqualTo("aniodbp", nycomp);
+     query.orderByAscending("diadbp");
+     
+     
+    try {
+	List<ParseObject> objects=query.find();
+	
+    int i=0;
+       
+       while(i<objects.size()){
+    	   
+    	   if(objects.get(i).getString("lbdbp").length()>0)   //si se ha hecho lectura biblica
+    	   
+    	   {
+    	               	        		   
+    	   String obj=objects.get(i).getString("diadbp");
+    	  
+    	   if(Integer.valueOf(obj)<10){obj=obj.replaceAll("0", "");} //quitandole los 0's iniciales a dias PARSE
+    	   
+    	   res[i]=obj;
+    	 
+   	   
+    	   }
+    	   i++;
+       }
+	
+	
+	
+} catch (ParseException e1) {
+	// TODO Auto-generated catch block
+	e1.printStackTrace();
+}
+      
+
+return res;
+}
+
+
+public void inflandogridview(String[] dcompl,int mescall,int aniocall){
+	
+	String nmes= nombremes(mescall);	
+	tvmes.setText(nmes);
+	tvanio.setText(String.valueOf(aniocall));
+	
+	//INFLANDO GRIDVIEW
+    final DisplayMetrics metrics = new DisplayMetrics();  //contruyendo el adaptador 
+ 	getWindowManager().getDefaultDisplay().getMetrics(metrics);
+ 
+ 	mgva= new MonthAdapter2(this,mescall,aniocall,metrics,dcompl);  
+ 	
+ 	//CALCULANDO Y SETTEANDO ALTURA TOTAL DEL GRIDVIEW
+ 	//int numfilas= mgva.getCount()/7;
+	int gridviewtot =                        (metrics.heightPixels  		//tama–o de toda la pantalla segun dispositivo
+            															//menos:
+											- getBarHeight()             //espacio de actionbar segun densidad de pantalla 		      
+											- 50                         //espacio flechas de control calendario
+											- 40                         //espacio del boton REPORTES
+											 - ( (metrics.heightPixels/100)*16 ) //offset
+											) ; 
+	
+	LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) gv.getLayoutParams();
+	lp.height = gridviewtot;
+	gv.setLayoutParams(lp);
+	gv.setAdapter(mgva);
+}
 	
 
 //inflado del menu
@@ -490,17 +608,18 @@ private int getBarHeight() {
 		
 	   
 	    case R.id.mur:
-	    	ProgressBar pb=(ProgressBar) findViewById(R.id.progressBar1);
 	    	pb.setVisibility(View.VISIBLE);
 	    	 Intent in = new Intent(getApplicationContext(), MuroActivity.class);
 	    	 startActivity(new Intent(in));  
+	    	 
 			return true;
 		 	
 			
 	    case R.id.shr:
 	    	Intent intent = new Intent(Intent.ACTION_SEND);
 	    	intent.setType("text/plain");
-	    	intent.putExtra(Intent.EXTRA_TEXT, "R07 On The Go! Haz tu R07 en cualquier parte! Descarga la aplicación R07D en: https://play.google.com/store/apps/details?id=com.xoaquin.r07d");
+	    	intent.putExtra(Intent.EXTRA_SUBJECT, "Title Of The Post");
+	    	intent.putExtra(Intent.EXTRA_TEXT, "R07 On The Go! Haz tu R07 en cualquier parte! Descarga la aplicaci\u00F3n R07D en: https://play.google.com/store/apps/details?id=com.xoaquin.r07d");
 	    	startActivity(Intent.createChooser(intent, "Share with"));
 			return true;
 		 	

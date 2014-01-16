@@ -333,7 +333,7 @@ private String spdfop="",spdfopi="",ntu="";;
 	    		String nombre = "<b>"+"NOMBRE: "+et1.getText().toString()+"</b>";
 	    		String nombrecg = "<b>"+"NOMBRE COORDINADOR DE GRUPO CONEXION: "+et2.getText().toString()+"</b>";
 	    		String mdl = "<b>"+"META DE LECTURA: "+et3.getText().toString()+"</b>";
-	    		String cmdl = "<b>"+"¿CUMPLI LA META DE LECTURA?: NO"+"</b>";
+	    		String cmdl = "<b>"+"\u00BFCUMPLI LA META DE LECTURA?: NO"+"</b>";
 	    		String sraop=" ";
 	    		String sraopi=" ";
 	    		String srpl="",srco="",srmdg="",srpd="",srplco="";
@@ -342,7 +342,7 @@ private String spdfop="",spdfopi="",ntu="";;
 	    		
 	    		//Comprobando Boton 
 	    		if(b1.isChecked()){
-	    			cmdl = "<b>"+"¿CUMPLI LA META DE LECTURA?: SI"+"</b>";
+	    			cmdl = "<b>"+"\u00BFCUMPLI LA META DE LECTURA?: SI"+"</b>";
 	    		
 	    		}
 	    		
@@ -413,11 +413,11 @@ private String spdfop="",spdfopi="",ntu="";;
              		    }//  While de booleans en PARSE
              		      
              		      //Strings con variables que inflan asistencia a oracion
-	        			    sraop="<b>"+"¿CUANTAS VECES ASISTI A ORACION PRESENCIAL?: "+String.valueOf(s)+"</b>";
-	        	   		    sraopi="<b>"+"¿CUANTAS VECES ASISTI A ORACION POR INTERNET?: "+String.valueOf(si)+"</b>";
+	        			    sraop="<b>"+"\u00BFCUANTAS VECES ASISTI A ORACION PRESENCIAL?: "+String.valueOf(s)+"</b>";
+	        	   		    sraopi="<b>"+"\u00BFCUANTAS VECES ASISTI A ORACION POR INTERNET?: "+String.valueOf(si)+"</b>";
 	        		       
-	        	   		 spdfop="¿CUANTAS VECES ASISTI A ORACION PRESENCIAL?: "+String.valueOf(s);
-	        	   	   	spdfopi="¿CUANTAS VECES ASISTI A ORACION POR INTERNET?: "+String.valueOf(si);
+	        	   		 spdfop="\u00BFCUANTAS VECES ASISTI A ORACION PRESENCIAL?: "+String.valueOf(s);
+	        	   	   	spdfopi="\u00BFCUANTAS VECES ASISTI A ORACION POR INTERNET?: "+String.valueOf(si);
 	        		  
 	        	   		    
 	        	   		    
@@ -461,7 +461,7 @@ private String spdfop="",spdfopi="",ntu="";;
 	                  osw.write("<th>HORA INICIO</th>\n");
 	                  osw.write("<th>HORA FIN</th>\n");
 	                  osw.write("<th>LECTURA BIBLICA</th>\n");
-	                  osw.write("<th>¿QUE ME HABLO DIOS?</th>\n");
+	                  osw.write("<th>\u00BFQUE ME HABLO DIOS?</th>\n");
 	                  osw.write("<th>ACCION DE GRACIAS</th>\n");
 	                  osw.write("<th>LISTA DE NUEVOS</th>\n");
 	                  osw.write("<th>PETICIONES/INTERCESION</th>\n");
@@ -532,7 +532,7 @@ private String spdfop="",spdfopi="",ntu="";;
 	                  objDocument.setTitle("REPR07D-"+mes+"-"+anio);
 	           
 	                  // Create a page to add to the document
-	                  Page objPage = new Page(1570,2000,30.0f);
+	                  Page objPage = new Page(1700,2000,30.0f);
 	           
 	                  // Create a strings para labels
 	                  String tit= "REPORTE R07D";
@@ -540,7 +540,7 @@ private String spdfop="",spdfopi="",ntu="";;
 	                  String sn = "NOMBRE: "+et1.getText().toString();
 	                  String snc= "NOMBRE COORDINADOR DE GRUPO CONEXION: "+et2.getText().toString();
 	                  String sml= "META DE LECTURA: "+et3.getText().toString();
-	                  String scm= "¿CUMPLI LA META DE LECTURA?: NO"; if(rb1.isChecked()){scm ="¿CUMPLI LA META DE LECTURA?: SI";}
+	                  String scm= "\u00BFCUMPLI LA META DE LECTURA?: NO"; if(rb1.isChecked()){scm ="\u00BFCUMPLI LA META DE LECTURA?: SI";}
 	                  String sopre=spdfop;
 	                  String sopoin=spdfopi;
 	                  String sop= "ORACION POR: "+srpl+srco+srmdg+srpd+srplco;
@@ -592,7 +592,7 @@ private String spdfop="",spdfopi="",ntu="";;
 	                  Cell2 cell2=row1.getCells().add("HORA INICIO");  cell2.setAlign(TextAlign.CENTER);  cell2.setVAlign(VAlign.CENTER);
 	                  Cell2 cell3=row1.getCells().add("HORA FIN");  cell3.setAlign(TextAlign.CENTER);  cell3.setVAlign(VAlign.CENTER);
 	                  Cell2 cell4=row1.getCells().add("LECTURA BIBLICA");  cell4.setAlign(TextAlign.CENTER);  cell4.setVAlign(VAlign.CENTER);
-	                  Cell2 cell5=row1.getCells().add("¿QUE ME HABLO DIOS?");  cell5.setAlign(TextAlign.CENTER);  cell5.setVAlign(VAlign.CENTER);
+	                  Cell2 cell5=row1.getCells().add("\u00BFQUE ME HABLO DIOS?");  cell5.setAlign(TextAlign.CENTER);  cell5.setVAlign(VAlign.CENTER);
 	                  Cell2 cell6=row1.getCells().add("ACCION DE GRACIAS");  cell6.setAlign(TextAlign.CENTER);  cell6.setVAlign(VAlign.CENTER);
 	                  Cell2 cell7=row1.getCells().add("LISTA DE NUEVOS");  cell7.setAlign(TextAlign.CENTER);  cell7.setVAlign(VAlign.CENTER);
 	                  Cell2 cell8=row1.getCells().add("PETICIONES/INTERCESION");  cell8.setAlign(TextAlign.CENTER);  cell8.setVAlign(VAlign.CENTER);
@@ -670,7 +670,7 @@ private String spdfop="",spdfopi="",ntu="";;
 	                  objPage.getElements().add(table2); 
 	                  
 	                  
-	                  PageDimensions ps=new PageDimensions(1570,atotmax+140+(9*30)+100);  //reset dinamico altura pagina
+	                  PageDimensions ps=new PageDimensions(1613,atotmax+140+(9*30)+100);  //reset dinamico altura pagina
 	                  objPage.setDimensions(ps);
 	                  
 	                  

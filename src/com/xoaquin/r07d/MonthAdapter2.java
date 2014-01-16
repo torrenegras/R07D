@@ -1,18 +1,9 @@
 package com.xoaquin.r07d;
 
-// ADAPTADOR PRESTADO EN INVESTIGACION  MODIFICADO CUSTOM MADE...
-
-
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
-
-import com.parse.FindCallback;
-import com.parse.ParseException;
-import com.parse.ParseObject;
-import com.parse.ParseQuery;
-import com.parse.ParseUser;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -27,7 +18,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
  
-class MonthAdapter extends BaseAdapter {
+class MonthAdapter2 extends BaseAdapter {
         private GregorianCalendar mCalendar;
         private Calendar mCalendarToday;
         private Context mContext;
@@ -42,15 +33,17 @@ class MonthAdapter extends BaseAdapter {
         private final String[] mDays = { "LUN", "MAR", "MIE", "JUE", "VIE", "SAB", "DOM" };
         private final int[] mDaysInMonth = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
         
-        
+        private String[] dcompl=new String[31];
                
-        public MonthAdapter(Context c, int month, int year, DisplayMetrics metrics) {
+        public MonthAdapter2(Context c, int month, int year, DisplayMetrics metrics, String[] dcompa) {
                 mContext = c;
                 mMonth = month;
                 mYear = year;
                 mCalendar = new GregorianCalendar(mYear, mMonth, 1);
                 mCalendarToday = Calendar.getInstance();
                 mDisplayMetrics = metrics;
+                dcompl=dcompa;
+               
                 populateMonth();
         }
        
@@ -220,7 +213,7 @@ class MonthAdapter extends BaseAdapter {
                            
                             if (networkInfo != null && networkInfo.isConnected()) { //chequeo RED
                                                   
-                       
+                    
                             	   
            	         //coloreado de rojo dias sin hacer R07 
                                   Calendar now = Calendar.getInstance();
@@ -233,53 +226,29 @@ class MonthAdapter extends BaseAdapter {
                                   
            	        	      
                       
-                    
+                   
                       //coloreado de verde dias OK 
-                        String nmcomp=String.valueOf(mMonth+1);
-                        if((mMonth+1)<10){nmcomp="0"+nmcomp;}
-                        
-                        String nycomp=String.valueOf(mYear);
-                        
-                        ParseUser cu = ParseUser.getCurrentUser();
-                       
-                        String nombretablausuario=cu.getEmail();
-                 		nombretablausuario=nombretablausuario.replaceAll("\\.", "");
-                 		nombretablausuario=nombretablausuario.replaceAll("@", "");
-                 		
-                 		ParseQuery<ParseObject> query = ParseQuery.getQuery(nombretablausuario); //query para buscar records de ese mes y año en orden ascendente
-                 		
-                 		query.whereEqualTo("mesdbp", nmcomp);
-            	        query.whereEqualTo("aniodbp", nycomp);
-              	        query.orderByAscending("diadbp");
-                        
-            	        query.findInBackground(new FindCallback<ParseObject>() {
-            	            public void done(List<ParseObject> objects, ParseException e) {
-            	                  	             	
+                  
             	           int i=0;
             	           
-            	           while(i<objects.size()){
-            	        	   
-            	        	   if(objects.get(i).getString("lbdbp").length()>0)   //si se ha hecho lectura biblica
-            	        	   
-            	        	   {
-            	        	               	        		   
-            	        	   String obj=objects.get(i).getString("diadbp");
+            	           while(i<dcompl.length){
+            	        	        	        		   
+            	        	   String obj=dcompl[i];
             	        	  
-            	        	   if(Integer.valueOf(obj)<10){obj=obj.replaceAll("0", "");} //quitandole los 0's iniciales a dias PARSE
+            	        	   
+            	        	   if(obj==null){}else{
             	        	   
             	        	   if(obj.equals(view.getText().toString()) ){view.setTextColor(Color.rgb(47, 143, 54));}
-            	       	   
-            	        	   
+            	        	 
             	        	   }
             	        	   
             	        	   i++;
             	           }
-            	            
-            	            }
-
-            	        });
-   
-                            }
+            	     
+                            
+                            
+                            
+                            }//IF network check
            
               
                 } else {
