@@ -16,6 +16,7 @@ import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.PushService;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.app.ActionBar;
@@ -42,7 +43,7 @@ public class CalendarioActivity2 extends Activity {
 	private TextView tvmes,tvanio,diatv; //variables globales dentro de esta actividad 
     private GridView gv;
     public int diacal,mescal,aniocal,diatmp,diafm;
-    public static int mescalt,aniocalt;
+    public static int mescalt,aniocalt,voltereta;
 	private String nombretablausuario="",m="";
 	private ParseInstallation installation;
 	private MonthAdapter2 mgva;
@@ -137,23 +138,24 @@ public class CalendarioActivity2 extends Activity {
             }      
         
                 
-     
+            
    //MANEJO CAMBIO DE ORIENTACION
             @SuppressWarnings("deprecation")
 			final Object data = getLastNonConfigurationInstance();  //variable de chequeo de cambio de orientacion
 
 	         if (data == null) { //Solo entra en la primera entrada al oncreate() 
       
-        	 dcomp=listadiascompletados(mescal,aniocal); //Recuperando desde PARSE un listado de dias completados, poniendo en arreglo local solo pasa en Oncreate()
-        	 dcompp=dcomp; //asignando arreglo persistente para cada vez que hay un cambio
- 	    	 inflandogridview(dcomp,mescal,aniocal); //funcion para llamar adaptador e inflar gridview con datos
-        
+	       
+	         voltereta=1;
+	         AsyncTaskRunner runner = new AsyncTaskRunner();
+             runner.execute(mescal,aniocal);
+             
          
              }else{ //Entra cuando hay cambio en configuracion, rotacion, etc..
-        
+             
         	 mescal=mescalt; //asignacion de variables persistentes al cambio el mes en el que estaba cuando se efectuo el cambio
         	 aniocal=aniocalt; //anio en que estaba cuando se hizo cambio
-        	 inflandogridview(dcompp,mescalt,aniocalt); //inflando con ultimos datos que habian al hacer cambio
+        	 inflandogridview(dcompp,mescal,aniocal); //inflando con ultimos datos que habian al hacer cambio
       	 
                  }
 	
@@ -163,6 +165,7 @@ public class CalendarioActivity2 extends Activity {
 			public void onItemClick(AdapterView<?> parent, View v,
 				int position, long id) {
 			   
+				 voltereta=0;
 			     diatv=(TextView) v;
 			     dia=diatv.getText().toString();
 			     diatmp=Integer.valueOf(dia);
@@ -184,8 +187,8 @@ public class CalendarioActivity2 extends Activity {
 		    	 nombredia=nomdia(dayofweek);
 		    			    	 
 		    	 Intent i = new Intent(getApplicationContext(), RecdiaActivity2.class);
-             	 i.putExtra("correog",nombretablausuario);
-             	 i.putExtra("fca",fecha);
+             	i.putExtra("correog",nombretablausuario);
+             	i.putExtra("fca",fecha);
                	i.putExtra("ndca",nombredia);
             	i.putExtra("dca",dia);
                	i.putExtra("mca",mes);
@@ -196,23 +199,50 @@ public class CalendarioActivity2 extends Activity {
 	   	
 } 
 	
-
+//IMPLEMENTACION ASYNCTASK, FETCH PARSE POR FUERA DE MAIN THREAD
 	
+private class AsyncTaskRunner extends AsyncTask<Integer, Integer, Integer> {	
+	
+	protected void onPreExecute() {
+		
+		pb.setVisibility(View.VISIBLE);
+	}
+	
+
+    protected Integer doInBackground(Integer... params) {
+		
+		dcomp=listadiascompletados(params[0],params[1]); //Recuperando desde PARSE un listado de dias completados, poniendo en arreglo local solo pasa en Oncreate()
+   	    dcompp=dcomp; //asignando arreglo persistente para cada vez que hay un cambio
+       
+   	    int u=1; //variable dummy de retorno para ingresar a onPostExecute
+   	    return u;
+    }
+	
+	
+    protected void onPostExecute(Integer x) {
+		 
+		 inflandogridview(dcomp,mescal,aniocal); //funcion para llamar adaptador e inflar gridview con datos
+		 pb.setVisibility(View.GONE);
+	  }
+	
+
+}
+	
+
  //ONRESUME() de actividad
 		@Override
 		public void onResume()
 		    {  
 		    super.onResume();
 		   
-		    pb=(ProgressBar) findViewById(R.id.progressBar1);
-			pb.setVisibility(View.INVISIBLE);
-			
-			 dcomp=listadiascompletados(mescal,aniocal);
-        	 dcompp=dcomp; 
- 	    	
-        	 inflandogridview(dcomp,mescal,aniocal); 
-
-		     }
+		    if(voltereta==1){}else{
+		    
+			 AsyncTaskRunner runner2 = new AsyncTaskRunner();
+             runner2.execute(mescal,aniocal);
+		    }
+		     
+		   
+		    }
 		
 	
 //FUNCION LLAMADA AL EFECTUARSE CAMBIO EN CONFIGURACION, ROTACION, ETC..  
@@ -221,8 +251,8 @@ public class CalendarioActivity2 extends Activity {
 		
 		mescalt=mescal;  //mes que hay cuando se hace cambio , persiste
 		aniocalt=aniocal; //anio que hay cuando se hace cambio, persiste
-		
-		return nombretablausuario;   //solo relleno de Retorno, no se usa...
+		voltereta=1;
+		return nombretablausuario;   //solo variable dummy de Retorno, no se usa...
 	    
 	}
 
@@ -245,11 +275,8 @@ public class CalendarioActivity2 extends Activity {
 	String nmes= nombremes(mescal);	
 	tvmes.setText(nmes);
 	
-	String [] dcompfleder;
-	dcompfleder=listadiascompletados(mescal,aniocal);
-	dcompp=dcompfleder;
-	
-	inflandogridview(dcompfleder,mescal,aniocal); 
+	 AsyncTaskRunner runner3 = new AsyncTaskRunner();
+     runner3.execute(mescal,aniocal);
 	
 	}
 	
@@ -272,12 +299,9 @@ public class CalendarioActivity2 extends Activity {
 	String nmes= nombremes(mescal);	
 	tvmes.setText(nmes);
 	
-	String [] dcompfleizq;
-	dcompfleizq=listadiascompletados(mescal,aniocal);
-    dcompp=dcompfleizq;
-	
-    inflandogridview(dcompfleizq,mescal,aniocal); 
-	
+	 AsyncTaskRunner runner4 = new AsyncTaskRunner();
+     runner4.execute(mescal,aniocal);
+     
 	}
 		
 	
@@ -541,15 +565,11 @@ private int getBarHeight() {
 		startActivity(new Intent(this, AboutActivity.class));
 		return true;
 	 
-		
 	   
 	    case R.id.mur:
-	    	pb.setVisibility(View.VISIBLE);
 	    	 Intent in = new Intent(getApplicationContext(), MuroActivity.class);
 	    	 startActivity(new Intent(in));  
-	    	 
-			return true;
-		 	
+		   	return true;
 			
 	    case R.id.shr:
 	    	Intent intent = new Intent(Intent.ACTION_SEND);
@@ -559,7 +579,6 @@ private int getBarHeight() {
 	    	startActivity(Intent.createChooser(intent, "Share with"));
 			return true;
 		 	
-		
 	    
 	    default:
 	    return super.onOptionsItemSelected(item);

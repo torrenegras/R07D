@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.xoaquin.r07d"
-    android:versionCode="34"
-    android:versionName="Elias" >
+    android:versionCode="35"
+    android:versionName="Filemon" >
 
     <uses-sdk
         android:minSdkVersion="11"
