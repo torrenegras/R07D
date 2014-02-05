@@ -140,10 +140,12 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int NCLMR=0x7f06002f;
         public static final int OOO=0x7f06002a;
         public static final int SICLM=0x7f06002e;
+        public static final int abr=0x7f060060;
         public static final int acerca=0x7f060032;
         public static final int action_settings=0x7f060001;
         public static final int adgins=0x7f06003d;
         public static final int adglabel=0x7f060011;
+        public static final int ago=0x7f060064;
         public static final int app_name=0x7f060000;
         public static final int autoresabout=0x7f060041;
         public static final int breplabel=0x7f060021;
@@ -164,10 +166,14 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int dev=0x7f060048;
         public static final int devo=0x7f060054;
         public static final int dialabel=0x7f06001a;
+        public static final int dic=0x7f060068;
+        public static final int dom=0x7f06006f;
         public static final int dummy_button=0x7f06004a;
         public static final int dummy_content=0x7f06004b;
         public static final int emaillabel=0x7f060006;
+        public static final int ene=0x7f06005d;
         public static final int env=0x7f06005b;
+        public static final int feb=0x7f06005e;
         public static final int fechalabel=0x7f06001b;
         public static final int guargarblabel=0x7f060020;
         public static final int hablolabel=0x7f060010;
@@ -180,19 +186,29 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int hintlb=0x7f06000d;
         public static final int inscoord=0x7f060038;
         public static final int insmenu=0x7f060031;
+        public static final int jue=0x7f06006c;
+        public static final int jul=0x7f060063;
+        public static final int jun=0x7f060062;
         public static final int lbhfin=0x7f06001f;
         public static final int lbothin=0x7f06001e;
         public static final int ldnins=0x7f06003e;
         public static final int ldnlabel=0x7f060012;
         public static final int lec=0x7f060058;
         public static final int lecbiblilabel=0x7f06000c;
+        public static final int lun=0x7f060069;
+        public static final int mar=0x7f06005f;
+        public static final int mart=0x7f06006a;
+        public static final int may=0x7f060061;
         public static final int mdgccblabel=0x7f060016;
         public static final int mdlcins=0x7f060039;
         public static final int mdlr=0x7f06002b;
         public static final int mesanioreport=0x7f060027;
+        public static final int mie=0x7f06006b;
         public static final int mur=0x7f06005a;
         public static final int muro=0x7f060046;
         public static final int nombrerep=0x7f060024;
+        public static final int nov=0x7f060067;
+        public static final int oct=0x7f060066;
         public static final int ol=0x7f060051;
         public static final int peiins=0x7f06003f;
         public static final int pilabel=0x7f060013;
@@ -207,7 +223,9 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int recdialabel=0x7f06000b;
         public static final int reg=0x7f060053;
         public static final int regis=0x7f060029;
+        public static final int sab=0x7f06006e;
         public static final int sep=0x7f060005;
+        public static final int sept=0x7f060065;
         public static final int sfecha=0x7f060026;
         public static final int tbtext=0x7f060056;
         public static final int title_activity_about=0x7f060034;
@@ -227,6 +245,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int twitter1=0x7f060037;
         public static final int twitter2=0x7f060036;
         public static final int usuario=0x7f060030;
+        public static final int vie=0x7f06006d;
     }
     public static final class style {
         /** 
