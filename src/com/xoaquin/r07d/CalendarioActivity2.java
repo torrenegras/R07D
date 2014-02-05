@@ -454,7 +454,7 @@ public void inflandogridview(String[] dcompl,int mescall,int aniocall){
     final DisplayMetrics metrics = new DisplayMetrics();  //contruyendo el adaptador 
  	getWindowManager().getDefaultDisplay().getMetrics(metrics);
     
- 	mgva= new MonthAdapter2(this,mescall,aniocall,metrics,dcomp);  
+ 	mgva= new MonthAdapter2(this,mescall,aniocall,metrics,dcompl);  
  	
  	//CALCULANDO Y SETTEANDO ALTURA TOTAL DEL GRIDVIEW
  	
