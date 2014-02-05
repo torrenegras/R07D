@@ -23,7 +23,6 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.util.DisplayMetrics;
@@ -58,7 +57,6 @@ public class CalendarioActivity2 extends Activity {
 		super.onCreate(savedInstanceState);
 		
 		setContentView(R.layout.activity_calendario_activity2);
-		//setTitle("CALENDARIO");
 		
 	    AppRater.app_launched(this); //LLAMANDO DIALOG PARA RATE APP
 		

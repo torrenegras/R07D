@@ -4,9 +4,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
-
 import android.content.Context;
-import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.net.ConnectivityManager;
@@ -33,7 +31,6 @@ class MonthAdapter2 extends BaseAdapter {
         private int mTitleHeight, mDayHeight;
         private final String[] mDays = { "LUN", "MAR", "MIE", "JUE", "VIE", "SAB", "DOM" };
         private final int[] mDaysInMonth = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
-        private Resources res;
         private String[] dcompl=new String[31];
                
         public MonthAdapter2(Context c, int month, int year, DisplayMetrics metrics, String[] dcompa) {

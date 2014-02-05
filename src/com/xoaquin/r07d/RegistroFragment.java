@@ -572,14 +572,5 @@ public class RegistroFragment extends Fragment {
 	}
 	
 	
-	public int onBackPressed() {
-    	
-    		return 1;
-    	}
-
-    
-    
-   
-	
 	
 }

@@ -57,10 +57,10 @@
     <string name="desconectarse">SIGN OUT</string>
     <string name="twitter2">twitter2</string>
     <string name="twitter1">twitter1</string>
-    <string name="inscoord"><b>Name of Leader:</b> Name of the leader or group coordinator to which you belong.</string>
+    <string name="inscoord"><b>Name of Leader:</b> Name of the leader or coordinator of the group to which you belong.</string>
     <string name="mdlcins"><b>Reading Goal:</b> It is a way to make an effort in order to meet a daily bible reading goal. Example: If you are going to read 2 chapters daily, the goal could be: Gn 1\u201450 and Ex 1\u201410.</string>
-    <string name="clmins"><b>Met the Goal? :</b> If you met the goal within a percentage higher than 90%, mark YES. If barely made it to 89.9% or less then mark NO. This will take you to make a greater effort in the next month.</string>
-    <string name="hihfins">"<b>Initial Time / End Time :</b> Time in which your daily session of prayer and bible reading starts and ends.  "</string>
+    <string name="clmins"><b>Met the Goal? :</b> If you met the goal within a percentage higher than 90%, mark YES. If you barely made it to 89.9% or less then mark NO. This will lead you to make a greater effort in the next month.</string>
+    <string name="hihfins">"<b>Initial Time / End Time :</b> Time in which your daily session of prayer and bible reading start and end.  "</string>
     <string name="qmhDins">"<b>What did God tell me? :</b> Specific word from some verse, in accordance to a personal necessity or situation that you are going through, or a principle for your life. Also records of God given thoughts or impressions can be kept.  "</string>
     <string name="adgins"><b>Thanks Giving:</b> List of answers to prayers.Or thanks giving while awaiting for something specific.</string>
     <string name="ldnins"><b>List of New:</b> List of people that you want to get to know Jesus.</string>
