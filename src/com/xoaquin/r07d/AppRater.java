@@ -66,7 +66,7 @@ public class AppRater {
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
         params.setMargins(0, 0, 0, 30);
         EditText tv= new EditText (mContext);
-        tv.setText("Si te gusta " + APP_TITLE + ", por favor tomate un segundo para calificarla. Gracias por el apoyo!\n\nComp\u00E1rtela!");
+        tv.setText(mContext.getString(R.string.stg)+" "+ APP_TITLE+", "+mContext.getString(R.string.tus)+"\n\n"+mContext.getString(R.string.comps));
         tv.setTypeface(kepf);
         tv.setLayoutParams(params);
         tv.setTextColor(Color.rgb(141, 102, 95));
@@ -75,7 +75,7 @@ public class AppRater {
               
                
         Button b1 = new Button(mContext);
-        b1.setText("Calificar " + APP_TITLE);
+        b1.setText(mContext.getString(R.string.rr)+" "+ APP_TITLE);
         b1.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
                 mContext.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + APP_PNAME)));
@@ -89,7 +89,7 @@ public class AppRater {
         ll.addView(b1);
 
         Button b2 = new Button(mContext);
-        b2.setText("Recordar mas adelante..");
+        b2.setText(mContext.getString(R.string.rl));
         b2.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
                 dialog.dismiss();
@@ -102,7 +102,7 @@ public class AppRater {
         ll.addView(b2);
 
         Button b3 = new Button(mContext);
-        b3.setText("No, gracias");
+        b3.setText(mContext.getString(R.string.nt));
         b3.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
                 if (editor != null) {

@@ -59,6 +59,18 @@ public class CalendarioActivity2 extends Activity {
 		setContentView(R.layout.activity_calendario_activity2);
 		
 	    AppRater.app_launched(this); //LLAMANDO DIALOG PARA RATE APP
+		//AppRater.showRateDialog(this, null);  MOSTRAR EL DIALOG PARA PRUEBAS
+	    //JalertActivity.showRateDialog(this, null); MOSTRAR DIALOG PARA PRUEBAS
+	  
+	    //PONIENDO EN PARSE EL LOCALE DEL USUARIO
+	    ParseUser cu = ParseUser.getCurrentUser(); 
+		if (cu != null) {
+		 String locale = getResources().getConfiguration().locale.getDisplayName();
+		  cu.put("locale", locale);
+		  cu.saveInBackground();
+		} else {
+		
+		}
 		
 		//COLOR AL ACTIONBAR
 		ActionBar ab=getActionBar();
@@ -118,9 +130,10 @@ public class CalendarioActivity2 extends Activity {
         
     	 
  //push progreso fin de mes informe de nivel
-         if(diacal==diafm||diacal==diafm-1||diacal==diafm-2||diacal==diafm-3){
+         if(diacal==diafm||diacal==diafm-1||diacal==diafm-2||diacal==diafm-3){ 
         	
-             	String chk=installation.getString("mesaniochk"); 
+            String chk=installation.getString("mesaniochk"); 
+            
         	
         	  	if(chk==null){// en caso de ser la primera vez para el usuario que se lanza un mensaje push de este tipo
       
@@ -326,17 +339,32 @@ private class AsyncTaskRunner extends AsyncTask<Integer, Integer, Integer> {
 		List<ParseObject> objects= query.find();
 		
 		if(objects.size()>=5 && objects.size()<15){
+			String locale = getResources().getConfiguration().locale.getDisplayName();
 			ParsePush push = new ParsePush();
             push.setChannel(nombretablausuario);
-       	    push.setMessage("Puntaje Mes: +5 PUNTOS (R07D Principiante)");
-       	    push.sendInBackground();
+            
+            if(locale.equals("espa–ol (Espa–a)")){
+            push.setMessage("Puntaje Mes: +5 PUNTOS (R07D Principiante)");
+            }else{
+            push.setMessage("Month«s Score: +5 POINTS (R07D Beginner)");
+            }
+       	    
+            push.sendInBackground();
        	    installation.put("mesaniochk",m+Integer.toString(aniocal));
          	installation.saveInBackground();	
          	
          	try {
-        		 JSONObject data = new JSONObject("{\"action\": \"com.xoaquin.r07d.NIVEL\",\"mensaje\": \"Usted ha hecho un buen esfuerzo, siga avanzando! Bendiciones! (R07D Nivel Principiante) +5 PUNTOS \",\"puntos\": \"5\"    }");
-				
-        		ParsePush pushj = new ParsePush();
+         	   
+         	   
+         	    JSONObject data=new JSONObject();
+ 
+         	    if(locale.equals("espa–ol (Espa–a)")){
+         	    data = new JSONObject("{\"action\": \"com.xoaquin.r07d.NIVEL\",\"mensaje\": \"Usted ha hecho un buen esfuerzo, siga avanzando! Bendiciones! (R07D Nivel Principiante) +5 PUNTOS \",\"puntos\": \"5\"    }");
+         		}else{
+         			data = new JSONObject("{\"action\": \"com.xoaquin.r07d.NIVEL\",\"mensaje\": \"You«ve made a good effort, keep going! Blessings!              (R07D Beginner Level) +5 POINTS \",\"puntos\": \"5\"    }");
+         		}
+         	    
+         	    ParsePush pushj = new ParsePush();
  	            pushj.setChannel(nombretablausuario);
  	       	    pushj.setData(data);
  	       	    pushj.sendInBackground();	 
@@ -348,16 +376,29 @@ private class AsyncTaskRunner extends AsyncTask<Integer, Integer, Integer> {
 		}
 		
 		if(objects.size()>=15 && objects.size()<24){
+		String locale = getResources().getConfiguration().locale.getDisplayName();
 		ParsePush push = new ParsePush();
         push.setChannel(nombretablausuario);
-   	    push.setMessage("Puntaje Mes: +15 PUNTOS (R07D Intermedio)");
-   	    push.sendInBackground();
+       
+        if(locale.equals("espa–ol (Espa–a)")){
+        push.setMessage("Puntaje Mes: +15 PUNTOS (R07D Intermedio)");
+        }else{
+        push.setMessage("Month«s Score: +15 POINTS (R07D Intermediate)");
+        }
+   	    
+        push.sendInBackground();
    	    installation.put("mesaniochk",m+Integer.toString(aniocal));
   	    installation.saveInBackground();	
   	    
   	  try {
- 		 JSONObject data = new JSONObject("{\"action\": \"com.xoaquin.r07d.NIVEL\",\"mensaje\": \"Usted ha hecho un buen trabajo, siga avanzando! Bendiciones! (R07D Nivel Intermedio) +15 PUNTOS \",\"puntos\": \"15\"    }");
-			
+  		 JSONObject data=new JSONObject();
+  		 
+  		 if(locale.equals("espa–ol (Espa–a)")){
+  		  data = new JSONObject("{\"action\": \"com.xoaquin.r07d.NIVEL\",\"mensaje\": \"Usted ha hecho un buen trabajo, siga avanzando! Bendiciones! (R07D Nivel Intermedio) +15 PUNTOS \",\"puntos\": \"15\"    }");
+  		 }else{
+  		  data = new JSONObject("{\"action\": \"com.xoaquin.r07d.NIVEL\",\"mensaje\": \"You«ve done a good work, keep going! Blessings!               (R07D Intermediate Level) +15 POINTS \",\"puntos\": \"15\"    }"); 
+  		 }
+  			 
  		    ParsePush pushj = new ParsePush();
             pushj.setChannel(nombretablausuario);
        	    pushj.setData(data);
@@ -370,16 +411,29 @@ private class AsyncTaskRunner extends AsyncTask<Integer, Integer, Integer> {
 		}
 		
 		if(objects.size()>=24 && objects.size()<=diafm){
+			String locale = getResources().getConfiguration().locale.getDisplayName();
 			ParsePush push = new ParsePush();
             push.setChannel(nombretablausuario);
-       	    push.setMessage("Puntaje Mes: +25 PUNTOS (R07D Avanzado)");
+       	    
+            if(locale.equals("espa–ol (Espa–a)")){
+            push.setMessage("Puntaje Mes: +25 PUNTOS (R07D Avanzado)");
+            }else{
+            push.setMessage("Month«s Score: +25 POINTS (R07D Advanced)");
+            }
+            
        	    push.sendInBackground();
             installation.put("mesaniochk",m+Integer.toString(aniocal));
          	installation.saveInBackground();	
          	
          	try {
-	        		 JSONObject data = new JSONObject("{\"action\": \"com.xoaquin.r07d.NIVEL\",\"mensaje\": \"Usted ha hecho un excelente trabajo, siga avanzando! Bendiciones! (R07D Nivel Avanzado) +25 PUNTOS \",\"puntos\": \"25\"    }");
-					
+	        		 
+         		  JSONObject data=new JSONObject();
+         		    if(locale.equals("espa–ol (Espa–a)")){
+         		    data = new JSONObject("{\"action\": \"com.xoaquin.r07d.NIVEL\",\"mensaje\": \"Usted ha hecho un excelente trabajo, siga avanzando! Bendiciones! (R07D Nivel Avanzado) +25 PUNTOS \",\"puntos\": \"25\"    }");
+         		    }else{
+         		    	data = new JSONObject("{\"action\": \"com.xoaquin.r07d.NIVEL\",\"mensaje\": \"You«ve done an excellent work, keep going! Blessings!               (R07D Advanced Level) +25 POINTS \",\"puntos\": \"25\"    }");
+              		   
+         		    }
 	        		ParsePush pushj = new ParsePush();
 	 	            pushj.setChannel(nombretablausuario);
 	 	       	    pushj.setData(data);
@@ -499,13 +553,13 @@ public String nomdia(int dayofweek){
 	
 	String nomdia="";
 	
-	 if(dayofweek==1){nomdia="Domingo";}
-	 if(dayofweek==2){nomdia="Lunes";}
-	 if(dayofweek==3){nomdia="Martes";}
-	 if(dayofweek==4){nomdia="Miercoles";}
-	 if(dayofweek==5){nomdia="Jueves";}
-	 if(dayofweek==6){nomdia="Viernes";}
-	 if(dayofweek==7){nomdia="Sabado";}
+	 if(dayofweek==1){nomdia=getString(R.string.ndom);}
+	 if(dayofweek==2){nomdia=getString(R.string.nlun);}
+	 if(dayofweek==3){nomdia=getString(R.string.nmart);}
+	 if(dayofweek==4){nomdia=getString(R.string.nmie);}
+	 if(dayofweek==5){nomdia=getString(R.string.njue);}
+	 if(dayofweek==6){nomdia=getString(R.string.nvie);}
+	 if(dayofweek==7){nomdia=getString(R.string.nsab);}
 
 	return nomdia;
 }
@@ -575,7 +629,7 @@ private int getBarHeight() {
 	    	Intent intent = new Intent(Intent.ACTION_SEND);
 	    	intent.setType("text/plain");
 	    	intent.putExtra(Intent.EXTRA_SUBJECT, "Title Of The Post");
-	    	intent.putExtra(Intent.EXTRA_TEXT, "R07 On The Go! Haz tu R07 en cualquier parte! Descarga la aplicaci\u00F3n R07D en: https://play.google.com/store/apps/details?id=com.xoaquin.r07d");
+	    	intent.putExtra(Intent.EXTRA_TEXT, getString(R.string.shr));
 	    	startActivity(Intent.createChooser(intent, "Share with"));
 			return true;
 		 	

@@ -38,7 +38,7 @@ public class RecdiaActivity2 extends FragmentActivity {
 		t10.setTypeface(kepf);
 		t11.setTypeface(kepf);
 		
-		SpannableString contentUnderline = new SpannableString("REGISTRO");
+		SpannableString contentUnderline = new SpannableString(getString(R.string.reg));
 	    contentUnderline.setSpan(new UnderlineSpan(), 0, contentUnderline.length(), 0);
 	    t10.setText(contentUnderline);
 			
@@ -60,11 +60,11 @@ public class RecdiaActivity2 extends FragmentActivity {
 		
 		Toast.makeText(RecdiaActivity2.this, "Auto-Guardando...", Toast.LENGTH_LONG).show();
 	
-		SpannableString contentUnderline = new SpannableString("DEVOCIONAL");
+		SpannableString contentUnderline = new SpannableString(getString(R.string.devr));
 	    contentUnderline.setSpan(new UnderlineSpan(), 0, contentUnderline.length(), 0);
 	    t11.setText(contentUnderline);
 	    
-	    t10.setText("REGISTRO");
+	    t10.setText(getString(R.string.reg));
 		
 		
 		//INFLANDO FRAGMENTO DEVOCIONAL 
@@ -132,11 +132,11 @@ public class RecdiaActivity2 extends FragmentActivity {
 	
 	public void onclickreg(View v) {
 		
-		SpannableString contentUnderline = new SpannableString("REGISTRO");
+		SpannableString contentUnderline = new SpannableString(getString(R.string.reg));
 	    contentUnderline.setSpan(new UnderlineSpan(), 0, contentUnderline.length(), 0);
 	    t10.setText(contentUnderline);
 	    
-	    t11.setText("DEVOCIONAL");
+	    t11.setText(getString(R.string.devr));
 		
 		//INFLANDO FRAGMENTO REGISTRO
 		RegistroFragment rf=new RegistroFragment();

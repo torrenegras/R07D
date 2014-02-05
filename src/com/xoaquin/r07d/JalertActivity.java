@@ -51,7 +51,7 @@ public class JalertActivity extends Activity{
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
         params.setMargins(0, 0, 0, 30);
         EditText tv= new EditText (mContext);
-        tv.setText("Recordemos que este es el d\u00EDa que hizo el Se\u00F1or para que envi\u00E1ramos el R07D al l\u00EDder!\n\nBendiciones!");
+        tv.setText(mContext.getString(R.string.jal)+"\n\n"+mContext.getString(R.string.jal2));
         tv.setTypeface(kepf);
         tv.setLayoutParams(params);
         tv.setTextColor(Color.rgb(141, 102, 95));
@@ -61,7 +61,7 @@ public class JalertActivity extends Activity{
               
                
         Button b1 = new Button(mContext);
-        b1.setText("OK" );
+        b1.setText(mContext.getString(R.string.okr));
         b1.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
             	dialog.dismiss();
@@ -77,7 +77,7 @@ public class JalertActivity extends Activity{
         ll.addView(b1);
 
         Button b2 = new Button(mContext);
-        b2.setText("DESPUES");
+        b2.setText(mContext.getString(R.string.latr));
         b2.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
             	dialog.dismiss();

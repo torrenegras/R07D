@@ -116,7 +116,7 @@ public class RegistroFragment extends Fragment {
         String nomdia=ndca;
         if(nomdia==null){}else{
     		
-    		if(nomdia.equals("Martes")||nomdia.equals("Jueves")){ //habilitando checkbox de oracion 
+    		if(nomdia.equals("Martes")||nomdia.equals("Jueves")||nomdia.equals("Tuesday")||nomdia.equals("Thursday")){ //habilitando checkbox de oracion 
     		cb6.setVisibility(View.VISIBLE);
     		cb7.setVisibility(View.VISIBLE);
     		}
@@ -390,7 +390,7 @@ public class RegistroFragment extends Fragment {
         		ParseQuery<ParseObject> q = ParseQuery.getQuery("Muro");
         		q.whereEqualTo("correo", cu.getEmail().toString());
         		q.whereEqualTo("fecha", fca);
-        		q.whereEqualTo("tipo", "(AG)");
+        		q.whereEqualTo("tipo", getString(R.string.atg));
         		q.findInBackground(new FindCallback<ParseObject>() {
         		    public void done(List<ParseObject> o, ParseException e) {
         		        if (e == null) {
@@ -404,7 +404,7 @@ public class RegistroFragment extends Fragment {
         		        		ParseObject ag = new ParseObject("Muro");
         		        		ag.put("fecha",fca);
         		        		ag.put("correo", cu.getEmail().toString());
-        		            	ag.put("tipo", "(AG)");
+        		            	ag.put("tipo", getString(R.string.atg));
         		            	ag.put("texto", et3.getText().toString());
         		            	ag.saveInBackground();	
         		        	}

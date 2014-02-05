@@ -160,7 +160,7 @@ private String spdfop="",spdfopi="",ntu="";;
 			anio=String.valueOf(y); //variable para query
 	
 			
-	        b2.setText("MES "+mes+" / "+"A\u00D1O "+anio);
+	        b2.setText(getString(R.string.mesr)+" "+mes+" / "+getString(R.string.anior)+" "+anio);
 	
 			final Calendar c2 = Calendar.getInstance();
 			mYear = c2.get(Calendar.YEAR);
