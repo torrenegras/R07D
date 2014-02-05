@@ -4,7 +4,6 @@ import java.util.Calendar;
 
 import android.app.Fragment;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +19,8 @@ public class DevocionalFragment extends Fragment {
 	private static WebView wb;
 	private static ProgressBar pb;
 	
+	
+	
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
         Bundle savedInstanceState) {
@@ -32,11 +33,10 @@ public class DevocionalFragment extends Fragment {
     	 
     	 Calendar cal = Calendar.getInstance(); 
     	 int nd= cal.get(Calendar.DAY_OF_YEAR);
-    	 Log.e("doy",String.valueOf(nd));
-    	 
     	    	 
     	 nd=1; //**********************Quitar cuando tengamos material!!!!!!
     	 
+    	 wb.setBackgroundColor(0x00000000);
     	 wb.loadUrl("http://r07d.parseapp.com/"+nd+".htm");
     	   	 
     	 pb.setVisibility(View.VISIBLE);
@@ -88,18 +88,18 @@ public class DevocionalFragment extends Fragment {
    
    //FUNCION CONTROL BACK BUTTON PARA WEBVIEW 
 	public int onBackPressed() {
-	    if(wb!=null){
-		
+	    
 	    	if (wb.canGoBack()) {
 	        wb.goBack();
 	        return 0;
-	    }
-	    
-	    }
-	    
-	    return 1;
-	    // Otherwise defer to system default behavior.
-	    
+	    	}
+	    	
+	    	else
+	    	{
+	    		return 1;
+	    	}
+	
+	  
 	}
 	
 	 

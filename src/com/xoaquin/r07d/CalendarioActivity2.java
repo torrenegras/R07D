@@ -23,6 +23,7 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.util.DisplayMetrics;
@@ -57,7 +58,8 @@ public class CalendarioActivity2 extends Activity {
 		super.onCreate(savedInstanceState);
 		
 		setContentView(R.layout.activity_calendario_activity2);
-		setTitle("CALENDARIO");
+		//setTitle("CALENDARIO");
+		
 	    AppRater.app_launched(this); //LLAMANDO DIALOG PARA RATE APP
 		
 		//COLOR AL ACTIONBAR
@@ -451,8 +453,8 @@ public void inflandogridview(String[] dcompl,int mescall,int aniocall){
 	//INFLANDO GRIDVIEW
     final DisplayMetrics metrics = new DisplayMetrics();  //contruyendo el adaptador 
  	getWindowManager().getDefaultDisplay().getMetrics(metrics);
- 
- 	mgva= new MonthAdapter2(this,mescall,aniocall,metrics,dcompl);  
+    
+ 	mgva= new MonthAdapter2(this,mescall,aniocall,metrics,dcomp);  
  	
  	//CALCULANDO Y SETTEANDO ALTURA TOTAL DEL GRIDVIEW
  	
@@ -477,18 +479,18 @@ public String nombremes(int nummes){
 		
 		String nommes="";
 		
-		if(nummes==0){nommes="Enero";}
-		if(nummes==1){nommes="Febrero";}
-		if(nummes==2){nommes="Marzo";}
-		if(nummes==3){nommes="Abril";}
-		if(nummes==4){nommes="Mayo";}
-		if(nummes==5){nommes="Junio";}
-		if(nummes==6){nommes="Julio";}
-		if(nummes==7){nommes="Agosto";}
-		if(nummes==8){nommes="Septiembre";}
-		if(nummes==9){nommes="Octubre";}
-		if(nummes==10){nommes="Noviembre";}
-		if(nummes==11){nommes="Diciembre";}
+		if(nummes==0){nommes=getString(R.string.ene);}
+		if(nummes==1){nommes=getString(R.string.feb);}
+		if(nummes==2){nommes=getString(R.string.mar);}
+		if(nummes==3){nommes=getString(R.string.abr);}
+		if(nummes==4){nommes=getString(R.string.may);}
+		if(nummes==5){nommes=getString(R.string.jun);}
+		if(nummes==6){nommes=getString(R.string.jul);}
+		if(nummes==7){nommes=getString(R.string.ago);}
+		if(nummes==8){nommes=getString(R.string.sept);}
+		if(nummes==9){nommes=getString(R.string.oct);}
+		if(nummes==10){nommes=getString(R.string.nov);}
+		if(nummes==11){nommes=getString(R.string.dic);}
 	
 		return nommes;
 	}

@@ -6,6 +6,7 @@ import java.util.GregorianCalendar;
 import java.util.List;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.net.ConnectivityManager;
@@ -32,7 +33,7 @@ class MonthAdapter2 extends BaseAdapter {
         private int mTitleHeight, mDayHeight;
         private final String[] mDays = { "LUN", "MAR", "MIE", "JUE", "VIE", "SAB", "DOM" };
         private final int[] mDaysInMonth = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
-        
+        private Resources res;
         private String[] dcompl=new String[31];
                
         public MonthAdapter2(Context c, int month, int year, DisplayMetrics metrics, String[] dcompa) {
@@ -43,14 +44,21 @@ class MonthAdapter2 extends BaseAdapter {
                 mCalendarToday = Calendar.getInstance();
                 mDisplayMetrics = metrics;
                 dcompl=dcompa;
-               
+                mDays[0]=c.getString(R.string.lun);
+                mDays[1]=c.getString(R.string.mart);
+                mDays[2]=c.getString(R.string.mie);
+                mDays[3]=c.getString(R.string.jue);
+                mDays[4]=c.getString(R.string.vie);
+                mDays[5]=c.getString(R.string.sab);
+                mDays[6]=c.getString(R.string.dom);
                 populateMonth();
         }
        
         
         //LLENADO DE ELEMENTOS EN LISTA PARA INFLAR EL GRIDVIEW
         private void populateMonth() {
-                mItems = new ArrayList<String>();              
+
+        	   mItems = new ArrayList<String>();              
                 for (String day : mDays) {
                         mItems.add(day);
                         mDaysShown++;

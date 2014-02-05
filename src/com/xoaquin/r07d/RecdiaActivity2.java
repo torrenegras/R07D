@@ -21,6 +21,7 @@ import android.widget.Toast;
 public class RecdiaActivity2 extends FragmentActivity {
 	
 	private TextView t10,t11;
+	private int ff=0;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -45,7 +46,7 @@ public class RecdiaActivity2 extends FragmentActivity {
 		RegistroFragment rf=new RegistroFragment();
 		rf.setArguments(getIntent().getExtras()); //pasando los extras como argumentos al fragmento...
 		getFragmentManager().beginTransaction().add(R.id.fragments_container, rf).commit();
-		
+		ff=1;
 	
 	}
 
@@ -72,7 +73,7 @@ public class RecdiaActivity2 extends FragmentActivity {
 		transaction.replace(R.id.fragments_container, df);
 		transaction.addToBackStack(null);
     	transaction.commit();
-    	
+    	ff=2;
     	
     	
     	
@@ -144,17 +145,23 @@ public class RecdiaActivity2 extends FragmentActivity {
 		transaction.replace(R.id.fragments_container, rf);
 		transaction.addToBackStack(null);
     	transaction.commit();
-		
+		ff=1;
 	}
 	
 	
 	//CONTROL DE BOTON BACK PARA NAVEGACION E INTEGRACION WEBVIEW
 	@Override
 	public void onBackPressed() {
-	    DevocionalFragment f= new DevocionalFragment();
-	    f.onBackPressed();
-	    int ret=f.onBackPressed();
-	    if(ret==1){finish();}
+		
+		if(ff==2){
+		DevocionalFragment fragment = (DevocionalFragment) getFragmentManager().findFragmentById(R.id.fragments_container);
+		int i= fragment.onBackPressed();
+		if(i==0){}else{finish();}
+		}else{
+			finish();
+		}
+	
+	
 	}
 	
 	
