@@ -4,13 +4,15 @@
 
 Java unicode
 
-‡ \u00E1
-Ž \u00E9
-’ \u00ED
-— \u00F3
-œ \u00FA
+a tilde \u00E1
+e tilde \u00E9
+i tilde \u00ED
+o tilde \u00F3
+u tilde \u00FA
 
-– \u00F1
-„ \u00D1
+enie minuscula \u00F1
+enie mayuscula \u00D1
 
-À \u00BF
+signo interrogacion invertido del espaniol \u00BF
+
+apostrofe \u0027
