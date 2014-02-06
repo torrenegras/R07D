@@ -63,7 +63,7 @@
     <string name="hihfins">"<b>Initial Time / End Time :</b> Time in which your daily session of prayer and bible reading start and end.  "</string>
     <string name="qmhDins">"<b>What did God tell me? :</b> Specific word from some verse, in accordance to a personal necessity or situation that you are going through, or a principle for your life. Also records of God given thoughts or impressions can be kept.  "</string>
     <string name="adgins"><b>Thanks Giving:</b> List of answers to prayers.Or thanks giving while awaiting for something specific.</string>
-    <string name="ldnins"><b>List of New:</b> List of people that you want to get to know Jesus.</string>
+    <string name="ldnins"><b>List of New:</b> List of people that you want them to meet Jesus and get to know him.</string>
     <string name="peiins"><b>Petitions/Intercession:</b> The 5 predefined options are only a few we should pray for. Additionally write your own petitions.</string>
     <string name="r07dabout">R07D Ver:2.2  © 2013 </string>
     <string name="autoresabout">By XoaquinSoft © 2013</string>
@@ -202,8 +202,12 @@
 <string name="rmsub">R07D MONTHLY REPORT:</string> 
 <string name="rmtext">ATTACHED R07D REPORT</string> 
 
-<string name="trpdf">R07D REPORT</string> 
-
-
+<string name="trpdf">R07D REPORT</string>
+ 
+<string name="ucons">Under Construction</string> 
+<string name="caa">Do you know someone that would collaborate with this section with a daily devotional?</string> 
+<string name="wtm">Contact Me</string> 
+<string name="ikso">I KNOW SOMEONE THAT WOULD COLLABORATE WITH A DEVOTIONAL FOR R07D</string> 
+<string name="nodev">No</string> 
 
 </resources>

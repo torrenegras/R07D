@@ -38,12 +38,14 @@ public class DefaultApplication extends Application{
       		if(locale.equals("espa\u00F1ol (Espa\u00F1a)")){ 
       		
       			PushService.subscribe(this, "jalert", JalertActivity.class);
+      			PushService.unsubscribe(this, "jalerting");
       		}else{
       			PushService.subscribe(this, "jalerting", JalertActivity.class);
+      			PushService.unsubscribe(this, "jalert");
       		}
       		//ParseInstallation installation = ParseInstallation.getCurrentInstallation();  //lo quite por ahora...?
 
-   
+      	
 	
       		 context=getApplicationContext();//para tener context en toda la app y llamarlo desde cualquier class
 	

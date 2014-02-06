@@ -48,7 +48,6 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int s=0x7f020008;
         public static final int splash=0x7f020009;
         public static final int t2=0x7f02000a;
-        public static final int uc=0x7f02000b;
     }
     public static final class id {
         public static final int LinearLayout01=0x7f090020;
@@ -130,8 +129,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int niveles=0x7f080008;
         public static final int recdia=0x7f080009;
         public static final int recdia_activity2=0x7f08000a;
-        public static final int recdia_activity3=0x7f08000b;
-        public static final int reporte=0x7f08000c;
+        public static final int reporte=0x7f08000b;
     }
     public static final class string {
         public static final int BYJ=0x7f060043;
@@ -154,6 +152,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int autoresabout=0x7f060041;
         public static final int breplabel=0x7f060021;
         public static final int brmay=0x7f0600a4;
+        public static final int caa=0x7f0600ae;
         public static final int cbcoodlabel=0x7f060017;
         public static final int cbcoordlabel=0x7f060015;
         public static final int cbdisclabel=0x7f060018;
@@ -201,6 +200,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int hint=0x7f060007;
         public static final int hintlb=0x7f06000d;
         public static final int iecv=0x7f06008e;
+        public static final int ikso=0x7f0600b0;
         public static final int inscoord=0x7f060038;
         public static final int insmenu=0x7f060031;
         public static final int jal=0x7f060082;
@@ -238,6 +238,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int nlun=0x7f060072;
         public static final int nmart=0x7f060073;
         public static final int nmie=0x7f060074;
+        public static final int nodev=0x7f0600b1;
         public static final int nol=0x7f060096;
         public static final int nombrerep=0x7f060024;
         public static final int nov=0x7f060067;
@@ -303,10 +304,12 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int twitter2=0x7f060036;
         public static final int uce=0x7f060089;
         public static final int uce2=0x7f06008a;
+        public static final int ucons=0x7f0600ad;
         public static final int uec=0x7f06008b;
         public static final int uec2=0x7f06008c;
         public static final int usuario=0x7f060030;
         public static final int vie=0x7f06006d;
+        public static final int wtm=0x7f0600af;
     }
     public static final class style {
         /** 

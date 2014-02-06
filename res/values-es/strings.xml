@@ -205,4 +205,9 @@
 
 <string name="trpdf">REPORTE R07D</string> 
 
+<string name="ucons">En Construcci\u00F3n</string> 
+<string name="caa">Conoces a alguien que pueda aportar un devocional diario para esta secci\u00F3n?</string> 
+<string name="wtm">Escr\u00EDbeme</string> 
+<string name="ikso">CONOZCO A ALGUIEN PARA APORTAR DEVOCIONAL A R07D</string> 
+<string name="nodev">No</string> 
 </resources>

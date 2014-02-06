@@ -1,10 +1,12 @@
 package com.xoaquin.r07d;
 
 import android.app.ActionBar;
-import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.FragmentTransaction;
-import android.content.DialogInterface;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -15,8 +17,14 @@ import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
 import android.view.Menu;
 import android.view.View;
+import android.view.Window;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.LinearLayout.LayoutParams;
 
 public class RecdiaActivity2 extends FragmentActivity {
 	
@@ -80,48 +88,10 @@ public class RecdiaActivity2 extends FragmentActivity {
     	//DIALOG PARA RECLUTAR DEVOCIONALES
     	int secondsDelayed = 5;
         new Handler().postDelayed(new Runnable() {
-                public void run() {
-                	  	
-    	
-    	    	AlertDialog.Builder alertDialog2 = new AlertDialog.Builder(RecdiaActivity2.this);
-		 
-		// Setting Dialog Title
-		alertDialog2.setTitle("En Construcci\u00F3n...");
-		 
-		// Setting Dialog Message
-		alertDialog2.setMessage("Conoces a alguien que pueda aportar un devocional diario para esta secci\u00F3n?");
-		 
-		// Setting Icon to Dialog
-		alertDialog2.setIcon(R.drawable.uc);
-		 
-		// Setting Positive "Yes" Btn
-		alertDialog2.setPositiveButton("Escr\u00EDbeme",
-		        new DialogInterface.OnClickListener() {
-		            public void onClick(DialogInterface dialog, int which) {
-		            	 
-		            	Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
-		 			            "mailto","xoaquin@outlook.com", null));
-		 			emailIntent.putExtra(Intent.EXTRA_SUBJECT, "CONOZCO A ALGUIEN PARA APORTAR DEVOCIONAL A R07D");
-		 			
-		 			startActivity(Intent.createChooser(emailIntent, "Send email..."));
-		 	        	  
-		 			
-		            }
-		        });
-		// Setting Negative "NO" Btn
-		alertDialog2.setNegativeButton("No",
-		        new DialogInterface.OnClickListener() {
-		            public void onClick(DialogInterface dialog, int which) {
-		                
-		                dialog.cancel();
-		                
-		            }
-		        });
-		 
-		// Showing Alert Dialog
-		alertDialog2.show();
-		
-		
+                public void run() {         
+                	
+               showRateDialog(RecdiaActivity2.this,null); 	
+    
                 }
               }, secondsDelayed * 1000);
 		
@@ -163,6 +133,73 @@ public class RecdiaActivity2 extends FragmentActivity {
 	
 	
 	}
+	
+	
+
+	public static void showRateDialog(final Context mContext, final SharedPreferences.Editor editor) {
+        final Dialog dialog = new Dialog(mContext);
+
+       
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        
+        Typeface kepf = Typeface.createFromAsset(mContext.getAssets(),"Kepler-Std-Black_26074.ttf");
+        
+        LinearLayout ll = new LinearLayout(mContext);
+        ll.setOrientation(LinearLayout.VERTICAL);
+        ll.setBackgroundColor(Color.rgb(255, 226, 216));
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+        params.setMargins(0, 0, 0, 30);
+        EditText tv= new EditText (mContext);
+        tv.setText(mContext.getString(R.string.ucons)+"...\n\n"+mContext.getString(R.string.caa));
+        tv.setTypeface(kepf);
+        tv.setLayoutParams(params);
+        tv.setTextColor(Color.rgb(141, 102, 95));
+        tv.setBackgroundColor(Color.rgb(255, 226, 216));
+        tv.setKeyListener(null);
+        ll.addView(tv);
+              
+               
+        Button b1 = new Button(mContext);
+        b1.setText(mContext.getString(R.string.wtm));
+        b1.setOnClickListener(new OnClickListener() {
+            public void onClick(View v) {
+            	dialog.dismiss();
+            	Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
+ 			            "mailto","xoaquin@outlook.com", null));
+ 			emailIntent.putExtra(Intent.EXTRA_SUBJECT, mContext.getString(R.string.ikso));
+ 			
+ 			mContext.startActivity(Intent.createChooser(emailIntent, "Send email..."));
+            
+            }
+        });        
+        b1.setTypeface(kepf);
+        b1.setBackgroundColor(Color.rgb(141, 102, 95));
+        b1.setLayoutParams(params);
+        b1.setTextColor(Color.WHITE);
+        ll.addView(b1);
+
+        Button b2 = new Button(mContext);
+        b2.setText(mContext.getString(R.string.nodev));
+        b2.setOnClickListener(new OnClickListener() {
+            public void onClick(View v) {
+            	
+            	dialog.dismiss();
+            	dialog.cancel();
+            	//System.exit(0);            
+                
+            }
+        });
+        b2.setTypeface(kepf);
+        b2.setBackgroundColor(Color.rgb(141, 102, 95));
+        b2.setLayoutParams(params);
+        b2.setTextColor(Color.WHITE);
+        ll.addView(b2);
+
+        
+
+        dialog.setContentView(ll);        
+        dialog.show();        
+    }
 	
 	
 	@Override

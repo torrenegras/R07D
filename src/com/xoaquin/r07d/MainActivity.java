@@ -17,7 +17,9 @@ import com.parse.LogInCallback;
 import com.parse.Parse;
 import com.parse.ParseAnalytics;
 import com.parse.ParseException;
+import com.parse.ParseInstallation;
 import com.parse.ParseUser;
+import com.parse.PushService;
 
 
 
@@ -48,6 +50,13 @@ public class MainActivity extends Activity {
     Parse.initialize(this, "KfBj6ivkLAaLTXhssMZkjp0MTp5DWhezdpprtYqo", "ePZ6T7RmvGGW87nNO0Oe9Th23H0Je7dwLyTOY4w3"); 
     ParseAnalytics.trackAppOpened(getIntent());
     
+    PushService.setDefaultPushCallback(this, MainActivity.class);
+	ParseInstallation.getCurrentInstallation().saveInBackground();
+	ParseAnalytics.trackAppOpened(getIntent());
+	PushService.subscribe(this, "todos", MainActivity.class);
+	@SuppressWarnings("unused")
+	ParseInstallation installation = ParseInstallation.getCurrentInstallation();
+	
    
      Boolean b;
      b=isNetworkAvailable();  //true si hay internet,  false si no hay.

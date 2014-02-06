@@ -26,7 +26,7 @@ Parse.Cloud.job("pushfinmes", function(request, status) {
 	
 
 if (dd==ld){
-  
+  //MENSAJE EN LOCAL ESPAÑOL
   Parse.Push.send({
   
   expiration_time: new Date(aa, mm+1, 3),
@@ -43,13 +43,13 @@ if (dd==ld){
   }
 });
   
- 
+ //MENSAJE EN LOCALE INGLES
  Parse.Push.send({
   
   expiration_time: new Date(aa, mm+1, 3),
   channels: [ "jalerting"],
   data: {
-    alert: "Send R07D Reminder! Blessings!"
+    alert: "R07D Send Reminder! Blessings!"
   }
 }, {
   success: function() {
@@ -104,6 +104,7 @@ if(dd==1){
   var ue = user.getEmail();
   var loc = user.get("locale");
   
+  //DISTINGUIENDO ARREGLOS EN BASE A LOCALE
  if(loc=="español (España)"){
   
   myArray[i] = {email:ue, name:"",type:"bcc"}; 
@@ -119,7 +120,7 @@ if(dd==1){
    
  }).then(function() { //si todo ok en query.each {
       
- 
+ //EMAIL LOCALE ESPAÑOL
  Mandrill.sendEmail({
   
   message: {
@@ -142,7 +143,7 @@ if(dd==1){
 });   // Cierre Mandrill SendEmail
  
  
- 
+ //EMAIL LOCALE INGLES
  Mandrill.sendEmail({
   
   message: {
