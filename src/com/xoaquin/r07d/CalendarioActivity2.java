@@ -133,7 +133,7 @@ public class CalendarioActivity2 extends Activity {
          if(diacal==diafm||diacal==diafm-1||diacal==diafm-2||diacal==diafm-3){ 
         	
             String chk=installation.getString("mesaniochk"); 
-            
+          
         	
         	  	if(chk==null){// en caso de ser la primera vez para el usuario que se lanza un mensaje push de este tipo
       
@@ -361,7 +361,7 @@ private class AsyncTaskRunner extends AsyncTask<Integer, Integer, Integer> {
          	    if(locale.equals("espa\u00F1ol (Espa\u00F1a)")){
          	    data = new JSONObject("{\"action\": \"com.xoaquin.r07d.NIVEL\",\"mensaje\": \"Usted ha hecho un buen esfuerzo, siga avanzando! Bendiciones! (R07D Nivel Principiante) +5 PUNTOS \",\"puntos\": \"5\"    }");
          		}else{
-         			data = new JSONObject("{\"action\": \"com.xoaquin.r07d.NIVEL\",\"mensaje\": \"You«ve made a good effort, keep going! Blessings!              (R07D Beginner Level) +5 POINTS \",\"puntos\": \"5\"    }");
+         			data = new JSONObject("{\"action\": \"com.xoaquin.r07d.NIVEL\",\"mensaje\": \"You\u0027ve made a good effort, keep going! Blessings!              (R07D Beginner Level) +5 POINTS \",\"puntos\": \"5\"    }");
          		}
          	    
          	    ParsePush pushj = new ParsePush();
@@ -396,7 +396,7 @@ private class AsyncTaskRunner extends AsyncTask<Integer, Integer, Integer> {
   		 if(locale.equals("espa\u00F1ol (Espa\u00F1a)")){
   		  data = new JSONObject("{\"action\": \"com.xoaquin.r07d.NIVEL\",\"mensaje\": \"Usted ha hecho un buen trabajo, siga avanzando! Bendiciones! (R07D Nivel Intermedio) +15 PUNTOS \",\"puntos\": \"15\"    }");
   		 }else{
-  		  data = new JSONObject("{\"action\": \"com.xoaquin.r07d.NIVEL\",\"mensaje\": \"You«ve done a good work, keep going! Blessings!               (R07D Intermediate Level) +15 POINTS \",\"puntos\": \"15\"    }"); 
+  		  data = new JSONObject("{\"action\": \"com.xoaquin.r07d.NIVEL\",\"mensaje\": \"You\u0027ve done a good work, keep going! Blessings!               (R07D Intermediate Level) +15 POINTS \",\"puntos\": \"15\"    }"); 
   		 }
   			 
  		    ParsePush pushj = new ParsePush();
@@ -431,7 +431,7 @@ private class AsyncTaskRunner extends AsyncTask<Integer, Integer, Integer> {
          		    if(locale.equals("espa\u00F1ol (Espa\u00F1a)")){
          		    data = new JSONObject("{\"action\": \"com.xoaquin.r07d.NIVEL\",\"mensaje\": \"Usted ha hecho un excelente trabajo, siga avanzando! Bendiciones! (R07D Nivel Avanzado) +25 PUNTOS \",\"puntos\": \"25\"    }");
          		    }else{
-         		    	data = new JSONObject("{\"action\": \"com.xoaquin.r07d.NIVEL\",\"mensaje\": \"You«ve done an excellent work, keep going! Blessings!               (R07D Advanced Level) +25 POINTS \",\"puntos\": \"25\"    }");
+         		    	data = new JSONObject("{\"action\": \"com.xoaquin.r07d.NIVEL\",\"mensaje\": \"You\u0027ve done an excellent work, keep going! Blessings!               (R07D Advanced Level) +25 POINTS \",\"puntos\": \"25\"    }");
               		   
          		    }
 	        		ParsePush pushj = new ParsePush();

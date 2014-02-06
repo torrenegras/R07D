@@ -148,7 +148,61 @@
      <string name="latr">DESPUES</string>
      
      <string name="atg">(AG)</string>
-     
-    
-     
+
+       <string name="ncon">Sin Conexi\u00F3n</string>
+      <string name="conn">Conectando</string>
+      
+       <string name="uce">Usuario/Clave Errados</string>
+      <string name="uce2">Intente de Nuevo</string>
+
+       <string name="uec">Usuario Existente</string>
+        <string name="uec2">Conectarse</string>
+        
+         <string name="rex">Registro Exitoso</string>
+         
+            <string name="iecv">Ingrese Email y Contraseña V\u00E1lidos</string>
+            
+           <string name="esrp">Se ha enviado correo para resetear la clave</string>
+             <string name="augu">Auto-Guardando</string>
+             
+              <string name="actu">Actualizando</string>
+             <string name="guard">Guardando</string>
+             
+              <string name="grep">Generando Reporte</string>
+              
+               <string name="reph">REPORTE:</string>
+                <string name="namh">NOMBRE:</string>
+                <string name="nol">NOMBRE COORDINADOR DE GRUPO:</string>
+                <string name="rgoa">META DE LECTURA:</string>
+                 <string name="mtgo">\u00BFCUMPLI LA META DE LECTURA?: NO</string>
+                   <string name="mtgoy">\u00BFCUMPLI LA META DE LECTURA?: SI</string>
+      <string name="tpm">\u00BFCUANTAS VECES ASISTI A ORACION PRESENCIAL?</string>
+          <string name="tpmi">\u00BFCUANTAS VECES ASISTI A ORACION POR INTERNET?</string>
+          
+           <string name="pyl">Pastores y L\u00EDderes</string>
+          <string name="coordi">Coordinadores</string>
+          <string name="mgcon">Miembros de Grupo</string>
+          <string name="discl">Discipulos</string>
+          <string name="harv">La Cosecha</string>
+           <string name="pfor">ORACION POR:</string>
+           
+            <string name="hinim">HORA INICIO</string>
+          <string name="hfinm">HORA FIN</string>
+          
+          <string name="brmay">LECTURA BIBLICA</string>
+          <string name="qmhdma">\u00BFQUE ME HABLO DIOS?</string> 
+          
+          <string name="tgma">ACCION DE GRACIAS</string>        
+<string name="lonma">LISTADO DE NUEVOS</string>        
+<string name="pinma">PETICIONES/INTERCESION</string>   
+
+<string name="rgr07">Reporte Generado por R07D</string>
+
+
+<string name="rmsub">REPORTE MENSUAL R07D:</string> 
+<string name="rmtext">REPORTE R07D ADJUNTO</string> 
+
+
+<string name="trpdf">REPORTE R07D</string> 
+
 </resources>

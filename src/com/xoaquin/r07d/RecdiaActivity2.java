@@ -58,7 +58,7 @@ public class RecdiaActivity2 extends FragmentActivity {
 		RegistroFragment rf=new RegistroFragment();
 		rf.guardar();
 		
-		Toast.makeText(RecdiaActivity2.this, "Auto-Guardando...", Toast.LENGTH_LONG).show();
+		Toast.makeText(RecdiaActivity2.this, getString(R.string.augu)+"...", Toast.LENGTH_LONG).show();
 	
 		SpannableString contentUnderline = new SpannableString(getString(R.string.devr));
 	    contentUnderline.setSpan(new UnderlineSpan(), 0, contentUnderline.length(), 0);

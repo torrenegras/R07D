@@ -33,7 +33,14 @@ public class DefaultApplication extends Application{
       	
       		//ParseAnalytics.trackAppOpened(I);//  interrogante lo del intent aqui..........
       		PushService.subscribe(this, "todos", MainActivity.class);
-      		PushService.subscribe(this, "jalert", JalertActivity.class);	
+      	
+      		String locale = getResources().getConfiguration().locale.getDisplayName();
+      		if(locale.equals("espa\u00F1ol (Espa\u00F1a)")){ 
+      		
+      			PushService.subscribe(this, "jalert", JalertActivity.class);
+      		}else{
+      			PushService.subscribe(this, "jalerting", JalertActivity.class);
+      		}
       		//ParseInstallation installation = ParseInstallation.getCurrentInstallation();  //lo quite por ahora...?
 
    

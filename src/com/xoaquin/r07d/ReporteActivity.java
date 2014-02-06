@@ -296,12 +296,12 @@ private String spdfop="",spdfopi="",ntu="";;
 	     b=isNetworkAvailable();  //true si hay internet,  false si no hay.
 	    
 	    if(!b){
-	    	Toast.makeText(ReporteActivity.this, "Sin Conexion...", Toast.LENGTH_LONG).show(); 
+	    	Toast.makeText(ReporteActivity.this, getString(R.string.ncon)+"...", Toast.LENGTH_LONG).show(); 
 			 
 	    	 
 	    }else{
  		
-	    	Toast.makeText(ReporteActivity.this, "Generando Reporte...", Toast.LENGTH_LONG).show(); 
+	    	Toast.makeText(ReporteActivity.this, getString(R.string.grep)+"...", Toast.LENGTH_LONG).show(); 
 			
  		
  		ParseQuery<ParseObject> query = ParseQuery.getQuery(nombretablausuario); //query para buscar records de ese mes y año en orden ascendente
@@ -329,11 +329,11 @@ private String spdfop="",spdfopi="",ntu="";;
 	    		
 	      	    
 	    		//Strings pre-TABLA en formato HTML
-	      		String fecha = "<b>"+"REPORTE: "+mes+"/"+anio+"</b>";
-	    		String nombre = "<b>"+"NOMBRE: "+et1.getText().toString()+"</b>";
-	    		String nombrecg = "<b>"+"NOMBRE COORDINADOR DE GRUPO CONEXION: "+et2.getText().toString()+"</b>";
-	    		String mdl = "<b>"+"META DE LECTURA: "+et3.getText().toString()+"</b>";
-	    		String cmdl = "<b>"+"\u00BFCUMPLI LA META DE LECTURA?: NO"+"</b>";
+	      		String fecha = "<b>"+getString(R.string.reph)+" "+mes+"/"+anio+"</b>";
+	    		String nombre = "<b>"+getString(R.string.namh)+" "+et1.getText().toString()+"</b>";
+	    		String nombrecg = "<b>"+getString(R.string.nol)+" "+et2.getText().toString()+"</b>";
+	    		String mdl = "<b>"+getString(R.string.rgoa)+" "+et3.getText().toString()+"</b>";
+	    		String cmdl = "<b>"+getString(R.string.mtgo)+"</b>";
 	    		String sraop=" ";
 	    		String sraopi=" ";
 	    		String srpl="",srco="",srmdg="",srpd="",srplco="";
@@ -342,7 +342,7 @@ private String spdfop="",spdfopi="",ntu="";;
 	    		
 	    		//Comprobando Boton 
 	    		if(b1.isChecked()){
-	    			cmdl = "<b>"+"\u00BFCUMPLI LA META DE LECTURA?: SI"+"</b>";
+	    			cmdl = "<b>"+getString(R.string.mtgoy)+"</b>";
 	    		
 	    		}
 	    		
@@ -374,35 +374,35 @@ private String spdfop="",spdfopi="",ntu="";;
              		    	 
              		    	if(sopl.equals("true")){
              		    		  //si encuentra algun true para oracion por pastores y lideres se infla String resultante en HTML
-             		    		srpl = "<b>"+"| Pastores y Líderes | "+"</b>";
+             		    		srpl = "| "+getString(R.string.pyl)+" | ";
              		    		
  
              		    	}
              		    	 
              		    	if(scoo.equals("true")){
              		    		  //si encuentra algun true para oracion por coordinadores se infla String resultante en HTML
-             		    	   srco = "<b>"+"| Coordinadores | "+"</b>";
+             		    	   srco = "| "+getString(R.string.coordi)+" | ";
              		    	 
 
              		    	 }
              		    	 
              		    	if(smgc.equals("true")){
              		    		  //si encuentra algun true para oracion por miembros grupo conexion se infla String resultante en HTML
-             		    		srmdg = "<b>"+"| Miembros de Grupo de Conexión | "+"</b>";
+             		    		srmdg = "| "+getString(R.string.mgcon)+" | ";
              		    		
 
              		    	 }
              		    	 
              		    	if(sopd.equals("true")){
              		    		 //si encuentra algun true para oracion por discipulos se infla String resutlante en HTML
-             		    		srpd = "<b>"+"| Discipulos | "+"</b>";
+             		    		srpd = "| "+getString(R.string.discl)+" | ";
              		    		
 
              		    	 }
              		    	
              		    	if(soplco.equals("true")){
              		    		  //si encuentra algun true para oracion por la cosecha se infla String resultante en HTML
-             		    	   srplco = "<b>"+"| La Cosecha | "+"</b>";
+             		    	   srplco = "| "+getString(R.string.harv)+" | ";
              		    	 
 
              		    	 }
@@ -413,11 +413,11 @@ private String spdfop="",spdfopi="",ntu="";;
              		    }//  While de booleans en PARSE
              		      
              		      //Strings con variables que inflan asistencia a oracion
-	        			    sraop="<b>"+"\u00BFCUANTAS VECES ASISTI A ORACION PRESENCIAL?: "+String.valueOf(s)+"</b>";
-	        	   		    sraopi="<b>"+"\u00BFCUANTAS VECES ASISTI A ORACION POR INTERNET?: "+String.valueOf(si)+"</b>";
+	        			    sraop="<b>"+getString(R.string.tpm)+": "+String.valueOf(s)+"</b>";
+	        	   		    sraopi="<b>"+getString(R.string.tpmi)+": "+String.valueOf(si)+"</b>";
 	        		       
-	        	   		 spdfop="\u00BFCUANTAS VECES ASISTI A ORACION PRESENCIAL?: "+String.valueOf(s);
-	        	   	   	spdfopi="\u00BFCUANTAS VECES ASISTI A ORACION POR INTERNET?: "+String.valueOf(si);
+	        	   		   spdfop=getString(R.string.tpm)+": "+String.valueOf(s);
+	        	   	    	spdfopi=getString(R.string.tpmi)+": "+String.valueOf(si);
 	        		  
 	        	   		    
 	        	   		    
@@ -450,21 +450,21 @@ private String spdfop="",spdfopi="",ntu="";;
 	                 
       	   		     
 	                  //Creando bloque encabezado reporte HTML
-	                  cuerpocorreo= "<!DOCTYPE html>\n"+"<html>\n"+"<body>\n"+"<p>\n"+fecha+"<br />"+nombre+"<br />"+nombrecg+"<br /><br />"+mdl+"<br />"+cmdl+"<br /><br />"+sraop+"<br />"+sraopi+"<br /><br />"+"<b>ORACION POR:</B> "+srpl+srco+srmdg+srpd+srplco+"<br /><br /><br /><br />"+"</p>\n";
+	                  cuerpocorreo= "<!DOCTYPE html>\n"+"<html>\n"+"<body>\n"+"<p>\n"+fecha+"<br />"+nombre+"<br />"+nombrecg+"<br /><br />"+mdl+"<br />"+cmdl+"<br /><br />"+sraop+"<br />"+sraopi+"<br /><br />"+"<b>"+getString(R.string.pfor)+"</B> "+"<b>"+srpl+srco+srmdg+srpd+srplco+"</b>"+"<br /><br /><br /><br />"+"</p>\n";
       	    		
 	                  osw.write(cuerpocorreo);
 	                  
 	                  //Creando encabezado de tabla, segundo bloque HTML	                  
 	                  osw.write("<table border=\"1\">\n");
 	                  osw.write("<tr>\n");
-	                  osw.write("<th>FECHA</th>\n");
-	                  osw.write("<th>HORA INICIO</th>\n");
-	                  osw.write("<th>HORA FIN</th>\n");
-	                  osw.write("<th>LECTURA BIBLICA</th>\n");
-	                  osw.write("<th>\u00BFQUE ME HABLO DIOS?</th>\n");
-	                  osw.write("<th>ACCION DE GRACIAS</th>\n");
-	                  osw.write("<th>LISTA DE NUEVOS</th>\n");
-	                  osw.write("<th>PETICIONES/INTERCESION</th>\n");
+	                  osw.write("<th>"+getString(R.string.fechalabel)+"</th>\n");
+	                  osw.write("<th>"+getString(R.string.hinim)+"</th>\n");
+	                  osw.write("<th>"+getString(R.string.hfinm)+"</th>\n");
+	                  osw.write("<th>"+getString(R.string.brmay)+"</th>\n");
+	                  osw.write("<th>"+getString(R.string.qmhdma)+"</th>\n");
+	                  osw.write("<th>"+getString(R.string.tgma)+"</th>\n");
+	                  osw.write("<th>"+getString(R.string.lonma)+"</th>\n");
+	                  osw.write("<th>"+getString(R.string.pinma)+"</th>\n");
 	                  osw.write("</tr>\n");
 	                  
 	                  
@@ -505,7 +505,7 @@ private String spdfop="",spdfopi="",ntu="";;
 	               
 	                 
 	                  
-	                  osw.write("\n\n <p>Reporte Generado por R07D</p>\n");
+	                  osw.write("\n\n <p>"+getString(R.string.rgr07)+"</p>\n");
 	                  osw.write(" </body>\n");
 	                  osw.write(" </html>\n");
 	         
@@ -535,16 +535,16 @@ private String spdfop="",spdfopi="",ntu="";;
 	                  Page objPage = new Page(1700,2000,30.0f);
 	           
 	                  // Create a strings para labels
-	                  String tit= "REPORTE R07D";
-	                  String sr = "REPORTE: "+mes+"/"+anio;
-	                  String sn = "NOMBRE: "+et1.getText().toString();
-	                  String snc= "NOMBRE COORDINADOR DE GRUPO CONEXION: "+et2.getText().toString();
-	                  String sml= "META DE LECTURA: "+et3.getText().toString();
-	                  String scm= "\u00BFCUMPLI LA META DE LECTURA?: NO"; if(rb1.isChecked()){scm ="\u00BFCUMPLI LA META DE LECTURA?: SI";}
+	                  String tit= getString(R.string.trpdf);
+	                  String sr = getString(R.string.reph)+" "+mes+"/"+anio;
+	                  String sn = getString(R.string.namh)+" "+et1.getText().toString();
+	                  String snc= getString(R.string.nol)+" "+et2.getText().toString();
+	                  String sml= getString(R.string.rgoa)+" "+et3.getText().toString();
+	                  String scm= getString(R.string.mtgo); if(rb1.isChecked()){scm =getString(R.string.mtgoy);}
 	                  String sopre=spdfop;
 	                  String sopoin=spdfopi;
-	                  String sop= "ORACION POR: "+srpl+srco+srmdg+srpd+srplco;
-	                  String rg= "Reporte Generado por R07D";
+	                  String sop= getString(R.string.pfor)+" "+srpl+srco+srmdg+srpd+srplco;
+	                  String rg= getString(R.string.rgr07);
 	                                    
 	                  //crear labels iniciales
 	                  Label objLabelt = new Label(tit, 635, 0, 1000, 100, Font.getCourierBoldOblique(),40, TextAlign.LEFT);
@@ -588,14 +588,14 @@ private String spdfop="",spdfopi="",ntu="";;
 	                  
 	                  
 	                 
-	                  Cell2 cell1=row1.getCells().add("FECHA");  cell1.setAlign(TextAlign.CENTER);  cell1.setVAlign(VAlign.CENTER);
-	                  Cell2 cell2=row1.getCells().add("HORA INICIO");  cell2.setAlign(TextAlign.CENTER);  cell2.setVAlign(VAlign.CENTER);
-	                  Cell2 cell3=row1.getCells().add("HORA FIN");  cell3.setAlign(TextAlign.CENTER);  cell3.setVAlign(VAlign.CENTER);
-	                  Cell2 cell4=row1.getCells().add("LECTURA BIBLICA");  cell4.setAlign(TextAlign.CENTER);  cell4.setVAlign(VAlign.CENTER);
-	                  Cell2 cell5=row1.getCells().add("\u00BFQUE ME HABLO DIOS?");  cell5.setAlign(TextAlign.CENTER);  cell5.setVAlign(VAlign.CENTER);
-	                  Cell2 cell6=row1.getCells().add("ACCION DE GRACIAS");  cell6.setAlign(TextAlign.CENTER);  cell6.setVAlign(VAlign.CENTER);
-	                  Cell2 cell7=row1.getCells().add("LISTA DE NUEVOS");  cell7.setAlign(TextAlign.CENTER);  cell7.setVAlign(VAlign.CENTER);
-	                  Cell2 cell8=row1.getCells().add("PETICIONES/INTERCESION");  cell8.setAlign(TextAlign.CENTER);  cell8.setVAlign(VAlign.CENTER);
+	                  Cell2 cell1=row1.getCells().add(getString(R.string.fechalabel));  cell1.setAlign(TextAlign.CENTER);  cell1.setVAlign(VAlign.CENTER);
+	                  Cell2 cell2=row1.getCells().add(getString(R.string.hinim));  cell2.setAlign(TextAlign.CENTER);  cell2.setVAlign(VAlign.CENTER);
+	                  Cell2 cell3=row1.getCells().add(getString(R.string.hfinm));  cell3.setAlign(TextAlign.CENTER);  cell3.setVAlign(VAlign.CENTER);
+	                  Cell2 cell4=row1.getCells().add(getString(R.string.brmay));  cell4.setAlign(TextAlign.CENTER);  cell4.setVAlign(VAlign.CENTER);
+	                  Cell2 cell5=row1.getCells().add(getString(R.string.qmhdma));  cell5.setAlign(TextAlign.CENTER);  cell5.setVAlign(VAlign.CENTER);
+	                  Cell2 cell6=row1.getCells().add(getString(R.string.tgma));  cell6.setAlign(TextAlign.CENTER);  cell6.setVAlign(VAlign.CENTER);
+	                  Cell2 cell7=row1.getCells().add(getString(R.string.lonma));  cell7.setAlign(TextAlign.CENTER);  cell7.setVAlign(VAlign.CENTER);
+	                  Cell2 cell8=row1.getCells().add(getString(R.string.pinma));  cell8.setAlign(TextAlign.CENTER);  cell8.setVAlign(VAlign.CENTER);
 	                  
 	                  
 	                  
@@ -709,8 +709,8 @@ private String spdfop="",spdfopi="",ntu="";;
 
 	        	
 
-	        	  emailIntent.putExtra(Intent.EXTRA_SUBJECT,"REPORTE MENSUAL R07D: "+et1.getText().toString()+" "+mes+"/"+anio);
-	        	  emailIntent.putExtra(Intent.EXTRA_TEXT, "\n\nREPORTE R07D ADJUNTO\n\n\n");
+	        	  emailIntent.putExtra(Intent.EXTRA_SUBJECT,getString(R.string.rmsub)+" "+et1.getText().toString()+" "+mes+"/"+anio);
+	        	  emailIntent.putExtra(Intent.EXTRA_TEXT, "\n\n"+getString(R.string.rmtext)+"\n\n\n");
 	        	  emailIntent.putParcelableArrayListExtra(Intent.EXTRA_STREAM, uris);
 
 	        	  startActivity(Intent.createChooser(emailIntent, "Email:"));

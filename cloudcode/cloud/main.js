@@ -44,6 +44,24 @@ if (dd==ld){
 });
   
  
+ Parse.Push.send({
+  
+  expiration_time: new Date(aa, mm+1, 3),
+  channels: [ "jalerting"],
+  data: {
+    alert: "Send R07D Reminder! Blessings!"
+  }
+}, {
+  success: function() {
+  status.success("Enviado dentro de dia fin mes OK");  // Push was successful
+  },
+  error: function(error) {
+  status.error("Error al envío dentro de dia fin mes Pailander!");  // Handle error
+  }
+});
+ 
+ 
+ 
  }else{
  	
  	status.success("Ejecutado por fuera de fin de mes");
@@ -70,22 +88,39 @@ if (dd==ld){
   var dd = today.getDate();
   
   var i=1;
-    
+  var j=1;
+
 if(dd==1){
 
+
  var myArray = [];
+ var myArray2 = [];
  myArray[0] = {email:"torrenegrajr@gmail.com", name:"", type:"to"};
+ myArray2[0] = {email:"torrenegrajr@gmail.com", name:"", type:"to"};
+ 
  
  query.each(function(user) {
       
   var ue = user.getEmail();
-  myArray[i] = {email:ue, name:"",type:"bcc"};
+  var loc = user.get("locale");
+  
+ if(loc=="español (España)"){
+  
+  myArray[i] = {email:ue, name:"",type:"bcc"}; 
   i=i+1;
- 
+  
+   }else{
+  
+  myArray2[j] = {email:ue, name:"",type:"bcc"};
+  j=j+1;
+     
+   }
+   
+   
  }).then(function() { //si todo ok en query.each {
       
  
-Mandrill.sendEmail({
+ Mandrill.sendEmail({
   
   message: {
     html: "<!DOCTYPE html><html><body><p>Empieza el mes con toda&#33;&#44;en El Secreto&#44;cercano al Se&#241;or&#33;<br><br>Bendiciones&#33;<br><br><br><br>Cada vez somos mas&#33; Comparte la aplicaci&#243;n con tus amigos y conocidos&#33;<br><a href=\"https://play.google.com/store/apps/details?id=com.xoaquin.r07d \">Desc&#225;rgala en Google Play</a> </p></body></html>",
@@ -106,6 +141,30 @@ Mandrill.sendEmail({
   }
 });   // Cierre Mandrill SendEmail
  
+ 
+ 
+ Mandrill.sendEmail({
+  
+  message: {
+    html: "<!DOCTYPE html><html><body><p>Start this month with all you got&#33;&#44;in The Secret&#44;close to the Lord&#33;<br><br>Blessings&#33;<br><br><br><br>Growing more and more each day&#33; Share the application with your friends and acquaintances&#33;<br><a href=\"https://play.google.com/store/apps/details?id=com.xoaquin.r07d \">Download it at Google Play</a> </p></body></html>",
+    subject: "R07D COMMUNITY",
+    from_email: "xoaquin@outlook.com",
+    from_name: "Xoaquin",
+    to: myArray2
+  },
+  async: true
+},{
+  success: function(httpResponse) {
+    console.log(httpResponse);
+    response.success("Email sent!");
+  },
+  error: function(httpResponse) {
+    console.error(httpResponse);
+    response.error("Uh oh, something went wrong");
+  }
+});   // Cierre Mandrill SendEmail
+
+
        
     status.success("EMAIL COMIENZO DE MES ENVIADO");
     
@@ -114,7 +173,9 @@ Mandrill.sendEmail({
     
     status.error("ALGO SALIO MAL!!");
   });
-	
+
+
+
 
 
  

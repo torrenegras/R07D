@@ -101,7 +101,7 @@ public class LoginActivity extends Activity {
 			     b=isNetworkAvailable();  //true si hay internet,  false si no hay.
 			    
 			    if(!b){
-			    	Toast.makeText(LoginActivity.this, "Sin Conexion...", Toast.LENGTH_LONG).show(); 
+			    	Toast.makeText(LoginActivity.this, getString(R.string.ncon), Toast.LENGTH_LONG).show(); 
 					 
 			    	pb.setVisibility(View.INVISIBLE); 
 			    }else{
@@ -120,7 +120,7 @@ public class LoginActivity extends Activity {
 						                db.insertTitle(etcorreo, etclave);
 									
 						                
-						                Toast.makeText(LoginActivity.this, "Conectando.......", Toast.LENGTH_LONG).show(); 
+						                Toast.makeText(LoginActivity.this, getString(R.string.conn)+".......", Toast.LENGTH_LONG).show(); 
 						                
 						                
 						                //llamando actividad calendario principal
@@ -136,7 +136,7 @@ public class LoginActivity extends Activity {
 						          
 			                	    	
 			                	    } else {
-			                	    	Toast.makeText(LoginActivity.this, "Usuario/Clave Errados....Intente de Nuevo..", Toast.LENGTH_LONG).show(); 					
+			                	    	Toast.makeText(LoginActivity.this, getString(R.string.uce)+"...."+getString(R.string.uce2)+"..", Toast.LENGTH_LONG).show(); 					
 										pb.setVisibility(View.INVISIBLE); 
 			                	    }
 			                	  }
@@ -174,7 +174,7 @@ public class LoginActivity extends Activity {
 			     b=isNetworkAvailable();  //true si hay internet,  false si no hay.
 			    
 			    if(!b){
-			    	Toast.makeText(LoginActivity.this, "Sin Conexion...", Toast.LENGTH_LONG).show(); 
+			    	Toast.makeText(LoginActivity.this, getString(R.string.ncon)+"...", Toast.LENGTH_LONG).show(); 
 					 
 			    	 
 			    }else{
@@ -192,7 +192,7 @@ public class LoginActivity extends Activity {
             	  public void done(ParseUser userl, ParseException e) {
             	    if (userl != null) {
             	      
-            	    	Toast.makeText(LoginActivity.this, "Usuario Existente...Conectarse", Toast.LENGTH_LONG).show();
+            	    	Toast.makeText(LoginActivity.this, getString(R.string.uec)+"..."+getString(R.string.uec2), Toast.LENGTH_LONG).show();
             	    	 b2.setEnabled(true);//success
 		        	    	 pb.setVisibility(View.INVISIBLE);
             	    	
@@ -232,7 +232,7 @@ public class LoginActivity extends Activity {
      		 	                        }
      		 	                }, secondsDelayed * 1000);
      		 	                
-     		 	                Toast.makeText(LoginActivity.this, "Registro Exitoso", Toast.LENGTH_LONG).show();
+     		 	                Toast.makeText(LoginActivity.this, getString(R.string.rex), Toast.LENGTH_LONG).show();
      		 	               b2.setEnabled(true);//success
    		        	    	 pb.setVisibility(View.INVISIBLE);
    		        	    	 
@@ -253,7 +253,7 @@ public class LoginActivity extends Activity {
 			
 	
 		}else{//si no hay correo valido proporcionado por usuario
-			Toast.makeText(LoginActivity.this, "Ingrese Email y Contraseña Válidos..", Toast.LENGTH_LONG).show();			
+			Toast.makeText(LoginActivity.this, getString(R.string.iecv)+"..", Toast.LENGTH_LONG).show();			
 			 b2.setEnabled(true);//success
    	    	 pb.setVisibility(View.INVISIBLE);
 		}
@@ -303,12 +303,12 @@ public class LoginActivity extends Activity {
                 public void done(ParseException e) {
                       if (e == null) {
                                           	  
-                    	  Toast.makeText(LoginActivity.this, "Se ha enviado correo para resetear la clave..", Toast.LENGTH_LONG).show();
+                    	  Toast.makeText(LoginActivity.this, getString(R.string.esrp)+"..", Toast.LENGTH_LONG).show();
                     	  pb.setVisibility(View.INVISIBLE);
                   		tv3.setEnabled(true);
                   		  
                           } else {
-                        	  Toast.makeText(LoginActivity.this, "Ups! Algo pasó: "+e.getMessage(), Toast.LENGTH_LONG).show();	
+                        	  Toast.makeText(LoginActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();	
                         	  pb.setVisibility(View.INVISIBLE);
                         		tv3.setEnabled(true);
                            }

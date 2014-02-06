@@ -127,7 +127,7 @@ public class RegistroFragment extends Fragment {
         Boolean b;
         b=isNetworkAvailable();  //true si hay internet,  false si no hay.
 	    if(!b){
-	    	Toast.makeText(getActivity(), "Sin Conexion...", Toast.LENGTH_LONG).show(); 
+	    	Toast.makeText(getActivity(), getString(R.string.ncon)+"...", Toast.LENGTH_LONG).show(); 
 		   	 int secondsDelayed = 2;
 		        new Handler().postDelayed(new Runnable() {
 		                public void run() {
@@ -250,9 +250,9 @@ public class RegistroFragment extends Fragment {
     	                if (e == null) {
     	                	if (obs.size()>0)
      	                   {   	                   
-     	                	   Toast.makeText(getActivity(), "Actualizando...", Toast.LENGTH_LONG).show();
+     	                	   Toast.makeText(getActivity(), getString(R.string.actu)+"...", Toast.LENGTH_LONG).show();
      	                   }else{
-     	                	   Toast.makeText(getActivity(), "Guardando...", Toast.LENGTH_LONG).show();
+     	                	   Toast.makeText(getActivity(), getString(R.string.guard)+"...", Toast.LENGTH_LONG).show();
      	                   }
     	                } else {
     	                    

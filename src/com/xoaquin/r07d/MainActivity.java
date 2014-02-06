@@ -53,7 +53,7 @@ public class MainActivity extends Activity {
      b=isNetworkAvailable();  //true si hay internet,  false si no hay.
     
     if(!b){
-    	Toast.makeText(MainActivity.this, "Sin Conexion...", Toast.LENGTH_LONG).show(); 
+    	Toast.makeText(MainActivity.this, getString(R.string.ncon)+"...", Toast.LENGTH_LONG).show(); 
 		 
     	 int secondsDelayed = 2;
 	        new Handler().postDelayed(new Runnable() {
