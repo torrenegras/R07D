@@ -163,6 +163,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int clmins=0x7f06003a;
         public static final int cmlm2=0x7f06002d;
         public static final int comps=0x7f06007e;
+        public static final int comreg=0x7f0600b2;
         public static final int con=0x7f060028;
         public static final int conn=0x7f060088;
         public static final int contrasenialab=0x7f060008;
@@ -248,6 +249,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int oct=0x7f060066;
         public static final int okr=0x7f060084;
         public static final int ol=0x7f060051;
+        public static final int or07w=0x7f0600b3;
         public static final int peiins=0x7f06003f;
         public static final int pfor=0x7f0600a1;
         public static final int pilabel=0x7f060013;

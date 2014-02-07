@@ -88,7 +88,7 @@
     <string name="devo">DEVOTIONAL</string>
     <string name="title_activity_recdia_activity2">DAILY RECORD</string>
     <string name="tbtext">P/TG/LON</string>
-    <string name="pub"><b>Publish P&amp;TG on The Wall:</b> Publish petitions and thanks giving messages on the wall of the R07D community.</string>
+    <string name="pub"><b>Publish P&amp;TG on The Wall:</b> Publish petitions and thanks giving messages on the wall of the R07D community. Also on the Wall, if you press and hold over a certain Petition or TGM, you can send a customized email regarding the matter to the person who published it.</string>
     <string name="lec">Reading:</string>
     <string name="COMP">Share</string>
     <string name="mur">R07D Wall</string>
@@ -209,5 +209,9 @@
 <string name="wtm">Contact Me</string> 
 <string name="ikso">I KNOW SOMEONE THAT WOULD COLLABORATE WITH A DEVOTIONAL FOR R07D</string> 
 <string name="nodev">No</string> 
+
+<string name="comreg">COMMENT REGARDING</string> 
+<string name="or07w">ON R07D WALL</string> 
+
 
 </resources>

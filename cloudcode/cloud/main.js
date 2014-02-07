@@ -26,7 +26,7 @@ Parse.Cloud.job("pushfinmes", function(request, status) {
 	
 
 if (dd==ld){
-  //MENSAJE EN LOCAL ESPAÑOL
+  //MENSAJE EN LOCALE ESPAÑOL
   Parse.Push.send({
   
   expiration_time: new Date(aa, mm+1, 3),

@@ -19,4 +19,7 @@
     <issue id="SimpleDateFormat">
         <ignore path="src/com/xoaquin/r07d/CalendarioActivity.java" />
     </issue>
+    <issue id="Typos">
+        <ignore path="res/values-es/strings.xml" />
+    </issue>
 </lint>

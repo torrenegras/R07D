@@ -88,7 +88,7 @@
     <string name="devo">DEVOCIONAL</string>
     <string name="title_activity_recdia_activity2">REGISTRO DIARIO</string>
     <string name="tbtext">P/AG/LN</string>
-    <string name="pub"><b>Publicar P&amp;AG en Muro:</b> Publicar las peticiones y acciones de gracias en el muro de la comunidad R07D.</string>
+    <string name="pub"><b>Publicar P&amp;AG en Muro:</b> Publicar las peticiones y acciones de gracias en el muro de la comunidad R07D. Tambien en el Muro, si se presiona en sostenido sobre alguna peticion o AG, se puede enviar un correo a la persona que lo public\u00F3,acerca del asunto en cuesti\u00F3n.</string>
     <string name="lec">Lectura:</string>
     <string name="COMP">Compartir</string>
     <string name="mur">Muro R07D</string>
@@ -210,4 +210,8 @@
 <string name="wtm">Escr\u00EDbeme</string> 
 <string name="ikso">CONOZCO A ALGUIEN PARA APORTAR DEVOCIONAL A R07D</string> 
 <string name="nodev">No</string> 
+
+<string name="comreg">COMENTARIO ACERCA DE</string> 
+<string name="or07w">EN MURO R07D</string> 
+
 </resources>

@@ -6,6 +6,7 @@ import java.util.List;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
+
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -83,7 +84,7 @@ public class MuroActivity extends ListActivity {
 			    
 			    Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
 			            "mailto",c, null));
-			emailIntent.putExtra(Intent.EXTRA_SUBJECT, "COMENTARIO ACERCA DE "+t+" EN MURO R07D ("+f+")");
+			emailIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.comreg)+" "+t+" "+getString(R.string.or07w)+" ("+f+")");
 			emailIntent.putExtra(Intent.EXTRA_TEXT, "\n\n\n\n\n\n"+t+"\n"+te);
 			startActivity(Intent.createChooser(emailIntent, "Send email..."));
 	        	  
