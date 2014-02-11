@@ -19,23 +19,21 @@ public class DefaultApplication extends Application{
     public void onCreate() {
         super.onCreate();
         Parse.initialize(this, "KfBj6ivkLAaLTXhssMZkjp0MTp5DWhezdpprtYqo", "ePZ6T7RmvGGW87nNO0Oe9Th23H0Je7dwLyTOY4w3"); 
-        
-        
-        
        
         //Inicializacion de Parse DB  y demas para toda la app
         
         
       //comandos para notificaciones push activados en esta clase
-      		PushService.setDefaultPushCallback(this, MainActivity.class);
+      		
+            PushService.setDefaultPushCallback(this, MainActivity.class);
       		ParseInstallation.getCurrentInstallation().saveInBackground();
-      		//Intent I = new Intent() ;
-      	
-      		//ParseAnalytics.trackAppOpened(I);//  interrogante lo del intent aqui..........
+      		
       		PushService.subscribe(this, "todos", MainActivity.class);
       	
+      		
       		String locale = getResources().getConfiguration().locale.getDisplayName();
-      		if(locale.equals("espa\u00F1ol (Espa\u00F1a)")){ 
+      		     		
+      		if(locale.contains("espa\u00F1ol")){ 
       		
       			PushService.subscribe(this, "jalert", JalertActivity.class);
       			PushService.unsubscribe(this, "jalerting");
@@ -43,18 +41,10 @@ public class DefaultApplication extends Application{
       			PushService.subscribe(this, "jalerting", JalertActivity.class);
       			PushService.unsubscribe(this, "jalert");
       		}
-      		//ParseInstallation installation = ParseInstallation.getCurrentInstallation();  //lo quite por ahora...?
-
-      	
-	
+      		
       		 context=getApplicationContext();//para tener context en toda la app y llamarlo desde cualquier class
 	
 	}
-
-
-
-
-
 
 
     public static Context getCustomAppContext(){ //llamar context en todas partes de la app  
