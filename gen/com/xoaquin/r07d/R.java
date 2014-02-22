@@ -127,9 +127,10 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int main=0x7f080006;
         public static final int muro=0x7f080007;
         public static final int niveles=0x7f080008;
-        public static final int recdia=0x7f080009;
-        public static final int recdia_activity2=0x7f08000a;
-        public static final int reporte=0x7f08000b;
+        public static final int notification=0x7f080009;
+        public static final int recdia=0x7f08000a;
+        public static final int recdia_activity2=0x7f08000b;
+        public static final int reporte=0x7f08000c;
     }
     public static final class string {
         public static final int BYJ=0x7f060043;
@@ -209,6 +210,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int jue=0x7f06006c;
         public static final int jul=0x7f060063;
         public static final int jun=0x7f060062;
+        public static final int lampp=0x7f0600b4;
         public static final int latr=0x7f060085;
         public static final int lbhfin=0x7f06001f;
         public static final int lbothin=0x7f06001e;
@@ -293,6 +295,8 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int title_activity_muro=0x7f060045;
         public static final int title_activity_nivel=0x7f060049;
         public static final int title_activity_niveles=0x7f06004d;
+        public static final int title_activity_noti=0x7f0600b6;
+        public static final int title_activity_notification=0x7f0600b5;
         public static final int title_activity_recdia=0x7f06000a;
         public static final int title_activity_recdia_activity2=0x7f060055;
         public static final int title_activity_recdia_activity3=0x7f06005c;

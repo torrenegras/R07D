@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.xoaquin.r07d"
-    android:versionCode="38"
-    android:versionName="Isaac" >
+    android:versionCode="39"
+    android:versionName="Joaquin" >
 
     <uses-sdk
         android:minSdkVersion="11"
@@ -34,14 +34,13 @@
         </activity>
         <activity
             android:name="com.xoaquin.r07d.LoginActivity"
-            android:label="@string/title_activity_login" 
-            android:configChanges="orientation|keyboardHidden|keyboard">
+            android:configChanges="orientation|keyboardHidden|keyboard"
+            android:label="@string/title_activity_login" >
         </activity>
-        
         <activity
             android:name="com.xoaquin.r07d.ReporteActivity"
-            android:label="@string/title_activity_reporte" 
-            android:configChanges="orientation|keyboardHidden|keyboard|screenSize">
+            android:configChanges="orientation|keyboardHidden|keyboard|screenSize"
+            android:label="@string/title_activity_reporte" >
         </activity>
         <activity
             android:name="com.xoaquin.r07d.InstActivity"
@@ -53,8 +52,7 @@
         </activity>
         <activity
             android:name="com.xoaquin.r07d.CalendarioActivity2"
-            android:label="@string/title_activity_calendario_activity2" 
-            >
+            android:label="@string/title_activity_calendario_activity2" >
         </activity>
 
         <service android:name="com.parse.PushService" />
@@ -73,8 +71,8 @@
 
         <activity
             android:name="com.xoaquin.r07d.MuroActivity"
-            android:label="@string/title_activity_muro" 
-            android:configChanges="orientation|keyboardHidden|keyboard|screenSize">
+            android:configChanges="orientation|keyboardHidden|keyboard|screenSize"
+            android:label="@string/title_activity_muro" >
         </activity>
         <activity
             android:name="com.xoaquin.r07d.NivelesActivity"
@@ -88,10 +86,14 @@
         </activity>
         <activity
             android:name="com.xoaquin.r07d.RecdiaActivity2"
-            android:label="@string/title_activity_recdia_activity2" 
-            android:configChanges="orientation|keyboardHidden|keyboard|screenSize">
+            android:configChanges="orientation|keyboardHidden|keyboard|screenSize"
+            android:label="@string/title_activity_recdia_activity2" >
         </activity>
-        
+        <activity
+            android:name="com.xoaquin.r07d.NotiActivity"
+            android:label="@string/title_activity_noti" 
+            android:theme="@android:style/Theme.Translucent.NoTitleBar">
+        </activity>
     </application>
 
 </manifest>

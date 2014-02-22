@@ -5,9 +5,12 @@ import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.app.Activity;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.support.v4.app.NotificationCompat;
 import android.view.Menu;
 import android.widget.Button;
 import android.widget.TextView;
@@ -57,8 +60,34 @@ public class MainActivity extends Activity {
 	@SuppressWarnings("unused")
 	ParseInstallation installation = ParseInstallation.getCurrentInstallation();
 	
-   
-     Boolean b;
+	
+	//NOTIFICACION EN AREA DE NOTIFICACIONES 
+	
+	NotificationCompat.Builder mBuilder =
+    	     new NotificationCompat.Builder(this)
+	        .setSmallIcon(R.drawable.ic_launcher)
+	        .setContentTitle(getString(R.string.app_name))
+	        .setStyle(new NotificationCompat.BigTextStyle().bigText(getString(R.string.lampp)))
+	        .setAutoCancel(false)
+	        .setContentText(getString(R.string.lampp));
+
+	Intent resultIntent = new Intent(this, NotiActivity.class);
+	resultIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+
+	PendingIntent resultPendingIntent = PendingIntent.getActivity(this,0,resultIntent,PendingIntent.FLAG_UPDATE_CURRENT);
+	mBuilder.setContentIntent(resultPendingIntent);
+	
+	NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+	mNotificationManager.notify(0, mBuilder.build());
+
+	
+	
+	
+	
+	
+	
+	//CHEQUEO INTERNET PRESENTE
+    Boolean b;
      b=isNetworkAvailable();  //true si hay internet,  false si no hay.
     
     if(!b){
