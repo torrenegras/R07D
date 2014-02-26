@@ -2,6 +2,7 @@ package com.xoaquin.r07d;
 
 import com.parse.Parse;
 import com.parse.ParseInstallation;
+import com.parse.ParseUser;
 import com.parse.PushService;
 
 import android.app.Application;
@@ -30,6 +31,15 @@ public class DefaultApplication extends Application{
       		
       		PushService.subscribe(this, "todos", MainActivity.class);
       	
+      		
+      		ParseUser cu = ParseUser.getCurrentUser(); 
+      		if(cu!=null){
+      		String nombretablausuario=cu.getEmail();
+      		nombretablausuario=nombretablausuario.replaceAll("\\.", "");
+ 			nombretablausuario=nombretablausuario.replaceAll("@", "");	
+ 			PushService.subscribe(this, nombretablausuario,MainActivity.class); //suscripcion a canal dedicado para cada instalacion.
+      		}
+ 			
       		
       		String locale = getResources().getConfiguration().locale.getDisplayName();
       		     		

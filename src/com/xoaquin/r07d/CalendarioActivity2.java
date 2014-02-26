@@ -88,10 +88,11 @@ public class CalendarioActivity2 extends Activity {
 		if (extras != null) {
 		    nombretablausuario = extras.getString("correog");
 		    nombretablausuario=nombretablausuario.replaceAll("\\.", "");
-			nombretablausuario=nombretablausuario.replaceAll("@", "");
-	 		PushService.subscribe(this, nombretablausuario,MainActivity.class); //suscripcion a canal dedicado para cada instalacion.
+			nombretablausuario=nombretablausuario.replaceAll("@", "");	
 		}
-					
+		PushService.subscribe(this, nombretablausuario,MainActivity.class); //suscripcion a canal dedicado para cada instalacion.
+		
+		
 		//cargando variables
 		tvmes = (TextView) findViewById(R.id.textViewt);
 		tvanio = (TextView) findViewById(R.id.textViewtxt);
@@ -131,16 +132,18 @@ public class CalendarioActivity2 extends Activity {
     	 
  //push progreso fin de mes informe de nivel
          if(diacal==diafm||diacal==diafm-1||diacal==diafm-2||diacal==diafm-3){ 
+        	//PONIENDO EN PARSE EL CHECK LANZAMIENTO PUSH
+     	   
+     		
+             //String chk=installation.getString("mesaniochk"); 
+             String chk2=cu.getString("usermesaniochk");
         	
-            String chk=installation.getString("mesaniochk"); 
-          
-        	
-        	  	if(chk==null){// en caso de ser la primera vez para el usuario que se lanza un mensaje push de este tipo
+        	  	if(chk2==null){// en caso de ser la primera vez para el usuario que se lanza un mensaje push de este tipo
       
         	  	   	pushnivel();  	
         	}else{
         	
-        	if(chk.equals(m+Integer.toString(aniocal))){ }//nada ya se lanzo en este mes el push message  
+        	if(chk2.equals(m+Integer.toString(aniocal))){ }//nada ya se lanzo en este mes el push message  
         		else{
         	 
                      pushnivel();
@@ -353,6 +356,15 @@ private class AsyncTaskRunner extends AsyncTask<Integer, Integer, Integer> {
        	    installation.put("mesaniochk",m+Integer.toString(aniocal));
          	installation.saveInBackground();	
          	
+         	//PONIENDO EN PARSE EL CHECK LANZAMIENTO PUSH
+    	    ParseUser cu = ParseUser.getCurrentUser(); 
+    		if (cu != null) {
+    		  cu.put("usermesaniochk", m+Integer.toString(aniocal));
+    		  cu.saveInBackground();
+    		} else {}
+    		
+    		
+         	
          	try {
          	   
          	   
@@ -390,6 +402,14 @@ private class AsyncTaskRunner extends AsyncTask<Integer, Integer, Integer> {
    	    installation.put("mesaniochk",m+Integer.toString(aniocal));
   	    installation.saveInBackground();	
   	    
+  	//PONIENDO EN PARSE EL CHECK LANZAMIENTO PUSH
+	    ParseUser cu = ParseUser.getCurrentUser(); 
+		if (cu != null) {
+		  cu.put("usermesaniochk", m+Integer.toString(aniocal));
+		  cu.saveInBackground();
+		} else {}
+		
+  	    
   	  try {
   		 JSONObject data=new JSONObject();
   		 
@@ -424,6 +444,14 @@ private class AsyncTaskRunner extends AsyncTask<Integer, Integer, Integer> {
        	    push.sendInBackground();
             installation.put("mesaniochk",m+Integer.toString(aniocal));
          	installation.saveInBackground();	
+         	
+         	//PONIENDO EN PARSE EL CHECK LANZAMIENTO PUSH
+    	    ParseUser cu = ParseUser.getCurrentUser(); 
+    		if (cu != null) {
+    		  cu.put("usermesaniochk", m+Integer.toString(aniocal));
+    		  cu.saveInBackground();
+    		} else {}
+    		
          	
          	try {
 	        		 
