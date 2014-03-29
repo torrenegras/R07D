@@ -1,3 +1,6 @@
+
+//ADAPTADOR BASE DE DATOS PARA NOMBRES EN REPORTE
+
 package com.xoaquin.r07d;
 
 import android.content.ContentValues;
@@ -8,7 +11,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-public class DBAdapter2 //ADAPTADOR BASE DE DATOS PARA NOMBRES EN REPORTE
+public class DBAdapter2 
 {
     public static final String KEY_ROWID = "_id";
     public static final String KEY_NOMBRE = "nombre";

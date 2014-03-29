@@ -1,3 +1,6 @@
+
+//ADAPTADOR BASE DE DATOS PARA GUARDAR AUTHENTICACION LOCAL DE USUARIOS
+
 package com.xoaquin.r07d;
 
 
@@ -9,7 +12,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-public class DBAdapter //ADAPTADOR BASE DE DATOS PARA GUARDAR AUTHENTICACION LOCAL DE USUARIOS
+public class DBAdapter 
 {
     public static final String KEY_ROWID = "_id";
     public static final String KEY_CORREO = "correo";

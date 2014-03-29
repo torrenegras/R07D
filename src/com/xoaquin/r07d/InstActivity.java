@@ -1,3 +1,6 @@
+
+//ACTIVIDAD DE INSTRUCCIONES
+
 package com.xoaquin.r07d;
 
 import android.os.Bundle;
@@ -7,6 +10,7 @@ import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.view.Menu;
 import android.widget.TextView;
+
 
 @SuppressWarnings("unused")
 public class InstActivity extends Activity {

@@ -1,3 +1,6 @@
+
+//ACTIVIDAD ALERTA FIN DE MES SOLO ES UN ALERTDIALOG 
+
 package com.xoaquin.r07d;
 
 import android.os.Bundle;
@@ -16,9 +19,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
-
-
-//ACTIVIDAD ALERTA FIN DE MES SOLO ES UN ALERTDIALOG 
 
 
 public class JalertActivity extends Activity{     

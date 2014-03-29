@@ -1,3 +1,6 @@
+
+//RECEPTOR DE JSON DE MENSAJES PUSH NIVELES Y PUTNAJES PERSONALES
+
 package com.xoaquin.r07d;
 
 import org.json.JSONException;
@@ -7,10 +10,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
-
-
-
-//Receptor de JSON de Mensajes Push Niveles y Puntajes personales
 
 
 public class MyCustomReceiver extends BroadcastReceiver {

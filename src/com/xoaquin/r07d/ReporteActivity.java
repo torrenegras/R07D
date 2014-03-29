@@ -1,3 +1,6 @@
+
+// **** ACTIVIDAD CORE3 DE CREACION Y ENVIO DE REPORTES ****
+
 package com.xoaquin.r07d;
 
 
@@ -30,8 +33,6 @@ import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -40,17 +41,16 @@ import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.DatePickerDialog.OnDateSetListener;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -59,19 +59,16 @@ import android.widget.Toast;
 public class ReporteActivity extends Activity {
 
 	String mes,anio,strFile;
-int sf,sif;
-
-static final int DATE_DIALOG_ID = 1;
-private int mYear;
-private int mMonth;
-private int mDay;
-
-private Button b2;
-
-
-private static String FILE;
-private String spdfop="",spdfopi="",ntu="";;
-
+    int sf,sif;
+	static final int DATE_DIALOG_ID = 1;
+	private int mYear;
+	private int mMonth;
+	private int mDay;
+	private Button b2;
+	private static String FILE;
+	private String spdfop="",spdfopi="",ntu="";
+	private static ProgressBar pb;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -88,7 +85,7 @@ private String spdfop="",spdfopi="",ntu="";;
 		    
 		}
 		
-		
+		pb=(ProgressBar) findViewById(R.id.progressBar1);
 		
 		String nombre="",nombreli="",mdl="";
 		EditText etnombre,etnombreli,etmdl;
@@ -266,14 +263,12 @@ private String spdfop="",spdfopi="",ntu="";;
 	
 	public void onclickcreandorep(View v) { //funcion de generacion de reporte mensual
 		
-		
-	
+		pb.setVisibility(View.VISIBLE);
 		
 		//trayendo los editexts
 		EditText et1=(EditText) findViewById(R.id.editText1);
 		EditText et2=(EditText) findViewById(R.id.editText2);
 		EditText et3=(EditText) findViewById(R.id.editText5);
-		
 		
 		
 		//guardando campos en DB para nombres
@@ -283,43 +278,26 @@ private String spdfop="",spdfopi="",ntu="";;
      
 		
 		
-		
 		//Creando el reporte en HTML
 		
-		
-		
-		 String nombretablausuario=ntu;
+		    String nombretablausuario=ntu;
  		
- 		
- 		
- 		 Boolean b;
-	     b=isNetworkAvailable();  //true si hay internet,  false si no hay.
-	    
-	    if(!b){
-	    	Toast.makeText(ReporteActivity.this, getString(R.string.ncon)+"...", Toast.LENGTH_LONG).show(); 
-			 
-	    	 
-	    }else{
- 		
-	    	Toast.makeText(ReporteActivity.this, getString(R.string.grep)+"...", Toast.LENGTH_LONG).show(); 
-			
- 		
- 		ParseQuery<ParseObject> query = ParseQuery.getQuery(nombretablausuario); //query para buscar records de ese mes y año en orden ascendente
+ 		    ParseQuery<ParseObject> query = ParseQuery.getQuery(nombretablausuario); //query para buscar records de ese mes y año en orden ascendente
 	        query.whereEqualTo("mesdbp", mes);
 	        query.whereEqualTo("aniodbp", anio);
 	        query.orderByAscending("diadbp");
+	        query.setCachePolicy(ParseQuery.CachePolicy.NETWORK_ELSE_CACHE);
 	        
 	        query.findInBackground(new FindCallback<ParseObject>() {
 	          public void done(List<ParseObject> objects, ParseException e) {
-	          	  int os=objects.size();//  es 3
-	        	  
+	          	
 	        	
 	        	int i = 0; //contadores de booleans en parse
 	      		int s=0;
 	      		int si=0;
 	      		String cuerpocorreo = null;
 	      		
-	      	//trayendo los editexts
+	        	//trayendo los editexts
 	    		EditText et1=(EditText) findViewById(R.id.editText1);
 	    		EditText et2=(EditText) findViewById(R.id.editText2);
 	    		EditText et3=(EditText) findViewById(R.id.editText5);
@@ -346,9 +324,11 @@ private String spdfop="",spdfopi="",ntu="";;
 	    		
 	    		}
 	    		
-	        	  if(os>0){ //si el query es exitoso
+	    		if (e == null) {
+	    			int os=objects.size();
+	    			if(os>0){ //si el query es exitoso
 	        		
-	        		if (e == null) {
+	        		
 					
 	        			while( i < os  ) { //recorriendo la lista resultante del Query
              		    	 String saop=objects.get(i).getString("aopdbp"); //sacando el string de oracion presencial por cada record diario
@@ -365,7 +345,6 @@ private String spdfop="",spdfopi="",ntu="";;
              		    	 
              		    	 if(saop.equals("true")){
              		    		s++;  //si encuentra algun true para asistencia a oracion presencial aumenta este contador
-             		    	 
              		    	 }
              		    	 
              		    	if(saopi.equals("true")){
@@ -375,39 +354,32 @@ private String spdfop="",spdfopi="",ntu="";;
              		    	if(sopl.equals("true")){
              		    		  //si encuentra algun true para oracion por pastores y lideres se infla String resultante en HTML
              		    		srpl = "| "+getString(R.string.pyl)+" | ";
-             		    		
- 
+             		    	
              		    	}
              		    	 
              		    	if(scoo.equals("true")){
              		    		  //si encuentra algun true para oracion por coordinadores se infla String resultante en HTML
              		    	   srco = "| "+getString(R.string.coordi)+" | ";
              		    	 
-
              		    	 }
              		    	 
              		    	if(smgc.equals("true")){
              		    		  //si encuentra algun true para oracion por miembros grupo conexion se infla String resultante en HTML
              		    		srmdg = "| "+getString(R.string.mgcon)+" | ";
              		    		
-
              		    	 }
              		    	 
              		    	if(sopd.equals("true")){
              		    		 //si encuentra algun true para oracion por discipulos se infla String resutlante en HTML
              		    		srpd = "| "+getString(R.string.discl)+" | ";
              		    		
-
              		    	 }
              		    	
              		    	if(soplco.equals("true")){
              		    		  //si encuentra algun true para oracion por la cosecha se infla String resultante en HTML
              		    	   srplco = "| "+getString(R.string.harv)+" | ";
              		    	 
-
              		    	 }
-             		    	 
-             		    	
              		    	
              		    	i++;
              		    }//  While de booleans en PARSE
@@ -416,27 +388,17 @@ private String spdfop="",spdfopi="",ntu="";;
 	        			    sraop="<b>"+getString(R.string.tpm)+": "+String.valueOf(s)+"</b>";
 	        	   		    sraopi="<b>"+getString(R.string.tpmi)+": "+String.valueOf(si)+"</b>";
 	        		       
-	        	   		   spdfop=getString(R.string.tpm)+": "+String.valueOf(s);
+	        	   		    spdfop=getString(R.string.tpm)+": "+String.valueOf(s);
 	        	   	    	spdfopi=getString(R.string.tpmi)+": "+String.valueOf(si);
-	        		  
-	        	   		    
-	        	   		    
-	        	   		    
-	        	   		    
-					
+	        		
 					} else { //error tipo excepcion en query
-			           			           
+						 Toast.makeText(ReporteActivity.this, "Error...", Toast.LENGTH_LONG).show();        
 			        }
 	        	
-	        	}else{ // si el query no es exitoso en PARSE
 	        	
-	        	}
 	        	
-	        	  
-	        	 
 	        	  try {
 
-	        		
 	        		  //Guarda el archivo en el directorio de SDCARD
 	                  File sdCard = Environment.getExternalStorageDirectory();
 	                  File directory = new File (sdCard.getAbsolutePath() + "/R07D");
@@ -447,8 +409,6 @@ private String spdfop="",spdfopi="",ntu="";;
 	                  FileOutputStream fOut = new FileOutputStream(file);
 	                  OutputStreamWriter osw = new OutputStreamWriter(fOut,"latin1");   //ESTAR PENDIENDTE TEMA UTF-8 ISO NOSEQUE!!!  ENCODING
 	                  
-	                 
-      	   		     
 	                  //Creando bloque encabezado reporte HTML
 	                  cuerpocorreo= "<!DOCTYPE html>\n"+"<html>\n"+"<body>\n"+"<p>\n"+fecha+"<br />"+nombre+"<br />"+nombrecg+"<br /><br />"+mdl+"<br />"+cmdl+"<br /><br />"+sraop+"<br />"+sraopi+"<br /><br />"+"<b>"+getString(R.string.pfor)+"</B> "+"<b>"+srpl+srco+srmdg+srpd+srplco+"</b>"+"<br /><br /><br /><br />"+"</p>\n";
       	    		
@@ -469,7 +429,6 @@ private String spdfop="",spdfopi="",ntu="";;
 	                  
 	                  
 	                  //creando tabla HTML
-	                  
 	                  i=0;
 	                  while(i<os){
 	                	  String sfecha=objects.get(i).getString("fechadbp");
@@ -480,9 +439,7 @@ private String spdfop="",spdfopi="",ntu="";;
 	                	  String sadg=objects.get(i).getString("adgdbp");
 	                	  String sldn=objects.get(i).getString("ldndbp");
 	                	  String spei=objects.get(i).getString("peidbp");
-	                	 
 	                	
-	                	  
 	                	  osw.write("<tr>\n");
 	                	  osw.write("<td width=\"100\" style=\"text-align:center\" >"+  sfecha   +" </td>\n");
 	                	  osw.write("<td width=\"120\" style=\"text-align:center\">"+  hi   +" </td>\n");
@@ -493,33 +450,23 @@ private String spdfop="",spdfopi="",ntu="";;
 	                	  osw.write("<td>"+  sldn   +" </td>\n");
 	                	  osw.write("<td>"+  spei   +" </td>\n");
 	                	  osw.write(" </tr>\n");
-	                	  
 	                	 
-	                	  
 	                	  i++;
 	                  }
 	                  
 	                 
 	                 //cerrando tabla y doc HTML 
 	                  osw.write(" </table> \n");
-	               
-	                 
-	                  
 	                  osw.write("\n\n <p>"+getString(R.string.rgr07)+"</p>\n");
 	                  osw.write(" </body>\n");
 	                  osw.write(" </html>\n");
 	         
-	                  
 	                  osw.flush();
 	                  osw.close();
 	                  
+	             
 	                  
-	                  
-	                  
-	                  
-	                  
-	                  
-	                  //GENERACION REPORTE PDF
+	       //*******************GENERACION REPORTE PDF***************************
 	          	    
 	          	    FILE=Environment.getExternalStorageDirectory()	+ "/R07D/REPR07D-"+mes+"-"+anio+".pdf";
 	          	    
@@ -585,9 +532,7 @@ private String spdfop="",spdfopi="",ntu="";;
 	                  
 	               // Add rows to the table and add cells to the rows
 	                  Row2 row1 = table2.getRows().add(40, Font.getHelveticaBold(), 16, Color.a("Black"), Color.a("Gray"));
-	                  
-	                  
-	                 
+	                
 	                  Cell2 cell1=row1.getCells().add(getString(R.string.fechalabel));  cell1.setAlign(TextAlign.CENTER);  cell1.setVAlign(VAlign.CENTER);
 	                  Cell2 cell2=row1.getCells().add(getString(R.string.hinim));  cell2.setAlign(TextAlign.CENTER);  cell2.setVAlign(VAlign.CENTER);
 	                  Cell2 cell3=row1.getCells().add(getString(R.string.hfinm));  cell3.setAlign(TextAlign.CENTER);  cell3.setVAlign(VAlign.CENTER);
@@ -596,8 +541,7 @@ private String spdfop="",spdfopi="",ntu="";;
 	                  Cell2 cell6=row1.getCells().add(getString(R.string.tgma));  cell6.setAlign(TextAlign.CENTER);  cell6.setVAlign(VAlign.CENTER);
 	                  Cell2 cell7=row1.getCells().add(getString(R.string.lonma));  cell7.setAlign(TextAlign.CENTER);  cell7.setVAlign(VAlign.CENTER);
 	                  Cell2 cell8=row1.getCells().add(getString(R.string.pinma));  cell8.setAlign(TextAlign.CENTER);  cell8.setVAlign(VAlign.CENTER);
-	                  
-	                  
+	                 
 	                  
 	                //creando tabla PDF
 	                  float aqmhD=0,atotmax=0;
@@ -683,12 +627,12 @@ private String spdfop="",spdfopi="",ntu="";;
 	                  
 	                } 
 
-	    catch (java.io.IOException e1) {
+	                 catch (java.io.IOException e1) {
 
 	                }
 	      
 	        	
-	        	
+	        	  //BUSCA Y TRAE LOS ARCHIVOS PARA ADJUNTARLOS AL CORREO
 	        	  String strFile = Environment.getExternalStorageDirectory().getAbsolutePath() + "/R07D"+"/REPR07D-"+mes+"-"+anio+".html";
 	        	  String strFilepdf = Environment.getExternalStorageDirectory().getAbsolutePath() + "/R07D"+"/REPR07D-"+mes+"-"+anio+".pdf";
 	        		
@@ -714,34 +658,20 @@ private String spdfop="",spdfopi="",ntu="";;
 	        	  emailIntent.putParcelableArrayListExtra(Intent.EXTRA_STREAM, uris);
 
 	        	  startActivity(Intent.createChooser(emailIntent, "Email:"));
-	        	  	  
+	        	  
+	        	  pb.setVisibility(View.GONE);
 	        	
+	    		}else{ // si el query no es exitoso en PARSE
+	        		Toast.makeText(ReporteActivity.this, "Error...", Toast.LENGTH_LONG).show(); 
+	        		 pb.setVisibility(View.GONE);
+	        	}
 	          
 	          }//done
 	   
 	        }); //cierra Query
 	
-	    }//cierre else check internet
-	    
 	
-	}//cierre onclick
+	}//cierre onclickcreandorep
 	
 	
-	
-	
-	
-	private boolean isNetworkAvailable() {  //FUNCION DE CHECK RED
-	    ConnectivityManager connectivityManager 
-	          = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-	    NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
-	    return activeNetworkInfo != null && activeNetworkInfo.isConnected();
-	}
-	
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.reporte, menu);
-		return true;
-	}
-
 }

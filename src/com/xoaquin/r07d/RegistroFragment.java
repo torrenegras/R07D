@@ -1,3 +1,6 @@
+
+//**** FRAGMENT CORE REGISTRO ****
+
 package com.xoaquin.r07d;
 
 import java.util.Calendar;
@@ -15,7 +18,6 @@ import android.app.DialogFragment;
 import android.app.Fragment;
 import android.app.TimePickerDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Typeface;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -35,6 +37,7 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
+
 public class RegistroFragment extends Fragment {
     
 	//DECLARANDO VARS GLOBALES FRAGMENTO
@@ -46,15 +49,16 @@ public class RegistroFragment extends Fragment {
 	private static CheckBox cb1,cb2,cb3,cb4,cb5,cb6,cb7,cb8;
 	private static ProgressBar pb;
 	private static ParseUser cu = ParseUser.getCurrentUser();
-
-	
+ 	private Boolean b;
+    
 	@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
         Bundle savedInstanceState) {
         
 		// INFLANDO VIEW DEL FRAGMENTO
         View V= inflater.inflate(R.layout.fragment_registro, container, false);
-                
+        
+
         //INICIALIZANDO VARIABLES
         bhi=(Button) V.findViewById(R.id.button1);
         bhf=(Button) V.findViewById(R.id.button2);
@@ -123,24 +127,11 @@ public class RegistroFragment extends Fragment {
     	
     	}
         
-                
-        Boolean b;
-        b=isNetworkAvailable();  //true si hay internet,  false si no hay.
-	    if(!b){
-	    	Toast.makeText(getActivity(), getString(R.string.ncon)+"...", Toast.LENGTH_LONG).show(); 
-		   	 int secondsDelayed = 2;
-		        new Handler().postDelayed(new Runnable() {
-		                public void run() {
-		                	startActivity(new Intent(getActivity(), CalendarioActivity2.class));
-		                    getActivity().finish();
-		                }
-		        }, secondsDelayed * 1000);
-	    }else{
-	    	
-	    	ParseQuery<ParseObject> query = ParseQuery.getQuery(ntu);
+    	    //POPULANDO REGISTRO EN ONCREATE  	
+            ParseQuery<ParseObject> query = ParseQuery.getQuery(ntu);
 	        query.whereEqualTo("fechadbp", fca);
 	    
-	        
+	        query.setCachePolicy(ParseQuery.CachePolicy.NETWORK_ELSE_CACHE);
 	        query.findInBackground(new FindCallback<ParseObject>() {
 	            public void done(List<ParseObject> obs, ParseException e) {
 	                if (e == null) {
@@ -173,17 +164,52 @@ public class RegistroFragment extends Fragment {
 		                tdrc.setClickable(true);
 	                   }
 	                   
-	                } else {
-	                //Error en Query  
+	                } else {//modo offline sin poder hacer query, sin cache
+	                	Toast.makeText(getActivity(), getString(R.string.offmode)+"...", Toast.LENGTH_LONG).show(); 
+	                	pb.setVisibility(View.GONE);
+		                tdrc.setClickable(true);
+	                	
 	                }
 	            }
 
 	        });
 	           
-	    }//cierre del ELSE conexion
-        
-        
-	    
+	
+	        //REPLICANDO QUERIES MURO PARA OBTENER CACHE PREVIOS EN CASOS DE PUBLICACION 
+	       
+	        //QUERY DUMMY 1 PARA CACHE ACCION DE GRACIAS
+	        ParseQuery<ParseObject> q = ParseQuery.getQuery("Muro");
+    		q.whereEqualTo("correo", cu.getEmail().toString());
+    		q.whereEqualTo("fecha", fca);
+    		q.whereEqualTo("tipo", getString(R.string.atg));
+    		q.setCachePolicy(ParseQuery.CachePolicy.NETWORK_ELSE_CACHE);
+    		q.findInBackground(new FindCallback<ParseObject>() {
+    		    public void done(List<ParseObject> o, ParseException e) {
+    		        if (e == null) {
+    		         } else {
+    		        
+    		        }
+    		    }
+    		});
+	        
+    		//QUERY DUMMY 2 PARA CACHE PETICIONES
+    		ParseQuery<ParseObject> q2 = ParseQuery.getQuery("Muro");
+    		q2.whereEqualTo("correo", cu.getEmail().toString());
+    		q2.whereEqualTo("fecha", fca);
+    		q2.whereEqualTo("tipo", "(P)");
+    		q2.setCachePolicy(ParseQuery.CachePolicy.NETWORK_ELSE_CACHE);
+    		q2.findInBackground(new FindCallback<ParseObject>() {
+    		    public void done(List<ParseObject> o, ParseException e) {
+    		        if (e == null) {
+    		        } else {
+    		        
+    		        }
+    		    }
+    		});
+	        
+	 
+    		
+	        
 	  //HORA INICIO
 	    bhi.setOnClickListener(new OnClickListener() 
         {
@@ -228,42 +254,17 @@ public class RegistroFragment extends Fragment {
         );
         
         
-             
-        
-        
-       
+ 
      // GUARDAR
         bg.setOnClickListener(new OnClickListener()
         {
             public void onClick(View v) 
             
             {
-            	            	
             	guardar(); //LLAMANDO FUNCION GUARDAR DE ABAJO
-            	
-            	//QUERY SOLO PARA EL TOAST (SUJETO A OPTIMIZACION)
-            	ParseQuery<ParseObject> query = ParseQuery.getQuery(ntu);
-    	        query.whereEqualTo("fechadbp", fca);
-    	         
-    	        query.findInBackground(new FindCallback<ParseObject>() {
-    	            public void done(List<ParseObject> obs, ParseException e) {
-    	                if (e == null) {
-    	                	if (obs.size()>0)
-     	                   {   	                   
-     	                	   Toast.makeText(getActivity(), getString(R.string.actu)+"...", Toast.LENGTH_LONG).show();
-     	                   }else{
-     	                	   Toast.makeText(getActivity(), getString(R.string.guard)+"...", Toast.LENGTH_LONG).show();
-     	                   }
-    	                } else {
-    	                    
-    	                }
-    	            }
-    	        });
-    	        
-    	   
-    	        
-            }//FIN ONCLICK GUARDAR NATIVO IN-FRAGMENT       
-          });//FIN ONCLICKLISTENER GUARDAR NATIVO IN-FRAGMENT
+            	   	        
+            }
+          });
         
         
        
@@ -288,92 +289,39 @@ public class RegistroFragment extends Fragment {
        	pb.setVisibility(View.VISIBLE);
 		bg.setEnabled(false);//desabilita boton de guardar mientras hace la operacion, evita dobles
 		
+		b=isNetworkAvailable();
     	
 		//GUARDAR / ACTUALIZAR DATOS EN DB PARSE
 		
     	ParseQuery<ParseObject> query = ParseQuery.getQuery(ntu);
         query.whereEqualTo("fechadbp", fca);
+        query.setCachePolicy(ParseQuery.CachePolicy.NETWORK_ELSE_CACHE);
         query.findInBackground(new FindCallback<ParseObject>() {
             public void done(List<ParseObject> obs, ParseException e) {
                 if (e == null) {
                    if (obs.size()>0)
                    {   	                   
                 	   
-                
-                   ParseObject object=obs.get(0);
-                   
-                object.put("fechadbp", fca); 
-   		        object.put("diadbp", dca);
-   		        object.put("mesdbp", mca);
-   		        object.put("aniodbp", aca);
-   		        object.put("horaidbp", bhi.getText().toString()); 
-   		        object.put("horafdbp", bhf.getText().toString()); 
-   		        object.put("lbdbp", et1.getText().toString());
-   		        object.put("qmhDdbp", et2.getText().toString()); 
-   		        object.put("adgdbp", et3.getText().toString());
-   		        object.put("ldndbp", et4.getText().toString());
-   		        object.put("peidbp", et5.getText().toString()); 
-   		        object.put("opldbp", String.valueOf(cb1.isChecked())); 
-   		        object.put("coodbp", String.valueOf(cb2.isChecked()));
-   		        object.put("mgcdbp", String.valueOf(cb3.isChecked())); 
-   		        object.put("opddbp", String.valueOf(cb4.isChecked())); 
-   		        object.put("oplcodbp", String.valueOf(cb5.isChecked()));
-   		        object.put("aopdbp", String.valueOf(cb6.isChecked())); 
-   		        object.put("aopidbp", String.valueOf(cb7.isChecked())); 
-   		        
-   		   //guarda el objeto y activa el boton cuando finaliza correctamente
-		        object.saveInBackground(new SaveCallback() {
-		        	   public void done(ParseException e) {
-		        	     if (e == null) {
-		        	    	 bg.setEnabled(true);//success
-		        	    	 pb.setVisibility(View.INVISIBLE);
-		        	     } else {
-		        	       //fail
-		        	     }
-		        	   }
-		        	 });
-                   
+                ParseObject object=obs.get(0);
+               
+                actualizarRecordParse(object);   
+              
+		        Toast.makeText(getActivity(), getString(R.string.actu)+"...", Toast.LENGTH_LONG).show();
                    
                    }else{
-                   	                	   
-                    
-               		
-                    ParseObject TablaUsr = new ParseObject(ntu);//se crea un nuevo elemento para introducir nuevo record en PARSE
-           	            	           			
-           			TablaUsr.put("fechadbp", fca); 
-           	        TablaUsr.put("diadbp", dca);
-           	        TablaUsr.put("mesdbp", mca);
-           	        TablaUsr.put("aniodbp", aca);
-           	        TablaUsr.put("horaidbp", bhi.getText().toString()); 
-           	        TablaUsr.put("horafdbp", bhf.getText().toString()); 
-           	        TablaUsr.put("lbdbp", et1.getText().toString());
-           	        TablaUsr.put("qmhDdbp", et2.getText().toString()); 
-           	        TablaUsr.put("adgdbp", et3.getText().toString());
-           	        TablaUsr.put("ldndbp", et4.getText().toString());
-           	        TablaUsr.put("peidbp", et5.getText().toString()); 
-           	        TablaUsr.put("opldbp", String.valueOf(cb1.isChecked())); 
-           	        TablaUsr.put("coodbp", String.valueOf(cb2.isChecked()));
-           	        TablaUsr.put("mgcdbp", String.valueOf(cb3.isChecked())); 
-           	        TablaUsr.put("opddbp", String.valueOf(cb4.isChecked())); 
-           	        TablaUsr.put("oplcodbp", String.valueOf(cb5.isChecked()));
-           	        TablaUsr.put("aopdbp", String.valueOf(cb6.isChecked())); 
-           	        TablaUsr.put("aopidbp", String.valueOf(cb7.isChecked())); 
-          
-           	        //guarda el objeto y activa el boton cuando finaliza correctamente
-           	        TablaUsr.saveInBackground(new SaveCallback() {
-       		        	   public void done(ParseException e) {
-       		        	     if (e == null) {
-       		        	    	 bg.setEnabled(true);//success
-       		        	    	 pb.setVisibility(View.INVISIBLE);
-       		        	     } else {
-       		        	       //fail
-       		        	     }
-       		        	   }
-       		        	 });
+                  
+                 crearNuevoRecordParse();   
+                  	        
+           	     Toast.makeText(getActivity(), getString(R.string.guard)+"...", Toast.LENGTH_LONG).show();
                      	                   
-                   }
-                } else {
-                //Error en Query  
+                 }
+                   
+                } else {//error en query, algo salio mal.. sin net, sin cache...  PRIMERA VEZ QUE SE INTENTA QUERY SOBRE ELEMENTO, POR LO QUE ES NUEVO** OPTIMIZACION??**
+                	
+                 crearNuevoRecordParse();   
+      			        
+      			 Toast.makeText(getActivity(), getString(R.string.guard)+"...", Toast.LENGTH_LONG).show();
+                
                 }
             }
 
@@ -383,7 +331,7 @@ public class RegistroFragment extends Fragment {
         //PUBLICACION EN MURO R07D
         if(cb8.isChecked()){
         	
-        	//si no esta vacio 
+        	//si no esta vacio ACCION DE GRACIAS
         	if(!et3.getText().toString().isEmpty()){
         		
         		
@@ -391,6 +339,7 @@ public class RegistroFragment extends Fragment {
         		q.whereEqualTo("correo", cu.getEmail().toString());
         		q.whereEqualTo("fecha", fca);
         		q.whereEqualTo("tipo", getString(R.string.atg));
+        		q.setCachePolicy(ParseQuery.CachePolicy.NETWORK_ELSE_CACHE);
         		q.findInBackground(new FindCallback<ParseObject>() {
         		    public void done(List<ParseObject> o, ParseException e) {
         		        if (e == null) {
@@ -398,7 +347,8 @@ public class RegistroFragment extends Fragment {
         		        	//si existe actualiza
         		        	if(o.size()>0){
         		        		o.get(0).put("texto", et3.getText().toString());
-        		        		o.get(0).saveInBackground();
+        		        		o.get(0).saveEventually();
+        		        		
         		        	//o crea uno nuevo
         		        	}else{
         		        		ParseObject ag = new ParseObject("Muro");
@@ -406,63 +356,187 @@ public class RegistroFragment extends Fragment {
         		        		ag.put("correo", cu.getEmail().toString());
         		            	ag.put("tipo", getString(R.string.atg));
         		            	ag.put("texto", et3.getText().toString());
-        		            	ag.saveInBackground();	
-        		        	}
+        		            	ag.saveEventually();
+        	       		        	   
+             		        	}
         		        	
         		        	
         		        } else {
-        		            
+        		        	//falla query sin cache , sin net.. NUNCA SE HA HECHO ANTES,ENTONCES ELEMENTO NUEVO  SUJETO A OPTIMIZACION****
+        		        	ParseObject ag = new ParseObject("Muro");
+    		        		ag.put("fecha",fca);
+    		        		ag.put("correo", cu.getEmail().toString());
+    		            	ag.put("tipo", getString(R.string.atg));
+    		            	ag.put("texto", et3.getText().toString());
+    		            	ag.saveEventually();
         		        }
         		    }
         		});
         		
            		
         	}
-        	//si no esta vacio
+        	
+        	//si no esta vacio PETICIONES/INTERCESION
         	if(!et5.getText().toString().isEmpty()){
         	
         	
-        		ParseQuery<ParseObject> q = ParseQuery.getQuery("Muro");
-        		q.whereEqualTo("correo", cu.getEmail().toString());
-        		q.whereEqualTo("fecha", fca);
-        		q.whereEqualTo("tipo", "(P)");
-        		q.findInBackground(new FindCallback<ParseObject>() {
+        		ParseQuery<ParseObject> q2 = ParseQuery.getQuery("Muro");
+        		q2.whereEqualTo("correo", cu.getEmail().toString());
+        		q2.whereEqualTo("fecha", fca);
+        		q2.whereEqualTo("tipo", "(P)");
+        		q2.setCachePolicy(ParseQuery.CachePolicy.NETWORK_ELSE_CACHE);
+        		q2.findInBackground(new FindCallback<ParseObject>() {
         		    public void done(List<ParseObject> o, ParseException e) {
         		        if (e == null) {
         		            
         		        	if(o.size()>0){
         		        		o.get(0).put("texto", et5.getText().toString());
-        		        		o.get(0).saveInBackground();
+        		        		o.get(0).saveEventually();
         		        	}else{
         		        		ParseObject pet = new ParseObject("Muro");
         		            	pet.put("fecha",fca);
         		            	pet.put("correo", cu.getEmail().toString());
         		            	pet.put("tipo", "(P)");
         		            	pet.put("texto", et5.getText().toString());
-        		               	pet.saveInBackground();	
+        		               	pet.saveEventually();
         		        	}
-        		        	
-        		        	
+        		        
         		        } else {
-        		            
+        		        	//falla query sin cache , sin net.. NUNCA SE HA HECHO ANTES,ENTONCES ELEMENTO NUEVO  SUJETO A OPTIMIZACION****
+        		        	ParseObject pet = new ParseObject("Muro");
+    		            	pet.put("fecha",fca);
+    		            	pet.put("correo", cu.getEmail().toString());
+    		            	pet.put("tipo", "(P)");
+    		            	pet.put("texto", et5.getText().toString());
+    		               	pet.saveEventually();
         		        }
         		    }
         		});
-        		
-        
+        	
         	
         	}
-           	
+        
         }
-        
-        
+  
+
+	}//FIN GUARDAR()
 	
-	}//FIN GUARDAR
+    
+	
+	
+	
+	
+	//ACTUALIZAR RECORD EXISTENTE EN PARSE
+	 public void actualizarRecordParse(ParseObject object){
+	        
+		    object.put("fechadbp", fca); 
+	        object.put("diadbp", dca);
+	        object.put("mesdbp", mca);
+	        object.put("aniodbp", aca);
+	        object.put("horaidbp", bhi.getText().toString()); 
+	        object.put("horafdbp", bhf.getText().toString()); 
+	        object.put("lbdbp", et1.getText().toString());
+	        object.put("qmhDdbp", et2.getText().toString()); 
+	        object.put("adgdbp", et3.getText().toString());
+	        object.put("ldndbp", et4.getText().toString());
+	        object.put("peidbp", et5.getText().toString()); 
+	        object.put("opldbp", String.valueOf(cb1.isChecked())); 
+	        object.put("coodbp", String.valueOf(cb2.isChecked()));
+	        object.put("mgcdbp", String.valueOf(cb3.isChecked())); 
+	        object.put("opddbp", String.valueOf(cb4.isChecked())); 
+	        object.put("oplcodbp", String.valueOf(cb5.isChecked()));
+	        object.put("aopdbp", String.valueOf(cb6.isChecked())); 
+	        object.put("aopidbp", String.valueOf(cb7.isChecked())); 
+	        
+	       
+	      //true si hay internet,  false si no hay.
+	    if(!b){
+	   //guarda el objeto y activa el boton cuando finaliza correctamente estando OFFLINE
+		   	   object.saveEventually();
+		   	   
+	    	    int secondsDelayed = 2;
+		        new Handler().postDelayed(new Runnable() {
+		                public void run() {
+		                 bg.setEnabled(true);//success
+	        	    	 pb.setVisibility(View.INVISIBLE);
+		                }
+		        }, secondsDelayed * 1000);
+	    }else{
+	        
+	   //guarda el objeto y activa el boton cuando finaliza correctamente estando ONLINE
+	        object.saveInBackground(new SaveCallback() {
+	        	   public void done(ParseException e) {
+	        	     if (e == null) {
+	        	    	 bg.setEnabled(true);//success
+	        	    	 pb.setVisibility(View.INVISIBLE);
+	        	     } else {
+	        	       //fail
+	        	     }
+	        	   }
+	        	 });
+            
+	    }
+	 }   
 	
 
+	 //CREAR NUEVO RECORD EN PARSE
+	 public void  crearNuevoRecordParse() {
+		 
+            ParseObject TablaUsr = new ParseObject(ntu);//se crea un nuevo elemento para introducir nuevo record en PARSE
+   			
+			TablaUsr.put("fechadbp", fca); 
+	        TablaUsr.put("diadbp", dca);
+	        TablaUsr.put("mesdbp", mca);
+	        TablaUsr.put("aniodbp", aca);
+	        TablaUsr.put("horaidbp", bhi.getText().toString()); 
+	        TablaUsr.put("horafdbp", bhf.getText().toString()); 
+	        TablaUsr.put("lbdbp", et1.getText().toString());
+	        TablaUsr.put("qmhDdbp", et2.getText().toString()); 
+	        TablaUsr.put("adgdbp", et3.getText().toString());
+	        TablaUsr.put("ldndbp", et4.getText().toString());
+	        TablaUsr.put("peidbp", et5.getText().toString()); 
+	        TablaUsr.put("opldbp", String.valueOf(cb1.isChecked())); 
+	        TablaUsr.put("coodbp", String.valueOf(cb2.isChecked()));
+	        TablaUsr.put("mgcdbp", String.valueOf(cb3.isChecked())); 
+	        TablaUsr.put("opddbp", String.valueOf(cb4.isChecked())); 
+	        TablaUsr.put("oplcodbp", String.valueOf(cb5.isChecked()));
+	        TablaUsr.put("aopdbp", String.valueOf(cb6.isChecked())); 
+	        TablaUsr.put("aopidbp", String.valueOf(cb7.isChecked())); 
+
+	        
+	      //true si hay internet,  false si no hay.   
+	     if(!b){
+  		   //guarda el objeto y activa el boton cuando finaliza correctamente estando OFFLINE
+  			   	   TablaUsr.saveEventually();
+  			   	   
+  		    	    int secondsDelayed = 2;
+  			        new Handler().postDelayed(new Runnable() {
+  			                public void run() {
+  			                 bg.setEnabled(true);//success
+		        	    	 pb.setVisibility(View.INVISIBLE);
+  			                }
+  			        }, secondsDelayed * 1000);
+  		    }else{
+  		        
+  		   //guarda el objeto y activa el boton cuando finaliza correctamente estando ONLINE
+		        TablaUsr.saveInBackground(new SaveCallback() {
+		        	   public void done(ParseException e) {
+		        	     if (e == null) {
+		        	    	 bg.setEnabled(true);//success
+		        	    	 pb.setVisibility(View.INVISIBLE);
+		        	     } else {
+		        	       //fail
+		        	     }
+		        	   }
+		        	 });
+                  
+  		    }
+		 
+	 }
+	 
 	
-	
-	//DIALOG HORA INICIO
+	 
+	 //DIALOG HORA INICIO
 	public static class TimePickerFragment extends DialogFragment implements TimePickerDialog.OnTimeSetListener { 
 		@Override
 		public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -565,6 +639,7 @@ public class RegistroFragment extends Fragment {
 	
 	//CHECK NETWORK
 	private boolean isNetworkAvailable() { 
+		
 			ConnectivityManager connectivityManager 
 	          = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
 	    NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();

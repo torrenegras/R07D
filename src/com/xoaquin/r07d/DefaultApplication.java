@@ -1,3 +1,6 @@
+
+//CLASE PARA ONCREATE DE APP EN GENERAL..  
+
 package com.xoaquin.r07d;
 
 import com.parse.Parse;
@@ -8,8 +11,6 @@ import com.parse.PushService;
 import android.app.Application;
 import android.content.Context;
 
-
-//Clase para OnCreate de la aplicacion en general....   
 
 public class DefaultApplication extends Application{ 
 	
@@ -27,7 +28,7 @@ public class DefaultApplication extends Application{
       //comandos para notificaciones push activados en esta clase
       		
             PushService.setDefaultPushCallback(this, MainActivity.class);
-      		ParseInstallation.getCurrentInstallation().saveInBackground();
+      		ParseInstallation.getCurrentInstallation().saveEventually();
       		
       		PushService.subscribe(this, "todos", MainActivity.class);
       	

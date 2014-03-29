@@ -1,11 +1,12 @@
+
+//ACTIVIDAD DUMMY PARA USAR EN TRAER AL FRENTE APP CON NOTIFICACION
+
 package com.xoaquin.r07d;
 
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
 
-
-//ACTIVIDAD DUMMY PARA USAR EN TRAER AL FRENTE APP CON NOTIFICACION
 
 public class NotiActivity extends Activity {
 

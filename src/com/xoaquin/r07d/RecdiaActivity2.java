@@ -1,3 +1,6 @@
+
+//****  ACTIVIDAD CORE2 PARA GRABAR RECORD DIARIO ****
+
 package com.xoaquin.r07d;
 
 import android.app.ActionBar;
@@ -9,6 +12,8 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -26,10 +31,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.LinearLayout.LayoutParams;
 
+
 public class RecdiaActivity2 extends FragmentActivity {
 	
 	private TextView t10,t11;
 	private int ff=0;
+	
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -62,8 +70,13 @@ public class RecdiaActivity2 extends FragmentActivity {
 	
 	public void onclickdevo(View v) {
 		
+	    Boolean b=isNetworkAvailable();  //true si hay internet,  false si no hay.
+	    if(!b){
+	    	Toast.makeText(RecdiaActivity2.this, getString(R.string.ncon)+"...", Toast.LENGTH_LONG).show();
+	    }else{
+	   
 		//LLAMANDO FUNCION AUTOGUARDADO PARA CUANDO CAMBIO DE TAB
-		RegistroFragment rf=new RegistroFragment();
+		RegistroFragment rf = (RegistroFragment) getFragmentManager().findFragmentById(R.id.fragments_container);
 		rf.guardar();
 		
 		Toast.makeText(RecdiaActivity2.this, getString(R.string.augu)+"...", Toast.LENGTH_LONG).show();
@@ -95,7 +108,7 @@ public class RecdiaActivity2 extends FragmentActivity {
                 }
               }, secondsDelayed * 1000);
 		
-		
+	    }
     }
 	
 	
@@ -200,6 +213,20 @@ public class RecdiaActivity2 extends FragmentActivity {
         dialog.setContentView(ll);        
         dialog.show();        
     }
+	
+	
+	
+
+	//funcion conectividad de red
+	private boolean isNetworkAvailable() {
+	    ConnectivityManager connectivityManager 
+	          = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+	    NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+	    return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+	}
+	
+	
+	
 	
 	
 	@Override

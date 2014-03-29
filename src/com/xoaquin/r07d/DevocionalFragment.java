@@ -1,3 +1,6 @@
+
+//FRAGMENT DEVOCIONAL
+
 package com.xoaquin.r07d;
 
 import java.util.Calendar;

@@ -1,3 +1,6 @@
+
+//ACTIVIDAD DE VISUALIZACION DE NIVELES Y PUNTAJES 
+
 package com.xoaquin.r07d;
 
 import com.parse.ParseUser;
@@ -5,9 +8,10 @@ import com.parse.ParseUser;
 import android.os.Bundle;
 import android.app.Activity;
 import android.graphics.Typeface;
-import android.view.Menu;
 import android.widget.Button;
 import android.widget.TextView;
+
+
 
 public class NivelesActivity extends Activity {
 
@@ -45,7 +49,7 @@ public class NivelesActivity extends Activity {
 		  pun=pun+Integer.valueOf(puntos);
 		  b.setText(String.valueOf(pun));
 		  cu.put("puntaje", pun);
-		  cu.saveInBackground();
+		  cu.saveEventually();
 		} else {
 		  // show the signup or login screen
 		}
@@ -53,15 +57,4 @@ public class NivelesActivity extends Activity {
 	}
 
 	
-	
-	
-	
-	
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.niveles, menu);
-		return true;
-	}
-
 }

@@ -127,10 +127,9 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int main=0x7f080006;
         public static final int muro=0x7f080007;
         public static final int niveles=0x7f080008;
-        public static final int notification=0x7f080009;
-        public static final int recdia=0x7f08000a;
-        public static final int recdia_activity2=0x7f08000b;
-        public static final int reporte=0x7f08000c;
+        public static final int recdia=0x7f080009;
+        public static final int recdia_activity2=0x7f08000a;
+        public static final int reporte=0x7f08000b;
     }
     public static final class string {
         public static final int BYJ=0x7f060043;
@@ -249,6 +248,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int nt=0x7f060081;
         public static final int nvie=0x7f060076;
         public static final int oct=0x7f060066;
+        public static final int offmode=0x7f0600b7;
         public static final int okr=0x7f060084;
         public static final int ol=0x7f060051;
         public static final int or07w=0x7f0600b3;

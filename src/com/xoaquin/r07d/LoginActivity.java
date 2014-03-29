@@ -1,3 +1,6 @@
+
+//ACTIVIDAD DE LOGIN, ETC.
+
 package com.xoaquin.r07d;
 
 import com.parse.LogInCallback;
@@ -23,6 +26,7 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
 
 public class LoginActivity extends Activity {
 
@@ -90,23 +94,9 @@ public class LoginActivity extends Activity {
 			    final String etcorreo=correo.getText().toString();
 			    final String etclave=clave.getText().toString();
 			    final DBAdapter db = new DBAdapter(this);  
-			    
-			    
-			    
-			    
+						    
 			    MainActivity.correoglobal=etcorreo;
 			    
-	        
-			    Boolean b;
-			     b=isNetworkAvailable();  //true si hay internet,  false si no hay.
-			    
-			    if(!b){
-			    	Toast.makeText(LoginActivity.this, getString(R.string.ncon), Toast.LENGTH_LONG).show(); 
-					 
-			    	pb.setVisibility(View.INVISIBLE); 
-			    }else{
-			        
-			
 			                //loggeando usuario existente
 			                String email= etcorreo; //creando username con primera parte de email
 			                String usr[]=email.split("@");
@@ -136,13 +126,26 @@ public class LoginActivity extends Activity {
 						          
 			                	    	
 			                	    } else {
+			                	    	
+			            			    Boolean b;
+			            			     b=isNetworkAvailable();  //true si hay internet,  false si no hay.
+			            			    
+			            			    if(!b){
+			            			    	Toast.makeText(LoginActivity.this, getString(R.string.ncon)+"...", Toast.LENGTH_LONG).show(); 
+			            					pb.setVisibility(View.INVISIBLE); 
+			            			    }else{
+			            			   
 			                	    	Toast.makeText(LoginActivity.this, getString(R.string.uce)+"...."+getString(R.string.uce2)+"..", Toast.LENGTH_LONG).show(); 					
 										pb.setVisibility(View.INVISIBLE); 
+			            			    }
 			                	    }
 			                	  }
-			                	});
+			                	
+			                
+			                
+			                });
 			        
-			    }//else conexion
+			
 			    
 	}//conectarse
 	
@@ -175,7 +178,8 @@ public class LoginActivity extends Activity {
 			    
 			    if(!b){
 			    	Toast.makeText(LoginActivity.this, getString(R.string.ncon)+"...", Toast.LENGTH_LONG).show(); 
-					 
+			    	 pb.setVisibility(View.INVISIBLE);
+			    	 b2.setEnabled(true);
 			    	 
 			    }else{
 			    
@@ -270,7 +274,8 @@ public class LoginActivity extends Activity {
 	
 	public void onclickdesc(View view) {
 		
-		 final DBAdapter db = new DBAdapter(this);  
+		//SUJETO A OPTIMIZACION PORQUE NO ES NECESARIO SI SE TIENE EL LOGOUT DE ABAJO DE PARSEUSER
+		final DBAdapter db = new DBAdapter(this);  
 		db.open(); 
         db.insertTitle("", "desc");
         
@@ -308,7 +313,7 @@ public class LoginActivity extends Activity {
                   		tv3.setEnabled(true);
                   		  
                           } else {
-                        	  Toast.makeText(LoginActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();	
+                        	  Toast.makeText(LoginActivity.this, getString(R.string.ncon)+"...", Toast.LENGTH_LONG).show();	
                         	  pb.setVisibility(View.INVISIBLE);
                         		tv3.setEnabled(true);
                            }

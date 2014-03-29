@@ -1,3 +1,6 @@
+
+//ADAPTADOR CUSTOM PARA INFLAR CALENDARIO
+
 package com.xoaquin.r07d;
 
 import java.util.ArrayList;
@@ -7,8 +10,6 @@ import java.util.List;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Typeface;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.View;
@@ -202,15 +203,6 @@ class MonthAdapter2 extends BaseAdapter {
                         }
                     
                          
-                        //Color Rojo y Verde con chequeo de base de datos
-                        ConnectivityManager connMgr = (ConnectivityManager) 
-                                view.getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
-                            NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
-                           
-                            if (networkInfo != null && networkInfo.isConnected()) { //chequeo RED
-                                                  
-                    
-                            	   
            	         //coloreado BASE de rojo dias sin hacer R07 
                                   Calendar now = Calendar.getInstance();
                                   int hoy = now.get(Calendar.DAY_OF_MONTH);
@@ -231,9 +223,7 @@ class MonthAdapter2 extends BaseAdapter {
             	        	   }  
             	        	   i++;
             	           }
-                            
-                }//IF network check
-           
+            
                             
               
                 } else {

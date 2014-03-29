@@ -1,3 +1,6 @@
+
+//ACTIVIDAD DEL MURO R07D
+
 package com.xoaquin.r07d;
 
 import java.util.ArrayList;
@@ -17,13 +20,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
-import android.view.Menu;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+
 
 public class MuroActivity extends ListActivity {
 
@@ -59,8 +62,7 @@ public class MuroActivity extends ListActivity {
 		
 		
 //LLENANDO LISTVIEW EN TAREA ASYNC
-		//lv.setDivider(new ColorDrawable(getResources().getColor(R.color.marron)));
-		//lv.setDividerHeight(1);
+		
 		Context ctx=this;
 		AsyncTaskRunner2 runner = new AsyncTaskRunner2();
         runner.execute(ctx);
@@ -122,6 +124,7 @@ private class AsyncTaskRunner2 extends AsyncTask<Context, Void, CustomAdapter> {
 			//Query de toda la clase en Parse
 			ParseQuery<ParseObject> q = ParseQuery.getQuery("Muro");
 			q.orderByDescending("createdAt");
+			q.setCachePolicy(ParseQuery.CachePolicy.NETWORK_ELSE_CACHE);
 			try {
 				List<ParseObject> o=q.find();
 				
@@ -154,8 +157,7 @@ private class AsyncTaskRunner2 extends AsyncTask<Context, Void, CustomAdapter> {
 	    	
 	   	    return customAdapter;
 	    }
-		
-		
+	
 	    
 	    protected void onPostExecute(CustomAdapter ca) {
 	    	ListView lv = getListView();
@@ -169,13 +171,5 @@ private class AsyncTaskRunner2 extends AsyncTask<Context, Void, CustomAdapter> {
 	}
 	
 
-	
-	
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		//getMenuInflater().inflate(R.menu.muro, menu);
-		return true;
-	}
 
 }

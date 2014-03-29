@@ -1,3 +1,6 @@
+
+//MODDED SNIPPET DE UN GENIO PARA CALIFICAR APP
+
 package com.xoaquin.r07d;
 
 import android.app.Dialog;
@@ -15,7 +18,6 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 
-//Moded Snippet de un genio para calificar APP
 
 public class AppRater {
     private final static String APP_TITLE = "R07D";

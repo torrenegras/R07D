@@ -1,6 +1,8 @@
-package com.xoaquin.r07d;
 
 //OBJETO CUSTOM CON 4 STRINGS QUE VAN A INFLAR LOS 4 TEXTVIEWS DE CADA ITEM EN LISTVIEW, ESTOS FORMAN LA LISTA DEL MISMO TIPO.
+
+package com.xoaquin.r07d;
+
 
 public class CustomObject {
 

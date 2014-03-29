@@ -184,5 +184,6 @@
     <string name="lampp">Your word is a lamp to guide my feet and a light for my path</string>
     <string name="title_activity_notification">NotificationActivity</string>
     <string name="title_activity_noti">NotiActivity</string>
-
+    <string name="offmode">Offline Mode</string>
+    
 </resources>

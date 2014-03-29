@@ -1,3 +1,6 @@
+
+//ACTIVIDAD DE ABOUT
+
 package com.xoaquin.r07d;
 
 import android.os.Bundle;

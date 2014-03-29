@@ -1,3 +1,6 @@
+
+//***  ACTIVIDAD CORE APP  ****
+
 package com.xoaquin.r07d;
 
 import java.util.Calendar;
@@ -45,10 +48,10 @@ public class CalendarioActivity2 extends Activity {
     public int diacal,mescal,aniocal,diatmp,diafm;
     public static int mescalt,aniocalt,voltereta;
 	private String nombretablausuario="",m="";
-	private ParseInstallation installation;
 	private MonthAdapter2 mgva;
 	public static String[] dcomp= new String[31], dcompp= new String[31];
 	private static ProgressBar pb;
+	
 	
 	
 	@Override
@@ -67,7 +70,7 @@ public class CalendarioActivity2 extends Activity {
 		if (cu != null) {
 		 String locale = getResources().getConfiguration().locale.getDisplayName();
 		  cu.put("locale", locale);
-		  cu.saveInBackground();
+		  cu.saveEventually();
 		} else {
 		
 		}
@@ -78,10 +81,10 @@ public class CalendarioActivity2 extends Activity {
 		ab.setBackgroundDrawable(drw);
 		
 		PushService.setDefaultPushCallback(this, MainActivity.class);
-		ParseInstallation.getCurrentInstallation().saveInBackground();
+		ParseInstallation.getCurrentInstallation().saveEventually();
 		ParseAnalytics.trackAppOpened(getIntent());
 		PushService.subscribe(this, "todos", MainActivity.class);
-		installation = ParseInstallation.getCurrentInstallation();
+		ParseInstallation.getCurrentInstallation();
 		
 		//trayendo correo de la anterior actividad usando intent y no variable global.. manera correcta. 
 		Bundle extras = getIntent().getExtras();
@@ -155,7 +158,7 @@ public class CalendarioActivity2 extends Activity {
         
                 
             
-   //MANEJO CAMBIO DE ORIENTACION
+   //EJECUCION DE TASK PRINCIPAL Y MANEJO DE CAMBIO DE ORIENTACION
             @SuppressWarnings("deprecation")
 			final Object data = getLastNonConfigurationInstance();  //variable de chequeo de cambio de orientacion
 
@@ -337,7 +340,7 @@ private class AsyncTaskRunner extends AsyncTask<Integer, Integer, Integer> {
 		ParseQuery<ParseObject> query = ParseQuery.getQuery(nombretablausuario); 
   		query.whereEqualTo("mesdbp", m);
 	    query.whereEqualTo("aniodbp", Integer.toString(aniocal)); 
-    	
+	    query.setCachePolicy(ParseQuery.CachePolicy.NETWORK_ELSE_CACHE);
 	       try {
 		List<ParseObject> objects= query.find();
 		
@@ -353,14 +356,14 @@ private class AsyncTaskRunner extends AsyncTask<Integer, Integer, Integer> {
             }
        	    
             push.sendInBackground();
-       	    installation.put("mesaniochk",m+Integer.toString(aniocal));
-         	installation.saveInBackground();	
+       	    //installation.put("mesaniochk",m+Integer.toString(aniocal));
+         	//installation.saveInBackground();	
          	
          	//PONIENDO EN PARSE EL CHECK LANZAMIENTO PUSH
     	    ParseUser cu = ParseUser.getCurrentUser(); 
     		if (cu != null) {
     		  cu.put("usermesaniochk", m+Integer.toString(aniocal));
-    		  cu.saveInBackground();
+    		  cu.saveEventually();
     		} else {}
     		
     		
@@ -399,14 +402,14 @@ private class AsyncTaskRunner extends AsyncTask<Integer, Integer, Integer> {
         }
    	    
         push.sendInBackground();
-   	    installation.put("mesaniochk",m+Integer.toString(aniocal));
-  	    installation.saveInBackground();	
+   	    //installation.put("mesaniochk",m+Integer.toString(aniocal));
+  	    //installation.saveInBackground();	
   	    
   	//PONIENDO EN PARSE EL CHECK LANZAMIENTO PUSH
 	    ParseUser cu = ParseUser.getCurrentUser(); 
 		if (cu != null) {
 		  cu.put("usermesaniochk", m+Integer.toString(aniocal));
-		  cu.saveInBackground();
+		  cu.saveEventually();
 		} else {}
 		
   	    
@@ -442,14 +445,14 @@ private class AsyncTaskRunner extends AsyncTask<Integer, Integer, Integer> {
             }
             
        	    push.sendInBackground();
-            installation.put("mesaniochk",m+Integer.toString(aniocal));
-         	installation.saveInBackground();	
+            //installation.put("mesaniochk",m+Integer.toString(aniocal));
+         	//installation.saveInBackground();	
          	
          	//PONIENDO EN PARSE EL CHECK LANZAMIENTO PUSH
     	    ParseUser cu = ParseUser.getCurrentUser(); 
     		if (cu != null) {
     		  cu.put("usermesaniochk", m+Integer.toString(aniocal));
-    		  cu.saveInBackground();
+    		  cu.saveEventually();
     		} else {}
     		
          	
@@ -484,24 +487,20 @@ private class AsyncTaskRunner extends AsyncTask<Integer, Integer, Integer> {
 //FUNCION LLAMADO PARSE PARA OBTENER LISTA DE DIAS COMPLETADOS EN ESE MES/AÑO
     public String[] listadiascompletados(int mescalf,int aniocalf)
      {
-	  String[] res= new String[31];
-	
+	  
+     String[] res= new String[31];
+    	
 	 String nmcomp=String.valueOf(mescalf+1);
      if((mescalf+1)<10){nmcomp="0"+nmcomp;}
      String nycomp=String.valueOf(aniocalf);
      
-     ParseUser cu = ParseUser.getCurrentUser();
-    
-     String nombretablausuario=cu.getEmail();
-     nombretablausuario=nombretablausuario.replaceAll("\\.", "");
-	 nombretablausuario=nombretablausuario.replaceAll("@", "");
-		
-	ParseQuery<ParseObject> query = ParseQuery.getQuery(nombretablausuario); //query para buscar records de ese mes y año en orden ascendente
+     ParseQuery<ParseObject> query = ParseQuery.getQuery(nombretablausuario); //query para buscar records de ese mes y año en orden ascendente
 	 query.whereEqualTo("mesdbp", nmcomp);
      query.whereEqualTo("aniodbp", nycomp);
      query.orderByAscending("diadbp");
+     query.setCachePolicy(ParseQuery.CachePolicy.NETWORK_ELSE_CACHE);
      
-    try {
+     try {
 	List<ParseObject> objects=query.find();
     int i=0;
        while(i<objects.size()){
@@ -517,9 +516,9 @@ private class AsyncTaskRunner extends AsyncTask<Integer, Integer, Integer> {
                } catch (ParseException e1 ) {
               	// TODO Auto-generated catch block
 	          e1.printStackTrace();
-          }      
+          }  
            return res;
-           }
+   }
 
 
 
