@@ -3,7 +3,11 @@
 
 package com.xoaquin.r07d;
 
+import java.util.HashMap;
+
+import com.parse.FunctionCallback;
 import com.parse.LogInCallback;
+import com.parse.ParseCloud;
 import com.parse.ParseException;
 import com.parse.ParseUser;
 import com.parse.RequestPasswordResetCallback;
@@ -218,7 +222,18 @@ public class LoginActivity extends Activity {
     	                user.setEmail(etcorreo);
     	                user.put("puntaje", 0);
     	                
-    	               
+    	               //llamando funcion Cloud email nuevo usuario y cuenta usuarios totales
+    	                
+    	                HashMap<String, Object> params = new HashMap<String, Object>();
+    	                params.put("correo", etcorreo);
+    	                ParseCloud.callFunctionInBackground("infonewusers", params, new FunctionCallback<String>() {
+    	                   public void done(String response, ParseException e) {
+    	                       if (e == null) {
+    	                          // ratings is 4.5
+    	                       }
+    	                   }
+    	                });
+    	                
     	                
     	                user.signUpInBackground(new SignUpCallback() {
     	                 

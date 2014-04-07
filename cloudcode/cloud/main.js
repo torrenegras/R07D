@@ -191,5 +191,58 @@ if(dd==1){
 
 
 
+//FUNCION EMAIL INFO NUEVO USUARIO Y CONTEO TOTAL USUARIOS
+Parse.Cloud.define("infonewusers", function(request, response) {
+ 
+var Mandrill = require('mandrill');
+Mandrill.initialize('1JXzvtkvJOoZ_VVMpNt2aQ');
+
+
+var query = new Parse.Query(Parse.User);
+
+query.count({
+  success: function(count) {
+    // The count request succeeded. Show the count
+   
+  
+   Mandrill.sendEmail({
+  message: {
+    text: "NUEVO USUARIO: "+request.params.correo+"   TOTAL USUARIOS: "+count,
+    subject: "NUEVO REGISTRO DE USUARIO EN R07D",
+    from_email: "xoaquin@outlook.com",
+    from_name: "Xoaquin",
+    to: [
+      {
+        email: "carlos@torrenegra.co",
+        name: "CARLOS TORRENEGRA"
+      }
+    ]
+  },
+  async: true
+},{
+  success: function(httpResponse) {
+    console.log(httpResponse);
+    response.success("Email sent!");
+  },
+  error: function(httpResponse) {
+    console.error(httpResponse);
+    response.error("Uh oh, something went wrong");
+  }
+});
+   
+   
+ 
+   
+  },
+  error: function(error) {
+    // The request failed
+  }
+});
+
+
+ 
+  
+});//cierre funcion email nuevo usuario
+
 
 
