@@ -217,6 +217,9 @@
 <string name="lampp">L\u00E1mpara es a mis pies tu palabra, y lumbrera a mi camino</string>
 <string name="offmode">Modo Offline</string>
 
+<string name="devnotsup">Este dispositivo no est\u00E1 soportado.</string>
+<string name="gpsmustbeins">Google Play Services debe estar instalado.</string>
+    
 
 
 </resources>

@@ -185,5 +185,7 @@
     <string name="title_activity_notification">NotificationActivity</string>
     <string name="title_activity_noti">NotiActivity</string>
     <string name="offmode">Offline Mode</string>
+    <string name="devnotsup">This device is not supported.</string>
+    <string name="gpsmustbeins">Google Play Services must be installed.</string>
     
 </resources>

@@ -10,6 +10,10 @@ import java.util.List;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GooglePlayServicesClient;
+import com.google.android.gms.common.GooglePlayServicesUtil;
+import com.google.android.gms.location.LocationClient;
 import com.parse.ParseAnalytics;
 import com.parse.ParseException;
 import com.parse.ParseInstallation;
@@ -19,6 +23,7 @@ import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.PushService;
 
+import android.location.Location;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Vibrator;
@@ -29,6 +34,7 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -39,8 +45,9 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Toast;
 
-public class CalendarioActivity2 extends Activity {
+public class CalendarioActivity2 extends Activity implements GooglePlayServicesClient.ConnectionCallbacks,GooglePlayServicesClient.OnConnectionFailedListener {
  
 	public static String fecha,nombredia,dia,mes,anio; //variables globales para toda la app
 	private TextView tvmes,tvanio,diatv; //variables globales dentro de esta actividad 
@@ -52,6 +59,10 @@ public class CalendarioActivity2 extends Activity {
 	public static String[] dcomp= new String[31], dcompp= new String[31];
 	private static ProgressBar pb;
 	
+	Location mCurrentLocation;
+	LocationClient mLocationClient;
+	
+	static final int REQUEST_CODE_RECOVER_PLAY_SERVICES = 1001;
 	
 	
 	@Override
@@ -74,6 +85,11 @@ public class CalendarioActivity2 extends Activity {
 		} else {
 		
 		}
+		
+		//SETTING DEL CLIENTE DE POSICIONAMIENTO
+	    mLocationClient= new LocationClient(this, this, this);
+
+	    
 		
 		//COLOR AL ACTIONBAR
 		ActionBar ab=getActionBar();
@@ -669,7 +685,115 @@ private int getBarHeight() {
 		
 	}
 
+
+	//TRES METODOS AUTOGENERADOS PARA LA IMPLEMENTACION DE LOCATION
+	@Override
+	public void onConnectionFailed(ConnectionResult arg0) {
+		// TODO Auto-generated method stub
+		
+    
+	}
+
+
+	@Override
+	public void onConnected(Bundle arg0) {
+		// TODO Auto-generated method stub
+		
+		//RECIBIENDO POSICION ACTUALIZADA
+	    mCurrentLocation = mLocationClient.getLastLocation();
+       
+	    if(mCurrentLocation!=null){
+	    Log.e("lat",Double.toString(mCurrentLocation.getLatitude()));
+	    Log.e("lon",Double.toString(Math.abs(mCurrentLocation.getLongitude())));
+	    
+	    Double lat=mCurrentLocation.getLatitude();
+	    Double lon=Math.abs(mCurrentLocation.getLongitude());
+	    
+	    //Su Presencia GeoFence
+	    if (lat>4.683319&&lat<4.686110){
+	    	if(lon>74.059575&&lon<74.063798){
+	    		Toast.makeText(this, "GEOFENCE SUPRESENCIA!!!", Toast.LENGTH_LONG).show();
+	  		          
+	    	}
+	    }
+	    
+         }
+		
+	}
+
+
+	@Override
+	public void onDisconnected() {
+		// TODO Auto-generated method stub
+		
+	}
+
 	
+	//CONEXION AL CLIENTE DE POSICIONAMIENTO CUANDO LA ACTIVIDAD ES VISIBLE
+	@Override
+    protected void onStart() {
+        super.onStart();
+        
+        if (checkPlayServices()) {
+        	mLocationClient.connect();
+          }
+        
+      
+        
+    }
+
+    //DESCONEXION DEL CLIENTE AL DESAPARECER LA ACTIVIDAD
+	@Override
+    protected void onStop() {
+		 
+		if (checkPlayServices()) {
+	        	mLocationClient.disconnect();
+	          }
+       
+        
+        super.onStop();
+    }
+
+	
+	
+	//3 METODOS COMPLEMENTARIOS PARA :  CHECK STATUS GOOGLE PLAY SERVICES PARA PODER USARLO EN GEOLOCALIZACION
+
+	private boolean checkPlayServices() {
+		  int status = GooglePlayServicesUtil.isGooglePlayServicesAvailable(this);
+		  if (status != ConnectionResult.SUCCESS) {
+		    if (GooglePlayServicesUtil.isUserRecoverableError(status)) {
+		      showErrorDialog(status);
+		    } else {
+		      Toast.makeText(this, getString(R.string.devnotsup), 
+		          Toast.LENGTH_LONG).show();
+		      finish();
+		    }
+		    return false;
+		  }
+		  return true;
+		} 
+
+	
+	void showErrorDialog(int code) {
+		  GooglePlayServicesUtil.getErrorDialog(code, this, 
+		      REQUEST_CODE_RECOVER_PLAY_SERVICES).show();
+		}
+
+	
+	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+	  switch (requestCode) {
+	    case REQUEST_CODE_RECOVER_PLAY_SERVICES:
+	      if (resultCode == RESULT_CANCELED) {
+	        Toast.makeText(this, getString(R.string.gpsmustbeins),
+	            Toast.LENGTH_SHORT).show();
+	        finish();
+	      }
+	      return;
+	  }
+	  super.onActivityResult(requestCode, resultCode, data);
+	}
 	
 
 }
