@@ -1,4 +1,5 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#ffe2d8"
@@ -26,6 +27,15 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="#8d665f"
         android:textSize="50sp" />
+
+    <Button
+        android:id="@+id/button2"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="left"
+        android:background="@drawable/s"
+        android:onClick="onclicksharepoints" />
 
     <Button
         android:id="@+id/button1"

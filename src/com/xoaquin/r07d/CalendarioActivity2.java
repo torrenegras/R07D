@@ -342,11 +342,14 @@ private class AsyncTaskRunner extends AsyncTask<Integer, Integer, Integer> {
 	
 //ONCLICK REPORTES
     public void onclickgenrepo(View v) { //boton inicio actividad MENU de generacion reportes	
-    	
+    
+    
 	 Intent i = new Intent(getApplicationContext(), ReporteActivity.class);
 	 i.putExtra("correog",nombretablausuario);//pasando la variable correo a la siguiente actividad
 	 
 	 startActivity(new Intent(i));  //llamando la actividad de registro acorde a fecha seleccionada
+	 
+    
 	}
 
 
@@ -671,7 +674,7 @@ private int getBarHeight() {
 	    case R.id.shr:
 	    	Intent intent = new Intent(Intent.ACTION_SEND);
 	    	intent.setType("text/plain");
-	    	intent.putExtra(Intent.EXTRA_SUBJECT, "Title Of The Post");
+	    	intent.putExtra(Intent.EXTRA_SUBJECT, "R07D");
 	    	intent.putExtra(Intent.EXTRA_TEXT, getString(R.string.shr));
 	    	startActivity(Intent.createChooser(intent, "Share with"));
 			return true;

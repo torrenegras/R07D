@@ -220,6 +220,8 @@
 <string name="devnotsup">Este dispositivo no est\u00E1 soportado.</string>
 <string name="gpsmustbeins">Google Play Services debe estar instalado.</string>
     
-
+<string name="shrscoresub">COMPARTIENDO PUNTAJE EN R07D</string>
+ <string name="shrscoretext">Este es mi puntaje en #R07D, \u00BFCual es el tuyo?.. http://bit.ly/1lN7aSl</string>
+ <string name="shrnoti">Compartir con</string>
 
 </resources>

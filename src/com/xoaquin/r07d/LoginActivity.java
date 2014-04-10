@@ -99,13 +99,11 @@ public class LoginActivity extends Activity {
 			    final String etclave=clave.getText().toString();
 			    final DBAdapter db = new DBAdapter(this);  
 						    
-			    MainActivity.correoglobal=etcorreo;
+			    MainActivity.correoglobal=etcorreo;  // se usa???  optimizacion?
 			    
-			                //loggeando usuario existente
-			                String email= etcorreo; //creando username con primera parte de email
-			                String usr[]=email.split("@");
 			                
-			                ParseUser.logInInBackground(usr[0], etclave, new LogInCallback() {
+			                
+			                ParseUser.logInInBackground(etcorreo, etclave, new LogInCallback() {
 			                	  public void done(ParseUser user, ParseException e) {
 			                	    if (user != null) {
 			                	      
@@ -158,7 +156,7 @@ public class LoginActivity extends Activity {
 	
 	
 	
-	public void onclickregistrarse(View view) {  //click boton registrarse
+public void onclickregistrarse(View view) {  //click boton registrarse
 		
 		final Button b2=(Button) findViewById(R.id.button2); 
 		b2.setEnabled(false);
@@ -193,54 +191,52 @@ public class LoginActivity extends Activity {
 			
 			
 			//check usuario existente
-            String email= etcorreo; //creando username con primera parte de email
-            String usr[]=email.split("@");
+            //String email= etcorreo; //creando username con primera parte de email
+            //String usr[]=etcorreo.split("@");
             
+            /*
             ParseUser.logInInBackground(usr[0], etclave, new LogInCallback() {
             	  public void done(ParseUser userl, ParseException e) {
             	    if (userl != null) {
             	      
             	    	Toast.makeText(LoginActivity.this, getString(R.string.uec)+"..."+getString(R.string.uec2), Toast.LENGTH_LONG).show();
             	    	 b2.setEnabled(true);//success
-		        	    	 pb.setVisibility(View.INVISIBLE);
+		        	     pb.setVisibility(View.INVISIBLE);
             	    	
-            	    } else {
-            	    	
-            	    	//insertando en DB LOC SQLITE
-    	        		db.open(); 
-    	                db.insertTitle(etcorreo, etclave);
-    	                
-    	                //Creacion de Usuario en PARSE 
-    	                String email= etcorreo; //creando username con primera parte de email
-    	                String usr[]=email.split("@");
-    	                            
-    	               
-    	                
-    	                ParseUser user = new ParseUser();
-    	                user.setUsername(usr[0]);
+            	    } else { */
+            
+            	     
+                        //creacion de objeto con nuevo usuario para PARSE
+                        ParseUser user = new ParseUser();
+    	                user.setUsername(etcorreo);
     	                user.setPassword(etclave);
     	                user.setEmail(etcorreo);
     	                user.put("puntaje", 0);
-    	                
-    	               //llamando funcion Cloud email nuevo usuario y cuenta usuarios totales
-    	                
-    	                HashMap<String, Object> params = new HashMap<String, Object>();
-    	                params.put("correo", etcorreo);
-    	                ParseCloud.callFunctionInBackground("infonewusers", params, new FunctionCallback<String>() {
-    	                   public void done(String response, ParseException e) {
-    	                       if (e == null) {
-    	                          // ratings is 4.5
-    	                       }
-    	                   }
-    	                });
-    	                
     	                
     	                user.signUpInBackground(new SignUpCallback() {
     	                 
     	                	public void done(ParseException e) {
     	                    if (e == null) {
-    	                    	 
-    	                    	int secondsDelayed = 1;
+    	                    	
+    	                    	
+    	                    	//insertando en DB LOC SQLITE
+    	    		              db.open(); 
+    	                          db.insertTitle(etcorreo, etclave);
+    	                          
+    	                          
+    	                    	//llamando funcion Cloud email nuevo usuario y cuenta usuarios totales
+    	    	                HashMap<String, Object> params = new HashMap<String, Object>();
+    	    	                params.put("correo", etcorreo);
+    	    	                ParseCloud.callFunctionInBackground("infonewusers", params, new FunctionCallback<String>() {
+    	    	                   public void done(String response, ParseException e) {
+    	    	                       if (e == null) {
+    	    	                          // respuesta de la funcion en response si se requiere
+    	    	                       }
+    	    	                   }
+    	    	                }); 
+    	                    	
+    	    	                //cambiando de actividad dado signup exitoso
+    	    	                int secondsDelayed = 1;
      		 	                new Handler().postDelayed(new Runnable() {
      		 	                        public void run() {
      		 	                        	Intent i = new Intent(getApplicationContext(), CalendarioActivity2.class);
@@ -252,26 +248,26 @@ public class LoginActivity extends Activity {
      		 	                }, secondsDelayed * 1000);
      		 	                
      		 	                Toast.makeText(LoginActivity.this, getString(R.string.rex), Toast.LENGTH_LONG).show();
-     		 	               b2.setEnabled(true);//success
-   		        	    	 pb.setVisibility(View.INVISIBLE);
+     		 	                //b2.setEnabled(true); no se necesita
+   		        	    	    pb.setVisibility(View.INVISIBLE);
    		        	    	 
    		        	    	 
     	                    } else {
-    	                    	 Toast.makeText(LoginActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
+    	                    	 Toast.makeText(LoginActivity.this, getString(R.string.uec)+"..."+getString(R.string.uec2), Toast.LENGTH_LONG).show();
     	                    	 b2.setEnabled(true);//success
        		        	    	 pb.setVisibility(View.INVISIBLE);
     	                    }
     	                  }
     	                });
             	    	
-            	    	
+            /*	    	
             	    
-            	    }
+            	   }//else signincheck
             	  }
-            	});
+            	});//callback signin */
 			
 	
-		}else{//si no hay correo valido proporcionado por usuario
+		}else{//si no hay correo o clave validos proporcionados por usuario
 			Toast.makeText(LoginActivity.this, getString(R.string.iecv)+"..", Toast.LENGTH_LONG).show();			
 			 b2.setEnabled(true);//success
    	    	 pb.setVisibility(View.INVISIBLE);

@@ -188,4 +188,8 @@
     <string name="devnotsup">This device is not supported.</string>
     <string name="gpsmustbeins">Google Play Services must be installed.</string>
     
+    <string name="shrscoresub">SHARING R07D\'S SCORE</string>
+    <string name="shrscoretext">This is my #R07D Score, What\'s yours?.. http://bit.ly/1lN7aSl</string>
+    <string name="shrnoti">Share with</string>
+    
 </resources>

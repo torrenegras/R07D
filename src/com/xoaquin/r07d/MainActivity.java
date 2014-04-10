@@ -84,15 +84,15 @@ public static String correoglobal;
 			}
 			
     //REQUIERE EVALUACION Y OPTIMIZACION...  YA NO SE USA....
-        final DBAdapter db = new DBAdapter(this); //creando handler SQLITE
-        db.open();
-        int nr=db.getTitle(1).getCount(); //variable que indica si existe algun dato en SQLITE
-        final long nri = db.getAllTitles().getCount(); //variable que da el ultimo indice de la tabla SQLITE
+       //  final DBAdapter db = new DBAdapter(this); //creando handler SQLITE
+       // db.open();
+       // int nr=db.getTitle(1).getCount(); //variable que indica si existe algun dato en SQLITE
+       // final long nri = db.getAllTitles().getCount(); //variable que da el ultimo indice de la tabla SQLITE
         
-    if(nr>0){ //si SQLITE no esta vacia
-         String correo= new String (db.getTitle(nri).getString(1)); //saca el correo de ultima fila SQLITE
+    //if(nr>0){ //si SQLITE no esta vacia
+      //   String correo= new String (db.getTitle(nri).getString(1)); //saca el correo de ultima fila SQLITE
         // String clave=new String(db.getTitle(nri).getString(2)); //sacando string de clave desde SQLITE
-         correoglobal=correo;
+        // correoglobal=correo;
      
 					//loggeando usuario existente { en previa version
 					//String email= correo; //creando username con primera parte de email
@@ -101,14 +101,18 @@ public static String correoglobal;
 				
 					
 					ParseUser currentUser = ParseUser.getCurrentUser();
+					
+					
 					if (currentUser != null) { //HAY USER EN CACHE
+						
+						final String correocu=currentUser.getEmail();
 						
 						// Timer que cambia de actividad a Calendario si match de claves
 						int secondsDelayed = 1;
 						new Handler().postDelayed(new Runnable() {
 						public void run() {
 						Intent i = new Intent(getApplicationContext(), CalendarioActivity2.class);
-						i.putExtra("correog",correoglobal);//pasando la variable correo a la siguiente actividad
+						i.putExtra("correog",correocu);//pasando la variable correo a la siguiente actividad
 						
 						startActivity(new Intent(i));
 						finish();
@@ -128,7 +132,7 @@ public static String correoglobal;
 						
 					}
 					
-
+/*
     } else{ //si SQLITE vacia, uso primera vez...
     	
     int secondsDelayed = 1;
@@ -140,7 +144,7 @@ public static String correoglobal;
         }, secondsDelayed * 1500);
 
     }
-        
+  */      
  
    
  }//fin oncreate
