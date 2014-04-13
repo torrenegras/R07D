@@ -67,20 +67,26 @@ public class CalendarioActivity2 extends Activity implements GooglePlayServicesC
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-	
 		super.onCreate(savedInstanceState);
-		
 		setContentView(R.layout.activity_calendario_activity2);
+		
 		
 	    AppRater.app_launched(this); //LLAMANDO DIALOG PARA RATE APP
 		//AppRater.showRateDialog(this, null);  MOSTRAR EL DIALOG PARA PRUEBAS
 	    //JalertActivity.showRateDialog(this, null); MOSTRAR DIALOG PARA PRUEBAS
+	    
+	    PushService.setDefaultPushCallback(this, MainActivity.class);
+		ParseInstallation.getCurrentInstallation().saveInBackground();
+		ParseAnalytics.trackAppOpened(getIntent());
+		PushService.subscribe(this, "todos", MainActivity.class);
+		ParseInstallation.getCurrentInstallation();
 	  
 	    //PONIENDO EN PARSE EL LOCALE DEL USUARIO
 	    ParseUser cu = ParseUser.getCurrentUser(); 
 		if (cu != null) {
 		 String locale = getResources().getConfiguration().locale.getDisplayName();
 		  cu.put("locale", locale);
+		  cu.put("version", ParseInstallation.getCurrentInstallation().getString("appVersion"));
 		  cu.saveEventually();
 		} else {
 		
@@ -96,11 +102,7 @@ public class CalendarioActivity2 extends Activity implements GooglePlayServicesC
 		Drawable drw = getResources().getDrawable( R.drawable.b1 );
 		ab.setBackgroundDrawable(drw);
 		
-		PushService.setDefaultPushCallback(this, MainActivity.class);
-		ParseInstallation.getCurrentInstallation().saveInBackground();
-		ParseAnalytics.trackAppOpened(getIntent());
-		PushService.subscribe(this, "todos", MainActivity.class);
-		ParseInstallation.getCurrentInstallation();
+		
 		
 		//trayendo correo de la anterior actividad usando intent y no variable global.. manera correcta. 
 		Bundle extras = getIntent().getExtras();

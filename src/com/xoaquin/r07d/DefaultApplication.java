@@ -39,8 +39,16 @@ public class DefaultApplication extends Application{
       		nombretablausuario=nombretablausuario.replaceAll("\\.", "");
  			nombretablausuario=nombretablausuario.replaceAll("@", "");	
  			PushService.subscribe(this, nombretablausuario,MainActivity.class); //suscripcion a canal dedicado para cada instalacion.
+      		
+ 			
+      		
       		}
  			
+      		
+      		
+      		
+      		
+      		
       		
       		String locale = getResources().getConfiguration().locale.getDisplayName();
       		     		
