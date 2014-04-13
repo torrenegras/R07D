@@ -28,7 +28,7 @@ public class DefaultApplication extends Application{
       //comandos para notificaciones push activados en esta clase
       		
             PushService.setDefaultPushCallback(this, MainActivity.class);
-      		ParseInstallation.getCurrentInstallation().saveEventually();
+      		ParseInstallation.getCurrentInstallation().saveInBackground();
       		
       		PushService.subscribe(this, "todos", MainActivity.class);
       	

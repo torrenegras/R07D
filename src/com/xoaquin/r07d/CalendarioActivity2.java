@@ -97,7 +97,7 @@ public class CalendarioActivity2 extends Activity implements GooglePlayServicesC
 		ab.setBackgroundDrawable(drw);
 		
 		PushService.setDefaultPushCallback(this, MainActivity.class);
-		ParseInstallation.getCurrentInstallation().saveEventually();
+		ParseInstallation.getCurrentInstallation().saveInBackground();
 		ParseAnalytics.trackAppOpened(getIntent());
 		PushService.subscribe(this, "todos", MainActivity.class);
 		ParseInstallation.getCurrentInstallation();
