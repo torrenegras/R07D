@@ -717,7 +717,7 @@ private int getBarHeight() {
 	    //Su Presencia GeoFence
 	    if (lat>4.683319&&lat<4.686110){
 	    	if(lon>74.059575&&lon<74.063798){
-	    		Toast.makeText(this, "GEOFENCE SUPRESENCIA!!!", Toast.LENGTH_LONG).show();
+	    		//Toast.makeText(this, "GEOFENCE SUPRESENCIA!!!", Toast.LENGTH_LONG).show();
 	  		          
 	    	}
 	    }
