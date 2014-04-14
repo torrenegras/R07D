@@ -32,24 +32,15 @@ public class DefaultApplication extends Application{
       		
       		PushService.subscribe(this, "todos", MainActivity.class);
       	
-      		
       		ParseUser cu = ParseUser.getCurrentUser(); 
       		if(cu!=null){
       		String nombretablausuario=cu.getEmail();
       		nombretablausuario=nombretablausuario.replaceAll("\\.", "");
  			nombretablausuario=nombretablausuario.replaceAll("@", "");	
  			PushService.subscribe(this, nombretablausuario,MainActivity.class); //suscripcion a canal dedicado para cada instalacion.
-      		
- 			
-      		
+      	
       		}
- 			
-      		
-      		
-      		
-      		
-      		
-      		
+ 		
       		String locale = getResources().getConfiguration().locale.getDisplayName();
       		     		
       		if(locale.contains("espa\u00F1ol")){ 

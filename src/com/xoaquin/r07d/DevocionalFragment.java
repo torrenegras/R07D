@@ -37,7 +37,7 @@ public class DevocionalFragment extends Fragment {
     	 Calendar cal = Calendar.getInstance(); 
     	 int nd= cal.get(Calendar.DAY_OF_YEAR);
     	    	 
-    	 nd=1; //**********************Quitar cuando tengamos material!!!!!!
+    	 nd=1;              //**********************Quitar cuando tengamos material!!!!!!
     	 
     	 wb.setBackgroundColor(0x00000000);
     	 wb.loadUrl("http://r07d.parseapp.com/"+nd+".htm");

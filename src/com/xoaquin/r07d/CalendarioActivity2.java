@@ -34,7 +34,6 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -154,9 +153,8 @@ public class CalendarioActivity2 extends Activity implements GooglePlayServicesC
  //push progreso fin de mes informe de nivel
          if(diacal==diafm||diacal==diafm-1||diacal==diafm-2||diacal==diafm-3){ 
         	//PONIENDO EN PARSE EL CHECK LANZAMIENTO PUSH
-     	   
-     		
-             //String chk=installation.getString("mesaniochk"); 
+     	 
+            
              String chk2=cu.getString("usermesaniochk");
         	
         	  	if(chk2==null){// en caso de ser la primera vez para el usuario que se lanza un mensaje push de este tipo
@@ -377,8 +375,7 @@ private class AsyncTaskRunner extends AsyncTask<Integer, Integer, Integer> {
             }
        	    
             push.sendInBackground();
-       	    //installation.put("mesaniochk",m+Integer.toString(aniocal));
-         	//installation.saveInBackground();	
+       	    
          	
          	//PONIENDO EN PARSE EL CHECK LANZAMIENTO PUSH
     	    ParseUser cu = ParseUser.getCurrentUser(); 
@@ -423,8 +420,7 @@ private class AsyncTaskRunner extends AsyncTask<Integer, Integer, Integer> {
         }
    	    
         push.sendInBackground();
-   	    //installation.put("mesaniochk",m+Integer.toString(aniocal));
-  	    //installation.saveInBackground();	
+   	   
   	    
   	//PONIENDO EN PARSE EL CHECK LANZAMIENTO PUSH
 	    ParseUser cu = ParseUser.getCurrentUser(); 
@@ -466,8 +462,7 @@ private class AsyncTaskRunner extends AsyncTask<Integer, Integer, Integer> {
             }
             
        	    push.sendInBackground();
-            //installation.put("mesaniochk",m+Integer.toString(aniocal));
-         	//installation.saveInBackground();	
+           
          	
          	//PONIENDO EN PARSE EL CHECK LANZAMIENTO PUSH
     	    ParseUser cu = ParseUser.getCurrentUser(); 
@@ -704,6 +699,7 @@ private int getBarHeight() {
 	public void onConnected(Bundle arg0) {
 		// TODO Auto-generated method stub
 		
+		/*
 		//RECIBIENDO POSICION ACTUALIZADA
 	    mCurrentLocation = mLocationClient.getLastLocation();
        
@@ -717,13 +713,13 @@ private int getBarHeight() {
 	    //Su Presencia GeoFence
 	    if (lat>4.683319&&lat<4.686110){
 	    	if(lon>74.059575&&lon<74.063798){
-	    		//Toast.makeText(this, "GEOFENCE SUPRESENCIA!!!", Toast.LENGTH_LONG).show();
+	    		Toast.makeText(this, "GEOFENCE SUPRESENCIA!!!", Toast.LENGTH_LONG).show();
 	  		          
 	    	}
 	    }
 	    
          }
-		
+		*/
 	}
 
 

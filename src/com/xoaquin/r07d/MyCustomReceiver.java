@@ -22,7 +22,7 @@ private static final String TAG = "MyCustomReceiver";
       JSONObject json = new JSONObject(intent.getExtras().getString("com.parse.Data"));
       
       
-      context=DefaultApplication.getCustomAppContext();
+                        context=DefaultApplication.getCustomAppContext();
       
 	                	Intent i = new Intent(context,NivelesActivity.class);
 	                	

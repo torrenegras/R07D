@@ -198,7 +198,7 @@ public class RecdiaActivity2 extends FragmentActivity {
             	
             	dialog.dismiss();
             	dialog.cancel();
-            	//System.exit(0);            
+            
                 
             }
         });

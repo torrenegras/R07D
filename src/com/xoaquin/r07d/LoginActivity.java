@@ -189,23 +189,6 @@ public void onclickregistrarse(View view) {  //click boton registrarse
 		if(etcorreo.length()>0 && etclave.length()>=4){  //si hay un correo valido y clave(mas de 4 char) validos
 		
 			
-			
-			//check usuario existente
-            //String email= etcorreo; //creando username con primera parte de email
-            //String usr[]=etcorreo.split("@");
-            
-            /*
-            ParseUser.logInInBackground(usr[0], etclave, new LogInCallback() {
-            	  public void done(ParseUser userl, ParseException e) {
-            	    if (userl != null) {
-            	      
-            	    	Toast.makeText(LoginActivity.this, getString(R.string.uec)+"..."+getString(R.string.uec2), Toast.LENGTH_LONG).show();
-            	    	 b2.setEnabled(true);//success
-		        	     pb.setVisibility(View.INVISIBLE);
-            	    	
-            	    } else { */
-            
-            	     
                         //creacion de objeto con nuevo usuario para PARSE
                         ParseUser user = new ParseUser();
     	                user.setUsername(etcorreo);
@@ -260,13 +243,7 @@ public void onclickregistrarse(View view) {  //click boton registrarse
     	                  }
     	                });
             	    	
-            /*	    	
-            	    
-            	   }//else signincheck
-            	  }
-            	});//callback signin */
-			
-	
+          
 		}else{//si no hay correo o clave validos proporcionados por usuario
 			Toast.makeText(LoginActivity.this, getString(R.string.iecv)+"..", Toast.LENGTH_LONG).show();			
 			 b2.setEnabled(true);//success
@@ -285,11 +262,6 @@ public void onclickregistrarse(View view) {  //click boton registrarse
 	
 	public void onclickdesc(View view) {
 		
-		//SUJETO A OPTIMIZACION PORQUE NO ES NECESARIO SI SE TIENE EL LOGOUT DE ABAJO DE PARSEUSER
-		final DBAdapter db = new DBAdapter(this);  
-		db.open(); 
-        db.insertTitle("", "desc");
-        
         ParseUser.logOut();//logout usuario
         
         

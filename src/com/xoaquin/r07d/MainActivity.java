@@ -82,25 +82,9 @@ public static String correoglobal;
 			if(!b){
 			Toast.makeText(MainActivity.this, getString(R.string.offmode), Toast.LENGTH_LONG).show(); 
 			}
-			
-    //REQUIERE EVALUACION Y OPTIMIZACION...  YA NO SE USA....
-       //  final DBAdapter db = new DBAdapter(this); //creando handler SQLITE
-       // db.open();
-       // int nr=db.getTitle(1).getCount(); //variable que indica si existe algun dato en SQLITE
-       // final long nri = db.getAllTitles().getCount(); //variable que da el ultimo indice de la tabla SQLITE
-        
-    //if(nr>0){ //si SQLITE no esta vacia
-      //   String correo= new String (db.getTitle(nri).getString(1)); //saca el correo de ultima fila SQLITE
-        // String clave=new String(db.getTitle(nri).getString(2)); //sacando string de clave desde SQLITE
-        // correoglobal=correo;
-     
-					//loggeando usuario existente { en previa version
-					//String email= correo; //creando username con primera parte de email
-					//String usr[]=email.split("@");
-					//user= usr[0] 
-				
+	
 					
-					ParseUser currentUser = ParseUser.getCurrentUser();
+			ParseUser currentUser = ParseUser.getCurrentUser();
 					
 					
 					if (currentUser != null) { //HAY USER EN CACHE
@@ -132,20 +116,6 @@ public static String correoglobal;
 						
 					}
 					
-/*
-    } else{ //si SQLITE vacia, uso primera vez...
-    	
-    int secondsDelayed = 1;
-        new Handler().postDelayed(new Runnable() {
-                public void run() {
-                        startActivity(new Intent(MainActivity.this, LoginActivity.class));
-                        finish();
-                }
-        }, secondsDelayed * 1500);
-
-    }
-  */      
- 
    
  }//fin oncreate
 

@@ -176,9 +176,7 @@ public class ReporteActivity extends Activity {
 		
 	}
 	
-    
-	
-	
+   
 	
 	DatePickerDialog.OnDateSetListener mDateSetListner = new OnDateSetListener() {  //funcion para CUSTOM PICKER
 
@@ -404,6 +402,8 @@ public class ReporteActivity extends Activity {
 	                  File directory = new File (sdCard.getAbsolutePath() + "/R07D");
 	                  directory.mkdirs();
 
+	                  
+	          //*******************GENERACION REPORTE HTML***************************
 	                  
 	                  File file = new File(directory, "REPR07D-"+mes+"-"+anio+".html");
 	                  FileOutputStream fOut = new FileOutputStream(file);

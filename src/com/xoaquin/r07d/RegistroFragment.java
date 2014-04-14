@@ -424,8 +424,6 @@ public class RegistroFragment extends Fragment {
     
 	
 	
-	
-	
 	//ACTUALIZAR RECORD EXISTENTE EN PARSE
 	 public void actualizarRecordParse(ParseObject object){
 	        
