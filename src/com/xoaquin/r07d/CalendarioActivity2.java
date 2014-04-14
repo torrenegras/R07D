@@ -76,7 +76,7 @@ public class CalendarioActivity2 extends Activity implements GooglePlayServicesC
 	    //JalertActivity.showRateDialog(this, null); MOSTRAR DIALOG PARA PRUEBAS
 	    
 	    PushService.setDefaultPushCallback(this, MainActivity.class);
-		ParseInstallation.getCurrentInstallation().saveInBackground();
+		ParseInstallation.getCurrentInstallation().saveEventually();
 		ParseAnalytics.trackAppOpened(getIntent());
 		PushService.subscribe(this, "todos", MainActivity.class);
 		ParseInstallation.getCurrentInstallation();
