@@ -126,7 +126,7 @@ if(dd==1){
   message: {
     html: "<!DOCTYPE html><html><body><p>Empieza el mes con toda&#33;&#44;en El Secreto&#44;cercano al Se&#241;or&#33;<br><br>Bendiciones&#33;<br><br><br><br>Cada vez somos mas&#33; Comparte la aplicaci&#243;n con tus amigos y conocidos&#33;<br><a href=\"https://play.google.com/store/apps/details?id=com.xoaquin.r07d \">Desc&#225;rgala en Google Play</a> </p></body></html>",
     subject: "COMUNIDAD R07D",
-    from_email: "xoaquin@outlook.com",
+    from_email: "xoaquin@torrenegra.co",
     from_name: "Xoaquin",
     to: myArray
   },
@@ -149,7 +149,7 @@ if(dd==1){
   message: {
     html: "<!DOCTYPE html><html><body><p>Start this month with all you got&#33;&#44;in The Secret&#44;close to the Lord&#33;<br><br>Blessings&#33;<br><br><br><br>Growing more and more each day&#33; Share the application with your friends and acquaintances&#33;<br><a href=\"https://play.google.com/store/apps/details?id=com.xoaquin.r07d \">Download it at Google Play</a> </p></body></html>",
     subject: "R07D COMMUNITY",
-    from_email: "xoaquin@outlook.com",
+    from_email: "xoaquin@torrenegra.co",
     from_name: "Xoaquin",
     to: myArray2
   },
@@ -303,7 +303,7 @@ query.count({
   message: {
     text: "Favor instalar actualizacion (4.3 Noe)",  //ojo con los caracteres en esta vaina, muy quisquilloso!!!!!!!!!!!!
     subject: "R07D ACTUALIZACION IMPORTANTE ",
-    from_email: "xoaquin@outlook.com",
+    from_email: "xoaquin@torrenegra.co",
     from_name: "Xoaquin",
     to: myArray
      
@@ -330,7 +330,7 @@ query.count({
   message: {
     text: "Please Install Update (4.3 Noe)",
     subject: "R07D IMPORTANT UPDATE ",
-    from_email: "xoaquin@outlook.com",
+    from_email: "xoaquin@torrenegra.co",
     from_name: "Xoaquin",
     to: myArray2
   
