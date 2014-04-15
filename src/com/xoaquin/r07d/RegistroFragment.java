@@ -131,41 +131,74 @@ public class RegistroFragment extends Fragment {
             ParseQuery<ParseObject> query = ParseQuery.getQuery(ntu);
 	        query.whereEqualTo("fechadbp", fca);
 	    
-	        query.setCachePolicy(ParseQuery.CachePolicy.NETWORK_ELSE_CACHE);
+	        //query.setCachePolicy(ParseQuery.CachePolicy.NETWORK_ELSE_CACHE);
 	        query.findInBackground(new FindCallback<ParseObject>() {
 	            public void done(List<ParseObject> obs, ParseException e) {
 	                if (e == null) {
 	                   
 	                	if (obs.size()>0)
 	                   {   	                   
-	                	bhi.setText(obs.get(0).getString("horaidbp"));
-	                	bhf.setText(obs.get(0).getString("horafdbp"));   
-	                	et1.setText(obs.get(0).getString("lbdbp"));   
-	                	et2.setText(obs.get(0).getString("qmhDdbp"));   
-	                	et3.setText(obs.get(0).getString("adgdbp"));   
-	                	et4.setText(obs.get(0).getString("ldndbp"));   
-	                	et5.setText(obs.get(0).getString("peidbp"));
+	                	bhi.setText(obs.get(obs.size()-1).getString("horaidbp"));   //obs.size()-1  es el ultimo indice en caso de que haya mas de 1 resultado en query, sucede si hay repetidos, pasa cuando se guarda en offline repetidamente
+	                	bhf.setText(obs.get(obs.size()-1).getString("horafdbp"));   
+	                	et1.setText(obs.get(obs.size()-1).getString("lbdbp"));   
+	                	et2.setText(obs.get(obs.size()-1).getString("qmhDdbp"));   
+	                	et3.setText(obs.get(obs.size()-1).getString("adgdbp"));   
+	                	et4.setText(obs.get(obs.size()-1).getString("ldndbp"));   
+	                	et5.setText(obs.get(obs.size()-1).getString("peidbp"));
 	                	
 	                	if(et3.getText().toString().length()>0||et4.getText().toString().length()>0||et5.getText().toString().length()>0){visibles();tb.setChecked(true);}
 	                	
-	                	if(obs.get(0).getString("aopdbp").equals("true")){cb6.setChecked(true);}else{cb6.setChecked(false);}  
-	                	if(obs.get(0).getString("aopidbp").equals("true")){cb7.setChecked(true);}else{cb7.setChecked(false);}   
-	                	if (obs.get(0).getString("opldbp").equals("true")){cb1.setChecked(true);visibles();tb.setChecked(true);}else{cb1.setChecked(false);}   
-	                	if (obs.get(0).getString("coodbp").equals("true")){cb2.setChecked(true);visibles();tb.setChecked(true);}else{cb2.setChecked(false);}   
-	                	if (obs.get(0).getString("mgcdbp").equals("true")){cb3.setChecked(true);visibles();tb.setChecked(true);}else{cb3.setChecked(false);}   
-	                	if(obs.get(0).getString("opddbp").equals("true")){ cb4.setChecked(true);visibles();tb.setChecked(true);}else{cb4.setChecked(false);}
-	                	if (obs.get(0).getString("oplcodbp").equals("true")){cb5.setChecked(true);visibles();tb.setChecked(true);}else{cb5.setChecked(false);}   
+	                	if(obs.get(obs.size()-1).getString("aopdbp").equals("true")){cb6.setChecked(true);}else{cb6.setChecked(false);}  
+	                	if(obs.get(obs.size()-1).getString("aopidbp").equals("true")){cb7.setChecked(true);}else{cb7.setChecked(false);}   
+	                	if (obs.get(obs.size()-1).getString("opldbp").equals("true")){cb1.setChecked(true);visibles();tb.setChecked(true);}else{cb1.setChecked(false);}   
+	                	if (obs.get(obs.size()-1).getString("coodbp").equals("true")){cb2.setChecked(true);visibles();tb.setChecked(true);}else{cb2.setChecked(false);}   
+	                	if (obs.get(obs.size()-1).getString("mgcdbp").equals("true")){cb3.setChecked(true);visibles();tb.setChecked(true);}else{cb3.setChecked(false);}   
+	                	if(obs.get(obs.size()-1).getString("opddbp").equals("true")){ cb4.setChecked(true);visibles();tb.setChecked(true);}else{cb4.setChecked(false);}
+	                	if (obs.get(obs.size()-1).getString("oplcodbp").equals("true")){cb5.setChecked(true);visibles();tb.setChecked(true);}else{cb5.setChecked(false);}   
 	                   
 	                	
 	                    pb.setVisibility(View.GONE);
 	                    tdrc.setClickable(true);
+	                   
 	                   }else{
+	                	
 	                	pb.setVisibility(View.GONE);
 		                tdrc.setClickable(true);
+	                   
 	                   }
 	                   
-	                } else {//modo offline sin poder hacer query, sin cache
-	                	Toast.makeText(getActivity(), getString(R.string.offmode)+"...", Toast.LENGTH_LONG).show(); 
+	                	
+	                } else {//modo offline sin poder hacer query, sin cache parse,  entonces usa DB LOCAL SQLITE
+	                	
+	                	DatabaseHandler db = new DatabaseHandler(getActivity());
+	                	
+	                	RecordDiarioObject rdo=new RecordDiarioObject();
+	                	
+	                	rdo=db.getRDO(fca);
+	                	
+	                	if(rdo!=null){
+	                		
+	                	bhi.setText(rdo.gethorai());
+	                	bhf.setText(rdo.gethoraf());   
+	                	et1.setText(rdo.getlb());   
+	                	et2.setText(rdo.getqmhD());   
+	                	et3.setText(rdo.getadg());   
+	                	et4.setText(rdo.getldn());   
+	                	et5.setText(rdo.getpei());
+	                	
+	                	if(et3.getText().toString().length()>0||et4.getText().toString().length()>0||et5.getText().toString().length()>0){visibles();tb.setChecked(true);}
+	                	
+	                	
+	                	if(rdo.getaop().equals("true")){cb6.setChecked(true);}else{cb6.setChecked(false);}  
+	                	if(rdo.getaopi().equals("true")){cb7.setChecked(true);}else{cb7.setChecked(false);}   
+	                	if (rdo.getopl().equals("true")){cb1.setChecked(true);visibles();tb.setChecked(true);}else{cb1.setChecked(false);}   
+	                	if (rdo.getcoo().equals("true")){cb2.setChecked(true);visibles();tb.setChecked(true);}else{cb2.setChecked(false);}   
+	                	if (rdo.getmgc().equals("true")){cb3.setChecked(true);visibles();tb.setChecked(true);}else{cb3.setChecked(false);}   
+	                	if(rdo.getopd().equals("true")){ cb4.setChecked(true);visibles();tb.setChecked(true);}else{cb4.setChecked(false);}
+	                	if (rdo.getoplco().equals("true")){cb5.setChecked(true);visibles();tb.setChecked(true);}else{cb5.setChecked(false);}   
+	                	
+	                	}
+	                	
 	                	pb.setVisibility(View.GONE);
 		                tdrc.setClickable(true);
 	                	
@@ -320,7 +353,7 @@ public class RegistroFragment extends Fragment {
                 	
                  crearNuevoRecordParse();   
       			        
-      			 Toast.makeText(getActivity(), getString(R.string.guard)+"...", Toast.LENGTH_LONG).show();
+      			 Toast.makeText(getActivity(), getString(R.string.guard)+" "+getString(R.string.offmode), Toast.LENGTH_LONG).show();
                 
                 }
             }
@@ -474,6 +507,12 @@ public class RegistroFragment extends Fragment {
 	        	 });
             
 	    }
+	 
+	 
+	    actualizarRecordSQLite();  //actualizar record db local
+	 
+	 
+	 
 	 }   
 	
 
@@ -530,9 +569,74 @@ public class RegistroFragment extends Fragment {
                   
   		    }
 		 
+	 
+	 
+	     nuevoRecordSQLite(); //nuevo record db local
+	 
 	 }
 	 
 	
+	 
+	 
+	 public void actualizarRecordSQLite(){
+		 
+		 RecordDiarioObject rdo=new RecordDiarioObject(
+				 
+				 et3.getText().toString(),
+				 aca,
+				 String.valueOf(cb6.isChecked()),
+				 String.valueOf(cb7.isChecked()),
+				 String.valueOf(cb2.isChecked()),
+				 dca,
+				 fca,
+				 bhf.getText().toString(),
+				 bhi.getText().toString(),
+				 et1.getText().toString(),
+				 et4.getText().toString(),
+				 mca,
+				 String.valueOf(cb3.isChecked()),
+				 String.valueOf(cb4.isChecked()),
+				 String.valueOf(cb1.isChecked()),
+				 String.valueOf(cb5.isChecked()),
+				 et5.getText().toString(),
+				 et2.getText().toString()
+				 
+				 );
+		 
+		 DatabaseHandler db = new DatabaseHandler(getActivity());
+		 db.updateRDO(rdo);
+		 
+	 }
+	 
+public void nuevoRecordSQLite(){
+		 
+		 RecordDiarioObject rdo=new RecordDiarioObject(
+				 
+				 et3.getText().toString(),
+				 aca,
+				 String.valueOf(cb6.isChecked()),
+				 String.valueOf(cb7.isChecked()),
+				 String.valueOf(cb2.isChecked()),
+				 dca,
+				 fca,
+				 bhf.getText().toString(),
+				 bhi.getText().toString(),
+				 et1.getText().toString(),
+				 et4.getText().toString(),
+				 mca,
+				 String.valueOf(cb3.isChecked()),
+				 String.valueOf(cb4.isChecked()),
+				 String.valueOf(cb1.isChecked()),
+				 String.valueOf(cb5.isChecked()),
+				 et5.getText().toString(),
+				 et2.getText().toString()
+				 
+				 );
+		 
+		 DatabaseHandler db = new DatabaseHandler(getActivity());
+		 db.addRDO(rdo);
+		 
+	 }
 	 
 	 //DIALOG HORA INICIO
 	public static class TimePickerFragment extends DialogFragment implements TimePickerDialog.OnTimeSetListener { 
