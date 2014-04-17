@@ -240,6 +240,32 @@ query.count({
 });
  
  
+ //EMAIL BIENVENIDA USUARIO
+    Mandrill.sendEmail({
+  message: {
+    text: request.params.correo+"\n\nBienvenido a la comunidad R07D, Bendiciones! Usted va a recibir una notificacion para verficar su correo electronico. Si no la recibe, buscar en SPAM / No-Deseados.\n\nWelcome to the R07D community, Blessings! You're going to receive a notification to verfy your email. If not received please check the SPAM folder. ",
+    subject: "BIENVENIDO / WELCOME R07D",
+    from_email: "xoaquin@torrenegra.co",
+    from_name: "xoaquin@torrenegra.co",
+    to: [
+      {
+        email: request.params.correo,
+        name: ""
+      }
+    ]
+  },
+  async: true
+},{
+  success: function(httpResponse) {
+    console.log(httpResponse);
+    response.success("Email sent!");
+  },
+  error: function(httpResponse) {
+    console.error(httpResponse);
+    response.error("Uh oh, something went wrong");
+  }
+});
+ 
   
    
 });//cierre funcion email nuevo usuario
