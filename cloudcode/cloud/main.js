@@ -243,14 +243,15 @@ query.count({
  //EMAIL BIENVENIDA USUARIO
     Mandrill.sendEmail({
   message: {
-    text: request.params.correo+"\n\nBienvenido a la comunidad R07D, Bendiciones! Usted va a recibir una notificacion para verficar su correo electronico. Si no la recibe, buscar en SPAM / No-Deseados.\n\nWelcome to the R07D community, Blessings! You're going to receive a notification to verfy your email. If not received please check the SPAM folder. ",
+    //text: request.params.correo+"\n\nBienvenido a la comunidad R07D, Bendiciones! Usted va a recibir una notificacion para verficar su correo electronico. Si no la recibe, buscar en SPAM / No-Deseados.\n\nWelcome to the R07D community, Blessings! You're going to receive a notification to verfy your email. If not received please check the SPAM folder. ",
+    html: "<!DOCTYPE html><html><body><p><br><br>Bienvenido a la comunidad R07D, Bendiciones! Usted va a recibir una notificaci&#243;n para verficar su correo electr&#243;nico. Si no la recibe, buscar en SPAM / No-Deseados.<br><br>Welcome to the R07D community, Blessings! You're going to receive a notification to verfy your email. If not received please check the SPAM folder. </p></body></html>",
     subject: "BIENVENIDO / WELCOME R07D",
     from_email: "xoaquin@torrenegra.co",
     from_name: "xoaquin@torrenegra.co",
     to: [
       {
         email: request.params.correo,
-        name: ""
+        name: request.params.correo
       }
     ]
   },
