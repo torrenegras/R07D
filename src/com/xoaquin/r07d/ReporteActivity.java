@@ -41,11 +41,15 @@ import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.DatePickerDialog.OnDateSetListener;
+import android.app.backup.BackupManager;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -68,11 +72,14 @@ public class ReporteActivity extends Activity {
 	private static String FILE;
 	private String spdfop="",spdfopi="",ntu="";
 	private static ProgressBar pb;
+
+	BackupManager bm;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_reporte);
+		
 		
 		//COLOR AL ACTIONBAR
 		ActionBar ab=getActionBar();
@@ -87,8 +94,8 @@ public class ReporteActivity extends Activity {
 		
 		pb=(ProgressBar) findViewById(R.id.progressBar1);
 		
-		String nombre="",nombreli="",mdl="";
-		EditText etnombre,etnombreli,etmdl;
+		bm= new BackupManager(this);
+		
 		
 		//poniendo tipo de letra especial
 		Typeface kepf = Typeface.createFromAsset(getAssets(),"Kepler-Std-Black_26074.ttf");
@@ -129,20 +136,30 @@ public class ReporteActivity extends Activity {
 	      long nri = db2.getAllTitles().getCount();
 	      
 	      if (nr>0){
-	      nombre=db2.getTitle(nri).getString(1);
-	      nombreli=db2.getTitle(nri).getString(2);
-	      mdl=db2.getTitle(nri).getString(3);
+	    	  Log.e("sqlite","sqlite");
+	       et1.setText(db2.getTitle(nri).getString(1));
+	       et2.setText(db2.getTitle(nri).getString(2)); 
+	       et5.setText(db2.getTitle(nri).getString(3));
+	      
 	      }else{
+	    	  Log.e("prefs","prefs");
+	    	  /*
+	    	  bm.requestRestore(new RestoreObserver(){
+	    		  public void restoreFinished(int error) {
+		               Log.e("resterror", "Restore finished, error = " + error);
+		               
+		           }
+	    	  });
+	    	  */
 	    	  
+	    	  //Si no hay en DB local, trae backup de preferencias..  CUANDO SE INSTALA POR PRIMERA VEZ EN OTRO TELEFONO POR EJEMPLO
+	    	  SharedPreferences sharedPrefr = getSharedPreferences("myprefs", Context.MODE_PRIVATE);
+	    	  et1.setText(sharedPrefr.getString("nom", ""));
+		      et2.setText(sharedPrefr.getString("noml", "")); 
+		      et5.setText(sharedPrefr.getString("mdl", ""));
 	      }
 		
-	      etnombre=(EditText) findViewById(R.id.editText1);
-	       etnombreli=(EditText) findViewById (R.id.editText2);
-	       etmdl=(EditText) findViewById (R.id.editText5);
-	       
-	       etnombre.setText(nombre);
-	       etnombreli.setText(nombreli); 
-	       etmdl.setText(mdl);
+	      
 	      
 	      
 	       final Calendar c = Calendar.getInstance();
@@ -163,6 +180,10 @@ public class ReporteActivity extends Activity {
 			mYear = c2.get(Calendar.YEAR);
 			mMonth = c2.get(Calendar.MONTH);
 	       mMonth=mMonth+1;
+	       
+	       
+	       
+	       
 	
 	}
 	
@@ -268,19 +289,29 @@ public class ReporteActivity extends Activity {
 		EditText et2=(EditText) findViewById(R.id.editText2);
 		EditText et3=(EditText) findViewById(R.id.editText5);
 		
-		
+		/*
 		//guardando campos en DB para nombres
 		final DBAdapter2 db2 = new DBAdapter2(this);
 		db2.open(); 
 		db2.insertTitle(et1.getText().toString(),et2.getText().toString(),et3.getText().toString());
-     
+		*/
 		
+		//haciendo backup en prefs
+		//Context context = getActivity();  
+		SharedPreferences sharedPref = getSharedPreferences("myprefs", Context.MODE_PRIVATE);
+		SharedPreferences.Editor editor = sharedPref.edit();
+		editor.putString("nom", et1.getText().toString());
+		editor.putString("noml", et2.getText().toString());
+		editor.putString("mdl", et3.getText().toString());
+		editor.commit();
+        bm.dataChanged();
+	
 		
 		//Creando el reporte en HTML
 		
 		    String nombretablausuario=ntu;
  		
- 		    ParseQuery<ParseObject> query = ParseQuery.getQuery(nombretablausuario); //query para buscar records de ese mes y año en orden ascendente
+ 		    ParseQuery<ParseObject> query = ParseQuery.getQuery(nombretablausuario); //query para buscar records de ese mes y aï¿½o en orden ascendente
 	        query.whereEqualTo("mesdbp", mes);
 	        query.whereEqualTo("aniodbp", anio);
 	        query.orderByAscending("diadbp");
@@ -674,4 +705,7 @@ public class ReporteActivity extends Activity {
 	}//cierre onclickcreandorep
 	
 	
+	 
+	 
+	 
 }

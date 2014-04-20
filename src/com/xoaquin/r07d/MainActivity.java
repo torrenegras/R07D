@@ -32,20 +32,19 @@ public class MainActivity extends Activity {
 public static String correoglobal;
 
 
+
 @Override
     protected void onCreate(Bundle savedInstanceState) {
      super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
     
-        
-           
         Typeface kepf = Typeface.createFromAsset(getAssets(),"Kepler-Std-Black_26074.ttf");
         Button b1=(Button) findViewById(R.id.button1);
 		TextView t= (TextView) findViewById(R.id.textViewv2);
 		b1.setTypeface(kepf);
 		t.setTypeface(kepf);
         
-        
+	
         
         //Inicializacion de Parse DB
     Parse.initialize(this, "KfBj6ivkLAaLTXhssMZkjp0MTp5DWhezdpprtYqo", "ePZ6T7RmvGGW87nNO0Oe9Th23H0Je7dwLyTOY4w3");
@@ -126,6 +125,8 @@ private boolean isNetworkAvailable() {
     NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
     return activeNetworkInfo != null && activeNetworkInfo.isConnected();
 }
+
+
 
 
     

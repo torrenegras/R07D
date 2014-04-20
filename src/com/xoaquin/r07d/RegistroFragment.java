@@ -51,6 +51,8 @@ public class RegistroFragment extends Fragment {
 	private static ParseUser cu = ParseUser.getCurrentUser();
  	private Boolean b;
     
+ 	private static View pbactivity;
+ 	
 	@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
         Bundle savedInstanceState) {
@@ -58,6 +60,7 @@ public class RegistroFragment extends Fragment {
 		// INFLANDO VIEW DEL FRAGMENTO
         View V= inflater.inflate(R.layout.fragment_registro, container, false);
         
+        pbactivity = getActivity().findViewById(R.id.progressBar1);
 
         //INICIALIZANDO VARIABLES
         bhi=(Button) V.findViewById(R.id.button1);
@@ -319,7 +322,7 @@ public class RegistroFragment extends Fragment {
 	//FUNCION GUARDAR
 	public void guardar(){
 	    
-       	pb.setVisibility(View.VISIBLE);
+		pbactivity.setVisibility(View.VISIBLE);
 		bg.setEnabled(false);//desabilita boton de guardar mientras hace la operacion, evita dobles
 		
 		b=isNetworkAvailable();
@@ -489,7 +492,7 @@ public class RegistroFragment extends Fragment {
 		        new Handler().postDelayed(new Runnable() {
 		                public void run() {
 		                 bg.setEnabled(true);//success
-	        	    	 pb.setVisibility(View.INVISIBLE);
+		                 pbactivity.setVisibility(View.INVISIBLE);
 		                }
 		        }, secondsDelayed * 1000);
 	    }else{
@@ -499,7 +502,7 @@ public class RegistroFragment extends Fragment {
 	        	   public void done(ParseException e) {
 	        	     if (e == null) {
 	        	    	 bg.setEnabled(true);//success
-	        	    	 pb.setVisibility(View.INVISIBLE);
+	        	    	 pbactivity.setVisibility(View.INVISIBLE);
 	        	     } else {
 	        	       //fail
 	        	     }
@@ -550,7 +553,7 @@ public class RegistroFragment extends Fragment {
   			        new Handler().postDelayed(new Runnable() {
   			                public void run() {
   			                 bg.setEnabled(true);//success
-		        	    	 pb.setVisibility(View.INVISIBLE);
+  			                 pbactivity.setVisibility(View.INVISIBLE);
   			                }
   			        }, secondsDelayed * 1000);
   		    }else{
@@ -560,7 +563,7 @@ public class RegistroFragment extends Fragment {
 		        	   public void done(ParseException e) {
 		        	     if (e == null) {
 		        	    	 bg.setEnabled(true);//success
-		        	    	 pb.setVisibility(View.INVISIBLE);
+		        	    	 pbactivity.setVisibility(View.INVISIBLE);
 		        	     } else {
 		        	       //fail
 		        	     }
