@@ -36,16 +36,20 @@ public class MuroActivity extends ListActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
+		
+		
 		//COLOR AL ACTIONBAR
 		ActionBar ab=getActionBar();
 		Drawable drw = getResources().getDrawable( R.drawable.b1 );
 		ab.setBackgroundDrawable(drw);
 		
+		
+		
 		//trayendo listview y poniendo atributos
 		ListView lv = getListView();
 	
 		
-//FUERZA BRUTA PARA CAMBIAR BACKGROUND DE LISTVIEW (CHAMBONADA)
+        //FUERZA BRUTA PARA CAMBIAR BACKGROUND DE LISTVIEW (CHAMBONADA)
 		lv.setDivider(null);
 		lv.setDividerHeight(0);
 		ArrayList<CustomObject> objects = new ArrayList<CustomObject>();
@@ -109,8 +113,9 @@ private class AsyncTaskRunner2 extends AsyncTask<Context, Void, CustomAdapter> {
 	
 	protected void onPreExecute() {
 		
+		ProgressBar pbr=new ProgressBar(MuroActivity.this,null,android.R.attr.progressBarStyleLarge);
 		progressDialog=ProgressDialog.show(MuroActivity.this,null,null);
-        progressDialog.setContentView(new ProgressBar(MuroActivity.this));
+        progressDialog.setContentView(pbr);//(new ProgressBar(MuroActivity.this));
         progressDialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
 		}
 		

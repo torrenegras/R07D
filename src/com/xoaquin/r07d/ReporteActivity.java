@@ -32,6 +32,7 @@ import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
+import com.parse.ParseUser;
 
 import android.net.Uri;
 import android.os.Bundle;
@@ -74,6 +75,7 @@ public class ReporteActivity extends Activity {
 	private static ProgressBar pb;
 
 	BackupManager bm;
+	ParseUser cu;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -96,6 +98,7 @@ public class ReporteActivity extends Activity {
 		
 		bm= new BackupManager(this);
 		
+		cu=ParseUser.getCurrentUser();
 		
 		//poniendo tipo de letra especial
 		Typeface kepf = Typeface.createFromAsset(getAssets(),"Kepler-Std-Black_26074.ttf");
@@ -126,6 +129,7 @@ public class ReporteActivity extends Activity {
 		b2=(Button) findViewById(R.id.button2); 
 		b2.setTypeface(kepf);
 		
+		/*
 		//trayendo valores guardados anteriormente a nivel DB local SQLite
 		
 		final DBAdapter2 db2 = new DBAdapter2(this);  
@@ -142,22 +146,32 @@ public class ReporteActivity extends Activity {
 	       et5.setText(db2.getTitle(nri).getString(3));
 	      
 	      }else{
-	    	  Log.e("prefs","prefs");
-	    	  /*
-	    	  bm.requestRestore(new RestoreObserver(){
-	    		  public void restoreFinished(int error) {
-		               Log.e("resterror", "Restore finished, error = " + error);
-		               
-		           }
-	    	  });
 	    	  */
 	    	  
-	    	  //Si no hay en DB local, trae backup de preferencias..  CUANDO SE INSTALA POR PRIMERA VEZ EN OTRO TELEFONO POR EJEMPLO
-	    	  SharedPreferences sharedPrefr = getSharedPreferences("myprefs", Context.MODE_PRIVATE);
-	    	  et1.setText(sharedPrefr.getString("nom", ""));
-		      et2.setText(sharedPrefr.getString("noml", "")); 
-		      et5.setText(sharedPrefr.getString("mdl", ""));
-	      }
+	    	  
+	    	  
+ //Si no hay en DB local, trae campos en archivo de preferencias, deberia funcionar con backup de google y todo en nuevas instalaciones
+	    	 
+		      SharedPreferences sharedPrefr = getSharedPreferences("myprefs", Context.MODE_PRIVATE);
+	    	  
+	    	  if (sharedPrefr.contains("nom")){
+	    		  
+	    		  Log.e("prefs","prefs");  
+	    	      et1.setText(sharedPrefr.getString("nom", ""));
+		          et2.setText(sharedPrefr.getString("noml", "")); 
+		          et5.setText(sharedPrefr.getString("mdl", ""));
+	          
+	    	  }else{
+	        	
+	    		  Log.e("parse","parse");
+	    		  if(cu!=null){
+	    			  et1.setText(cu.getString("nomrep"));
+	    			  et2.setText(cu.getString("nomlidrep"));
+	    			  et5.setText(cu.getString("mdlrep"));
+	    		  }
+	    		  
+	        	  
+	          }
 		
 	      
 	      
@@ -296,18 +310,30 @@ public class ReporteActivity extends Activity {
 		db2.insertTitle(et1.getText().toString(),et2.getText().toString(),et3.getText().toString());
 		*/
 		
-		//haciendo backup en prefs
-		//Context context = getActivity();  
+		
+		//Guardando ET´s en archivo de preferencias
+		
 		SharedPreferences sharedPref = getSharedPreferences("myprefs", Context.MODE_PRIVATE);
 		SharedPreferences.Editor editor = sharedPref.edit();
 		editor.putString("nom", et1.getText().toString());
 		editor.putString("noml", et2.getText().toString());
 		editor.putString("mdl", et3.getText().toString());
 		editor.commit();
-        bm.dataChanged();
+        bm.dataChanged(); // llamado a backupmanager....  en un futuro incierto....
 	
+		//Guardando Backup persistente en PARSEUSER
+        
+        if(cu!=null){
+        	cu.put("nomrep", et1.getText().toString());
+        	cu.put("nomlidrep", et2.getText().toString());
+        	cu.put("mdlrep", et3.getText().toString());
+        	cu.saveEventually();
+        }
+        
+        
+        
 		
-		//Creando el reporte en HTML
+        //Creando el reporte en HTML
 		
 		    String nombretablausuario=ntu;
  		
