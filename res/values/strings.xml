@@ -2,6 +2,7 @@
 <resources>
 
     <string name="app_name">R07D</string>
+    <string name="app_id">757717534254589</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_login">SIGN IN</string>
@@ -191,5 +192,6 @@
     <string name="shrscoresub">SHARING R07D\'S SCORE</string>
     <string name="shrscoretext">This is my #R07D Score, What\'s yours?.. http://bit.ly/1lN7aSl</string>
     <string name="shrnoti">Share with</string>
+    
     
 </resources>

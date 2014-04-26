@@ -230,8 +230,7 @@ query.count({
   }
 });
     
-    
-  
+ 
     
   },
   error: function(error) {
@@ -240,7 +239,21 @@ query.count({
 });
  
  
- //EMAIL BIENVENIDA USUARIO
+ 
+  
+   
+});//cierre funcion email nuevo usuario
+
+
+
+//ENVIO EMAIL BIENVENIDA USUARIO
+Parse.Cloud.define("bienvenidausr", function(request, response) {
+  
+    var Mandrill = require('mandrill');
+    Mandrill.initialize('1JXzvtkvJOoZ_VVMpNt2aQ');
+ 
+  
+  
     Mandrill.sendEmail({
   message: {
     //text: request.params.correo+"\n\nBienvenido a la comunidad R07D, Bendiciones! Usted va a recibir una notificacion para verficar su correo electronico. Si no la recibe, buscar en SPAM / No-Deseados.\n\nWelcome to the R07D community, Blessings! You're going to receive a notification to verfy your email. If not received please check the SPAM folder. ",
@@ -267,12 +280,8 @@ query.count({
   }
 });
  
-  
-   
-});//cierre funcion email nuevo usuario
-
-
-
+});
+ 
 
 
 

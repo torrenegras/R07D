@@ -3,15 +3,30 @@
 
 package com.xoaquin.r07d;
 
+import java.util.Arrays;
 import java.util.HashMap;
 
 import com.parse.FunctionCallback;
 import com.parse.LogInCallback;
 import com.parse.ParseCloud;
 import com.parse.ParseException;
+import com.parse.ParseFacebookUtils;
+import com.parse.ParseFacebookUtils.Permissions;
 import com.parse.ParseUser;
 import com.parse.RequestPasswordResetCallback;
 import com.parse.SignUpCallback;
+
+
+
+
+
+
+
+
+
+
+
+
 
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -23,6 +38,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
@@ -34,6 +50,8 @@ import android.widget.Toast;
 
 public class LoginActivity extends Activity {
 
+	//final Context context = this.getApplicationContext();
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -210,6 +228,7 @@ public void onclickregistrarse(View view) {  //click boton registrarse
     	                    	//llamando funcion Cloud email nuevo usuario y cuenta usuarios totales
     	    	                HashMap<String, Object> params = new HashMap<String, Object>();
     	    	                params.put("correo", etcorreo);
+    	    	                
     	    	                ParseCloud.callFunctionInBackground("infonewusers", params, new FunctionCallback<String>() {
     	    	                   public void done(String response, ParseException e) {
     	    	                       if (e == null) {
@@ -217,6 +236,17 @@ public void onclickregistrarse(View view) {  //click boton registrarse
     	    	                       }
     	    	                   }
     	    	                }); 
+    	    	                
+    	    	                //llamando funcion cloud de envio de email de bienvenida al usuario
+    	    	                ParseCloud.callFunctionInBackground("bienvenidausr", params, new FunctionCallback<String>() {
+     	    	                   public void done(String response, ParseException e) {
+     	    	                       if (e == null) {
+     	    	                          // respuesta de la funcion en response si se requiere
+     	    	                       }
+     	    	                   }
+     	    	                }); 
+    	    	                
+    	    	                
     	                    	
     	    	                //cambiando de actividad dado signup exitoso
     	    	                int secondsDelayed = 1;
@@ -262,7 +292,31 @@ public void onclickregistrarse(View view) {  //click boton registrarse
 	
 	public void onclickdesc(View view) {
 		
-        ParseUser.logOut();//logout usuario
+        
+		ParseFacebookUtils.logIn(Arrays.asList("email", Permissions.Friends.ABOUT_ME),this, new LogInCallback() {
+			  @Override
+			  public void done(ParseUser user, ParseException err) {
+			    if (user == null) {
+			      
+			    	
+			    	
+			    	Log.e("MyApp", "Uh oh. The user cancelled the Facebook login.");
+			    } else if (user.isNew()) {
+			    	
+				    
+			    	Log.e("MyApp", "User signed up and logged in through Facebook!");
+			     
+			    } else {
+			    	
+			    	 
+			    	Log.e("MyApp", "User logged in through Facebook!");
+			      
+			      
+			    }
+			  }
+			});
+		/*
+		ParseUser.logOut();//logout usuario
         
         
         //Para llamar el HOME y salir de APP
@@ -271,7 +325,35 @@ public void onclickregistrarse(View view) {  //click boton registrarse
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
 		
+		/*
+		String[] names = getAccountNames();
+		String mScope = "oauth2:https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email";
+		Log.e("nocuentas",String.valueOf(names.length));
+		Log.e("cuentas",names[0]);
+		*/
+	
+		
+		
+		
 	}
+	
+
+
+	/*
+	
+	private String[] getAccountNames() {
+	    AccountManager mAccountManager = AccountManager.get(this);
+	    Account[] accounts = mAccountManager.getAccountsByType(
+	            GoogleAuthUtil.GOOGLE_ACCOUNT_TYPE);
+	    String[] names = new String[accounts.length];
+	    for (int i = 0; i < names.length; i++) {
+	        names[i] = accounts[i].name;
+	    }
+	    return names;
+	}
+	*/
+
+	
 	
 	public void olvidoclave(View view) {
 
@@ -314,6 +396,12 @@ public void onclickregistrarse(View view) {  //click boton registrarse
 	    return activeNetworkInfo != null && activeNetworkInfo.isConnected();
 	}
 	
+	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+	  super.onActivityResult(requestCode, resultCode, data);
+	  ParseFacebookUtils.finishAuthentication(requestCode, resultCode, data);
+	}
 	
 	
 	@Override

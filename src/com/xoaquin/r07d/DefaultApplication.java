@@ -4,6 +4,7 @@
 package com.xoaquin.r07d;
 
 import com.parse.Parse;
+import com.parse.ParseFacebookUtils;
 import com.parse.ParseInstallation;
 import com.parse.ParseUser;
 import com.parse.PushService;
@@ -29,16 +30,27 @@ public class DefaultApplication extends Application{
       		
             PushService.setDefaultPushCallback(this, MainActivity.class);
       		ParseInstallation.getCurrentInstallation().saveEventually();
+      		ParseFacebookUtils.initialize("757717534254589");
       		
       		PushService.subscribe(this, "todos", MainActivity.class);
       	
       		ParseUser cu = ParseUser.getCurrentUser(); 
       		if(cu!=null){
       		String nombretablausuario=cu.getEmail();
-      		nombretablausuario=nombretablausuario.replaceAll("\\.", "");
- 			nombretablausuario=nombretablausuario.replaceAll("@", "");	
+      		
+      		if(nombretablausuario!=null){
+      		
+      			if (nombretablausuario.contains("\\.")||nombretablausuario.contains("@")){
+      		              nombretablausuario=nombretablausuario.replaceAll("\\.", "");
+ 			              nombretablausuario=nombretablausuario.replaceAll("@", "");	
+      		          }
+      		
+      		
  			PushService.subscribe(this, nombretablausuario,MainActivity.class); //suscripcion a canal dedicado para cada instalacion.
       	
+      		}
+ 			
+ 			
       		}
  		
       		String locale = getResources().getConfiguration().locale.getDisplayName();
