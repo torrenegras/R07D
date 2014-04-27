@@ -82,6 +82,7 @@ public class CalendarioActivity2 extends Activity implements GooglePlayServicesC
 	  
 	    //PONIENDO EN PARSE EL LOCALE DEL USUARIO
 	    ParseUser cu = ParseUser.getCurrentUser(); 
+	       
 		if (cu != null) {
 		 String locale = getResources().getConfiguration().locale.getDisplayName();
 		  cu.put("locale", locale);
