@@ -154,7 +154,7 @@ public class CalendarioActivity2 extends Activity implements GooglePlayServicesC
     		 m="0"+m;
     	 } 
         
-    	 
+    	
  //push progreso fin de mes informe de nivel
          if(diacal==diafm||diacal==diafm-1||diacal==diafm-2||diacal==diafm-3){ 
         	//PONIENDO EN PARSE EL CHECK LANZAMIENTO PUSH
@@ -164,14 +164,15 @@ public class CalendarioActivity2 extends Activity implements GooglePlayServicesC
         	
         	  	if(chk2==null){// en caso de ser la primera vez para el usuario que se lanza un mensaje push de este tipo
       
-        	  	   	pushnivel();  	
+        	  	   	pushnivel();  
+        	  	   	Log.e("push","null, se lanza por primera vez");
         	}else{
         	
-        	if(chk2.equals(m+Integer.toString(aniocal))){ }//nada ya se lanzo en este mes el push message  
+        	if(chk2.equals(m+Integer.toString(aniocal))){ Log.e("push","no se lanza porque ya se lanzo este mes");}//nada ya se lanzo en este mes el push message  
         		else{
         	 
                      pushnivel();
- 	              
+                     Log.e("push","se lanza este mes");
         	        }
                }
 
@@ -364,7 +365,7 @@ private class AsyncTaskRunner extends AsyncTask<Integer, Integer, Integer> {
 		ParseQuery<ParseObject> query = ParseQuery.getQuery(nombretablausuario); 
   		query.whereEqualTo("mesdbp", m);
 	    query.whereEqualTo("aniodbp", Integer.toString(aniocal)); 
-	    query.setCachePolicy(ParseQuery.CachePolicy.NETWORK_ELSE_CACHE);
+	    //query.setCachePolicy(ParseQuery.CachePolicy.NETWORK_ELSE_CACHE);
 	       try {
 		List<ParseObject> objects= query.find();
 		
@@ -386,7 +387,7 @@ private class AsyncTaskRunner extends AsyncTask<Integer, Integer, Integer> {
     	    ParseUser cu = ParseUser.getCurrentUser(); 
     		if (cu != null) {
     		  cu.put("usermesaniochk", m+Integer.toString(aniocal));
-    		  cu.saveEventually();
+    		  cu.saveInBackground();
     		} else {}
     		
     		
@@ -431,7 +432,7 @@ private class AsyncTaskRunner extends AsyncTask<Integer, Integer, Integer> {
 	    ParseUser cu = ParseUser.getCurrentUser(); 
 		if (cu != null) {
 		  cu.put("usermesaniochk", m+Integer.toString(aniocal));
-		  cu.saveEventually();
+		  cu.saveInBackground();
 		} else {}
 		
   	    
@@ -473,7 +474,7 @@ private class AsyncTaskRunner extends AsyncTask<Integer, Integer, Integer> {
     	    ParseUser cu = ParseUser.getCurrentUser(); 
     		if (cu != null) {
     		  cu.put("usermesaniochk", m+Integer.toString(aniocal));
-    		  cu.saveEventually();
+    		  cu.saveInBackground();
     		} else {}
     		
          	
@@ -505,7 +506,7 @@ private class AsyncTaskRunner extends AsyncTask<Integer, Integer, Integer> {
 
 
 
-//FUNCION LLAMADO PARSE PARA OBTENER LISTA DE DIAS COMPLETADOS EN ESE MES/AÑO
+//FUNCION LLAMADO PARSE PARA OBTENER LISTA DE DIAS COMPLETADOS EN ESE MES/Aï¿½O
     public String[] listadiascompletados(int mescalf,int aniocalf)
      {
 	  
@@ -515,7 +516,7 @@ private class AsyncTaskRunner extends AsyncTask<Integer, Integer, Integer> {
      if((mescalf+1)<10){nmcomp="0"+nmcomp;}
      String nycomp=String.valueOf(aniocalf);
      
-     ParseQuery<ParseObject> query = ParseQuery.getQuery(nombretablausuario); //query para buscar records de ese mes y año en orden ascendente
+     ParseQuery<ParseObject> query = ParseQuery.getQuery(nombretablausuario); //query para buscar records de ese mes y aï¿½o en orden ascendente
 	 query.whereEqualTo("mesdbp", nmcomp);
      query.whereEqualTo("aniodbp", nycomp);
      query.orderByAscending("diadbp");
@@ -558,7 +559,7 @@ public void inflandogridview(String[] dcompl,int mescall,int aniocall){
  	
  	//CALCULANDO Y SETTEANDO ALTURA TOTAL DEL GRIDVIEW
  	
-	int gridviewtot =                        (metrics.heightPixels  		//tama–o de toda la pantalla segun dispositivo
+	int gridviewtot =                        (metrics.heightPixels  		//tamaï¿½o de toda la pantalla segun dispositivo
             															//menos:
 											- getBarHeight()             //espacio de actionbar segun densidad de pantalla 		      
 											- 50                         //espacio flechas de control calendario
