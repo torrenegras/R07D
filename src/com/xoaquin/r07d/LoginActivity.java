@@ -311,18 +311,19 @@ public void onclickregistrarse(View view) {  //click boton registrarse
 	
 	
 public void onclickconectarseFB(View view) {
-	
+	 final ProgressBar pb = (ProgressBar) findViewById(R.id.progressBar1);
+	  pb.setVisibility(View.VISIBLE);
+	  
+	  
 	ParseFacebookUtils.logIn(Arrays.asList("email", Permissions.Friends.ABOUT_ME),this, new LogInCallback() {
 		  @Override
 		  public void done(ParseUser user, ParseException err) {
 		    if (user == null) {
 		      Log.e("MyApp", "Uh oh. The user cancelled the Facebook login.");
+		      pb.setVisibility(View.INVISIBLE);
 		    
 		    } else if (user.isNew()) {
 		      Log.e("MyApp", "User signed up and logged in through Facebook!");
-		    	
-
-		    	//final ParseUser pu=user;
 		    	
 		    			    	
 		    	final Session session=Session.getActiveSession();
@@ -333,28 +334,55 @@ public void onclickconectarseFB(View view) {
 		                // If the response is successful
 		                if (session == Session.getActiveSession()) {
 		                    if (userg != null) {
-		                    	//Log.e("MyApp", user.getId());
-		                    	//Log.e("MyApp", user.getLastName());
-		                    	//Log.e("MyApp", response.getGraphObject().getProperty("email").toString());
 		                    	
+		                    	 //String fbemail=(String)userg.getProperty("email");
+		                    	  final String fbemail=response.getGraphObject().getProperty("email").toString();
+		                    	//String fbemail=(String)userg.asMap().get("email");
+		                    	//Log.e("fbemail", fbemail);
 		                    	
-		                    	   //String fbemail=(String)userg.getProperty("email");
-		                    	  //String fbemail=response.getGraphObject().getProperty("email").toString();
-		                    	  //String fbemail=(String)userg.asMap().get("email");
-		                    	  //Log.e("fbemail", fbemail);
-		                    	
-		                    	//pu.setEmail("loquesea@misterio");
-		                    	//pu.saveInBackground();
-		                    	
-		                    	//este funciona 100%
 		                    	ParseUser cu= ParseUser.getCurrentUser();
-		                    	cu.setEmail("niidea@niidea.com");
+		                    	cu.setEmail(fbemail);
 		                    	cu.saveInBackground();
 		                    	
-		    			    	
+		                    	
+		                     	//llamando funcion Cloud email nuevo usuario y cuenta usuarios totales
+    	    	                HashMap<String, Object> params = new HashMap<String, Object>();
+    	    	                params.put("correo", fbemail);
+    	    	                
+    	    	                ParseCloud.callFunctionInBackground("infonewusers", params, new FunctionCallback<String>() {
+    	    	                   public void done(String response, ParseException e) {
+    	    	                       if (e == null) {
+    	    	                          // respuesta de la funcion en response si se requiere
+    	    	                       }
+    	    	                   }
+    	    	                }); 
+    	    	                
+    	    	                //llamando funcion cloud de envio de email de bienvenida al usuario
+    	    	                ParseCloud.callFunctionInBackground("bienvenidausr", params, new FunctionCallback<String>() {
+     	    	                   public void done(String response, ParseException e) {
+     	    	                       if (e == null) {
+     	    	                          // respuesta de la funcion en response si se requiere
+     	    	                       }
+     	    	                   }
+     	    	                }); 
+    	    	                
+    	    	                
+    	                    	
+    	    	                //cambiando de actividad dado signup exitoso
+    	    	                int secondsDelayed = 1;
+     		 	                new Handler().postDelayed(new Runnable() {
+     		 	                        public void run() {
+     		 	                        	Intent i = new Intent(getApplicationContext(), CalendarioActivity2.class);
+ 						                	i.putExtra("correog",fbemail);//pasando la variable correo a la siguiente actividad
+ 						                	
+ 						                	    startActivity(new Intent(i));
+     		 	                                finish();
+     		 	                        }
+     		 	                }, secondsDelayed * 1000);
 		                    	
 		                    	
-		                    	//fbemailinside=userg.getProperty("email").toString();			                    	
+		                    	
+		                    	
 		                    	
 		                    	
 		                    }
@@ -367,10 +395,51 @@ public void onclickconectarseFB(View view) {
 				
 		        });
 		        request.executeAsync();
-		        //Log.e("MyApp", "async");
+		        
 		     
 		    } else {
 		      Log.e("MyApp", "User logged in through Facebook!");
+		      
+		     
+	    	final Session session=Session.getActiveSession();
+	    	Request request=Request.newMeRequest(session, 
+	                new Request.GraphUserCallback() {
+	            @Override
+	            public void onCompleted(GraphUser userg, Response response) {
+	                // If the response is successful
+	                if (session == Session.getActiveSession()) {
+	                    if (userg != null) {
+	                    	
+	                    	
+	                     final String fbemail=response.getGraphObject().getProperty("email").toString();
+	                    
+	    	                //cambiando de actividad dado signup exitoso
+	    	                int secondsDelayed = 1;
+		 	                new Handler().postDelayed(new Runnable() {
+		 	                        public void run() {
+		 	                        	Intent i = new Intent(getApplicationContext(), CalendarioActivity2.class);
+					                	i.putExtra("correog",fbemail);//pasando la variable correo a la siguiente actividad
+					                	
+					                	    startActivity(new Intent(i));
+		 	                                finish();
+		 	                        }
+		 	                }, secondsDelayed * 1000);
+	                    	
+	                   
+	                    	
+	                    }
+	                }
+	                if (response.getError() != null) {
+	                    // Handle errors, will do so later.
+	                }
+	            }
+
+			
+	        });
+	        request.executeAsync();
+		      
+		      
+		      
 		    	
 		    }
 		  }
@@ -481,6 +550,7 @@ public void onclickdesc(View view) {
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 	  super.onActivityResult(requestCode, resultCode, data);
 	  ParseFacebookUtils.finishAuthentication(requestCode, resultCode, data);
+	 
 	}
 	
 	

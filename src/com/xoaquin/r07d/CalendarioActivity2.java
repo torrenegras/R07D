@@ -34,6 +34,7 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -82,8 +83,11 @@ public class CalendarioActivity2 extends Activity implements GooglePlayServicesC
 	  
 	    //PONIENDO EN PARSE EL LOCALE DEL USUARIO
 	    ParseUser cu = ParseUser.getCurrentUser(); 
+	    
+	   
 	       
 		if (cu != null) {
+			 Log.e("user",cu.getUsername());
 		 String locale = getResources().getConfiguration().locale.getDisplayName();
 		  cu.put("locale", locale);
 		  cu.put("version", ParseInstallation.getCurrentInstallation().getString("appVersion"));
