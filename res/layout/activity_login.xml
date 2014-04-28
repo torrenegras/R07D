@@ -83,7 +83,7 @@
         <Button
             android:id="@+id/button1"
             android:layout_width="190dp"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:layout_gravity="center"
             android:layout_marginTop="37dp"
             android:background="@drawable/b1"
@@ -97,7 +97,7 @@
         <Button
             android:id="@+id/button2"
             android:layout_width="190dp"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:layout_gravity="center"
             android:layout_marginTop="32dp"
             android:background="@drawable/b1"
@@ -107,9 +107,20 @@
             android:textSize="22sp" />
         
         <Button
+            android:id="@+id/button2a"
+            android:layout_width="190dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="32dp"
+            android:background="@drawable/fbhdeng"
+            android:onClick="onclickconectarseFB"
+            android:textColor="#ffffff"
+            android:textSize="22sp" />
+        
+        <Button
             android:id="@+id/button3"
             android:layout_width="190dp"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:layout_gravity="center"
             android:layout_marginTop="32dp"
             android:background="@drawable/b1"

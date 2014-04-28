@@ -6,9 +6,6 @@ package com.xoaquin.r07d;
 import java.util.Arrays;
 import java.util.HashMap;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import com.facebook.Request;
 import com.facebook.Response;
 import com.facebook.Session;
@@ -22,6 +19,7 @@ import com.parse.ParseFacebookUtils.Permissions;
 import com.parse.ParseUser;
 import com.parse.RequestPasswordResetCallback;
 import com.parse.SignUpCallback;
+
 
 
 
@@ -67,7 +65,7 @@ import android.widget.Toast;
 public class LoginActivity extends Activity {
 
 	String FBemail="";
-	private String fbemailinside;
+	//private String fbemailinside;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -93,12 +91,19 @@ public class LoginActivity extends Activity {
 		b1.setTypeface(kepf);
 		Button b2=(Button) findViewById(R.id.button2); 
 		b2.setTypeface(kepf);
+		Button b2a=(Button) findViewById(R.id.button2a); 
 		Button b3=(Button) findViewById(R.id.button3); 
 		b3.setTypeface(kepf);
 		TextView t3=(TextView) findViewById(R.id.textViewv1);
 		t3.setTypeface(kepf);
 		
-		
+		//cambiando background de boton FB
+		String locale = getResources().getConfiguration().locale.getDisplayName();
+   		if(locale.contains("espa\u00F1ol")){ 
+  		b2a.setBackgroundResource(R.drawable.iniciafbesp);
+  		}else{
+  				
+  		}
 		
 		
 		//trayendo ultimo correo usado para loggin
@@ -305,73 +310,82 @@ public void onclickregistrarse(View view) {  //click boton registrarse
 }//registrarse
 	
 	
+public void onclickconectarseFB(View view) {
 	
+	ParseFacebookUtils.logIn(Arrays.asList("email", Permissions.Friends.ABOUT_ME),this, new LogInCallback() {
+		  @Override
+		  public void done(ParseUser user, ParseException err) {
+		    if (user == null) {
+		      Log.e("MyApp", "Uh oh. The user cancelled the Facebook login.");
+		    
+		    } else if (user.isNew()) {
+		      Log.e("MyApp", "User signed up and logged in through Facebook!");
+		    	
+
+		    	//final ParseUser pu=user;
+		    	
+		    			    	
+		    	final Session session=Session.getActiveSession();
+		    	Request request=Request.newMeRequest(session, 
+		                new Request.GraphUserCallback() {
+		            @Override
+		            public void onCompleted(GraphUser userg, Response response) {
+		                // If the response is successful
+		                if (session == Session.getActiveSession()) {
+		                    if (userg != null) {
+		                    	//Log.e("MyApp", user.getId());
+		                    	//Log.e("MyApp", user.getLastName());
+		                    	//Log.e("MyApp", response.getGraphObject().getProperty("email").toString());
+		                    	
+		                    	
+		                    	   //String fbemail=(String)userg.getProperty("email");
+		                    	  //String fbemail=response.getGraphObject().getProperty("email").toString();
+		                    	  //String fbemail=(String)userg.asMap().get("email");
+		                    	  //Log.e("fbemail", fbemail);
+		                    	
+		                    	//pu.setEmail("loquesea@misterio");
+		                    	//pu.saveInBackground();
+		                    	
+		                    	//este funciona 100%
+		                    	ParseUser cu= ParseUser.getCurrentUser();
+		                    	cu.setEmail("niidea@niidea.com");
+		                    	cu.saveInBackground();
+		                    	
+		    			    	
+		                    	
+		                    	
+		                    	//fbemailinside=userg.getProperty("email").toString();			                    	
+		                    	
+		                    	
+		                    }
+		                }
+		                if (response.getError() != null) {
+		                    // Handle errors, will do so later.
+		                }
+		            }
+
+				
+		        });
+		        request.executeAsync();
+		        //Log.e("MyApp", "async");
+		     
+		    } else {
+		      Log.e("MyApp", "User logged in through Facebook!");
+		    	
+		    }
+		  }
+		});
 	
-	public void onclickdesc(View view) {
-		
-        
-		ParseFacebookUtils.logIn(Arrays.asList("email", Permissions.Friends.ABOUT_ME),this, new LogInCallback() {
-			  @Override
-			  public void done(ParseUser user, ParseException err) {
-			    if (user == null) {
-			      Log.e("MyApp", "Uh oh. The user cancelled the Facebook login.");
-			    
-			    } else if (user.isNew()) {
-			      Log.e("MyApp", "User signed up and logged in through Facebook!");
-			    	
 
-			    	final ParseUser pu=user;
-			    	
-			    			    	
-			    	final Session session=Session.getActiveSession();
-			    	Request request=Request.newMeRequest(session, 
-			                new Request.GraphUserCallback() {
-			            @Override
-			            public void onCompleted(GraphUser userg, Response response) {
-			                // If the response is successful
-			                if (session == Session.getActiveSession()) {
-			                    if (userg != null) {
-			                    	//Log.e("MyApp", user.getId());
-			                    	//Log.e("MyApp", user.getLastName());
-			                    	//Log.e("MyApp", (String) response.getGraphObject().getProperty("email"));
-			                    	
-			                    	
-			                    	//String fbemail=userg.getProperty("email").toString();
-			                    	//Log.e("fbemail", fbemail);
-			                    	
-			                    	//pu.setEmail("gogol@gogol.com");
-			                    	//pu.saveInBackground();
-			                    	
-			                    	//ParseUser cu= ParseUser.getCurrentUser();
-			                    	//cu.setEmail("pedo@pedo.com");
-			                    	//cu.saveInBackground();
-			                    	
-			    			    	fbemailinside=userg.getProperty("email").toString();			                    	
-			                    	
-			                    	
-			                    }
-			                }
-			                if (response.getError() != null) {
-			                    // Handle errors, will do so later.
-			                }
-			            }
 
-					
-			        });
-			        request.executeAsync();
-			        //Log.e("MyApp", "async");
-			     
-			    } else {
-			      Log.e("MyApp", "User logged in through Facebook!");
-			    	
-			    }
-			  }
-			});
+}
+
+
+
+
+public void onclickdesc(View view) {
 		
 		
-		
-		
-		/*
 		ParseUser.logOut();//logout usuario
         
         
@@ -382,21 +396,19 @@ public void onclickregistrarse(View view) {  //click boton registrarse
         startActivity(intent);
 		
 		/*
-		String[] names = getAccountNames();
+		String[] names = getAccountNames(); //login con google 
 		String mScope = "oauth2:https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email";
 		Log.e("nocuentas",String.valueOf(names.length));
 		Log.e("cuentas",names[0]);
 		*/
 	
-		
-		
-		
+	
 	}
 	
 
 
 	/*
-	
+	//Para saber las cuentas de Google en el dispositivo
 	private String[] getAccountNames() {
 	    AccountManager mAccountManager = AccountManager.get(this);
 	    Account[] accounts = mAccountManager.getAccountsByType(
@@ -409,20 +421,19 @@ public void onclickregistrarse(View view) {  //click boton registrarse
 	}
 	*/
 
+	
+	
+	
+	
 	@Override
 	public void onResume(){
-super.onResume();
-	    Log.e("onresume","onreseum");
-	    if(fbemailinside!=null){
-	    Log.e("f",fbemailinside);
-	    ParseUser cu= ParseUser.getCurrentUser();
-	    if(cu!=null){
-	    	cu.setEmail(fbemailinside);
-	    	cu.saveInBackground();
-	    }
-	    	
-	    }
+       super.onResume();
+	    
 	}
+	
+	
+	
+	
 	
 	public void olvidoclave(View view) {
 

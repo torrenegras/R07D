@@ -369,7 +369,7 @@ private class AsyncTaskRunner extends AsyncTask<Integer, Integer, Integer> {
 			ParsePush push = new ParsePush();
             push.setChannel(nombretablausuario);
             
-            if(locale.equals("espa\u00F1ol (Espa\u00F1a)")){
+            if(locale.contains("espa\u00F1ol")){
             push.setMessage("Puntaje Mes: +5 PUNTOS (R07D Principiante)");
             }else{
             push.setMessage("Month\u0027s Score: +5 POINTS (R07D Beginner)");
@@ -392,7 +392,7 @@ private class AsyncTaskRunner extends AsyncTask<Integer, Integer, Integer> {
          	   
          	    JSONObject data=new JSONObject();
  
-         	    if(locale.equals("espa\u00F1ol (Espa\u00F1a)")){
+         	    if(locale.contains("espa\u00F1ol")){
          	    data = new JSONObject("{\"action\": \"com.xoaquin.r07d.NIVEL\",\"mensaje\": \"Usted ha hecho un buen esfuerzo, siga avanzando! Bendiciones! (R07D Nivel Principiante) +5 PUNTOS \",\"puntos\": \"5\"    }");
          		}else{
          			data = new JSONObject("{\"action\": \"com.xoaquin.r07d.NIVEL\",\"mensaje\": \"You\u0027ve made a good effort, keep going! Blessings!              (R07D Beginner Level) +5 POINTS \",\"puntos\": \"5\"    }");
@@ -414,7 +414,7 @@ private class AsyncTaskRunner extends AsyncTask<Integer, Integer, Integer> {
 		ParsePush push = new ParsePush();
         push.setChannel(nombretablausuario);
        
-        if(locale.equals("espa\u00F1ol (Espa\u00F1a)")){
+        if(locale.contains("espa\u00F1ol")){
         push.setMessage("Puntaje Mes: +15 PUNTOS (R07D Intermedio)");
         }else{
         push.setMessage("Month\u0027s Score: +15 POINTS (R07D Intermediate)");
@@ -434,7 +434,7 @@ private class AsyncTaskRunner extends AsyncTask<Integer, Integer, Integer> {
   	  try {
   		 JSONObject data=new JSONObject();
   		 
-  		 if(locale.equals("espa\u00F1ol (Espa\u00F1a)")){
+  		 if(locale.contains("espa\u00F1ol")){
   		  data = new JSONObject("{\"action\": \"com.xoaquin.r07d.NIVEL\",\"mensaje\": \"Usted ha hecho un buen trabajo, siga avanzando! Bendiciones! (R07D Nivel Intermedio) +15 PUNTOS \",\"puntos\": \"15\"    }");
   		 }else{
   		  data = new JSONObject("{\"action\": \"com.xoaquin.r07d.NIVEL\",\"mensaje\": \"You\u0027ve done a good work, keep going! Blessings!               (R07D Intermediate Level) +15 POINTS \",\"puntos\": \"15\"    }"); 
@@ -456,7 +456,7 @@ private class AsyncTaskRunner extends AsyncTask<Integer, Integer, Integer> {
 			ParsePush push = new ParsePush();
             push.setChannel(nombretablausuario);
        	    
-            if(locale.equals("espa\u00F1ol (Espa\u00F1a)")){
+            if(locale.contains("espa\u00F1ol")){
             push.setMessage("Puntaje Mes: +25 PUNTOS (R07D Avanzado)");
             }else{
             push.setMessage("Month\u0027s Score: +25 POINTS (R07D Advanced)");
@@ -476,7 +476,7 @@ private class AsyncTaskRunner extends AsyncTask<Integer, Integer, Integer> {
          	try {
 	        		 
          		  JSONObject data=new JSONObject();
-         		    if(locale.equals("espa\u00F1ol (Espa\u00F1a)")){
+         		    if(locale.contains("espa\u00F1ol")){
          		    data = new JSONObject("{\"action\": \"com.xoaquin.r07d.NIVEL\",\"mensaje\": \"Usted ha hecho un excelente trabajo, siga avanzando! Bendiciones! (R07D Nivel Avanzado) +25 PUNTOS \",\"puntos\": \"25\"    }");
          		    }else{
          		    	data = new JSONObject("{\"action\": \"com.xoaquin.r07d.NIVEL\",\"mensaje\": \"You\u0027ve done an excellent work, keep going! Blessings!               (R07D Advanced Level) +25 POINTS \",\"puntos\": \"25\"    }");
