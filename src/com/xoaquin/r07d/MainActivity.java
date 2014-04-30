@@ -18,11 +18,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.parse.Parse;
 import com.parse.ParseAnalytics;
-import com.parse.ParseInstallation;
 import com.parse.ParseUser;
-import com.parse.PushService;
 
 
 
@@ -46,17 +43,10 @@ public static String correoglobal;
         
 	
         
-        //Inicializacion de Parse DB
-    Parse.initialize(this, "KfBj6ivkLAaLTXhssMZkjp0MTp5DWhezdpprtYqo", "ePZ6T7RmvGGW87nNO0Oe9Th23H0Je7dwLyTOY4w3");
+    //Estadisticas en PARSE
     ParseAnalytics.trackAppOpened(getIntent());
-    PushService.setDefaultPushCallback(this, MainActivity.class);
-	ParseInstallation.getCurrentInstallation().saveEventually();
-	ParseAnalytics.trackAppOpened(getIntent());
-	PushService.subscribe(this, "todos", MainActivity.class);
-	@SuppressWarnings("unused")
-	ParseInstallation installation = ParseInstallation.getCurrentInstallation();
-
-
+ 
+    
 			//NOTIFICACION EN AREA DE NOTIFICACIONES
 			
 			NotificationCompat.Builder mBuilder =

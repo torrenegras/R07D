@@ -14,15 +14,12 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesClient;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.location.LocationClient;
-import com.parse.ParseAnalytics;
 import com.parse.ParseException;
 import com.parse.ParseInstallation;
 import com.parse.ParseObject;
 import com.parse.ParsePush;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
-import com.parse.PushService;
-
 import android.location.Location;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -34,7 +31,6 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -75,19 +71,14 @@ public class CalendarioActivity2 extends Activity implements GooglePlayServicesC
 		//AppRater.showRateDialog(this, null);  MOSTRAR EL DIALOG PARA PRUEBAS
 	    //JalertActivity.showRateDialog(this, null); MOSTRAR DIALOG PARA PRUEBAS
 	    
-	    PushService.setDefaultPushCallback(this, MainActivity.class);
-		ParseInstallation.getCurrentInstallation().saveEventually();
-		ParseAnalytics.trackAppOpened(getIntent());
-		PushService.subscribe(this, "todos", MainActivity.class);
-		ParseInstallation.getCurrentInstallation();
-	  
+	 
 	    //PONIENDO EN PARSE EL LOCALE DEL USUARIO
 	    ParseUser cu = ParseUser.getCurrentUser(); 
 	    
 	   
 	       
 		if (cu != null) {
-			 Log.e("user",cu.getUsername());
+			 
 		 String locale = getResources().getConfiguration().locale.getDisplayName();
 		  cu.put("locale", locale);
 		  cu.put("version", ParseInstallation.getCurrentInstallation().getString("appVersion"));
@@ -115,7 +106,7 @@ public class CalendarioActivity2 extends Activity implements GooglePlayServicesC
 		    nombretablausuario=nombretablausuario.replaceAll("\\.", "");
 			nombretablausuario=nombretablausuario.replaceAll("@", "");	
 		}
-		PushService.subscribe(this, nombretablausuario,MainActivity.class); //suscripcion a canal dedicado para cada instalacion.
+		
 		
 		
 		//cargando variables
@@ -165,14 +156,14 @@ public class CalendarioActivity2 extends Activity implements GooglePlayServicesC
         	  	if(chk2==null){// en caso de ser la primera vez para el usuario que se lanza un mensaje push de este tipo
       
         	  	   	pushnivel();  
-        	  	   	Log.e("push","null, se lanza por primera vez");
+        	  	   	
         	}else{
         	
-        	if(chk2.equals(m+Integer.toString(aniocal))){ Log.e("push","no se lanza porque ya se lanzo este mes");}//nada ya se lanzo en este mes el push message  
+        	if(chk2.equals(m+Integer.toString(aniocal))){ }//nada ya se lanzo en este mes el push message  
         		else{
         	 
                      pushnivel();
-                     Log.e("push","se lanza este mes");
+                     
         	        }
                }
 
@@ -365,7 +356,7 @@ private class AsyncTaskRunner extends AsyncTask<Integer, Integer, Integer> {
 		ParseQuery<ParseObject> query = ParseQuery.getQuery(nombretablausuario); 
   		query.whereEqualTo("mesdbp", m);
 	    query.whereEqualTo("aniodbp", Integer.toString(aniocal)); 
-	    //query.setCachePolicy(ParseQuery.CachePolicy.NETWORK_ELSE_CACHE);
+	    query.setCachePolicy(ParseQuery.CachePolicy.NETWORK_ELSE_CACHE);
 	       try {
 		List<ParseObject> objects= query.find();
 		
@@ -387,7 +378,7 @@ private class AsyncTaskRunner extends AsyncTask<Integer, Integer, Integer> {
     	    ParseUser cu = ParseUser.getCurrentUser(); 
     		if (cu != null) {
     		  cu.put("usermesaniochk", m+Integer.toString(aniocal));
-    		  cu.saveInBackground();
+    		  cu.saveEventually();
     		} else {}
     		
     		
@@ -432,7 +423,7 @@ private class AsyncTaskRunner extends AsyncTask<Integer, Integer, Integer> {
 	    ParseUser cu = ParseUser.getCurrentUser(); 
 		if (cu != null) {
 		  cu.put("usermesaniochk", m+Integer.toString(aniocal));
-		  cu.saveInBackground();
+		  cu.saveEventually();
 		} else {}
 		
   	    
@@ -474,7 +465,7 @@ private class AsyncTaskRunner extends AsyncTask<Integer, Integer, Integer> {
     	    ParseUser cu = ParseUser.getCurrentUser(); 
     		if (cu != null) {
     		  cu.put("usermesaniochk", m+Integer.toString(aniocal));
-    		  cu.saveInBackground();
+    		  cu.saveEventually();
     		} else {}
     		
          	

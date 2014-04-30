@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.xoaquin.r07d"
-    android:versionCode="48"
-    android:versionName="Ruth" >
+    android:versionCode="49"
+    android:versionName="Samuel" >
 
     <uses-sdk
         android:minSdkVersion="11"

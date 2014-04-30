@@ -29,7 +29,7 @@ public class DefaultApplication extends Application{
       //comandos para notificaciones push activados en esta clase
       		
             PushService.setDefaultPushCallback(this, MainActivity.class);
-      		ParseInstallation.getCurrentInstallation().saveEventually();
+      		
       		ParseFacebookUtils.initialize("757717534254589");
       		
       		PushService.subscribe(this, "todos", MainActivity.class);
@@ -44,13 +44,13 @@ public class DefaultApplication extends Application{
       		              nombretablausuario=nombretablausuario.replaceAll("\\.", "");
  			              nombretablausuario=nombretablausuario.replaceAll("@", "");	
       		          }
-      		
-      		
- 			PushService.subscribe(this, nombretablausuario,MainActivity.class); //suscripcion a canal dedicado para cada instalacion.
+      		PushService.subscribe(this, nombretablausuario,MainActivity.class); //suscripcion a canal dedicado para cada instalacion.
       	
       		}
- 			
- 			
+ 						
+      		ParseInstallation installation = ParseInstallation.getCurrentInstallation();
+      		installation.put("actualuser",cu.getUsername());
+      		installation.saveEventually();
       		}
  		
       		String locale = getResources().getConfiguration().locale.getDisplayName();
