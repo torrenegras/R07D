@@ -416,10 +416,29 @@ Parse.Cloud.job("pushavisoimportante", function(request, status) {
   }
 }, {
   success: function() {
-    // Push was successful
+    status.success("Aviso Importante Enviado");  // Push was successful
   },
   error: function(error) {
-    // Handle error
+    status.error("Aviso Importante No Enviado ERROR"); // Handle error
+  }
+});
+});
+
+
+Parse.Cloud.job("puntajes", function(request, status) {
+    Parse.Push.send({
+  channels: [ "xoaquinoutlookcom" ],
+  data: {
+    action:"com.xoaquin.r07d.NIVEL"
+    
+    
+  }
+}, {
+  success: function() {
+    status.success("Puntajes Enviados");  // Push was successful// Push was successful
+  },
+  error: function(error) {
+    status.error("Puntajes No Enviados ERROR"); // Handle error// Handle error
   }
 });
 });

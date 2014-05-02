@@ -7,29 +7,45 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.List;
 
+import com.parse.FindCallback;
+import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
 import com.parse.ParseUser;
+import com.parse.SaveCallback;
 
+import android.media.RingtoneManager;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.app.Activity;
+import android.app.NotificationManager;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.CompressFormat;
 import android.graphics.Typeface;
+import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-
+//reportar error en parse saveeventually user,   no permitir doble conteo en niveles onresume, cuadrar JOB cloud como es...
 
 public class NivelesActivity extends Activity {
 
-	private String mensaje=" ",puntos=" ";
-	
+	private String nombretablausuario="",m="",m2="";
+	private int mescal,aniocal,puntajemespasado;
+	private Boolean bn;
+	Button b;
 	LinearLayout L1;
 	
 	@Override
@@ -37,18 +53,33 @@ public class NivelesActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_niveles);
 		
+		//NOTIFICACION EN AREA DE NOTIFICACIONES
+		Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+		
+		NotificationCompat.Builder mBuilder =
+		     new NotificationCompat.Builder(this)
+		.setSmallIcon(R.drawable.ic_launcher)
+		.setContentTitle(getString(R.string.app_name))
+		.setStyle(new NotificationCompat.BigTextStyle().bigText(getString(R.string.puntaje)))
+		.setAutoCancel(false)
+		.setSound(alarmSound)
+		.setContentText(getString(R.string.puntaje));
+		
+		NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+		mNotificationManager.notify(1, mBuilder.build());
 		
 		
-		Bundle extras = getIntent().getExtras();
-		if (extras != null) {
-		    mensaje = extras.getString("msj");
-		    puntos = extras.getString("pun");
-		  
-		}
-	
+		
+		
+		
+		bn=isNetworkAvailable();
+		   
+        
+        
+
 		TextView tv=(TextView) findViewById(R.id.textViewt);
 		TextView tv2=(TextView) findViewById(R.id.textViewtxt);
-		Button b=(Button) findViewById(R.id.button1);
+		b=(Button) findViewById(R.id.button1);
 		L1 = (LinearLayout) findViewById(R.id.ll);
 		
 		Typeface kepf = Typeface.createFromAsset(getAssets(),"Kepler-Std-Black_26074.ttf");
@@ -56,23 +87,177 @@ public class NivelesActivity extends Activity {
 		tv.setTypeface(kepf);
 		tv2.setTypeface(kepf);
 		b.setTypeface(kepf);
-		tv.setText(mensaje);
+		
+		tv2.setText(getString(R.string.puntaje));
 	
+		
+		//iniciando calendario en fecha de hoy
+		 Calendar now = Calendar.getInstance(); //calendario, trayendo fecha de hoy
+       // diacal = now.get(Calendar.DAY_OF_MONTH);
+        mescal=now.get(Calendar.MONTH);
+        aniocal=now.get(Calendar.YEAR);
 		
 		
 		ParseUser cu = ParseUser.getCurrentUser();
 		if (cu != null) {
-		  int pun= cu.getInt("puntaje");
-		  pun=pun+Integer.valueOf(puntos);
-		  b.setText(String.valueOf(pun));
-		  cu.put("puntaje", pun);
-		  cu.saveEventually();
+				  
+		    nombretablausuario = cu.getEmail();
+		    nombretablausuario=nombretablausuario.replaceAll("\\.", "");
+			nombretablausuario=nombretablausuario.replaceAll("@", "");
+			
 		} else {
 		  // show the signup or login screen
 		}
+		
+		m=Integer.toString(mescal+1);
+   	 if(Integer.valueOf(m)<10){
+   		 m="0"+m;
+   	 } 
+   	 m2=m;
+   
+   	 if(m=="01"){ //primer mes del año
+   		 m="12";
+   		 aniocal=aniocal-1;
+   	 }else{
+   		
+   		 m=Integer.toString(mescal); //busca en mes anterior bajo normalidad
+      	 if(Integer.valueOf(m)<10){
+      		 m="0"+m;
+      	 }
+   	 }
+   	 
+   	 
+   	 
+		ParseQuery<ParseObject> query = ParseQuery.getQuery(nombretablausuario); 
+  		query.whereEqualTo("mesdbp", m);
+	    query.whereEqualTo("aniodbp", Integer.toString(aniocal)); 
+	    //query.setCachePolicy(ParseQuery.CachePolicy.NETWORK_ELSE_CACHE);
+	    if (!bn){
+        	query.fromLocalDatastore();
+        }
+	       
+	
+	    try {
+			List<ParseObject> objects= query.find();
+			
+			Log.e("size",Integer.toString(objects.size()));
+			int objetos=objects.size();
+			
+			
+			
+			if(mescal==0){
+				mescal=12;
+			}
+			
+			
+			Log.e("mesencuestion+anioencuestion+numdias",Integer.toString(mescal-1)+" "+Integer.toString(aniocal));
+			GregorianCalendar mycal = new GregorianCalendar(aniocal, mescal-1, 1);
+			int dem= mycal.getActualMaximum(Calendar.DAY_OF_MONTH);  
+			Log.e("numdias",Integer.toString(dem));
+			
+			if(dem==28 && objetos>=28){
+				objetos=30;
+				
+			}
+			
+			if(dem==29 && objetos>=29){
+				objetos=30;
+				
+			}
+			
+			if(objetos>=31){
+				objetos=30;
+			}
+			
+			
+			puntajemespasado=objetos*5;
+			
+			if(puntajemespasado==0){
+				puntajemespasado=2;
+			}
+			
+			 
+			ParseQuery<ParseObject> q = ParseQuery.getQuery("puntajes");
+	        q.whereEqualTo("usuario", nombretablausuario);
+	    
+	        if (!bn){
+	        	q.fromLocalDatastore();
+	        }
+	        q.findInBackground(new FindCallback<ParseObject>() {
+	            public void done(List<ParseObject> obs, ParseException e) {
+	                if (e == null) {
+	                   if (obs.size()>0)
+	                   {   	                   
+	                	   ParseObject o=obs.get(0);
+	                	   int pun= Integer.valueOf(o.get("puntaje").toString());
+	                	   pun=pun+puntajemespasado;
+	         			   b.setText(String.valueOf(pun));
+	         			   o.put("puntaje", String.valueOf(pun));
+	        			   o.saveEventually();
+	        			   o.pinInBackground(m2,new SaveCallback(){ //guardando tambien en Local Datastore
+
+	             				@Override
+	             				public void done(ParseException e) {
+	             					// TODO Auto-generated method stub
+	             					
+	             				}});
+	               
+	                   }else{
+	                       
+	                	  ParseObject o2=new ParseObject("puntajes"); 
+	                	  int punnuevo=puntajemespasado;
+	                	  b.setText(String.valueOf(punnuevo));
+	         			  o2.put("usuario", nombretablausuario);
+	         			  o2.put("puntaje", String.valueOf(punnuevo));
+	         			  o2.saveEventually();
+	         			  o2.pinInBackground(m2,new SaveCallback(){ //guardando tambien en Local Datastore
+
+	              				@Override
+	              				public void done(ParseException e) {
+	              					// TODO Auto-generated method stub
+	              					
+	              				}});
+	                     	                   
+	                 }
+	                   
+	                } else {//error en query, algo salio mal.. sin net, sin cache...  PRIMERA VEZ QUE SE INTENTA QUERY SOBRE ELEMENTO, POR LO QUE ES NUEVO** OPTIMIZACION??**
+	                	
+	                 
+	                }
+	            }
+
+	        });
+	        
+			
+			
+			 
+			 
+			  
+			  
+			  if(objetos>=5 && objetos<15){
+				  tv.setText(getString(R.string.punp)+" +"+String.valueOf(puntajemespasado));
+			  }
+               if(objetos>=15 && objetos<24){
+            	   tv.setText(getString(R.string.punm)+" +"+String.valueOf(puntajemespasado));
+			  }
+               if(objetos>=24 && objetos<=30){
+            	   tv.setText(getString(R.string.puna)+" +"+String.valueOf(puntajemespasado));
+ 			  }
+			
+			
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	
+	
 	
 	}//fin onCreate()
 
+	
+	
+	
+	
 	
 	//FUNCION COMPARTIR PUNTAJE REDES SOCIALES 
 	public void onclicksharepoints(View v) { 
@@ -121,5 +306,12 @@ public class NivelesActivity extends Activity {
 	         startActivity(android.content.Intent.createChooser(Intent, getString(R.string.shrnoti)));
 	     }
 	 
-	
+	//CHECK NETWORK
+			private boolean isNetworkAvailable() { 
+				
+					ConnectivityManager connectivityManager 
+			          = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+			    NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+			    return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+			}
 }

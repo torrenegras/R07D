@@ -824,6 +824,9 @@ containing a value of this type.
         public static final int pub=0x7f07008c;
         public static final int pubmuro=0x7f07007c;
         public static final int pun=0x7f070084;
+        public static final int puna=0x7f0700f5;
+        public static final int punm=0x7f0700f4;
+        public static final int punp=0x7f0700f3;
         public static final int puntaje=0x7f070083;
         public static final int pyl=0x7f0700d2;
         public static final int qmhDins=0x7f070071;

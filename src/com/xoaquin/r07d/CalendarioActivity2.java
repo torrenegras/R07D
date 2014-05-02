@@ -7,9 +7,6 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesClient;
 import com.google.android.gms.common.GooglePlayServicesUtil;
@@ -17,7 +14,6 @@ import com.google.android.gms.location.LocationClient;
 import com.parse.ParseException;
 import com.parse.ParseInstallation;
 import com.parse.ParseObject;
-import com.parse.ParsePush;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
@@ -34,7 +30,6 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -72,22 +67,21 @@ public class CalendarioActivity2 extends Activity implements GooglePlayServicesC
 		setContentView(R.layout.activity_calendario_activity2);
 		
 		
-	    AppRater.app_launched(this); //LLAMANDO DIALOG PARA RATE APP
+         AppRater.app_launched(this); //LLAMANDO DIALOG PARA RATE APP
 		//AppRater.showRateDialog(this, null);  MOSTRAR EL DIALOG PARA PRUEBAS
 	    //JalertActivity.showRateDialog(this, null); MOSTRAR DIALOG PARA PRUEBAS
 	    
-	 
+	    b=isNetworkAvailable();
+	    
 	    //PONIENDO EN PARSE EL LOCALE DEL USUARIO
 	    ParseUser cu = ParseUser.getCurrentUser(); 
-	    b=isNetworkAvailable();
-	   
-	       
+	   	       
 		if (cu != null) {
 			 
 		 String locale = getResources().getConfiguration().locale.getDisplayName();
 		  cu.put("locale", locale);
 		  cu.put("version", ParseInstallation.getCurrentInstallation().getString("appVersion"));
-		  cu.saveEventually();
+		  cu.saveEventually();  //Arreglar error.
 		} else {
 		
 		}
@@ -150,7 +144,7 @@ public class CalendarioActivity2 extends Activity implements GooglePlayServicesC
     		 m="0"+m;
     	 } 
         
-    	
+    	/*
  //push progreso fin de mes informe de nivel
          if(diacal==diafm||diacal==diafm-1||diacal==diafm-2||diacal==diafm-3){ 
         	//PONIENDO EN PARSE EL CHECK LANZAMIENTO PUSH
@@ -174,7 +168,7 @@ public class CalendarioActivity2 extends Activity implements GooglePlayServicesC
 
             }      
         
-                
+          */      
             
    //EJECUCION DE TASK PRINCIPAL Y MANEJO DE CAMBIO DE ORIENTACION
             @SuppressWarnings("deprecation")
@@ -257,7 +251,7 @@ private class AsyncTaskRunner extends AsyncTask<Integer, Integer, Integer> {
 	
 	
     protected void onPostExecute(Integer x) {
-		 Log.e("diascomp",dcomp.toString());
+		 
 		 inflandogridview(dcomp,mescal,aniocal); //funcion para llamar adaptador e inflar gridview con datos
 		 pb.setVisibility(View.GONE);
 	  }
@@ -354,7 +348,7 @@ private class AsyncTaskRunner extends AsyncTask<Integer, Integer, Integer> {
     
 	}
 
-
+/*
 //FUNCION MENSAJES PUSH NIVELES
      public void pushnivel(){
 			 	 
@@ -503,7 +497,7 @@ private class AsyncTaskRunner extends AsyncTask<Integer, Integer, Integer> {
 	
 }
 
-
+*/
 
 //FUNCION LLAMADO PARSE PARA OBTENER LISTA DE DIAS COMPLETADOS EN ESE MES/A�O
     public String[] listadiascompletados(int mescalf,int aniocalf)

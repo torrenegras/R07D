@@ -80,7 +80,7 @@
     <string name="dummy_content">DUMMY\nCONTENT</string>
     <string name="titlenivel">R07D LEVEL</string>
     <string name="title_activity_niveles">NivelesActivity</string>
-    <string name="puntaje">SCORE</string>
+    <string name="puntaje">R07D SCORE</string>
     <string name="pun">1000</string>
     <string name="hash">#</string>
     <string name="ol">Forgot Password?</string>
@@ -192,5 +192,10 @@
     <string name="shrscoresub">SHARING R07D\'S SCORE</string>
     <string name="shrscoretext">This is my #R07D Score, What\'s yours?.. http://bit.ly/1lN7aSl</string>
     <string name="shrnoti">Share with</string>
-  
+   
+    <string name="punp">You\u0027ve made a good effort, keep going! Blessings!              (R07D Beginner Level)</string>
+    <string name="punm">You\u0027ve done a good work, keep going! Blessings!               (R07D Intermediate Level)</string>
+    <string name="puna">You\u0027ve done an excellent work, keep going! Blessings!               (R07D Advanced Level)</string> 
+    
+
 </resources>

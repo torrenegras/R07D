@@ -79,7 +79,7 @@
     <string name="dummy_content">DUMMY\nCONTENT</string>
     <string name="titlenivel">NIVEL R07D</string>
     <string name="title_activity_niveles">NivelesActivity</string>
-    <string name="puntaje">PUNTAJE</string>
+    <string name="puntaje">PUNTAJE R07D</string>
     <string name="pun">1000</string>
     <string name="hash">#</string>
     <string name="ol">¿Olvidó su Clave?</string>
@@ -225,5 +225,9 @@
 <string name="shrscoresub">COMPARTIENDO PUNTAJE EN R07D</string>
  <string name="shrscoretext">Este es mi puntaje en #R07D, \u00BFCual es el tuyo?.. http://bit.ly/1lN7aSl</string>
  <string name="shrnoti">Compartir con</string>
+ 
+    <string name="punp">Usted ha hecho un buen esfuerzo, siga avanzando! Bendiciones! (R07D Nivel Principiante)</string>
+    <string name="punm">Usted ha hecho un buen trabajo, siga avanzando! Bendiciones! (R07D Nivel Intermedio)</string>
+    <string name="puna">Usted ha hecho un excelente trabajo, siga avanzando! Bendiciones! (R07D Nivel Avanzado)</string> 
 
 </resources>

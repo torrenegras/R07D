@@ -45,7 +45,6 @@
         android:layout_weight="4"
         android:background="#8d665f"
         android:gravity="center"
-        android:text="@string/hash"
         android:textColor="#ffffff"
         android:textSize="100sp" />
 

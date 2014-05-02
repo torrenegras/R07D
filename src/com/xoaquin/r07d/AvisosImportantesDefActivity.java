@@ -3,6 +3,7 @@ package com.xoaquin.r07d;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.Bundle;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
@@ -18,6 +19,7 @@ public class AvisosImportantesDefActivity extends Activity {
 		 wb=(WebView) findViewById(R.id.webView1);
 		 wb.loadUrl("http://avisor07d.torrenegra.co");
 		 wb.getSettings().setJavaScriptEnabled(true);
+		 wb.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
          wb.setWebViewClient(new WebViewClient());
          wb.setInitialScale(230);
          
