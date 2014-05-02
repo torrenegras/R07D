@@ -406,3 +406,20 @@ Parse.Cloud.define("bienvenidausr", function(request, response) {
  
 
 
+Parse.Cloud.job("pushavisoimportante", function(request, status) {
+   
+    Parse.Push.send({
+  channels: [ "xoaquinoutlookcom" ],
+  data: {
+    action:"com.xoaquin.r07d.AVISO"
+    
+  }
+}, {
+  success: function() {
+    // Push was successful
+  },
+  error: function(error) {
+    // Handle error
+  }
+});
+});

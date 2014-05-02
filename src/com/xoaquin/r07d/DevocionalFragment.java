@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
@@ -40,6 +41,8 @@ public class DevocionalFragment extends Fragment {
     	 nd=1;              //**********************Quitar cuando tengamos material!!!!!!
     	 
     	 wb.setBackgroundColor(0x00000000);
+    	 wb.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
+    	 
     	 wb.loadUrl("http://r07d.parseapp.com/"+nd+".htm");
     	   	 
     	 pb.setVisibility(View.VISIBLE);
@@ -55,6 +58,13 @@ public class DevocionalFragment extends Fragment {
 
         	   public void onPageFinished(WebView view, String url) {
         		   pb.setVisibility(View.GONE);
+        	    }
+        	   
+        	   public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
+        		   String summary = "<html><body>"+getString(R.string.nconhtml)+"...</body></html>";
+        		   wb.loadData(summary, "text/html", null);
+
+
         	    }
         	});
          

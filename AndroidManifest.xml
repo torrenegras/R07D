@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.xoaquin.r07d"
-    android:versionCode="49"
-    android:versionName="Samuel" >
+    android:versionCode="50"
+    android:versionName="Timoteo" >
 
     <uses-sdk
         android:minSdkVersion="11"
@@ -15,19 +15,19 @@
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
-    
-    <permission android:protectionLevel="signature"
-    android:name="com.xoaquin.r07d.permission.C2D_MESSAGE" />
+
+    <permission
+        android:name="com.xoaquin.r07d.permission.C2D_MESSAGE"
+        android:protectionLevel="signature" />
+
     <uses-permission android:name="com.xoaquin.r07d.permission.C2D_MESSAGE" />
-    
 
     <application
         android:name="com.xoaquin.r07d.DefaultApplication"
         android:allowBackup="true"
-        android:backupAgent="MyBackupAgent"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
@@ -63,8 +63,6 @@
             android:name="com.xoaquin.r07d.CalendarioActivity2"
             android:label="@string/title_activity_calendario_activity2" >
         </activity>
-
-
         <activity
             android:name="com.xoaquin.r07d.MuroActivity"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize"
@@ -72,6 +70,11 @@
         </activity>
         <activity
             android:name="com.xoaquin.r07d.NivelesActivity"
+            android:label="@string/title_activity_niveles"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
+        </activity>
+        <activity
+            android:name="com.xoaquin.r07d.AvisosImportantesDefActivity"
             android:label="@string/title_activity_niveles"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
         </activity>
@@ -87,51 +90,56 @@
         </activity>
         <activity
             android:name="com.xoaquin.r07d.NotiActivity"
-            android:label="@string/title_activity_noti" 
-            android:theme="@android:style/Theme.Translucent.NoTitleBar">
+            android:label="@string/title_activity_noti"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
         </activity>
-        
-       
-       
-       
-        <meta-data 
+
+        <meta-data
             android:name="com.google.android.gms.version"
-           android:value="@integer/google_play_services_version" />
-        
+            android:value="@integer/google_play_services_version" />
         <meta-data
             android:name="com.google.android.backup.api_key"
             android:value="AEdPqrEAAAAIsjmMFvO_szo4XkSnoZBhqHoZ7fssUffDDhghsA" />
-    
-       
+
         <receiver android:name="com.xoaquin.r07d.MyCustomReceiver" >
             <intent-filter>
                 <action android:name="com.xoaquin.r07d.NIVEL" />
             </intent-filter>
         </receiver>
-        
-      
-      <service android:name="com.parse.PushService" />
-      
-      <receiver android:name="com.parse.ParseBroadcastReceiver">
+        <receiver android:name="com.xoaquin.r07d.MyCustomReceiver2" >
             <intent-filter>
-    			<action android:name="android.intent.action.BOOT_COMPLETED" />
-    			<action android:name="android.intent.action.USER_PRESENT" />
-  			</intent-filter>
-      </receiver>
+                <action android:name="com.xoaquin.r07d.AVISO" />
+            </intent-filter>
+        </receiver>
 
+        <service android:name="com.parse.PushService" />
 
-      <receiver android:name="com.parse.GcmBroadcastReceiver"
-     	android:permission="com.google.android.c2dm.permission.SEND">
-  			<intent-filter>
-    			<action android:name="com.google.android.c2dm.intent.RECEIVE" />
-    			<action android:name="com.google.android.c2dm.intent.REGISTRATION" />
+        <receiver android:name="com.parse.ParseBroadcastReceiver" >
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.USER_PRESENT" />
+            </intent-filter>
+        </receiver>
+        <receiver
+            android:name="com.parse.GcmBroadcastReceiver"
+            android:permission="com.google.android.c2dm.permission.SEND" >
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+                <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
+
                 <category android:name="com.xoaquin.r07d" />
             </intent-filter>
-      </receiver>
-      <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/app_id"/>
-      <activity android:label="@string/app_name" android:name="com.facebook.LoginActivity"></activity>  
- 
-      
+        </receiver>
+
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/app_id" />
+
+        <activity
+            android:name="com.facebook.LoginActivity"
+            android:label="@string/app_name" >
+        </activity>
+        
     </application>
 
 </manifest>

@@ -342,7 +342,7 @@ public void onclickconectarseFB(View view) {
 		                    	
 		                    	ParseUser cu= ParseUser.getCurrentUser();
 		                    	cu.setEmail(fbemail);
-		                    	cu.saveInBackground();
+		                    	cu.saveEventually();
 		                    	
 		                    	
 		                     	//llamando funcion Cloud email nuevo usuario y cuenta usuarios totales

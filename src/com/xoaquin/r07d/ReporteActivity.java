@@ -34,6 +34,8 @@ import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -76,6 +78,7 @@ public class ReporteActivity extends Activity {
 
 	BackupManager bm;
 	ParseUser cu;
+	private Boolean b;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -99,6 +102,7 @@ public class ReporteActivity extends Activity {
 		bm= new BackupManager(this);
 		
 		cu=ParseUser.getCurrentUser();
+		b=isNetworkAvailable();
 		
 		//poniendo tipo de letra especial
 		Typeface kepf = Typeface.createFromAsset(getAssets(),"Kepler-Std-Black_26074.ttf");
@@ -303,12 +307,6 @@ public class ReporteActivity extends Activity {
 		EditText et2=(EditText) findViewById(R.id.editText2);
 		EditText et3=(EditText) findViewById(R.id.editText5);
 		
-		/*
-		//guardando campos en DB para nombres
-		final DBAdapter2 db2 = new DBAdapter2(this);
-		db2.open(); 
-		db2.insertTitle(et1.getText().toString(),et2.getText().toString(),et3.getText().toString());
-		*/
 		
 		
 		//Guardando ET´s en archivo de preferencias
@@ -333,7 +331,7 @@ public class ReporteActivity extends Activity {
         
         
 		
-        //Creando el reporte en HTML
+        //CREACION DE REPORTES   HTML Y PDF ***************************************
 		
 		    String nombretablausuario=ntu;
  		
@@ -341,8 +339,10 @@ public class ReporteActivity extends Activity {
 	        query.whereEqualTo("mesdbp", mes);
 	        query.whereEqualTo("aniodbp", anio);
 	        query.orderByAscending("diadbp");
-	        query.setCachePolicy(ParseQuery.CachePolicy.NETWORK_ELSE_CACHE);
-	        
+	        //query.setCachePolicy(ParseQuery.CachePolicy.NETWORK_ELSE_CACHE);
+	        if (!b){
+	        	query.fromLocalDatastore();
+	        }
 	        query.findInBackground(new FindCallback<ParseObject>() {
 	          public void done(List<ParseObject> objects, ParseException e) {
 	          	
@@ -731,7 +731,14 @@ public class ReporteActivity extends Activity {
 	}//cierre onclickcreandorep
 	
 	
-	 
+	//CHECK NETWORK
+			private boolean isNetworkAvailable() { 
+				
+					ConnectivityManager connectivityManager 
+			          = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+			    NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+			    return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+			}
 	 
 	 
 }

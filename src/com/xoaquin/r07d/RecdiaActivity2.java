@@ -12,8 +12,6 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -70,10 +68,7 @@ public class RecdiaActivity2 extends FragmentActivity {
 	
 	public void onclickdevo(View v) {
 		
-	    Boolean b=isNetworkAvailable();  //true si hay internet,  false si no hay.
-	    if(!b){
-	    	Toast.makeText(RecdiaActivity2.this, getString(R.string.ncon)+"...", Toast.LENGTH_LONG).show();
-	    }else{
+	  
 	   
 		//LLAMANDO FUNCION AUTOGUARDADO PARA CUANDO CAMBIO DE TAB
 		RegistroFragment rf = (RegistroFragment) getFragmentManager().findFragmentById(R.id.fragments_container);
@@ -108,7 +103,7 @@ public class RecdiaActivity2 extends FragmentActivity {
                 }
               }, secondsDelayed * 1000);
 		
-	    }
+	     
     }
 	
 	
@@ -217,18 +212,6 @@ public class RecdiaActivity2 extends FragmentActivity {
 	
 	
 
-	//funcion conectividad de red
-	private boolean isNetworkAvailable() {
-	    ConnectivityManager connectivityManager 
-	          = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-	    NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
-	    return activeNetworkInfo != null && activeNetworkInfo.isConnected();
-	}
-	
-	
-	
-	
-	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.

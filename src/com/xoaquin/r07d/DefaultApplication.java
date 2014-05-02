@@ -21,6 +21,8 @@ public class DefaultApplication extends Application{
 	@Override
     public void onCreate() {
         super.onCreate();
+        
+        Parse.enableLocalDatastore(this);
         Parse.initialize(this, "KfBj6ivkLAaLTXhssMZkjp0MTp5DWhezdpprtYqo", "ePZ6T7RmvGGW87nNO0Oe9Th23H0Je7dwLyTOY4w3"); 
        
         //Inicializacion de Parse DB  y demas para toda la app

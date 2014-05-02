@@ -20,7 +20,10 @@ import com.parse.ParseObject;
 import com.parse.ParsePush;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
+
 import android.location.Location;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Vibrator;
@@ -31,6 +34,7 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -54,6 +58,7 @@ public class CalendarioActivity2 extends Activity implements GooglePlayServicesC
 	private MonthAdapter2 mgva;
 	public static String[] dcomp= new String[31], dcompp= new String[31];
 	private static ProgressBar pb;
+	private Boolean b;
 	
 	Location mCurrentLocation;
 	LocationClient mLocationClient;
@@ -74,7 +79,7 @@ public class CalendarioActivity2 extends Activity implements GooglePlayServicesC
 	 
 	    //PONIENDO EN PARSE EL LOCALE DEL USUARIO
 	    ParseUser cu = ParseUser.getCurrentUser(); 
-	    
+	    b=isNetworkAvailable();
 	   
 	       
 		if (cu != null) {
@@ -252,7 +257,7 @@ private class AsyncTaskRunner extends AsyncTask<Integer, Integer, Integer> {
 	
 	
     protected void onPostExecute(Integer x) {
-		 
+		 Log.e("diascomp",dcomp.toString());
 		 inflandogridview(dcomp,mescal,aniocal); //funcion para llamar adaptador e inflar gridview con datos
 		 pb.setVisibility(View.GONE);
 	  }
@@ -356,7 +361,10 @@ private class AsyncTaskRunner extends AsyncTask<Integer, Integer, Integer> {
 		ParseQuery<ParseObject> query = ParseQuery.getQuery(nombretablausuario); 
   		query.whereEqualTo("mesdbp", m);
 	    query.whereEqualTo("aniodbp", Integer.toString(aniocal)); 
-	    query.setCachePolicy(ParseQuery.CachePolicy.NETWORK_ELSE_CACHE);
+	    //query.setCachePolicy(ParseQuery.CachePolicy.NETWORK_ELSE_CACHE);
+	    if (!b){
+        	query.fromLocalDatastore();
+        }
 	       try {
 		List<ParseObject> objects= query.find();
 		
@@ -511,7 +519,10 @@ private class AsyncTaskRunner extends AsyncTask<Integer, Integer, Integer> {
 	 query.whereEqualTo("mesdbp", nmcomp);
      query.whereEqualTo("aniodbp", nycomp);
      query.orderByAscending("diadbp");
-     query.setCachePolicy(ParseQuery.CachePolicy.NETWORK_ELSE_CACHE);
+     //query.setCachePolicy(ParseQuery.CachePolicy.NETWORK_ELSE_CACHE);
+     if (!b){
+     	query.fromLocalDatastore();
+     }
      
      try {
 	List<ParseObject> objects=query.find();
@@ -793,5 +804,15 @@ private int getBarHeight() {
 	  super.onActivityResult(requestCode, resultCode, data);
 	}
 	
+	//CHECK NETWORK
+		private boolean isNetworkAvailable() { 
+			
+				ConnectivityManager connectivityManager 
+		          = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+		    NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+		    return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+		}
+		
+		
 
 }

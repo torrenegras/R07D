@@ -138,6 +138,7 @@
     <string name="latr">LATER</string>
     <string name="atg">(TG)</string>
     <string name="ncon">No Connection</string>
+    <string name="nconhtml">No Connection</string>
     <string name="conn">Connecting</string>
     <string name="uce">Wrong User/Password</string>
     <string name="uce2">Try Again</string>
@@ -188,10 +189,8 @@
     <string name="offmode">Offline Mode</string>
     <string name="devnotsup">This device is not supported.</string>
     <string name="gpsmustbeins">Google Play Services must be installed.</string>
-    
     <string name="shrscoresub">SHARING R07D\'S SCORE</string>
     <string name="shrscoretext">This is my #R07D Score, What\'s yours?.. http://bit.ly/1lN7aSl</string>
     <string name="shrnoti">Share with</string>
-    
-    
+  
 </resources>

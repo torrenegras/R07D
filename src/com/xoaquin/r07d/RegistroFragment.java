@@ -61,7 +61,8 @@ public class RegistroFragment extends Fragment {
         View V= inflater.inflate(R.layout.fragment_registro, container, false);
         
         pbactivity = getActivity().findViewById(R.id.progressBar1);
-
+        b=isNetworkAvailable();
+        
         //INICIALIZANDO VARIABLES
         bhi=(Button) V.findViewById(R.id.button1);
         bhf=(Button) V.findViewById(R.id.button2);
@@ -133,8 +134,10 @@ public class RegistroFragment extends Fragment {
     	    //POPULANDO REGISTRO EN ONCREATE  	
             ParseQuery<ParseObject> query = ParseQuery.getQuery(ntu);
 	        query.whereEqualTo("fechadbp", fca);
-	    
 	        //query.setCachePolicy(ParseQuery.CachePolicy.NETWORK_ELSE_CACHE);
+	        if (!b){
+	        	query.fromLocalDatastore();
+	        }
 	        query.findInBackground(new FindCallback<ParseObject>() {
 	            public void done(List<ParseObject> obs, ParseException e) {
 	                if (e == null) {
@@ -210,7 +213,7 @@ public class RegistroFragment extends Fragment {
 
 	        });
 	           
-	
+	/*
 	        //REPLICANDO QUERIES MURO PARA OBTENER CACHE PREVIOS EN CASOS DE PUBLICACION 
 	       
 	        //QUERY DUMMY 1 PARA CACHE ACCION DE GRACIAS
@@ -242,7 +245,7 @@ public class RegistroFragment extends Fragment {
     		        }
     		    }
     		});
-	        
+	  */      
 	 
     		
 	        
@@ -331,7 +334,10 @@ public class RegistroFragment extends Fragment {
 		
     	ParseQuery<ParseObject> query = ParseQuery.getQuery(ntu);
         query.whereEqualTo("fechadbp", fca);
-        query.setCachePolicy(ParseQuery.CachePolicy.NETWORK_ELSE_CACHE);
+        //query.setCachePolicy(ParseQuery.CachePolicy.NETWORK_ELSE_CACHE);
+        if (!b){
+        	query.fromLocalDatastore();
+        }
         query.findInBackground(new FindCallback<ParseObject>() {
             public void done(List<ParseObject> obs, ParseException e) {
                 if (e == null) {
@@ -375,7 +381,10 @@ public class RegistroFragment extends Fragment {
         		q.whereEqualTo("correo", cu.getEmail().toString());
         		q.whereEqualTo("fecha", fca);
         		q.whereEqualTo("tipo", getString(R.string.atg));
-        		q.setCachePolicy(ParseQuery.CachePolicy.NETWORK_ELSE_CACHE);
+        		//q.setCachePolicy(ParseQuery.CachePolicy.NETWORK_ELSE_CACHE);
+        		if (!b){
+                	q.fromLocalDatastore();
+                }
         		q.findInBackground(new FindCallback<ParseObject>() {
         		    public void done(List<ParseObject> o, ParseException e) {
         		        if (e == null) {
@@ -384,6 +393,13 @@ public class RegistroFragment extends Fragment {
         		        	if(o.size()>0){
         		        		o.get(0).put("texto", et3.getText().toString());
         		        		o.get(0).saveEventually();
+        		        		o.get(0).pinInBackground(mca,new SaveCallback(){ //guardando tambien en Local Datastore
+
+        		     				@Override
+        		     				public void done(ParseException e) {
+        		     					// TODO Auto-generated method stub
+        		     					
+        		     				}});
         		        		
         		        	//o crea uno nuevo
         		        	}else{
@@ -393,6 +409,13 @@ public class RegistroFragment extends Fragment {
         		            	ag.put("tipo", getString(R.string.atg));
         		            	ag.put("texto", et3.getText().toString());
         		            	ag.saveEventually();
+        		            	ag.pinInBackground(mca,new SaveCallback(){ //guardando tambien en Local Datastore
+
+        		     				@Override
+        		     				public void done(ParseException e) {
+        		     					// TODO Auto-generated method stub
+        		     					
+        		     				}});
         	       		        	   
              		        	}
         		        	
@@ -405,6 +428,13 @@ public class RegistroFragment extends Fragment {
     		            	ag.put("tipo", getString(R.string.atg));
     		            	ag.put("texto", et3.getText().toString());
     		            	ag.saveEventually();
+    		            	ag.pinInBackground(mca,new SaveCallback(){ //guardando tambien en Local Datastore
+
+    		     				@Override
+    		     				public void done(ParseException e) {
+    		     					// TODO Auto-generated method stub
+    		     					
+    		     				}});
         		        }
         		    }
         		});
@@ -420,7 +450,10 @@ public class RegistroFragment extends Fragment {
         		q2.whereEqualTo("correo", cu.getEmail().toString());
         		q2.whereEqualTo("fecha", fca);
         		q2.whereEqualTo("tipo", "(P)");
-        		q2.setCachePolicy(ParseQuery.CachePolicy.NETWORK_ELSE_CACHE);
+        		//q2.setCachePolicy(ParseQuery.CachePolicy.NETWORK_ELSE_CACHE);
+        		if (!b){
+                	q2.fromLocalDatastore();
+                }
         		q2.findInBackground(new FindCallback<ParseObject>() {
         		    public void done(List<ParseObject> o, ParseException e) {
         		        if (e == null) {
@@ -428,6 +461,13 @@ public class RegistroFragment extends Fragment {
         		        	if(o.size()>0){
         		        		o.get(0).put("texto", et5.getText().toString());
         		        		o.get(0).saveEventually();
+        		        	    o.get(0).pinInBackground(mca,new SaveCallback(){ //guardando tambien en Local Datastore
+
+        		     				@Override
+        		     				public void done(ParseException e) {
+        		     					// TODO Auto-generated method stub
+        		     					
+        		     				}});
         		        	}else{
         		        		ParseObject pet = new ParseObject("Muro");
         		            	pet.put("fecha",fca);
@@ -435,6 +475,13 @@ public class RegistroFragment extends Fragment {
         		            	pet.put("tipo", "(P)");
         		            	pet.put("texto", et5.getText().toString());
         		               	pet.saveEventually();
+        		               	pet.pinInBackground(mca,new SaveCallback(){ //guardando tambien en Local Datastore
+
+        		     				@Override
+        		     				public void done(ParseException e) {
+        		     					// TODO Auto-generated method stub
+        		     					
+        		     				}});
         		        	}
         		        
         		        } else {
@@ -445,6 +492,13 @@ public class RegistroFragment extends Fragment {
     		            	pet.put("tipo", "(P)");
     		            	pet.put("texto", et5.getText().toString());
     		               	pet.saveEventually();
+    		               	pet.pinInBackground(mca,new SaveCallback(){ //guardando tambien en Local Datastore
+
+    		     				@Override
+    		     				public void done(ParseException e) {
+    		     					// TODO Auto-generated method stub
+    		     					
+    		     				}});
         		        }
         		    }
         		});
@@ -487,6 +541,13 @@ public class RegistroFragment extends Fragment {
 	    if(!b){
 	   //guarda el objeto y activa el boton cuando finaliza correctamente estando OFFLINE
 		   	   object.saveEventually();
+		   	   object.pinInBackground(mca,new SaveCallback(){ //guardando tambien en Local Datastore
+
+				@Override
+				public void done(ParseException e) {
+					// TODO Auto-generated method stub
+					
+				}});
 		   	   
 	    	    int secondsDelayed = 2;
 		        new Handler().postDelayed(new Runnable() {
@@ -508,7 +569,15 @@ public class RegistroFragment extends Fragment {
 	        	     }
 	        	   }
 	        	 });
-            
+	        
+	        
+	        object.pinInBackground(mca,new SaveCallback(){
+
+				@Override
+				public void done(ParseException e) {
+					// TODO Auto-generated method stub
+					
+				}});
 	    }
 	 
 	 
@@ -548,6 +617,13 @@ public class RegistroFragment extends Fragment {
 	     if(!b){
   		   //guarda el objeto y activa el boton cuando finaliza correctamente estando OFFLINE
   			   	   TablaUsr.saveEventually();
+  			       TablaUsr.pinInBackground(mca,new SaveCallback(){  //Local Datastore
+
+  					@Override
+  					public void done(ParseException e) {
+  						// TODO Auto-generated method stub
+  						
+  					}});
   			   	   
   		    	    int secondsDelayed = 2;
   			        new Handler().postDelayed(new Runnable() {
@@ -569,6 +645,14 @@ public class RegistroFragment extends Fragment {
 		        	     }
 		        	   }
 		        	 });
+		         
+		        TablaUsr.pinInBackground(mca,new SaveCallback(){
+
+					@Override
+					public void done(ParseException e) {
+						// TODO Auto-generated method stub
+						
+					}});
                   
   		    }
 		 

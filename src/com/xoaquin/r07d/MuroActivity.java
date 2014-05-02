@@ -10,6 +10,8 @@ import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -30,7 +32,7 @@ import android.widget.ProgressBar;
 
 public class MuroActivity extends ListActivity {
 
-	
+	private Boolean b;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +45,7 @@ public class MuroActivity extends ListActivity {
 		Drawable drw = getResources().getDrawable( R.drawable.b1 );
 		ab.setBackgroundDrawable(drw);
 		
-		
+		b=isNetworkAvailable();
 		
 		//trayendo listview y poniendo atributos
 		ListView lv = getListView();
@@ -129,7 +131,10 @@ private class AsyncTaskRunner2 extends AsyncTask<Context, Void, CustomAdapter> {
 			//Query de toda la clase en Parse
 			ParseQuery<ParseObject> q = ParseQuery.getQuery("Muro");
 			q.orderByDescending("createdAt");
-			q.setCachePolicy(ParseQuery.CachePolicy.NETWORK_ELSE_CACHE);
+			//q.setCachePolicy(ParseQuery.CachePolicy.NETWORK_ELSE_CACHE);
+			if (!b){
+	        	q.fromLocalDatastore();
+	        }
 			try {
 				List<ParseObject> o=q.find();
 				
@@ -175,6 +180,14 @@ private class AsyncTaskRunner2 extends AsyncTask<Context, Void, CustomAdapter> {
 
 	}
 	
+//CHECK NETWORK
+private boolean isNetworkAvailable() { 
+	
+		ConnectivityManager connectivityManager 
+          = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+    NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+    return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+}
 
 
 }

@@ -150,6 +150,8 @@
      <string name="atg">(AG)</string>
 
        <string name="ncon">Sin Conexi\u00F3n</string>
+       <string name="nconhtml">Sin Conexion</string>
+        
       <string name="conn">Conectando</string>
       
        <string name="uce">Usuario/Clave Errados</string>
