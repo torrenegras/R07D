@@ -312,8 +312,12 @@ public void onclickregistrarse(View view) {  //click boton registrarse
 	
 public void onclickconectarseFB(View view) {
 	 final ProgressBar pb = (ProgressBar) findViewById(R.id.progressBar1);
-	  pb.setVisibility(View.VISIBLE);
+	 pb.setVisibility(View.VISIBLE);
 	  
+	 
+	 Boolean b=isNetworkAvailable();
+	 if(b){
+		 
 	  
 	ParseFacebookUtils.logIn(Arrays.asList("email", Permissions.Friends.ABOUT_ME),this, new LogInCallback() {
 		  @Override
@@ -411,7 +415,7 @@ public void onclickconectarseFB(View view) {
 	                    if (userg != null) {
 	                    	
 	                    	
-	                     final String fbemail=response.getGraphObject().getProperty("email").toString();
+	                     final String fbemail=response.getGraphObject().getProperty("email").toString(); //solo se usa para pasarlo en el intent de llamado calendario
 	                    
 	    	                //cambiando de actividad dado signup exitoso
 	    	                int secondsDelayed = 1;
@@ -445,7 +449,11 @@ public void onclickconectarseFB(View view) {
 		  }
 		});
 	
-
+	 }else{ // si no hay internet
+		 Toast.makeText(LoginActivity.this, getString(R.string.ncon)+"...", Toast.LENGTH_LONG).show(); 
+    	 pb.setVisibility(View.INVISIBLE);
+	 }
+		 
 
 }
 

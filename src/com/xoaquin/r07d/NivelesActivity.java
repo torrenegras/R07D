@@ -38,20 +38,23 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-//reportar error en parse saveeventually user,   no permitir doble conteo en niveles onresume, cuadrar JOB cloud como es...
 
 public class NivelesActivity extends Activity {
 
 	private String nombretablausuario="",m="",m2="";
-	private int mescal,aniocal,puntajemespasado;
+	private int mescal,aniocal,puntajemespasado,objetos;
 	private Boolean bn;
 	Button b;
 	LinearLayout L1;
+	TextView tv,tv2;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_niveles);
+		
+		if(savedInstanceState==null) {
+			
 		
 		//NOTIFICACION EN AREA DE NOTIFICACIONES
 		Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
@@ -68,17 +71,10 @@ public class NivelesActivity extends Activity {
 		NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 		mNotificationManager.notify(1, mBuilder.build());
 		
-		
-		
-		
-		
+				
 		bn=isNetworkAvailable();
-		   
-        
-        
-
-		TextView tv=(TextView) findViewById(R.id.textViewt);
-		TextView tv2=(TextView) findViewById(R.id.textViewtxt);
+		tv=(TextView) findViewById(R.id.textViewt);
+		tv2=(TextView) findViewById(R.id.textViewtxt);
 		b=(Button) findViewById(R.id.button1);
 		L1 = (LinearLayout) findViewById(R.id.ll);
 		
@@ -141,7 +137,7 @@ public class NivelesActivity extends Activity {
 			List<ParseObject> objects= query.find();
 			
 			Log.e("size",Integer.toString(objects.size()));
-			int objetos=objects.size();
+			objetos=objects.size();
 			
 			
 			
@@ -182,18 +178,19 @@ public class NivelesActivity extends Activity {
 	    
 	        if (!bn){
 	        	q.fromLocalDatastore();
+	        	Log.e("localdata","localdata");
 	        }
 	        q.findInBackground(new FindCallback<ParseObject>() {
 	            public void done(List<ParseObject> obs, ParseException e) {
 	                if (e == null) {
 	                   if (obs.size()>0)
 	                   {   	                   
+	                	   Log.e("actua","actua");
 	                	   ParseObject o=obs.get(0);
 	                	   int pun= Integer.valueOf(o.get("puntaje").toString());
 	                	   pun=pun+puntajemespasado;
 	         			   b.setText(String.valueOf(pun));
 	         			   o.put("puntaje", String.valueOf(pun));
-	        			   o.saveEventually();
 	        			   o.pinInBackground(m2,new SaveCallback(){ //guardando tambien en Local Datastore
 
 	             				@Override
@@ -201,15 +198,15 @@ public class NivelesActivity extends Activity {
 	             					// TODO Auto-generated method stub
 	             					
 	             				}});
+	        			   o.saveEventually();
 	               
 	                   }else{
-	                       
+	                	   Log.e("nuevo","nuevo");
 	                	  ParseObject o2=new ParseObject("puntajes"); 
 	                	  int punnuevo=puntajemespasado;
 	                	  b.setText(String.valueOf(punnuevo));
 	         			  o2.put("usuario", nombretablausuario);
 	         			  o2.put("puntaje", String.valueOf(punnuevo));
-	         			  o2.saveEventually();
 	         			  o2.pinInBackground(m2,new SaveCallback(){ //guardando tambien en Local Datastore
 
 	              				@Override
@@ -217,6 +214,7 @@ public class NivelesActivity extends Activity {
 	              					// TODO Auto-generated method stub
 	              					
 	              				}});
+	         			 o2.saveEventually();
 	                     	                   
 	                 }
 	                   
@@ -228,11 +226,7 @@ public class NivelesActivity extends Activity {
 
 	        });
 	        
-			
-			
-			 
-			 
-			  
+		
 			  
 			  if(objetos>=5 && objetos<15){
 				  tv.setText(getString(R.string.punp)+" +"+String.valueOf(puntajemespasado));
@@ -250,7 +244,29 @@ public class NivelesActivity extends Activity {
 			e.printStackTrace();
 		}
 	
-	
+	    
+	   
+	    
+		}else {//saveinstance
+			Log.e("dd","saveins");
+			
+			/*
+			
+			if(objetos>=5 && objetos<15){
+				  tv.setText(getString(R.string.punp)+" +"+String.valueOf(puntajemespasado));
+			  }
+               if(objetos>=15 && objetos<24){
+            	   tv.setText(getString(R.string.punm)+" +"+String.valueOf(puntajemespasado));
+			  }
+               if(objetos>=24 && objetos<=30){
+            	   tv.setText(getString(R.string.puna)+" +"+String.valueOf(puntajemespasado));
+ 			  }
+			
+               tv2.setText(getString(R.string.puntaje));
+               
+               b.setText(punpers);
+              */ 
+		}
 	
 	}//fin onCreate()
 
@@ -314,4 +330,17 @@ public class NivelesActivity extends Activity {
 			    NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
 			    return activeNetworkInfo != null && activeNetworkInfo.isConnected();
 			}
+			
+			
+			//CONTROL DE BOTON BACK 
+			@Override
+			public void onBackPressed() {
+				
+				
+					this.finish();
+				    NivelesActivity.this.finish();
+			
+			
+			}
+			
 }

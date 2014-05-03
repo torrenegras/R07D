@@ -426,8 +426,16 @@ Parse.Cloud.job("pushavisoimportante", function(request, status) {
 
 
 Parse.Cloud.job("puntajes", function(request, status) {
+    
+    
+ var today = new Date();
+  var dd = today.getDate();
+  
+  if(dd==1){
+      
+  
     Parse.Push.send({
-  channels: [ "xoaquinoutlookcom" ],
+  channels: [ "todos" ],
   data: {
     action:"com.xoaquin.r07d.NIVEL"
     
@@ -441,4 +449,11 @@ Parse.Cloud.job("puntajes", function(request, status) {
     status.error("Puntajes No Enviados ERROR"); // Handle error// Handle error
   }
 });
+
+
+  }
+  
+  status.success("No es dia 1 Puntaje No enviado"); 
+  
+
 });

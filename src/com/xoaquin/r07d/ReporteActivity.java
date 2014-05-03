@@ -52,7 +52,6 @@ import android.graphics.Bitmap;
 import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -160,14 +159,14 @@ public class ReporteActivity extends Activity {
 	    	  
 	    	  if (sharedPrefr.contains("nom")){
 	    		  
-	    		  Log.e("prefs","prefs");  
+	    		    
 	    	      et1.setText(sharedPrefr.getString("nom", ""));
 		          et2.setText(sharedPrefr.getString("noml", "")); 
 		          et5.setText(sharedPrefr.getString("mdl", ""));
 	          
 	    	  }else{
 	        	
-	    		  Log.e("parse","parse");
+	    		  
 	    		  if(cu!=null){
 	    			  et1.setText(cu.getString("nomrep"));
 	    			  et2.setText(cu.getString("nomlidrep"));
