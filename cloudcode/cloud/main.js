@@ -337,7 +337,7 @@ Parse.Cloud.define("bienvenidausr", function(request, response) {
  Mandrill.sendEmail({
    
   message: {
-    text: "Favor instalar actualizacion (4.3 Noe)",  //ojo con los caracteres en esta vaina, muy quisquilloso!!!!!!!!!!!!
+    html: "<!DOCTYPE html><html><body><p>Favor instalar actualizacion<br><br><a href=\"https://play.google.com/store/apps/details?id=com.xoaquin.r07d \">Ver: 5.1 (Uzias)</a> </p></body></html>",  //ojo con los caracteres en esta vaina, muy quisquilloso!!!!!!!!!!!!
     subject: "R07D ACTUALIZACION IMPORTANTE ",
     from_email: "xoaquin@torrenegra.co",
     from_name: "Xoaquin",
@@ -364,7 +364,7 @@ Parse.Cloud.define("bienvenidausr", function(request, response) {
  Mandrill.sendEmail({
    
   message: {
-    text: "Please Install Update (4.3 Noe)",
+    html: "<!DOCTYPE html><html><body><p>Please install update<br><br><a href=\"https://play.google.com/store/apps/details?id=com.xoaquin.r07d \">Ver: 5.1 (Uzias)</a> </p></body></html>",
     subject: "R07D IMPORTANT UPDATE ",
     from_email: "xoaquin@torrenegra.co",
     from_name: "Xoaquin",
