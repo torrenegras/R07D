@@ -128,6 +128,24 @@
             </intent-filter>
         </receiver>
 
+        
+       <receiver
+         android:icon="@drawable/ic_launcher"
+         android:label="@string/widgettit"
+         android:name="MyWidgetProvider" >
+       
+           <intent-filter >
+            <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+           </intent-filter>
+
+          <meta-data
+          android:name="android.appwidget.provider"
+          android:resource="@xml/widget_info" />
+       
+       </receiver> 
+        
+        
+        
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/app_id" />
