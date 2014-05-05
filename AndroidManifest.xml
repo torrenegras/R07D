@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.xoaquin.r07d"
-    android:versionCode="51"
-    android:versionName="Uzias" >
+    android:versionCode="52"
+    android:versionName="Vanias" >
 
     <uses-sdk
-        android:minSdkVersion="11"
+        android:minSdkVersion="14"
         android:targetSdkVersion="19" />
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -141,10 +141,14 @@
           <meta-data
           android:name="android.appwidget.provider"
           android:resource="@xml/widget_info" />
-       
-       </receiver> 
+        </receiver> 
         
+       <service
+        android:name="WidgetService"
+        android:exported="false"
+        android:permission="android.permission.BIND_REMOTEVIEWS" />
         
+      
         
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"

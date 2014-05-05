@@ -443,7 +443,7 @@ containing a value of this type.
         public static final int LinearLayout01=0x7f05003e;
         public static final int LinearLayout1=0x7f05001f;
         public static final int TextView01=0x7f050007;
-        public static final int action_settings=0x7f050053;
+        public static final int action_settings=0x7f050054;
         public static final int button1=0x7f050011;
         public static final int button2=0x7f05001c;
         public static final int button2a=0x7f05001d;
@@ -488,14 +488,16 @@ containing a value of this type.
         public static final int hybrid=0x7f050006;
         public static final int imageButton1=0x7f05000f;
         public static final int imageButton2=0x7f05000e;
-        public static final int item1=0x7f05004e;
-        public static final int item2=0x7f05004f;
-        public static final int item3=0x7f050050;
+        public static final int imageView1=0x7f05004d;
+        public static final int item1=0x7f05004f;
+        public static final int item2=0x7f050050;
+        public static final int item3=0x7f050051;
         public static final int large=0x7f050002;
         public static final int linearLayout1=0x7f050019;
         public static final int list=0x7f050020;
+        public static final int listView1=0x7f05004e;
         public static final int ll=0x7f050021;
-        public static final int mur=0x7f050051;
+        public static final int mur=0x7f050052;
         public static final int none=0x7f050003;
         public static final int normal=0x7f050001;
         public static final int picker_subtitle=0x7f050038;
@@ -505,11 +507,10 @@ containing a value of this type.
         public static final int radioSINO=0x7f050026;
         public static final int satellite=0x7f050004;
         public static final int scrollView1=0x7f05000c;
-        public static final int shr=0x7f050052;
+        public static final int shr=0x7f050053;
         public static final int small=0x7f050000;
         public static final int terrain=0x7f050005;
         public static final int textView1=0x7f05004c;
-        public static final int textView2=0x7f05004d;
         public static final int textViewt=0x7f050009;
         public static final int textViewtxt=0x7f05000a;
         public static final int textViewv1=0x7f050008;
@@ -558,6 +559,7 @@ containing a value of this type.
         public static final int fragment_registro=0x7f03001a;
         public static final int rowlayout=0x7f03001b;
         public static final int widget_qmhd=0x7f03001c;
+        public static final int widgetlistlayout=0x7f03001d;
     }
     public static final class menu {
         public static final int about=0x7f0b0000;

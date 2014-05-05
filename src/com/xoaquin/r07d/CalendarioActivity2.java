@@ -54,6 +54,7 @@ public class CalendarioActivity2 extends Activity implements GooglePlayServicesC
 	public static String[] dcomp= new String[31], dcompp= new String[31];
 	private static ProgressBar pb;
 	private Boolean b;
+	ParseUser ua;
 	
 	Location mCurrentLocation;
 	LocationClient mLocationClient;
@@ -74,14 +75,15 @@ public class CalendarioActivity2 extends Activity implements GooglePlayServicesC
 	    b=isNetworkAvailable();
 	    
 	    //PONIENDO EN PARSE EL LOCALE DEL USUARIO
-	    ParseUser cu = ParseUser.getCurrentUser(); 
+	    //ParseUser cu = ParseUser.getCurrentUser(); 
+	    ua=ParseUser.getCurrentUser();
 	      	       
-		if (cu != null) {
+		if (ua != null) {
 			 
 		 String locale = getResources().getConfiguration().locale.getDisplayName();
-		  cu.put("locale", locale);
-		  cu.put("version", ParseInstallation.getCurrentInstallation().getString("appVersion"));
-		  cu.saveEventually();
+		  ua.put("locale", locale);
+		  ua.put("version", ParseInstallation.getCurrentInstallation().getString("appVersion"));
+		  ua.saveEventually();
 		} 
 		
 		//SETTING DEL CLIENTE DE POSICIONAMIENTO

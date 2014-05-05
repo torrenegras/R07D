@@ -8,17 +8,30 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="6"
+        android:layout_weight="4"
         android:background="@color/marron"
-        android:orientation="vertical" >
+        android:orientation="horizontal" >
 
         <TextView
             android:id="@+id/textView1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="10"
             android:text="@string/widgettit"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:textColor="@color/rosado" />
+            android:textColor="@color/rosado"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:typeface="serif" />
+        
+        <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_weight="1"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/ic_launcher" />
 
     </LinearLayout>
 
@@ -29,13 +42,12 @@
         android:background="@color/rosado"
         android:orientation="vertical" >
 
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:textColor="@color/marron" />
-
+         <ListView
+             android:id="@+id/listView1"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent" >
+         </ListView>
+        
     </LinearLayout>
 
 </LinearLayout>
