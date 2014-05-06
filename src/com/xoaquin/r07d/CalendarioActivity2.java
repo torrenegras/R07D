@@ -3,6 +3,7 @@
 
 package com.xoaquin.r07d;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
@@ -27,9 +28,17 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.gesture.Gesture;
+import android.gesture.GestureLibraries;
+import android.gesture.GestureLibrary;
+import android.gesture.GestureOverlayView;
+import android.gesture.GestureOverlayView.OnGesturePerformedListener;
+import android.gesture.Prediction;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -42,7 +51,8 @@ import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Toast;
 
-public class CalendarioActivity2 extends Activity implements GooglePlayServicesClient.ConnectionCallbacks,GooglePlayServicesClient.OnConnectionFailedListener {
+public class CalendarioActivity2 extends Activity implements OnGesturePerformedListener,GooglePlayServicesClient.ConnectionCallbacks,GooglePlayServicesClient.OnConnectionFailedListener {
+ 
  
 	public static String fecha,nombredia,dia,mes,anio; //variables globales para toda la app
 	private TextView tvmes,tvanio,diatv; //variables globales dentro de esta actividad 
@@ -55,6 +65,7 @@ public class CalendarioActivity2 extends Activity implements GooglePlayServicesC
 	private static ProgressBar pb;
 	private Boolean b;
 	ParseUser ua;
+	private GestureLibrary gestureLib;
 	
 	Location mCurrentLocation;
 	LocationClient mLocationClient;
@@ -65,9 +76,24 @@ public class CalendarioActivity2 extends Activity implements GooglePlayServicesC
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_calendario_activity2);
+		
+		GestureOverlayView gestureOverlayView = new GestureOverlayView(this);
+	    View inflate = getLayoutInflater().inflate(R.layout.activity_calendario_activity2, null);
+	    gestureOverlayView.addView(inflate);
+	    gestureOverlayView.addOnGesturePerformedListener(this);
+	    gestureOverlayView.setGestureColor(Color.TRANSPARENT);
+	    gestureLib = GestureLibraries.fromRawResource(this, R.raw.gestures);
+	    if (!gestureLib.load()) {
+	      finish();
+	    }
+	    setContentView(gestureOverlayView);
 		
 		
+		
+		//setContentView(R.layout.activity_calendario_activity2);
+		
+		
+
          AppRater.app_launched(this); //LLAMANDO DIALOG PARA RATE APP
 		//AppRater.showRateDialog(this, null);  MOSTRAR EL DIALOG PARA PRUEBAS
 	    //JalertActivity.showRateDialog(this, null); MOSTRAR DIALOG PARA PRUEBAS
@@ -287,6 +313,12 @@ private class AsyncTaskRunner extends AsyncTask<Integer, Integer, Integer> {
 	    
 	}
 
+	
+	
+	
+	
+	
+	
 	
 //FLECHA DERECHA
   public void clickfleder(View v) { //boton flecha derecha calendario
@@ -805,6 +837,66 @@ private int getBarHeight() {
 		          = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
 		    NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
 		    return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+		}
+
+
+		@Override
+		public void onGesturePerformed(GestureOverlayView overlay,Gesture gesture) {
+			// TODO Auto-generated method stub
+			ArrayList<Prediction> predictions = gestureLib.recognize(gesture);
+		    for (Prediction prediction : predictions) {
+		      if (prediction.score > 1.0) {
+		        
+		    	  
+		        if(prediction.name.contains("right")){
+		        	
+		        	Log.e("predic","right");
+		        	
+		        	Vibrator vib = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+		       	  // Vibrate for x milliseconds
+		       	   vib.vibrate(100);
+		       	
+		       	if(mescal==11){
+		       		aniocal++;
+		       		tvanio.setText(String.valueOf(aniocal));
+		       	}
+		       		
+		       	if(mescal<11){
+		       	mescal++;}else{mescal=0;}
+		       	
+		       	String nmes= nombremes(mescal);	
+		       	tvmes.setText(nmes);
+		       	
+		       	 AsyncTaskRunner runner3 = new AsyncTaskRunner();
+		            runner3.execute(mescal,aniocal);
+		        }
+		        
+                 
+		        if(prediction.name.contains("left")){
+                	  Vibrator vib = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+                	  // Vibrate for x milliseconds
+                	   vib.vibrate(100);
+                	   
+                	if(mescal==0){
+                		aniocal--;
+                		tvanio.setText(String.valueOf(aniocal));
+                	}
+                		
+                	if(mescal>0){
+                	mescal--;}else{mescal=11;}
+                	
+                	String nmes= nombremes(mescal);	
+                	tvmes.setText(nmes);
+                	
+                	 AsyncTaskRunner runner4 = new AsyncTaskRunner();
+                     runner4.execute(mescal,aniocal);
+                     
+		        }
+		        
+		        
+		        
+		      }
+		    }
 		}
 		
 		
