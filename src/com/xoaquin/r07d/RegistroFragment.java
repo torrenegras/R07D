@@ -330,6 +330,8 @@ public class RegistroFragment extends Fragment {
 		
 		b=isNetworkAvailable();
     	
+		
+		
 		//GUARDAR / ACTUALIZAR DATOS EN DB PARSE
 		
     	ParseQuery<ParseObject> query = ParseQuery.getQuery(ntu);
@@ -690,8 +692,16 @@ public class RegistroFragment extends Fragment {
 				 
 				 );
 		 
-		 DatabaseHandler db = new DatabaseHandler(getActivity());
+		DatabaseHandler db = new DatabaseHandler(getActivity());
+     	
+     	RecordDiarioObject rdocheckdbloc=new RecordDiarioObject();
+     	rdocheckdbloc=db.getRDO(fca);
+		 
+     	if(rdocheckdbloc!=null){ //si en realidad ya existe el record de esa fecha, entonces actualiza
 		 db.updateRDO(rdo);
+     	}else{                    //si existe en parse, por lo que manda a actualizar, pero aun no existe en Sqlite, entonces lo crea.
+     		db.addRDO(rdo);
+     	}
 		 
 	 }
 	 

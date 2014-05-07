@@ -6,6 +6,8 @@ package com.xoaquin.r07d;
 import android.app.ActionBar;
 import android.app.Dialog;
 import android.app.FragmentTransaction;
+import android.appwidget.AppWidgetManager;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -18,6 +20,7 @@ import android.os.Handler;
 import android.support.v4.app.FragmentActivity;
 import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.Window;
@@ -34,7 +37,7 @@ public class RecdiaActivity2 extends FragmentActivity {
 	
 	private TextView t10,t11;
 	private int ff=0;
-	
+
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -210,7 +213,17 @@ public class RecdiaActivity2 extends FragmentActivity {
     }
 	
 	
-	
+	@Override
+    public void onStop() {
+        super.onStop();
+        Log.e("ONSTOP", "++ ON STSTOP ++");
+        //refresh de widget 
+	    Intent intent = new Intent(this,MyWidgetProvider.class);
+	    intent.setAction("android.appwidget.action.APPWIDGET_UPDATE");
+	    int ids[] = AppWidgetManager.getInstance(getApplication()).getAppWidgetIds(new ComponentName(getApplication(), MyWidgetProvider.class));
+	    intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS,ids);
+	    sendBroadcast(intent);
+    }
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {

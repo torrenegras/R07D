@@ -87,12 +87,10 @@ public class CalendarioActivity2 extends Activity implements OnGesturePerformedL
 	      finish();
 	    }
 	    setContentView(gestureOverlayView);
+	    
 		
-		
-		
-		//setContentView(R.layout.activity_calendario_activity2);
-		
-		
+		//setContentView(R.layout.activity_calendario_activity2); //original
+
 
          AppRater.app_launched(this); //LLAMANDO DIALOG PARA RATE APP
 		//AppRater.showRateDialog(this, null);  MOSTRAR EL DIALOG PARA PRUEBAS
