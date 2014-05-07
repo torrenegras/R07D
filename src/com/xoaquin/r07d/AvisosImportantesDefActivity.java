@@ -1,3 +1,7 @@
+
+//ACTIVIDAD DE WEBVIEW PARA NOTIFICAR AVISO IMPORTANTE POR PUSH
+
+
 package com.xoaquin.r07d;
 
 import android.annotation.SuppressLint;

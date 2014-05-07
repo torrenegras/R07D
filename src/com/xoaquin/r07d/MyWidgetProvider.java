@@ -1,3 +1,6 @@
+
+//PROVIDER MOTOR DE WIDGETS
+
 package com.xoaquin.r07d;
 
 import java.util.Random;
@@ -18,7 +21,8 @@ public class MyWidgetProvider extends AppWidgetProvider {
 	  @Override
 	  public void onUpdate(Context context, AppWidgetManager appWidgetManager,int[] appWidgetIds) {
 
-		        //SUJETO A OPTIMIZACION 1  (HAY 3 BLOQUES, DOS AQUI Y UNO EN WidgetService)
+		  /*
+		        //SUJETO A OPTIMIZACION 1 
 		        ComponentName thisWidget = new ComponentName(context,MyWidgetProvider.class);
 			    int[] allWidgetIds = appWidgetManager.getAppWidgetIds(thisWidget);
 			    // Build the intent to call the service
@@ -26,18 +30,19 @@ public class MyWidgetProvider extends AppWidgetProvider {
 			    intent0.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, allWidgetIds);
 			    // Update the widgets via the service
 			    context.startService(intent0);
-			    appWidgetManager = AppWidgetManager.getInstance(context);
-			    appWidgetIds = appWidgetManager.getAppWidgetIds(new ComponentName(context, MyWidgetProvider.class));
-			    appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetIds, R.id.listView1);
+			*/    
 			    
-
+	     appWidgetManager = AppWidgetManager.getInstance(context);
+         appWidgetIds = appWidgetManager.getAppWidgetIds(new ComponentName(context, MyWidgetProvider.class));
+         appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetIds, R.id.listView1);
+			  
 			    
 	    for(int i=0;i<appWidgetIds.length;i++) {
 
 	     RemoteViews remoteViews = new RemoteViews(context.getPackageName(),R.layout.widget_qmhd);
 		 remoteViews.setTextViewText(R.id.textView1, context.getString(R.string.widgettit));
 		   
-		  AppWidgetManager.getInstance( context).updateAppWidget( thisWidget, remoteViews );  //SUJETO A OPTIMIZACION 2
+		//  AppWidgetManager.getInstance( context).updateAppWidget( thisWidget, remoteViews );  //SUJETO A OPTIMIZACION 2
 		  
 	   // Register an onClickListener
 	      Intent intent = new Intent(context, MainActivity.class);
