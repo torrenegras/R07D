@@ -226,12 +226,16 @@
  <string name="shrscoretext">Este es mi puntaje en #R07D, \u00BFCual es el tuyo?.. http://bit.ly/1lN7aSl</string>
  <string name="shrnoti">Compartir con</string>
  
-    <string name="punp">Usted ha hecho un buen esfuerzo, siga avanzando! Bendiciones! (R07D Nivel Principiante)</string>
-    <string name="punm">Usted ha hecho un buen trabajo, siga avanzando! Bendiciones! (R07D Nivel Intermedio)</string>
-    <string name="puna">Usted ha hecho un excelente trabajo, siga avanzando! Bendiciones! (R07D Nivel Avanzado)</string> 
+    <string name="punp">Usted ha hecho un buen esfuerzo, siga avanzando! Bendiciones!</string>
+    <string name="punp2">(R07D Nivel Principiante)</string>
+    <string name="punm">Usted ha hecho un buen trabajo, siga avanzando! Bendiciones!</string>
+    <string name="punm2">(R07D Nivel Intermedio)</string>
+    <string name="puna">Usted ha hecho un excelente trabajo, siga avanzando! Bendiciones!</string> 
+    <string name="puna2">(R07D Nivel Avanzado)</string> 
     
     <string name="widgettit">R07D \u00BFqmhD?</string>
     
       <string name="mtl">Encuentrate con el Señor en el Secreto&#8230;</string>
 
+       <string name="puntajem">Puntaje</string>
 </resources>

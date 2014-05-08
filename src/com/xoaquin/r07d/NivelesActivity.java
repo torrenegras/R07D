@@ -46,7 +46,7 @@ public class NivelesActivity extends Activity {
 	private Boolean bn;
 	Button b;
 	LinearLayout L1;
-	TextView tv,tv2;
+	TextView tv,tv2,tv3;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +75,7 @@ public class NivelesActivity extends Activity {
 		bn=isNetworkAvailable();
 		tv=(TextView) findViewById(R.id.textViewt);
 		tv2=(TextView) findViewById(R.id.textViewtxt);
+		tv3=(TextView) findViewById(R.id.textViewt2);
 		b=(Button) findViewById(R.id.button1);
 		L1 = (LinearLayout) findViewById(R.id.ll);
 		
@@ -82,6 +83,7 @@ public class NivelesActivity extends Activity {
 		
 		tv.setTypeface(kepf);
 		tv2.setTypeface(kepf);
+		tv3.setTypeface(kepf);
 		b.setTypeface(kepf);
 		
 		tv2.setText(getString(R.string.puntaje));
@@ -111,7 +113,7 @@ public class NivelesActivity extends Activity {
    	 } 
    	 m2=m;
    
-   	 if(m=="01"){ //primer mes del año
+   	 if(m=="01"){ //primer mes del aï¿½o
    		 m="12";
    		 aniocal=aniocal-1;
    	 }else{
@@ -227,17 +229,18 @@ public class NivelesActivity extends Activity {
 	        });
 	        
 		
-			  
-			  if(objetos>=5 && objetos<15){
-				  tv.setText(getString(R.string.punp)+" +"+String.valueOf(puntajemespasado));
+	        if(objetos>=5 && objetos<15){
+				  tv.setText(getString(R.string.punp));
+			      tv3.setText(getString(R.string.punp2)+" +"+String.valueOf(puntajemespasado));
 			  }
-               if(objetos>=15 && objetos<24){
-            	   tv.setText(getString(R.string.punm)+" +"+String.valueOf(puntajemespasado));
+             if(objetos>=15 && objetos<24){
+          	   tv.setText(getString(R.string.punm));
+          	   tv3.setText(getString(R.string.punm2)+" +"+String.valueOf(puntajemespasado));
 			  }
-               if(objetos>=24 && objetos<=30){
-            	   tv.setText(getString(R.string.puna)+" +"+String.valueOf(puntajemespasado));
- 			  }
-			
+             if(objetos>=24 && objetos<=30){
+          	   tv.setText(getString(R.string.puna));
+          	   tv3.setText(getString(R.string.puna2)+" +"+String.valueOf(puntajemespasado));
+			  }
 			
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block

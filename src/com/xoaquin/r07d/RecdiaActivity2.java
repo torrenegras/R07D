@@ -20,7 +20,6 @@ import android.os.Handler;
 import android.support.v4.app.FragmentActivity;
 import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
-import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.Window;
@@ -216,7 +215,7 @@ public class RecdiaActivity2 extends FragmentActivity {
 	@Override
     public void onStop() {
         super.onStop();
-        Log.e("ONSTOP", "++ ON STSTOP ++");
+        
         //refresh de widget 
 	    Intent intent = new Intent(this,MyWidgetProvider.class);
 	    intent.setAction("android.appwidget.action.APPWIDGET_UPDATE");

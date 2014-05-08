@@ -24,6 +24,7 @@ import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.format.DateFormat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -131,19 +132,52 @@ public class RegistroFragment extends Fragment {
     	
     	}
         
-    	    //POPULANDO REGISTRO EN ONCREATE  	
-            ParseQuery<ParseObject> query = ParseQuery.getQuery(ntu);
+    	
+        //POPULANDO REGISTRO EN ONCREATE  CACHE PROPIO-> LOCAL DATASTORE -> NETWORK 	
+        
+        //QUERY CACHE PROPIO
+    	DatabaseHandler db = new DatabaseHandler(getActivity());
+    	
+    	RecordDiarioObject rdo=new RecordDiarioObject();
+    	
+    	rdo=db.getRDO(fca);
+    	
+    	if(rdo!=null){
+    	Log.e("encontro","cache propio");	
+    	bhi.setText(rdo.gethorai());
+    	bhf.setText(rdo.gethoraf());   
+    	et1.setText(rdo.getlb());   
+    	et2.setText(rdo.getqmhD());   
+    	et3.setText(rdo.getadg());   
+    	et4.setText(rdo.getldn());   
+    	et5.setText(rdo.getpei());
+    	
+    	if(et3.getText().toString().length()>0||et4.getText().toString().length()>0||et5.getText().toString().length()>0){visibles();tb.setChecked(true);}
+    	
+    	
+    	if(rdo.getaop().equals("true")){cb6.setChecked(true);}else{cb6.setChecked(false);}  
+    	if(rdo.getaopi().equals("true")){cb7.setChecked(true);}else{cb7.setChecked(false);}   
+    	if (rdo.getopl().equals("true")){cb1.setChecked(true);visibles();tb.setChecked(true);}else{cb1.setChecked(false);}   
+    	if (rdo.getcoo().equals("true")){cb2.setChecked(true);visibles();tb.setChecked(true);}else{cb2.setChecked(false);}   
+    	if (rdo.getmgc().equals("true")){cb3.setChecked(true);visibles();tb.setChecked(true);}else{cb3.setChecked(false);}   
+    	if(rdo.getopd().equals("true")){ cb4.setChecked(true);visibles();tb.setChecked(true);}else{cb4.setChecked(false);}
+    	if (rdo.getoplco().equals("true")){cb5.setChecked(true);visibles();tb.setChecked(true);}else{cb5.setChecked(false);}   
+    	
+    	pb.setVisibility(View.GONE);
+        tdrc.setClickable(true);
+        
+    	}else{ //HACE QUERY A DATASTORE
+    		
+    		ParseQuery<ParseObject> query = ParseQuery.getQuery(ntu);
 	        query.whereEqualTo("fechadbp", fca);
-	        //query.setCachePolicy(ParseQuery.CachePolicy.NETWORK_ELSE_CACHE);
-	        if (!b){
-	        	query.fromLocalDatastore();
-	        }
+	        query.fromLocalDatastore();
 	        query.findInBackground(new FindCallback<ParseObject>() {
 	            public void done(List<ParseObject> obs, ParseException e) {
 	                if (e == null) {
 	                   
 	                	if (obs.size()>0)
 	                   {   	                   
+	                		Log.e("encontro","cache datastore");	
 	                	bhi.setText(obs.get(obs.size()-1).getString("horaidbp"));   //obs.size()-1  es el ultimo indice en caso de que haya mas de 1 resultado en query, sucede si hay repetidos, pasa cuando se guarda en offline repetidamente
 	                	bhf.setText(obs.get(obs.size()-1).getString("horafdbp"));   
 	                	et1.setText(obs.get(obs.size()-1).getString("lbdbp"));   
@@ -166,86 +200,88 @@ public class RegistroFragment extends Fragment {
 	                    pb.setVisibility(View.GONE);
 	                    tdrc.setClickable(true);
 	                   
-	                   }else{
-	                	
-	                	pb.setVisibility(View.GONE);
-		                tdrc.setClickable(true);
+	                   }else{  //HACE QUERY A NETWORK
+	               		ParseQuery<ParseObject> queryn = ParseQuery.getQuery(ntu);
+	        	        queryn.whereEqualTo("fechadbp", fca);
+	        	        queryn.findInBackground(new FindCallback<ParseObject>() {
+	        	            public void done(List<ParseObject> obs, ParseException e) {
+	        	                if (e == null) {
+	        	                   
+	        	                	if (obs.size()>0)
+	        	                   {   	                   
+	        	                		Log.e("encontro","network");	
+	        	                	bhi.setText(obs.get(obs.size()-1).getString("horaidbp"));   //obs.size()-1  es el ultimo indice en caso de que haya mas de 1 resultado en query, sucede si hay repetidos, pasa cuando se guarda en offline repetidamente
+	        	                	bhf.setText(obs.get(obs.size()-1).getString("horafdbp"));   
+	        	                	et1.setText(obs.get(obs.size()-1).getString("lbdbp"));   
+	        	                	et2.setText(obs.get(obs.size()-1).getString("qmhDdbp"));   
+	        	                	et3.setText(obs.get(obs.size()-1).getString("adgdbp"));   
+	        	                	et4.setText(obs.get(obs.size()-1).getString("ldndbp"));   
+	        	                	et5.setText(obs.get(obs.size()-1).getString("peidbp"));
+	        	                	
+	        	                	if(et3.getText().toString().length()>0||et4.getText().toString().length()>0||et5.getText().toString().length()>0){visibles();tb.setChecked(true);}
+	        	                	
+	        	                	if(obs.get(obs.size()-1).getString("aopdbp").equals("true")){cb6.setChecked(true);}else{cb6.setChecked(false);}  
+	        	                	if(obs.get(obs.size()-1).getString("aopidbp").equals("true")){cb7.setChecked(true);}else{cb7.setChecked(false);}   
+	        	                	if (obs.get(obs.size()-1).getString("opldbp").equals("true")){cb1.setChecked(true);visibles();tb.setChecked(true);}else{cb1.setChecked(false);}   
+	        	                	if (obs.get(obs.size()-1).getString("coodbp").equals("true")){cb2.setChecked(true);visibles();tb.setChecked(true);}else{cb2.setChecked(false);}   
+	        	                	if (obs.get(obs.size()-1).getString("mgcdbp").equals("true")){cb3.setChecked(true);visibles();tb.setChecked(true);}else{cb3.setChecked(false);}   
+	        	                	if(obs.get(obs.size()-1).getString("opddbp").equals("true")){ cb4.setChecked(true);visibles();tb.setChecked(true);}else{cb4.setChecked(false);}
+	        	                	if (obs.get(obs.size()-1).getString("oplcodbp").equals("true")){cb5.setChecked(true);visibles();tb.setChecked(true);}else{cb5.setChecked(false);}   
+	        	                   
+	        	                	
+	        	                    pb.setVisibility(View.GONE);
+	        	                    tdrc.setClickable(true);
+	        	                   
+	        	                   }else{  //NO HAY NINGUN OBJETO EN NINGUN LADO
+	        	                	   Log.e("encontro","no encontro en network por tanto en nada");	
+	        	                	   pb.setVisibility(View.GONE);
+		        	                   tdrc.setClickable(true);
+	        	                   
+	        	                   }
+	        	                   
+	        	                	
+	        	                } else {//SI FALLA QUERY NETWORK
+	        	                	pb.setVisibility(View.GONE);
+		        	                tdrc.setClickable(true);
+	        	                	Log.e("falla","query network");	
+	        	                	Toast.makeText(getActivity(), getString(R.string.ncon)+"...", Toast.LENGTH_LONG).show();
+	        	                	
+	        	                }
+	        	            }
+
+	        	        });
 	                   
 	                   }
 	                   
 	                	
-	                } else {//modo offline sin poder hacer query, sin cache parse,  entonces usa DB LOCAL SQLITE
-	                	
-	                	DatabaseHandler db = new DatabaseHandler(getActivity());
-	                	
-	                	RecordDiarioObject rdo=new RecordDiarioObject();
-	                	
-	                	rdo=db.getRDO(fca);
-	                	
-	                	if(rdo!=null){
-	                		
-	                	bhi.setText(rdo.gethorai());
-	                	bhf.setText(rdo.gethoraf());   
-	                	et1.setText(rdo.getlb());   
-	                	et2.setText(rdo.getqmhD());   
-	                	et3.setText(rdo.getadg());   
-	                	et4.setText(rdo.getldn());   
-	                	et5.setText(rdo.getpei());
-	                	
-	                	if(et3.getText().toString().length()>0||et4.getText().toString().length()>0||et5.getText().toString().length()>0){visibles();tb.setChecked(true);}
-	                	
-	                	
-	                	if(rdo.getaop().equals("true")){cb6.setChecked(true);}else{cb6.setChecked(false);}  
-	                	if(rdo.getaopi().equals("true")){cb7.setChecked(true);}else{cb7.setChecked(false);}   
-	                	if (rdo.getopl().equals("true")){cb1.setChecked(true);visibles();tb.setChecked(true);}else{cb1.setChecked(false);}   
-	                	if (rdo.getcoo().equals("true")){cb2.setChecked(true);visibles();tb.setChecked(true);}else{cb2.setChecked(false);}   
-	                	if (rdo.getmgc().equals("true")){cb3.setChecked(true);visibles();tb.setChecked(true);}else{cb3.setChecked(false);}   
-	                	if(rdo.getopd().equals("true")){ cb4.setChecked(true);visibles();tb.setChecked(true);}else{cb4.setChecked(false);}
-	                	if (rdo.getoplco().equals("true")){cb5.setChecked(true);visibles();tb.setChecked(true);}else{cb5.setChecked(false);}   
-	                	
-	                	}
-	                	
+	                } else {//SI FALLA QUERY DATASTORE
 	                	pb.setVisibility(View.GONE);
-		                tdrc.setClickable(true);
+ 	                    tdrc.setClickable(true);
+	                	Log.e("falla","query datastore");	
+	                	Toast.makeText(getActivity(), getString(R.string.ncon)+"...", Toast.LENGTH_LONG).show();
 	                	
 	                }
 	            }
 
 	        });
-	           
-	/*
-	        //REPLICANDO QUERIES MURO PARA OBTENER CACHE PREVIOS EN CASOS DE PUBLICACION 
-	       
-	        //QUERY DUMMY 1 PARA CACHE ACCION DE GRACIAS
-	        ParseQuery<ParseObject> q = ParseQuery.getQuery("Muro");
-    		q.whereEqualTo("correo", cu.getEmail().toString());
-    		q.whereEqualTo("fecha", fca);
-    		q.whereEqualTo("tipo", getString(R.string.atg));
-    		q.setCachePolicy(ParseQuery.CachePolicy.NETWORK_ELSE_CACHE);
-    		q.findInBackground(new FindCallback<ParseObject>() {
-    		    public void done(List<ParseObject> o, ParseException e) {
-    		        if (e == null) {
-    		         } else {
-    		        
-    		        }
-    		    }
-    		});
-	        
-    		//QUERY DUMMY 2 PARA CACHE PETICIONES
-    		ParseQuery<ParseObject> q2 = ParseQuery.getQuery("Muro");
-    		q2.whereEqualTo("correo", cu.getEmail().toString());
-    		q2.whereEqualTo("fecha", fca);
-    		q2.whereEqualTo("tipo", "(P)");
-    		q2.setCachePolicy(ParseQuery.CachePolicy.NETWORK_ELSE_CACHE);
-    		q2.findInBackground(new FindCallback<ParseObject>() {
-    		    public void done(List<ParseObject> o, ParseException e) {
-    		        if (e == null) {
-    		        } else {
-    		        
-    		        }
-    		    }
-    		});
-	  */      
+    	}//else CACHE PROPIO
+    	
+    	
+            
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+	   
 	 
     		
 	        

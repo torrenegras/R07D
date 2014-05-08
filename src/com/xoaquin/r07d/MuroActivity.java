@@ -131,7 +131,7 @@ private class AsyncTaskRunner2 extends AsyncTask<Context, Void, CustomAdapter> {
 			//Query de toda la clase en Parse
 			ParseQuery<ParseObject> q = ParseQuery.getQuery("Muro");
 			q.orderByDescending("createdAt");
-			//q.setCachePolicy(ParseQuery.CachePolicy.NETWORK_ELSE_CACHE);
+			
 			if (!b){
 	        	q.fromLocalDatastore();
 	        }

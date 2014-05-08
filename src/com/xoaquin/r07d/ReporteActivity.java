@@ -338,7 +338,7 @@ public class ReporteActivity extends Activity {
 	        query.whereEqualTo("mesdbp", mes);
 	        query.whereEqualTo("aniodbp", anio);
 	        query.orderByAscending("diadbp");
-	        //query.setCachePolicy(ParseQuery.CachePolicy.NETWORK_ELSE_CACHE);
+	        
 	        if (!b){
 	        	query.fromLocalDatastore();
 	        }

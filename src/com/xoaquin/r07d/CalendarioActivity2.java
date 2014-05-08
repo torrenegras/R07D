@@ -530,27 +530,28 @@ private class AsyncTaskRunner extends AsyncTask<Integer, Integer, Integer> {
 */
 
 //FUNCION LLAMADO PARSE PARA OBTENER LISTA DE DIAS COMPLETADOS EN ESE MES/A�O
-    public String[] listadiascompletados(int mescalf,int aniocalf)
-     {
+    public String[] listadiascompletados(int mescalf,int aniocalf){
 	  
      String[] res= new String[31];
     	
 	 String nmcomp=String.valueOf(mescalf+1);
      if((mescalf+1)<10){nmcomp="0"+nmcomp;}
      String nycomp=String.valueOf(aniocalf);
+    
      
      ParseQuery<ParseObject> query = ParseQuery.getQuery(nombretablausuario); //query para buscar records de ese mes y a�o en orden ascendente
 	 query.whereEqualTo("mesdbp", nmcomp);
      query.whereEqualTo("aniodbp", nycomp);
      query.orderByAscending("diadbp");
-     //query.setCachePolicy(ParseQuery.CachePolicy.NETWORK_ELSE_CACHE);
-     if (!b){
-     	query.fromLocalDatastore();
+   
+     if(!b){
+     query.fromLocalDatastore();
      }
      
      try {
-	List<ParseObject> objects=query.find();
-    int i=0;
+	   List<ParseObject> objects=query.find();
+    
+	   int i=0;
        while(i<objects.size()){
     	   if(objects.get(i).getString("lbdbp").length()>0)   //si se ha hecho lectura biblica
     	   {            	        		   
@@ -559,11 +560,10 @@ private class AsyncTaskRunner extends AsyncTask<Integer, Integer, Integer> {
     	   res[i]=obj;   
     	   }
     	   i++;
-       }
-	
-               } catch (ParseException e1 ) {
-              	// TODO Auto-generated catch block
-	          e1.printStackTrace();
+                              }
+	  
+             } catch (ParseException e1 ) {  //falla query 
+            	 Toast.makeText(CalendarioActivity2.this, getString(R.string.ncon)+"...", Toast.LENGTH_LONG).show();
           }  
            return res;
    }
@@ -708,7 +708,11 @@ private int getBarHeight() {
 	    	startActivity(Intent.createChooser(intent, "Share with"));
 			return true;
 		 	
-	    
+	    case R.id.puntaje:
+	    	startActivity(new Intent(this, NivelesMenuActivity.class));
+	    	return true;
+	    	
+		    
 	    default:
 	    return super.onOptionsItemSelected(item);
 	}

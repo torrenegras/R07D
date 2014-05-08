@@ -15,6 +15,16 @@
         android:text="@string/adglabel"
         android:textAlignment="center"
         android:textColor="#8d665f" />
+    <TextView
+        android:id="@+id/textViewt2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="@string/adglabel"
+        android:textAlignment="center"
+        android:textColor="#8d665f" />
 
     <TextView
         android:id="@+id/textViewtxt"
