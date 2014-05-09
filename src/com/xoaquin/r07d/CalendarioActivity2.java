@@ -549,25 +549,29 @@ private class AsyncTaskRunner extends AsyncTask<Integer, Integer, Integer> {
      }
      
      try {
-	   List<ParseObject> objects=query.find();
+    	 		List<ParseObject> objects=query.find();
     
-	   int i=0;
-       while(i<objects.size()){
-    	   if(objects.get(i).getString("lbdbp").length()>0)   //si se ha hecho lectura biblica
-    	   {            	        		   
-    	   String obj=objects.get(i).getString("diadbp");
-    	   if(Integer.valueOf(obj)<10){obj=obj.replaceAll("0", "");} //quitandole los 0's iniciales a dias PARSE
-    	   res[i]=obj;   
-    	   }
-    	   i++;
-                              }
+	           int i=0;
+               while(i<objects.size()){
+            	   if(objects.get(i).getString("lbdbp").length()>0)   //si se ha hecho lectura biblica
+            	   {            	        		   
+            		   String obj=objects.get(i).getString("diadbp");
+            		   if(Integer.valueOf(obj)<10){obj=obj.replaceAll("0", "");} //quitandole los 0's iniciales a dias PARSE
+            		   res[i]=obj;   
+            	   }
+            	   i++;
+                                      }
+                
+                 return res;
+                 
 	  
-             } catch (ParseException e1 ) {  //falla query 
+          } catch (ParseException e1 ) {  //falla query 
             	 int i=0;
             	 res[i]= getString(R.string.errcon)+"...";
-            	
+            	 return res;
           }  
-           return res;
+          
+         //return res;  //AQUI ESTABA ANTES EL RETURN
    }
 
 
