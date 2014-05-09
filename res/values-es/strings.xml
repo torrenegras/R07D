@@ -238,4 +238,6 @@
       <string name="mtl">Encuentrate con el Señor en el Secreto&#8230;</string>
 
        <string name="puntajem">Puntaje</string>
+       
+       <string name="errcon">Error de Conexi\u00F3n</string>
 </resources>

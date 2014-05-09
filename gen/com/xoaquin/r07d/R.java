@@ -755,6 +755,7 @@ containing a value of this type.
         public static final int emaillabel=0x7f09003b;
         public static final int ene=0x7f090093;
         public static final int env=0x7f090091;
+        public static final int errcon=0x7f0900fd;
         public static final int esrp=0x7f0900c6;
         public static final int feb=0x7f090094;
         public static final int fechalabel=0x7f090050;

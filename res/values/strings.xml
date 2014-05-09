@@ -202,5 +202,7 @@
     <string name="widgettit">R07D wdGtm?</string>
     <string name="mtl">Meet the Lord in the Secret&#8230;</string>
     <string name="title_activity_niveles_menu">NivelesMenuActivity</string>
+    
+    <string name="errcon">Connection Error</string>
 
 </resources>

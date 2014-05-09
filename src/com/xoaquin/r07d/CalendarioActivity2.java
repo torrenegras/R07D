@@ -4,10 +4,10 @@
 package com.xoaquin.r07d;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
-
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesClient;
 import com.google.android.gms.common.GooglePlayServicesUtil;
@@ -563,7 +563,9 @@ private class AsyncTaskRunner extends AsyncTask<Integer, Integer, Integer> {
                               }
 	  
              } catch (ParseException e1 ) {  //falla query 
-            	 Toast.makeText(CalendarioActivity2.this, getString(R.string.ncon)+"...", Toast.LENGTH_LONG).show();
+            	 int i=0;
+            	 res[i]= getString(R.string.errcon)+"...";
+            	
           }  
            return res;
    }
@@ -572,6 +574,11 @@ private class AsyncTaskRunner extends AsyncTask<Integer, Integer, Integer> {
 
 //FUNCION INFLADO DE GRIDVIEW
 public void inflandogridview(String[] dcompl,int mescall,int aniocall){
+	List<String> lista = Arrays.asList(dcompl);
+	boolean contains = lista.contains(getString(R.string.errcon));
+	if(contains){
+		Toast.makeText(this, getString(R.string.errcon), Toast.LENGTH_LONG).show();
+	}
 	
 	String nmes= nombremes(mescall);	
 	tvmes.setText(nmes);

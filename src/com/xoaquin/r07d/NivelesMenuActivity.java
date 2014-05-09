@@ -13,6 +13,7 @@ import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
+
 import android.app.Activity;
 import android.app.NotificationManager;
 import android.content.Context;
@@ -35,6 +36,7 @@ import android.widget.TextView;
 
 public class NivelesMenuActivity extends Activity {
 
+	@SuppressWarnings("unused")
 	private String nombretablausuario="",m="",m2="";
 	private int mescal,aniocal,puntajemespasado,objetos;
 	private Boolean bn;
