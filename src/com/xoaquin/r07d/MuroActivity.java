@@ -28,11 +28,13 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 
 public class MuroActivity extends ListActivity {
 
 	private Boolean b;
+	private int intcatch=0;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -163,6 +165,7 @@ private class AsyncTaskRunner2 extends AsyncTask<Context, Void, CustomAdapter> {
 			} catch (ParseException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+				intcatch=1;
 			}
 	    	
 	   	    return customAdapter;
@@ -170,6 +173,10 @@ private class AsyncTaskRunner2 extends AsyncTask<Context, Void, CustomAdapter> {
 	
 	    
 	    protected void onPostExecute(CustomAdapter ca) {
+	    	
+	    	if(intcatch==1){
+	    		Toast.makeText(MuroActivity.this, getString(R.string.errcon), Toast.LENGTH_LONG).show();
+	    	}
 	    	ListView lv = getListView();
 	    	lv.setDivider(new ColorDrawable(getResources().getColor(R.color.marron)));
 			lv.setDividerHeight(1);

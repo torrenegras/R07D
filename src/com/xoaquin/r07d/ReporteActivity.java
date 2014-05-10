@@ -446,7 +446,7 @@ public class ReporteActivity extends Activity {
 	        	   	    	spdfopi=getString(R.string.tpmi)+": "+String.valueOf(si);
 	        		
 					} else { //error tipo excepcion en query
-						 Toast.makeText(ReporteActivity.this, "Error...", Toast.LENGTH_LONG).show();        
+						Toast.makeText(ReporteActivity.this, getString(R.string.errcon), Toast.LENGTH_LONG).show();      
 			        }
 	        	
 	        	

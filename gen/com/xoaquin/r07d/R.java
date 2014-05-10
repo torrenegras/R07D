@@ -776,6 +776,7 @@ containing a value of this type.
         public static final int hintlb=0x7f090042;
         public static final int iecv=0x7f0900c5;
         public static final int ikso=0x7f0900e7;
+        public static final int impnot=0x7f0900fe;
         public static final int inscoord=0x7f09006d;
         public static final int insmenu=0x7f090066;
         public static final int jal=0x7f0900b8;

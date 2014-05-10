@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.xoaquin.r07d"
-    android:versionCode="56"
-    android:versionName="Zorobabel" >
+    android:versionCode="57"
+    android:versionName="Andres" >
 
     <uses-sdk
         android:minSdkVersion="14"

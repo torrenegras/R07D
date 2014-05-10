@@ -37,6 +37,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 public class NivelesActivity extends Activity {
@@ -129,7 +130,7 @@ public class NivelesActivity extends Activity {
 		ParseQuery<ParseObject> query = ParseQuery.getQuery(nombretablausuario); 
   		query.whereEqualTo("mesdbp", m);
 	    query.whereEqualTo("aniodbp", Integer.toString(aniocal)); 
-	    //query.setCachePolicy(ParseQuery.CachePolicy.NETWORK_ELSE_CACHE);
+	    
 	    if (!bn){
         	query.fromLocalDatastore();
         }
@@ -221,7 +222,7 @@ public class NivelesActivity extends Activity {
 	                 }
 	                   
 	                } else {//error en query, algo salio mal.. sin net, sin cache...  PRIMERA VEZ QUE SE INTENTA QUERY SOBRE ELEMENTO, POR LO QUE ES NUEVO** OPTIMIZACION??**
-	                	
+	                	Toast.makeText(NivelesActivity.this, getString(R.string.errcon), Toast.LENGTH_LONG).show();
 	                 
 	                }
 	            }
@@ -245,6 +246,7 @@ public class NivelesActivity extends Activity {
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			Toast.makeText(this, getString(R.string.errcon), Toast.LENGTH_LONG).show();
 		}
 	
 	    

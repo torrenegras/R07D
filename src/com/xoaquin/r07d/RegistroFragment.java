@@ -244,7 +244,7 @@ public class RegistroFragment extends Fragment {
 	        	                	pb.setVisibility(View.GONE);
 		        	                tdrc.setClickable(true);
 	        	                	Log.e("falla","query network");	
-	        	                	Toast.makeText(getActivity(), getString(R.string.ncon)+"...", Toast.LENGTH_LONG).show();
+	        	                	Toast.makeText(getActivity(), getString(R.string.errcon), Toast.LENGTH_LONG).show();
 	        	                	
 	        	                }
 	        	            }
@@ -258,7 +258,7 @@ public class RegistroFragment extends Fragment {
 	                	pb.setVisibility(View.GONE);
  	                    tdrc.setClickable(true);
 	                	Log.e("falla","query datastore");	
-	                	Toast.makeText(getActivity(), getString(R.string.ncon)+"...", Toast.LENGTH_LONG).show();
+	                	Toast.makeText(getActivity(), getString(R.string.errcon), Toast.LENGTH_LONG).show();
 	                	
 	                }
 	            }
@@ -372,7 +372,7 @@ public class RegistroFragment extends Fragment {
 		
     	ParseQuery<ParseObject> query = ParseQuery.getQuery(ntu);
         query.whereEqualTo("fechadbp", fca);
-        //query.setCachePolicy(ParseQuery.CachePolicy.NETWORK_ELSE_CACHE);
+      
         if (!b){
         	query.fromLocalDatastore();
         }
@@ -488,7 +488,7 @@ public class RegistroFragment extends Fragment {
         		q2.whereEqualTo("correo", cu.getEmail().toString());
         		q2.whereEqualTo("fecha", fca);
         		q2.whereEqualTo("tipo", "(P)");
-        		//q2.setCachePolicy(ParseQuery.CachePolicy.NETWORK_ELSE_CACHE);
+        	
         		if (!b){
                 	q2.fromLocalDatastore();
                 }

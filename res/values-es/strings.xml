@@ -240,4 +240,6 @@
        <string name="puntajem">Puntaje</string>
        
        <string name="errcon">Error de Conexi\u00F3n</string>
+       
+        <string name="impnot">Aviso Importante</string>
 </resources>

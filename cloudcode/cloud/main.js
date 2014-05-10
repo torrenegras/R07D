@@ -409,7 +409,7 @@ Parse.Cloud.define("bienvenidausr", function(request, response) {
 Parse.Cloud.job("pushavisoimportante", function(request, status) {
    
     Parse.Push.send({
-  channels: [ "xoaquinoutlookcom" ],
+  channels: [ "todos" ],
   data: {
     action:"com.xoaquin.r07d.AVISO"
     

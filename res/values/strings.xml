@@ -204,5 +204,6 @@
     <string name="title_activity_niveles_menu">NivelesMenuActivity</string>
     
     <string name="errcon">Connection Error</string>
+     <string name="impnot">Important Notice</string>
 
 </resources>
