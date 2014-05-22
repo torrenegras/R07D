@@ -123,6 +123,7 @@ public class LoginActivity extends Activity {
 	      }else{
 	    	  
 	      }
+	      db.close();
 	
 	}
 
@@ -150,7 +151,7 @@ public class LoginActivity extends Activity {
 			                	    	//insertando en DB LOC SQLITE
 						        		db.open(); 
 						                db.insertTitle(etcorreo, etclave);
-									
+									    db.close();
 						                
 						                Toast.makeText(LoginActivity.this, getString(R.string.conn)+".......", Toast.LENGTH_LONG).show(); 
 						                
@@ -245,7 +246,7 @@ public void onclickregistrarse(View view) {  //click boton registrarse
     	                    	//insertando en DB LOC SQLITE
     	    		              db.open(); 
     	                          db.insertTitle(etcorreo, etclave);
-    	                          
+    	                          db.close();
     	                          
     	                    	//llamando funcion Cloud email nuevo usuario y cuenta usuarios totales
     	    	                HashMap<String, Object> params = new HashMap<String, Object>();

@@ -83,7 +83,7 @@ public class DatabaseHandler extends SQLiteOpenHelper{
     
     //CRUDS = CREAR LEER ACTUALIZAR Y BORRAR
     
- // A–adir record
+ // Aï¿½adir record
     void addRDO(RecordDiarioObject rdo) {
         SQLiteDatabase db = this.getWritableDatabase();
  
@@ -149,6 +149,12 @@ public class DatabaseHandler extends SQLiteOpenHelper{
                 cursor.getString(17),
                 cursor.getString(18));
         }
+        
+        
+        if(cursor != null){
+            cursor.close();
+        }
+        
         // retorna Recorddiario
         return rdoget;
     }
@@ -181,8 +187,12 @@ public class DatabaseHandler extends SQLiteOpenHelper{
         
  
         // actualizando fila
-        return db.update(TABLE_RECORDS, values, KEY_FECHA + " = ?",
-                new String[] { rdo.getfecha() });
+        
+        db.update(TABLE_RECORDS, values, KEY_FECHA + " = ?",  new String[] { rdo.getfecha() });
+        db.close();
+        return 1;
+        
+        //return db.update(TABLE_RECORDS, values, KEY_FECHA + " = ?",  new String[] { rdo.getfecha() });   //original
     }
  
   

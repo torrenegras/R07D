@@ -53,6 +53,12 @@ public class DefaultApplication extends Application{
       		ParseInstallation installation = ParseInstallation.getCurrentInstallation();
       		installation.put("actualuser",cu.getUsername());
       		installation.saveEventually();
+      		
+      		 String locale = getResources().getConfiguration().locale.getDisplayName();
+   		     cu.put("locale", locale);
+   		     cu.put("version", installation.getString("appVersion"));
+   		     cu.saveInBackground();
+      		
       		}
  		
       		String locale = getResources().getConfiguration().locale.getDisplayName();

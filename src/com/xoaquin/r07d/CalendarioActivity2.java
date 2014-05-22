@@ -13,7 +13,6 @@ import com.google.android.gms.common.GooglePlayServicesClient;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.location.LocationClient;
 import com.parse.ParseException;
-import com.parse.ParseInstallation;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
@@ -101,7 +100,7 @@ public class CalendarioActivity2 extends Activity implements OnGesturePerformedL
 	    //PONIENDO EN PARSE EL LOCALE DEL USUARIO
 	    //ParseUser cu = ParseUser.getCurrentUser(); 
 	    ua=ParseUser.getCurrentUser();
-	      	       
+	    /*  	       
 		if (ua != null) {
 			 
 		 String locale = getResources().getConfiguration().locale.getDisplayName();
@@ -109,7 +108,7 @@ public class CalendarioActivity2 extends Activity implements OnGesturePerformedL
 		  ua.put("version", ParseInstallation.getCurrentInstallation().getString("appVersion"));
 		  ua.saveEventually();
 		} 
-		
+		*/
 		//SETTING DEL CLIENTE DE POSICIONAMIENTO
 	    mLocationClient= new LocationClient(this, this, this);
 
