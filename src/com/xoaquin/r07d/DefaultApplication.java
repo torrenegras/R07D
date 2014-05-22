@@ -11,7 +11,7 @@ import com.parse.PushService;
 
 import android.app.Application;
 import android.content.Context;
-
+import android.os.Build;
 
 public class DefaultApplication extends Application{ 
 	
@@ -21,6 +21,11 @@ public class DefaultApplication extends Application{
 	@Override
     public void onCreate() {
         super.onCreate();
+       
+        String manufacturer = Build.MANUFACTURER;
+        String brand        = Build.BRAND;
+        String product      = Build.PRODUCT;
+        String model        = Build.MODEL;
         
         Parse.enableLocalDatastore(this);
         Parse.initialize(this, "KfBj6ivkLAaLTXhssMZkjp0MTp5DWhezdpprtYqo", "ePZ6T7RmvGGW87nNO0Oe9Th23H0Je7dwLyTOY4w3"); 
@@ -52,6 +57,10 @@ public class DefaultApplication extends Application{
  						
       		ParseInstallation installation = ParseInstallation.getCurrentInstallation();
       		installation.put("actualuser",cu.getUsername());
+      		installation.put("manufacturer", manufacturer);
+  		    installation.put("brand", brand);
+  		    installation.put("product", product);
+  		    installation.put("model", model);
       		installation.saveEventually();
       		
       		 String locale = getResources().getConfiguration().locale.getDisplayName();
