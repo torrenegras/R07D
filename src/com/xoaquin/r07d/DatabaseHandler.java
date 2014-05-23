@@ -152,7 +152,7 @@ public class DatabaseHandler extends SQLiteOpenHelper{
         
         
         if(cursor != null){
-            cursor.close();
+           cursor.close();
         }
         
         // retorna Recorddiario
