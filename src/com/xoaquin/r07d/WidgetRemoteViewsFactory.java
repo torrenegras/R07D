@@ -8,8 +8,6 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 
-import com.parse.ParseUser;
-
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
@@ -35,9 +33,9 @@ public WidgetRemoteViewsFactory(Context context, Intent intent)
 private void updateWidgetListView()
 {
 	
-	String nombretablausuario = ParseUser.getCurrentUser().getEmail();
-    nombretablausuario=nombretablausuario.replaceAll("\\.", "");
-	nombretablausuario=nombretablausuario.replaceAll("@", "");
+	//String nombretablausuario = ParseUser.getCurrentUser().getEmail();
+    //nombretablausuario=nombretablausuario.replaceAll("\\.", "");
+	//nombretablausuario=nombretablausuario.replaceAll("@", "");
 
 	 Calendar now = Calendar.getInstance(); //calendario, trayendo fecha de hoy
      int diacal = now.get(Calendar.DAY_OF_MONTH);
