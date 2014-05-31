@@ -19,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.parse.ParseAnalytics;
+import com.parse.ParseInstallation;
 import com.parse.ParseUser;
 
 
@@ -77,7 +78,13 @@ public static String correoglobal;
 					
 					
 					if (currentUser != null) { //HAY USER EN CACHE
-						
+						 
+						 ParseInstallation installation = ParseInstallation.getCurrentInstallation();
+						 String locale = getResources().getConfiguration().locale.getDisplayName();
+			   		     currentUser.put("locale", locale);
+			   		     currentUser.put("version", installation.getString("appVersion"));
+			   		     currentUser.saveEventually();
+			   		     
 						final String correocu=currentUser.getEmail();
 						
 						// Timer que cambia de actividad a Calendario si match de claves

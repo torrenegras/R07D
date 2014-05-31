@@ -63,11 +63,6 @@ public class DefaultApplication extends Application{
   		    installation.put("model", model);
       		installation.saveEventually();
       		
-      		 String locale = getResources().getConfiguration().locale.getDisplayName();
-   		     cu.put("locale", locale);
-   		     cu.put("version", installation.getString("appVersion"));
-   		     cu.saveInBackground();
-      		
       		}
  		
       		String locale = getResources().getConfiguration().locale.getDisplayName();

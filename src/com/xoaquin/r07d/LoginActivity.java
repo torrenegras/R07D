@@ -15,10 +15,12 @@ import com.parse.LogInCallback;
 import com.parse.ParseCloud;
 import com.parse.ParseException;
 import com.parse.ParseFacebookUtils;
+import com.parse.ParseInstallation;
 import com.parse.ParseFacebookUtils.Permissions;
 import com.parse.ParseUser;
 import com.parse.RequestPasswordResetCallback;
 import com.parse.SignUpCallback;
+
 
 
 
@@ -148,6 +150,13 @@ public class LoginActivity extends Activity {
 			                	  public void done(ParseUser user, ParseException e) {
 			                	    if (user != null) {
 			                	      
+			                	    	ParseInstallation installation = ParseInstallation.getCurrentInstallation();
+			   						    String locale = getResources().getConfiguration().locale.getDisplayName();
+			   			   		        user.put("locale", locale);
+			   			   		        user.put("version", installation.getString("appVersion"));
+			   			   		        user.saveInBackground();
+			   			   		     
+			                	    	
 			                	    	//insertando en DB LOC SQLITE
 						        		db.open(); 
 						                db.insertTitle(etcorreo, etclave);
@@ -235,7 +244,11 @@ public void onclickregistrarse(View view) {  //click boton registrarse
     	                user.setUsername(etcorreo);
     	                user.setPassword(etclave);
     	                user.setEmail(etcorreo);
-    	                user.put("puntaje", 0);
+    	                ParseInstallation installation = ParseInstallation.getCurrentInstallation();
+						String locale = getResources().getConfiguration().locale.getDisplayName();
+			   		    user.put("locale", locale);
+			   		    user.put("version", installation.getString("appVersion"));
+			   		   
     	                
     	                user.signUpInBackground(new SignUpCallback() {
     	                 
@@ -330,7 +343,12 @@ public void onclickconectarseFB(View view) {
 		    } else if (user.isNew()) {
 		      Log.e("MyApp", "User signed up and logged in through Facebook!");
 		    	
-		    			    	
+		            ParseInstallation installation = ParseInstallation.getCurrentInstallation();
+				    String locale = getResources().getConfiguration().locale.getDisplayName();
+	   		        user.put("locale", locale);
+	   		        user.put("version", installation.getString("appVersion"));
+	   		        user.saveInBackground();
+	   		        
 		    	final Session session=Session.getActiveSession();
 		    	Request request=Request.newMeRequest(session, 
 		                new Request.GraphUserCallback() {
@@ -414,7 +432,13 @@ public void onclickconectarseFB(View view) {
 	                // If the response is successful
 	                if (session == Session.getActiveSession()) {
 	                    if (userg != null) {
-	                    	
+	                    
+	                    	ParseUser cu= ParseUser.getCurrentUser();
+	                    	ParseInstallation installation = ParseInstallation.getCurrentInstallation();
+	    				    String locale = getResources().getConfiguration().locale.getDisplayName();
+	    	   		        cu.put("locale", locale);
+	    	   		        cu.put("version", installation.getString("appVersion"));
+	                    	cu.saveInBackground();
 	                    	
 	                     final String fbemail=response.getGraphObject().getProperty("email").toString(); //solo se usa para pasarlo en el intent de llamado calendario
 	                    
