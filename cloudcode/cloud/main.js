@@ -60,11 +60,11 @@ if (dd==ld){
   }
 });
   
-  
+  status.success("Ejecutado dentro de fin mes OK");
   
  }else{
      
-    status.success("Ejecutado por fuera de fin de mes");
+  status.success("Ejecutado por fuera de fin de mes");
       
  }
   
@@ -450,10 +450,12 @@ Parse.Cloud.job("puntajes", function(request, status) {
   }
 });
 
-
-  }
+    status.success("Ejecutado en dia 1 Puntaje Enviado OK");
   
-  status.success("No es dia 1 Puntaje No enviado"); 
+    }else{
   
+    status.success("Ejecutado por fuera de dia 1 Puntaje No enviado"); 
+      
+       }
 
 });
