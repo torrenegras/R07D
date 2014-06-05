@@ -115,7 +115,7 @@ public class DatabaseHandler extends SQLiteOpenHelper{
  
     
     // Obteniendo record desde fecha 
-    RecordDiarioObject getRDO(String fecha) {
+        RecordDiarioObject getRDO(String fecha) {
         SQLiteDatabase db = this.getReadableDatabase();
  
         //Query con la fecha
@@ -154,6 +154,8 @@ public class DatabaseHandler extends SQLiteOpenHelper{
         if(cursor != null){
            cursor.close();
         }
+        
+        db.close();
         
         // retorna Recorddiario
         return rdoget;

@@ -70,7 +70,7 @@ private void updateWidgetListView()
 	     List<String> convertedToList = new ArrayList<String>(Arrays.asList(widgetFruitsArray));
 		 this.widgetList = convertedToList;
 	}
-
+       db.close();
 }
 
 
