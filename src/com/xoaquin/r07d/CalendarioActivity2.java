@@ -8,6 +8,7 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
+
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesClient;
 import com.google.android.gms.common.GooglePlayServicesUtil;
@@ -15,7 +16,6 @@ import com.google.android.gms.location.LocationClient;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
-import com.parse.ParseUser;
 
 import android.location.Location;
 import android.net.ConnectivityManager;
@@ -63,7 +63,6 @@ public class CalendarioActivity2 extends Activity implements OnGesturePerformedL
 	public static String[] dcomp= new String[31], dcompp= new String[31];
 	private static ProgressBar pb;
 	private Boolean b;
-	ParseUser ua;
 	private GestureLibrary gestureLib;
 	
 	Location mCurrentLocation;
@@ -87,9 +86,7 @@ public class CalendarioActivity2 extends Activity implements OnGesturePerformedL
 	    }
 	    setContentView(gestureOverlayView);
 	    
-		
 		//setContentView(R.layout.activity_calendario_activity2); //original
-
 
          AppRater.app_launched(this); //LLAMANDO DIALOG PARA RATE APP
 		//AppRater.showRateDialog(this, null);  MOSTRAR EL DIALOG PARA PRUEBAS
@@ -97,22 +94,9 @@ public class CalendarioActivity2 extends Activity implements OnGesturePerformedL
 	    
 	    b=isNetworkAvailable();
 	    
-	    //PONIENDO EN PARSE EL LOCALE DEL USUARIO
-	    //ParseUser cu = ParseUser.getCurrentUser(); 
-	    ua=ParseUser.getCurrentUser();
-	    /*  	       
-		if (ua != null) {
-			 
-		 String locale = getResources().getConfiguration().locale.getDisplayName();
-		  ua.put("locale", locale);
-		  ua.put("version", ParseInstallation.getCurrentInstallation().getString("appVersion"));
-		  ua.saveEventually();
-		} 
-		*/
 		//SETTING DEL CLIENTE DE POSICIONAMIENTO
 	    mLocationClient= new LocationClient(this, this, this);
 
-	    
 		
 		//COLOR AL ACTIONBAR
 		ActionBar ab=getActionBar();
@@ -128,7 +112,6 @@ public class CalendarioActivity2 extends Activity implements OnGesturePerformedL
 		    nombretablausuario=nombretablausuario.replaceAll("\\.", "");
 			nombretablausuario=nombretablausuario.replaceAll("@", "");	
 		}
-		
 		
 		
 		//cargando variables
@@ -167,31 +150,7 @@ public class CalendarioActivity2 extends Activity implements OnGesturePerformedL
     		 m="0"+m;
     	 } 
         
-    	/*
- //push progreso fin de mes informe de nivel
-         if(diacal==diafm||diacal==diafm-1||diacal==diafm-2||diacal==diafm-3){ 
-        	//PONIENDO EN PARSE EL CHECK LANZAMIENTO PUSH
-     	 
-            
-             String chk2=cu.getString("usermesaniochk");
-        	
-        	  	if(chk2==null){// en caso de ser la primera vez para el usuario que se lanza un mensaje push de este tipo
-      
-        	  	   	pushnivel();  
-        	  	   	
-        	}else{
-        	
-        	if(chk2.equals(m+Integer.toString(aniocal))){ }//nada ya se lanzo en este mes el push message  
-        		else{
-        	 
-                     pushnivel();
-                     
-        	        }
-               }
-
-            }      
-        
-          */      
+    
             
    //EJECUCION DE TASK PRINCIPAL Y MANEJO DE CAMBIO DE ORIENTACION
             @SuppressWarnings("deprecation")
@@ -253,7 +212,9 @@ public class CalendarioActivity2 extends Activity implements OnGesturePerformedL
 	   	
 } 
 	
-//IMPLEMENTACION ASYNCTASK, FETCH PARSE POR FUERA DE MAIN THREAD
+
+	
+	//IMPLEMENTACION ASYNCTASK, FETCH PARSE POR FUERA DE MAIN THREAD
 	
 private class AsyncTaskRunner extends AsyncTask<Integer, Integer, Integer> {	
 	
@@ -310,12 +271,7 @@ private class AsyncTaskRunner extends AsyncTask<Integer, Integer, Integer> {
 	    
 	}
 
-	
-	
-	
-	
-	
-	
+
 	
 //FLECHA DERECHA
   public void clickfleder(View v) { //boton flecha derecha calendario
@@ -377,156 +333,7 @@ private class AsyncTaskRunner extends AsyncTask<Integer, Integer, Integer> {
     
 	}
 
-/*
-//FUNCION MENSAJES PUSH NIVELES
-     public void pushnivel(){
-			 	 
-		ParseQuery<ParseObject> query = ParseQuery.getQuery(nombretablausuario); 
-  		query.whereEqualTo("mesdbp", m);
-	    query.whereEqualTo("aniodbp", Integer.toString(aniocal)); 
-	    //query.setCachePolicy(ParseQuery.CachePolicy.NETWORK_ELSE_CACHE);
-	    if (!b){
-        	query.fromLocalDatastore();
-        }
-	       try {
-		List<ParseObject> objects= query.find();
-		
-		if(objects.size()>=5 && objects.size()<15){
-			String locale = getResources().getConfiguration().locale.getDisplayName();
-			ParsePush push = new ParsePush();
-            push.setChannel(nombretablausuario);
-            
-            if(locale.contains("espa\u00F1ol")){
-            push.setMessage("Puntaje Mes: +5 PUNTOS (R07D Principiante)");
-            }else{
-            push.setMessage("Month\u0027s Score: +5 POINTS (R07D Beginner)");
-            }
-       	    
-            push.sendInBackground();
-       	    
-         	
-         	//PONIENDO EN PARSE EL CHECK LANZAMIENTO PUSH
-    	    ParseUser cu = ParseUser.getCurrentUser(); 
-    		if (cu != null) {
-    		  cu.put("usermesaniochk", m+Integer.toString(aniocal));
-    		  cu.saveEventually();
-    		} else {}
-    		
-    		
-         	
-         	try {
-         	   
-         	   
-         	    JSONObject data=new JSONObject();
- 
-         	    if(locale.contains("espa\u00F1ol")){
-         	    data = new JSONObject("{\"action\": \"com.xoaquin.r07d.NIVEL\",\"mensaje\": \"Usted ha hecho un buen esfuerzo, siga avanzando! Bendiciones! (R07D Nivel Principiante) +5 PUNTOS \",\"puntos\": \"5\"    }");
-         		}else{
-         			data = new JSONObject("{\"action\": \"com.xoaquin.r07d.NIVEL\",\"mensaje\": \"You\u0027ve made a good effort, keep going! Blessings!              (R07D Beginner Level) +5 POINTS \",\"puntos\": \"5\"    }");
-         		}
-         	    
-         	    ParsePush pushj = new ParsePush();
- 	            pushj.setChannel(nombretablausuario);
- 	       	    pushj.setData(data);
- 	       	    pushj.sendInBackground();	 
-				
-        	 } catch (JSONException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} 	
-		}
-		
-		if(objects.size()>=15 && objects.size()<24){
-		String locale = getResources().getConfiguration().locale.getDisplayName();
-		ParsePush push = new ParsePush();
-        push.setChannel(nombretablausuario);
-       
-        if(locale.contains("espa\u00F1ol")){
-        push.setMessage("Puntaje Mes: +15 PUNTOS (R07D Intermedio)");
-        }else{
-        push.setMessage("Month\u0027s Score: +15 POINTS (R07D Intermediate)");
-        }
-   	    
-        push.sendInBackground();
-   	   
-  	    
-  	//PONIENDO EN PARSE EL CHECK LANZAMIENTO PUSH
-	    ParseUser cu = ParseUser.getCurrentUser(); 
-		if (cu != null) {
-		  cu.put("usermesaniochk", m+Integer.toString(aniocal));
-		  cu.saveEventually();
-		} else {}
-		
-  	    
-  	  try {
-  		 JSONObject data=new JSONObject();
-  		 
-  		 if(locale.contains("espa\u00F1ol")){
-  		  data = new JSONObject("{\"action\": \"com.xoaquin.r07d.NIVEL\",\"mensaje\": \"Usted ha hecho un buen trabajo, siga avanzando! Bendiciones! (R07D Nivel Intermedio) +15 PUNTOS \",\"puntos\": \"15\"    }");
-  		 }else{
-  		  data = new JSONObject("{\"action\": \"com.xoaquin.r07d.NIVEL\",\"mensaje\": \"You\u0027ve done a good work, keep going! Blessings!               (R07D Intermediate Level) +15 POINTS \",\"puntos\": \"15\"    }"); 
-  		 }
-  			 
- 		    ParsePush pushj = new ParsePush();
-            pushj.setChannel(nombretablausuario);
-       	    pushj.setData(data);
-       	    pushj.sendInBackground();	 
-			
- 	 } catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		}
-		
-		if(objects.size()>=24 && objects.size()<=diafm){
-			String locale = getResources().getConfiguration().locale.getDisplayName();
-			ParsePush push = new ParsePush();
-            push.setChannel(nombretablausuario);
-       	    
-            if(locale.contains("espa\u00F1ol")){
-            push.setMessage("Puntaje Mes: +25 PUNTOS (R07D Avanzado)");
-            }else{
-            push.setMessage("Month\u0027s Score: +25 POINTS (R07D Advanced)");
-            }
-            
-       	    push.sendInBackground();
-           
-         	
-         	//PONIENDO EN PARSE EL CHECK LANZAMIENTO PUSH
-    	    ParseUser cu = ParseUser.getCurrentUser(); 
-    		if (cu != null) {
-    		  cu.put("usermesaniochk", m+Integer.toString(aniocal));
-    		  cu.saveEventually();
-    		} else {}
-    		
-         	
-         	try {
-	        		 
-         		  JSONObject data=new JSONObject();
-         		    if(locale.contains("espa\u00F1ol")){
-         		    data = new JSONObject("{\"action\": \"com.xoaquin.r07d.NIVEL\",\"mensaje\": \"Usted ha hecho un excelente trabajo, siga avanzando! Bendiciones! (R07D Nivel Avanzado) +25 PUNTOS \",\"puntos\": \"25\"    }");
-         		    }else{
-         		    	data = new JSONObject("{\"action\": \"com.xoaquin.r07d.NIVEL\",\"mensaje\": \"You\u0027ve done an excellent work, keep going! Blessings!               (R07D Advanced Level) +25 POINTS \",\"puntos\": \"25\"    }");
-              		   
-         		    }
-	        		ParsePush pushj = new ParsePush();
-	 	            pushj.setChannel(nombretablausuario);
-	 	       	    pushj.setData(data);
-	 	       	    pushj.sendInBackground();	 
-					
-	        	 } catch (JSONException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-	} catch (ParseException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}
-	
-}
 
-*/
 
 //FUNCION LLAMADO PARSE PARA OBTENER LISTA DE DIAS COMPLETADOS EN ESE MES/A�O
     public String[] listadiascompletados(int mescalf,int aniocalf){
@@ -792,13 +599,37 @@ private int getBarHeight() {
     //DESCONEXION DEL CLIENTE AL DESAPARECER LA ACTIVIDAD
 	@Override
     protected void onStop() {
+		 super.onStop();
 		 
 		if (checkPlayServices()) {
 	        	mLocationClient.disconnect();
 	          }
        
+		//PROCESO UNPIN LOCALDATASTORE DOS MESES ATRAS
+		if(diacal==1){
+			
+			
+			String mesunpin=String.valueOf(mescal-1);
+			
+			if((mescal+1)<10){
+				mesunpin="0"+mesunpin;
+			}
+			
+			if((mescal+1)==1){
+				mesunpin="11";
+			}
+			
+            if((mescal+1)==2){
+            	mesunpin="12";
+			}
+			
+			
+			ParseObject.unpinAllInBackground(mesunpin);
+			
+			
+		}
         
-        super.onStop();
+       
     }
 
 	

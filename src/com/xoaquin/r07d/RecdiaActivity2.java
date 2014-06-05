@@ -175,7 +175,7 @@ public class RecdiaActivity2 extends FragmentActivity {
             public void onClick(View v) {
             	dialog.dismiss();
             	Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
- 			            "mailto","xoaquin@outlook.com", null));
+ 			            "mailto","xoaquin@torrenegra.co", null));
  			emailIntent.putExtra(Intent.EXTRA_SUBJECT, mContext.getString(R.string.ikso));
  			
  			mContext.startActivity(Intent.createChooser(emailIntent, "Send email..."));
