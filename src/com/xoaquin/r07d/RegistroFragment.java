@@ -243,7 +243,7 @@ public class RegistroFragment extends Fragment {
 	        	                	pb.setVisibility(View.GONE);
 		        	                tdrc.setClickable(true);
 	        	               
-	        	                	Toast.makeText(getActivity(), getString(R.string.errcon), Toast.LENGTH_LONG).show();
+	        	                	Toast.makeText(getActivity(), getString(R.string.errcon)+"N "+e.toString(), Toast.LENGTH_LONG).show();
 	        	                	
 	        	                }
 	        	            }
@@ -257,7 +257,7 @@ public class RegistroFragment extends Fragment {
 	                	pb.setVisibility(View.GONE);
  	                    tdrc.setClickable(true);
 	                	
-	                	Toast.makeText(getActivity(), getString(R.string.errcon), Toast.LENGTH_LONG).show();
+	                	Toast.makeText(getActivity(), getString(R.string.errcon)+"D "+e.toString(), Toast.LENGTH_LONG).show();
 	                	
 	                }
 	            }
