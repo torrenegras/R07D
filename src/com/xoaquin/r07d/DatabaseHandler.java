@@ -121,10 +121,12 @@ public class DatabaseHandler extends SQLiteOpenHelper{
         //Query con la fecha
         Cursor cursor = db.query(TABLE_RECORDS, new String[] { KEY_ID,KEY_ADG,KEY_ANIO,KEY_AOP,KEY_AOPI,KEY_COO,KEY_DIA,KEY_FECHA,KEY_HORAF,KEY_HORAI,KEY_LB,KEY_LDN,KEY_MES,KEY_MGC,KEY_OPD,KEY_OPLCO,KEY_OPL,KEY_PEI,KEY_QMHD}, KEY_FECHA + "=?",
                 new String[] { fecha }, null, null, null, null);
+        
+        try {
+        
         if (cursor != null)
             cursor.moveToLast();
  
-        
         int rows=cursor.getCount();
         
         if(rows>0){
@@ -151,9 +153,14 @@ public class DatabaseHandler extends SQLiteOpenHelper{
         }
         
         
-        if(cursor != null){
-           cursor.close();
+        } finally {
+        	
+        	 if(cursor != null){
+                cursor.close();
+              }
+        	 
         }
+    
         
         db.close();
         
