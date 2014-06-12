@@ -8,6 +8,12 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 
+import com.parse.FindCallback;
+import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
+import com.parse.ParseUser;
+
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
@@ -33,9 +39,9 @@ public WidgetRemoteViewsFactory(Context context, Intent intent)
 private void updateWidgetListView()
 {
 	
-	//String nombretablausuario = ParseUser.getCurrentUser().getEmail();
-    //nombretablausuario=nombretablausuario.replaceAll("\\.", "");
-	//nombretablausuario=nombretablausuario.replaceAll("@", "");
+      String nombretablausuario = ParseUser.getCurrentUser().getEmail();
+      nombretablausuario=nombretablausuario.replaceAll("\\.", "");
+	  nombretablausuario=nombretablausuario.replaceAll("@", "");
 
 	 Calendar now = Calendar.getInstance(); //calendario, trayendo fecha de hoy
      int diacal = now.get(Calendar.DAY_OF_MONTH);
@@ -52,6 +58,7 @@ private void updateWidgetListView()
 	 String fecha=dia+"-"+mes+"-"+anio;
 	 //String fecha="09"+"-"+"10"+"-"+"2014";
 	
+//op1
 	DatabaseHandler db = new DatabaseHandler(context);
 	
 	RecordDiarioObject rdo=new RecordDiarioObject();
@@ -71,6 +78,39 @@ private void updateWidgetListView()
 		 this.widgetList = convertedToList;
 	}
        db.close();
+       
+//fin op1
+       
+     
+/*op2
+
+       ParseQuery<ParseObject> query = ParseQuery.getQuery(nombretablausuario);
+       query.whereEqualTo("fechadbp", fecha);
+       query.fromLocalDatastore();
+       query.findInBackground(new FindCallback<ParseObject>() {
+           public void done(List<ParseObject> obs,ParseException e) {
+               if (e == null) {
+                   
+            	   if(obs.size()>0){
+            		     String[] widgetFruitsArray={obs.get(obs.size()-1).getString("qmhDdbp")};
+            		     List<String> convertedToList = new ArrayList<String>(Arrays.asList(widgetFruitsArray));
+            			 WidgetRemoteViewsFactory.this.widgetList = convertedToList;
+            	   }else{
+            		     String[] widgetFruitsArray={context.getString(R.string.mtl)};
+            		     List<String> convertedToList = new ArrayList<String>(Arrays.asList(widgetFruitsArray));
+            			 WidgetRemoteViewsFactory.this.widgetList = convertedToList;
+            	   }
+            	   
+            	   
+               } else {
+                   Log.d("score", "Error: " + e.getMessage());
+               }
+           }
+       });
+       
+*/
+       
+
 }
 
 
