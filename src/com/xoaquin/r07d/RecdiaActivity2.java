@@ -94,16 +94,23 @@ public class RecdiaActivity2 extends FragmentActivity {
     	ff=2;
     	
     	
+    	String locale = getResources().getConfiguration().locale.getDisplayName();
+   		if(locale.contains("espa\u00F1ol")){ 
+  		
+  		}else{
+  		
+  			//DIALOG PARA RECLUTAR DEVOCIONALES
+  	    	int secondsDelayed = 5;
+  	        new Handler().postDelayed(new Runnable() {
+  	                public void run() {         
+  	                	
+  	               showRateDialog(RecdiaActivity2.this,null); 	
+  	    
+  	                }
+  	              }, secondsDelayed * 1000);
+  		}
     	
-    	//DIALOG PARA RECLUTAR DEVOCIONALES
-    	int secondsDelayed = 5;
-        new Handler().postDelayed(new Runnable() {
-                public void run() {         
-                	
-               showRateDialog(RecdiaActivity2.this,null); 	
-    
-                }
-              }, secondsDelayed * 1000);
+    	
 		
 	     
     }

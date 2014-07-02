@@ -337,8 +337,8 @@ Parse.Cloud.define("bienvenidausr", function(request, response) {
  Mandrill.sendEmail({
    
   message: {
-    html: "<!DOCTYPE html><html><body><p>Favor instalar actualizacion<br><br><a href=\"https://play.google.com/store/apps/details?id=com.xoaquin.r07d \">Ver: 5.1 (Uzias)</a> </p></body></html>",  //ojo con los caracteres en esta vaina, muy quisquilloso!!!!!!!!!!!!
-    subject: "R07D ACTUALIZACION IMPORTANTE ",
+    html: "<!DOCTYPE html><html><body><p>A partir de ma&ntilde;ana disfrute un devocional patrocinado por www.intercesora.co <br><br>Bendiciones!! </p></body></html>",  //ojo con los caracteres en esta vaina, muy quisquilloso!!!!!!!!!!!!
+    subject: "R07D NUEVO DEVOCIONAL ",
     from_email: "xoaquin@torrenegra.co",
     from_name: "Xoaquin",
     to: myArray
@@ -364,8 +364,8 @@ Parse.Cloud.define("bienvenidausr", function(request, response) {
  Mandrill.sendEmail({
    
   message: {
-    html: "<!DOCTYPE html><html><body><p>Please install update<br><br><a href=\"https://play.google.com/store/apps/details?id=com.xoaquin.r07d \">Ver: 5.1 (Uzias)</a> </p></body></html>",
-    subject: "R07D IMPORTANT UPDATE ",
+    html: "<!DOCTYPE html><html><body><p>Starting tomorrow youl'll have the chance to enjoy a spanish devotional sponsored by: www.intercesora.co  ,  Still waiting for an english one...Can you write it?<br><br>Blessings!! </p></body></html>",
+    subject: "R07D NEW DEVOTIONAL ",
     from_email: "xoaquin@torrenegra.co",
     from_name: "Xoaquin",
     to: myArray2
