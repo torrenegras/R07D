@@ -73,8 +73,8 @@ public class RecdiaActivity2 extends FragmentActivity {
 	  
 	   
 		//LLAMANDO FUNCION AUTOGUARDADO PARA CUANDO CAMBIO DE TAB
-		RegistroFragment rf = (RegistroFragment) getFragmentManager().findFragmentById(R.id.fragments_container);
-		rf.guardar();
+		//RegistroFragment rf = (RegistroFragment) getFragmentManager().findFragmentById(R.id.fragments_container);
+		//rf.guardar();
 		
 		Toast.makeText(RecdiaActivity2.this, getString(R.string.augu)+"...", Toast.LENGTH_LONG).show();
 	
@@ -87,6 +87,7 @@ public class RecdiaActivity2 extends FragmentActivity {
 		
 		//INFLANDO FRAGMENTO DEVOCIONAL 
 		DevocionalFragment df=new DevocionalFragment();
+		df.setArguments(getIntent().getExtras()); //pasando los extras como argumentos al fragmento...
     	FragmentTransaction transaction = getFragmentManager().beginTransaction();
 		transaction.replace(R.id.fragments_container, df);
 		transaction.addToBackStack(null);

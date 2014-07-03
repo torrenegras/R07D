@@ -871,6 +871,14 @@ public void nuevoRecordSQLite(){
 }
 	
 	
+	@Override
+    public void onPause() {
+        super.onPause();
+        
+        guardar();
+    }
+	
+	
 	//CHECK NETWORK
 	private boolean isNetworkAvailable() { 
 		

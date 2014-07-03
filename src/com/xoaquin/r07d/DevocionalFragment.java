@@ -24,6 +24,7 @@ public class DevocionalFragment extends Fragment {
 	private static WebView wb;
 	private static ProgressBar pb;
 	
+	private static String dca="",mca="",aca="";
 	
 	
     @Override
@@ -32,14 +33,29 @@ public class DevocionalFragment extends Fragment {
        
     	View V=inflater.inflate(R.layout.fragment_devocional, container, false);
     	
-    	 
+    	 //TRAYENDO VARIABLES DE ACTIVIDAD 
+        Bundle extras = getArguments();
+		if (extras != null) {
+		   		    
+		    dca = extras.getString("dca");
+		    mca = extras.getString("mca");
+		    aca = extras.getString("aca");
+		    
+		}
+		
+		int diaproc=Integer.valueOf(dca);
+		int mesproc=Integer.valueOf(mca)-1;
+		int anioproc=Integer.valueOf(aca);
+		
+				
     	 wb=(WebView) V.findViewById(R.id.webView1);
     	 pb=(ProgressBar) getActivity().findViewById(R.id.progressBar1);
     	 
-    	 Calendar cal = Calendar.getInstance(); 
+    	 Calendar cal = Calendar.getInstance();
+    	 cal.set(anioproc,mesproc,diaproc);
     	 int nd= cal.get(Calendar.DAY_OF_YEAR);
     	 Log.e("nd",String.valueOf(nd));   	 
-    	       //nd=184;**********************Quitar cuando tengamos material!!!!!!
+    	       
     	 
     	 wb.setBackgroundColor(0x00000000);
     	 wb.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
