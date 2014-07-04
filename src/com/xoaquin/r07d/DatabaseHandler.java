@@ -110,7 +110,7 @@ public class DatabaseHandler extends SQLiteOpenHelper{
  
         // Insertando fila
         db.insert(TABLE_RECORDS, null, values);
-        db.close(); // Cerrando conexion db
+        
     }
  
     
@@ -162,7 +162,7 @@ public class DatabaseHandler extends SQLiteOpenHelper{
         }
     
         
-        db.close();
+      
         
         // retorna Recorddiario
         return rdoget;
@@ -198,7 +198,7 @@ public class DatabaseHandler extends SQLiteOpenHelper{
         // actualizando fila
         
         db.update(TABLE_RECORDS, values, KEY_FECHA + " = ?",  new String[] { rdo.getfecha() });
-        db.close();
+        
         return 1;
         
         //return db.update(TABLE_RECORDS, values, KEY_FECHA + " = ?",  new String[] { rdo.getfecha() });   //original

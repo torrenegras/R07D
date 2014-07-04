@@ -24,6 +24,7 @@ import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.format.DateFormat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -52,6 +53,7 @@ public class RegistroFragment extends Fragment {
  	private Boolean b;
     
  	private static View pbactivity;
+ 	private static int controlbp;
  	
 	@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -62,7 +64,7 @@ public class RegistroFragment extends Fragment {
         
         pbactivity = getActivity().findViewById(R.id.progressBar1);
         b=isNetworkAvailable();
-        
+        controlbp=0;
         //INICIALIZANDO VARIABLES
         bhi=(Button) V.findViewById(R.id.button1);
         bhf=(Button) V.findViewById(R.id.button2);
@@ -874,11 +876,22 @@ public void nuevoRecordSQLite(){
 	@Override
     public void onPause() {
         super.onPause();
-        
+        if (controlbp==1){
+        	Log.e("onp","1");	
+        }else{
+        	Log.e("onp","0");
         guardar();
+        }
     }
 	
 	
+	public void backpre(){
+		controlbp=1;
+	}
+	
+	
+	 
+	 
 	//CHECK NETWORK
 	private boolean isNetworkAvailable() { 
 		

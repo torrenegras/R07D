@@ -8,6 +8,10 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 
+import com.parse.FindCallback;
+import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
 import android.content.Context;
@@ -54,7 +58,7 @@ private void updateWidgetListView()
 	 String fecha=dia+"-"+mes+"-"+anio;
 	 //String fecha="09"+"-"+"10"+"-"+"2014";
 	
-//op1
+/*op1
 	DatabaseHandler db = new DatabaseHandler(context);
 	
 	RecordDiarioObject rdo=new RecordDiarioObject();
@@ -75,10 +79,10 @@ private void updateWidgetListView()
 	}
        db.close();
        
-//fin op1
+*/ //fin op1
        
      
-/*op2
+// op 2
 
        ParseQuery<ParseObject> query = ParseQuery.getQuery(nombretablausuario);
        query.whereEqualTo("fechadbp", fecha);
@@ -102,9 +106,10 @@ private void updateWidgetListView()
                    Log.d("score", "Error: " + e.getMessage());
                }
            }
+
        });
        
-*/
+//op 2
        
 
 }
