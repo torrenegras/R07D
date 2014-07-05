@@ -58,7 +58,7 @@ private void updateWidgetListView()
 	 String fecha=dia+"-"+mes+"-"+anio;
 	 //String fecha="09"+"-"+"10"+"-"+"2014";
 	
-/*op1
+/* op1
 	DatabaseHandler db = new DatabaseHandler(context);
 	
 	RecordDiarioObject rdo=new RecordDiarioObject();
@@ -79,10 +79,10 @@ private void updateWidgetListView()
 	}
        db.close();
        
-*/ //fin op1
+*///op1
        
      
-// op 2
+//op 2
 
        ParseQuery<ParseObject> query = ParseQuery.getQuery(nombretablausuario);
        query.whereEqualTo("fechadbp", fecha);
@@ -110,6 +110,33 @@ private void updateWidgetListView()
        });
        
 //op 2
+       
+       
+       
+/*op3
+       ParseQuery<ParseObject> query = ParseQuery.getQuery(nombretablausuario);
+       query.whereEqualTo("fechadbp", fecha);
+       query.fromLocalDatastore();
+       try {
+		List<ParseObject> obs=query.find();
+		
+		if(obs.size()>0){
+		     String[] widgetFruitsArray={obs.get(obs.size()-1).getString("qmhDdbp")};
+		     List<String> convertedToList = new ArrayList<String>(Arrays.asList(widgetFruitsArray));
+			 this.widgetList = convertedToList;
+	   }else{
+		     String[] widgetFruitsArray={context.getString(R.string.mtl)};
+		     List<String> convertedToList = new ArrayList<String>(Arrays.asList(widgetFruitsArray));
+			 this.widgetList = convertedToList;
+	   }
+		
+	} catch (ParseException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+       
+*///op3       
+       
        
 
 }
