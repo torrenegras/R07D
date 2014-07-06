@@ -32,6 +32,7 @@ import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
+@SuppressWarnings("unused")
 public class ToolTipPopup {
     
     public static enum Style {

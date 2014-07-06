@@ -24,10 +24,12 @@ import android.support.v4.app.Fragment;
 import android.support.v4.content.LocalBroadcastManager;
 import android.text.TextUtils;
 import android.util.Log;
+
 import com.facebook.internal.*;
 import com.facebook.model.GraphMultiResult;
 import com.facebook.model.GraphObject;
 import com.facebook.model.GraphObjectList;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -160,7 +162,8 @@ public class Session implements Serializable {
      * class should not be modified. If serializations formats change,
      * create a new class SerializationProxyVx.
      */
-    private static class SerializationProxyV1 implements Serializable {
+    @SuppressWarnings("unused")
+	private static class SerializationProxyV1 implements Serializable {
         private static final long serialVersionUID = 7663436173185080063L;
         private final String applicationId;
         private final SessionState state;

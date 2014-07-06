@@ -25,6 +25,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
+
 import com.facebook.*;
 
 import java.util.*;
@@ -171,7 +172,8 @@ public final class NativeProtocol {
     private static final String PLATFORM_PROVIDER_VERSION_COLUMN = "version";
 
     // Broadcast action for asynchronously-executing AppCalls
-    private static final String PLATFORM_ASYNC_APPCALL_ACTION = "com.facebook.platform.AppCallResultBroadcast";
+    @SuppressWarnings("unused")
+	private static final String PLATFORM_ASYNC_APPCALL_ACTION = "com.facebook.platform.AppCallResultBroadcast";
 
     private static abstract class NativeAppInfo {
         abstract protected String getPackage();

@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+
 import com.facebook.internal.NativeProtocol;
 
 /**
@@ -15,6 +16,7 @@ import com.facebook.internal.NativeProtocol;
  * Applications may subclass this class and register it in their AndroidManifest.xml, listening on the
  * com.facebook.platform.AppCallResultBroadcast action.
  */
+@SuppressWarnings("unused")
 public class FacebookBroadcastReceiver extends BroadcastReceiver {
 
     @Override

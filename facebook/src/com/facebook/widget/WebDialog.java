@@ -36,6 +36,7 @@ import android.webkit.WebViewClient;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+
 import com.facebook.*;
 import com.facebook.android.*;
 import com.facebook.internal.Logger;
@@ -51,7 +52,8 @@ import com.facebook.internal.Validate;
 public class WebDialog extends Dialog {
     private static final String LOG_TAG = Logger.LOG_TAG_BASE + "WebDialog";
     private static final String DISPLAY_TOUCH = "touch";
-    private static final String USER_AGENT = "user_agent";
+    @SuppressWarnings("unused")
+	private static final String USER_AGENT = "user_agent";
     static final String REDIRECT_URI = "fbconnect://success";
     static final String CANCEL_URI = "fbconnect://cancel";
     static final boolean DISABLE_SSL_CHECK_FOR_TESTING = false;

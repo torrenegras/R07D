@@ -24,8 +24,10 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
+
 import com.facebook.internal.*;
 import com.facebook.model.GraphObject;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -35,6 +37,7 @@ import java.util.Iterator;
 /**
  * Class to encapsulate an app link, and provide methods for constructing the data from various sources
  */
+@SuppressWarnings("unused")
 public class AppLinkData {
 
     /**
