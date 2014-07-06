@@ -82,7 +82,7 @@ private void updateWidgetListView()
 *///op1
        
      
-//op 2
+/*op 2
 
        ParseQuery<ParseObject> query = ParseQuery.getQuery(nombretablausuario);
        query.whereEqualTo("fechadbp", fecha);
@@ -109,11 +109,11 @@ private void updateWidgetListView()
 
        });
        
-//op 2
+*///op 2
        
        
        
-/*op3
+//op3
        ParseQuery<ParseObject> query = ParseQuery.getQuery(nombretablausuario);
        query.whereEqualTo("fechadbp", fecha);
        query.fromLocalDatastore();
@@ -135,7 +135,7 @@ private void updateWidgetListView()
 		e.printStackTrace();
 	}
        
-*///op3       
+//op3       
        
        
 
