@@ -12,12 +12,6 @@ public class WidgetService extends RemoteViewsService
     public RemoteViewsFactory onGetViewFactory(Intent intent)
     {   
     	
-    	/*
-    	//SUJETO A OPTIMIZACION 3
-    	 RemoteViews remoteViews = new RemoteViews(this.getPackageName(),R.layout.widget_qmhd); //probando de todo
-    	 ComponentName thisWidget = new ComponentName(this,MyWidgetProvider.class); //probando de todo
-    	 AppWidgetManager.getInstance( this ).updateAppWidget( thisWidget, remoteViews ); //probando de todo
-    	 */
         return (new WidgetRemoteViewsFactory(this.getApplicationContext(), intent));
     }
 

@@ -24,7 +24,6 @@ import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.format.DateFormat;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -877,9 +876,9 @@ public void nuevoRecordSQLite(){
     public void onPause() {
         super.onPause();
         if (controlbp==1){
-        	Log.e("onp","1");	
+        	
         }else{
-        	Log.e("onp","0");
+        
         guardar();
         }
     }

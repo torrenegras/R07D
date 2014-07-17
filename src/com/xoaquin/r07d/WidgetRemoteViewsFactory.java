@@ -29,7 +29,6 @@ private List<String> widgetList = new ArrayList<String>();
 public WidgetRemoteViewsFactory(Context context, Intent intent)
 {
     this.context = context;
-    //appWidgetId = intent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,AppWidgetManager.INVALID_APPWIDGET_ID);  //original
     appWidgetId = Integer.valueOf(intent.getData().getSchemeSpecificPart())- MyWidgetProvider.number; //modificado para refresh listview
     Log.d("AppWidgetId", String.valueOf(appWidgetId));
     
@@ -55,64 +54,10 @@ private void updateWidgetListView()
 	 if(Integer.valueOf(mes)<10){ mes="0"+mes; }
 	
 	 String fecha=dia+"-"+mes+"-"+anio;
-	 //String fecha="09"+"-"+"10"+"-"+"2014";
 	
-/* op1
-	DatabaseHandler db = new DatabaseHandler(context);
-	
-	RecordDiarioObject rdo=new RecordDiarioObject();
-	
-	rdo=db.getRDO(fecha);
-	
-	if(rdo!=null){
-		
-		 String[] widgetFruitsArray={rdo.getqmhD()};
-	     List<String> convertedToList = new ArrayList<String>(Arrays.asList(widgetFruitsArray));
-		 this.widgetList = convertedToList;
-	
-	}else{
-		 
-		 String[] widgetFruitsArray={context.getString(R.string.mtl)};
-	     List<String> convertedToList = new ArrayList<String>(Arrays.asList(widgetFruitsArray));
-		 this.widgetList = convertedToList;
-	}
-       db.close();
-       
-*///op1
-       
-     
-/*op 2
-
-       ParseQuery<ParseObject> query = ParseQuery.getQuery(nombretablausuario);
-       query.whereEqualTo("fechadbp", fecha);
-       query.fromLocalDatastore();
-       query.findInBackground(new FindCallback<ParseObject>() {
-           public void done(List<ParseObject> obs,ParseException e) {
-               if (e == null) {
-                   
-            	   if(obs.size()>0){
-            		     String[] widgetFruitsArray={obs.get(obs.size()-1).getString("qmhDdbp")};
-            		     List<String> convertedToList = new ArrayList<String>(Arrays.asList(widgetFruitsArray));
-            			 WidgetRemoteViewsFactory.this.widgetList = convertedToList;
-            	   }else{
-            		     String[] widgetFruitsArray={context.getString(R.string.mtl)};
-            		     List<String> convertedToList = new ArrayList<String>(Arrays.asList(widgetFruitsArray));
-            			 WidgetRemoteViewsFactory.this.widgetList = convertedToList;
-            	   }
-            	   
-            	   
-               } else {
-                   Log.d("score", "Error: " + e.getMessage());
-               }
-           }
-
-       });
-       
-*///op 2
-       
-       
-       
-//op3
+      
+//LLENADO INFO DEL WIDGET
+	 
        ParseQuery<ParseObject> query = ParseQuery.getQuery(nombretablausuario);
        query.whereEqualTo("fechadbp", fecha);
        query.fromLocalDatastore();
@@ -134,7 +79,7 @@ private void updateWidgetListView()
 		e.printStackTrace();
 	}
        
-//op3       
+      
        
        
 

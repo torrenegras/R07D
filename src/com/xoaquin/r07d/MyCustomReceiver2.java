@@ -1,3 +1,6 @@
+
+//RECEPTOR DE JSON DE MENSAJES PUSH AVISOS IMPORTANTES
+
 package com.xoaquin.r07d;
 
 import android.content.BroadcastReceiver;

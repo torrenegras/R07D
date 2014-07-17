@@ -7,7 +7,6 @@ import java.util.Calendar;
 
 import android.app.Fragment;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,7 +53,7 @@ public class DevocionalFragment extends Fragment {
     	 Calendar cal = Calendar.getInstance();
     	 cal.set(anioproc,mesproc,diaproc);
     	 int nd= cal.get(Calendar.DAY_OF_YEAR);
-    	 Log.e("nd",String.valueOf(nd));   	 
+    	
     	       
     	 
     	 wb.setBackgroundColor(0x00000000);

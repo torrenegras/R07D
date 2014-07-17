@@ -1,3 +1,6 @@
+
+//ACTIVIDAD DE VISUALIZACION DE NIVELES , PUNTAJES, LANZADA DESDE EL MENU PRINCIPAL, NO AUMENTA PUNTAJE NI LO GRABA EN PARSE
+
 package com.xoaquin.r07d;
 
 import java.io.File;
@@ -135,7 +138,7 @@ public class NivelesMenuActivity extends Activity {
 	    try {
 			List<ParseObject> objects= query.find();
 			
-			Log.e("size",Integer.toString(objects.size()));
+			
 			objetos=objects.size();
 			
 			
@@ -145,10 +148,10 @@ public class NivelesMenuActivity extends Activity {
 			}
 			
 			
-			Log.e("mesencuestion+anioencuestion+numdias",Integer.toString(mescal-1)+" "+Integer.toString(aniocal));
+		
 			GregorianCalendar mycal = new GregorianCalendar(aniocal, mescal-1, 1);
 			int dem= mycal.getActualMaximum(Calendar.DAY_OF_MONTH);  
-			Log.e("numdias",Integer.toString(dem));
+			
 			
 			if(dem==28 && objetos>=28){
 				objetos=30;
@@ -177,14 +180,14 @@ public class NivelesMenuActivity extends Activity {
 	    
 	        if (!bn){
 	        	q.fromLocalDatastore();
-	        	Log.e("localdata","localdata");
+	        
 	        }
 	        q.findInBackground(new FindCallback<ParseObject>() {
 	            public void done(List<ParseObject> obs, ParseException e) {
 	                if (e == null) {
 	                   if (obs.size()>0)
 	                   {   	                   
-	                	   Log.e("actua","actua");
+	                	  
 	                	   ParseObject o=obs.get(0);
 	                	   int pun= Integer.valueOf(o.get("puntaje").toString());
 	                	   
@@ -192,7 +195,7 @@ public class NivelesMenuActivity extends Activity {
 	         			   
 	               
 	                   }else{
-	                	   Log.e("nuevo","nuevo");
+	                	  
 	                	 
 	                	  int punnuevo=puntajemespasado;
 	                	  b.setText(String.valueOf(punnuevo));
@@ -234,24 +237,9 @@ public class NivelesMenuActivity extends Activity {
 	   
 	    
 		}else {//saveinstance
-			Log.e("dd","saveins");
 			
-			/*
 			
-			if(objetos>=5 && objetos<15){
-				  tv.setText(getString(R.string.punp)+" +"+String.valueOf(puntajemespasado));
-			  }
-               if(objetos>=15 && objetos<24){
-            	   tv.setText(getString(R.string.punm)+" +"+String.valueOf(puntajemespasado));
-			  }
-               if(objetos>=24 && objetos<=30){
-            	   tv.setText(getString(R.string.puna)+" +"+String.valueOf(puntajemespasado));
- 			  }
-			
-               tv2.setText(getString(R.string.puntaje));
-               
-               b.setText(punpers);
-              */ 
+		
 		}
 	
 	}//fin onCreate()

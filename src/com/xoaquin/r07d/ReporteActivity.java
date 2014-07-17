@@ -132,25 +132,7 @@ public class ReporteActivity extends Activity {
 		b2=(Button) findViewById(R.id.button2); 
 		b2.setTypeface(kepf);
 		
-		/*
-		//trayendo valores guardados anteriormente a nivel DB local SQLite
-		
-		final DBAdapter2 db2 = new DBAdapter2(this);  
-	     db2.open(); 
-	      
-	   
-	      int nr=db2.getTitle(1).getCount();
-	      long nri = db2.getAllTitles().getCount();
-	      
-	      if (nr>0){
-	    	  Log.e("sqlite","sqlite");
-	       et1.setText(db2.getTitle(nri).getString(1));
-	       et2.setText(db2.getTitle(nri).getString(2)); 
-	       et5.setText(db2.getTitle(nri).getString(3));
-	      
-	      }else{
-	    	  */
-	    	  
+	   	  
 	    	  
 	    	  
  //Si no hay en DB local, trae campos en archivo de preferencias, deberia funcionar con backup de google y todo en nuevas instalaciones

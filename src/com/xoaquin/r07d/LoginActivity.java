@@ -358,11 +358,8 @@ public void onclickconectarseFB(View view) {
 		                if (session == Session.getActiveSession()) {
 		                    if (userg != null) {
 		                    	
-		                    	 //String fbemail=(String)userg.getProperty("email");
-		                    	  final String fbemail=response.getGraphObject().getProperty("email").toString();
-		                    	//String fbemail=(String)userg.asMap().get("email");
-		                    	//Log.e("fbemail", fbemail);
-		                    	
+		                    	 final String fbemail=response.getGraphObject().getProperty("email").toString();
+		                    
 		                    	ParseUser cu= ParseUser.getCurrentUser();
 		                    	cu.setEmail(fbemail);
 		                    	cu.saveEventually();
@@ -497,35 +494,13 @@ public void onclickdesc(View view) {
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
 		
-		/*
-		String[] names = getAccountNames(); //login con google 
-		String mScope = "oauth2:https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email";
-		Log.e("nocuentas",String.valueOf(names.length));
-		Log.e("cuentas",names[0]);
-		*/
+		
 	
 	
 	}
 	
 
 
-	/*
-	//Para saber las cuentas de Google en el dispositivo
-	private String[] getAccountNames() {
-	    AccountManager mAccountManager = AccountManager.get(this);
-	    Account[] accounts = mAccountManager.getAccountsByType(
-	            GoogleAuthUtil.GOOGLE_ACCOUNT_TYPE);
-	    String[] names = new String[accounts.length];
-	    for (int i = 0; i < names.length; i++) {
-	        names[i] = accounts[i].name;
-	    }
-	    return names;
-	}
-	*/
-
-	
-	
-	
 	
 	@Override
 	public void onResume(){
