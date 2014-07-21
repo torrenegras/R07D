@@ -43,7 +43,8 @@ public class DefaultApplication extends Application{
       	
       		ParseUser cu = ParseUser.getCurrentUser(); 
       		if(cu!=null){
-      		String nombretablausuario=cu.getEmail();
+      		//String nombretablausuario=cu.getEmail();  //original channel personalizado desde email
+      		String nombretablausuario=cu.getUsername();  //channel personalizado desde username para incluir usuarios FB sin email...raro pero pasó
       		
       		if(nombretablausuario!=null){
       		

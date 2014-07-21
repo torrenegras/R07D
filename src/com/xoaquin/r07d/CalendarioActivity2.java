@@ -16,13 +16,14 @@ import com.google.android.gms.location.LocationClient;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
-
+import com.parse.ParseUser;
 import android.location.Location;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Vibrator;
+import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Context;
@@ -71,6 +72,8 @@ public class CalendarioActivity2 extends Activity implements OnGesturePerformedL
 	static final int REQUEST_CODE_RECOVER_PLAY_SERVICES = 1001;
 	
 	
+	
+	@SuppressLint("InflateParams")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -108,10 +111,35 @@ public class CalendarioActivity2 extends Activity implements OnGesturePerformedL
 		//trayendo correo de la anterior actividad usando intent y no variable global.. manera correcta. 
 		Bundle extras = getIntent().getExtras();
 		if (extras != null) {
+		    
 		    nombretablausuario = extras.getString("correog");
-		    nombretablausuario=nombretablausuario.replaceAll("\\.", "");
-			nombretablausuario=nombretablausuario.replaceAll("@", "");	
-		}
+		    
+		    if(nombretablausuario!=null){
+	      		
+      			if (nombretablausuario.contains("\\.")||nombretablausuario.contains("@")){
+      		              nombretablausuario=nombretablausuario.replaceAll("\\.", "");
+ 			              nombretablausuario=nombretablausuario.replaceAll("@", "");	
+      		              }
+      		
+      		    }else{ //Casos raros de usuarios donde no se tiene un correo electronico, se tiene como null. Se saca nombretablausuario de username 
+      		    	
+      		  ParseUser cu = ParseUser.getCurrentUser(); 
+      	      		
+      		   if(cu!=null){
+      	      		 
+      		    nombretablausuario=cu.getUsername();
+      	      		
+      	         if(nombretablausuario!=null){
+      	      		
+      	      			                 if (nombretablausuario.contains("\\.")||nombretablausuario.contains("@")){
+      	      		                                nombretablausuario=nombretablausuario.replaceAll("\\.", "");
+      	 			                                nombretablausuario=nombretablausuario.replaceAll("@", "");	
+      	      		                               }
+      	      		         		         }	
+      		    	          }
+		  
+		              }
+		                     }
 		
 		
 		//cargando variables
@@ -158,7 +186,7 @@ public class CalendarioActivity2 extends Activity implements OnGesturePerformedL
 
 	         if (data == null) { //Solo entra en la primera entrada al oncreate() 
       
-	       
+	     	       
 	         voltereta=1;
 	         AsyncTaskRunner runner = new AsyncTaskRunner();
              runner.execute(mescal,aniocal);

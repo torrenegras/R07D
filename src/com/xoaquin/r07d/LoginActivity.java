@@ -67,7 +67,7 @@ import android.widget.Toast;
 public class LoginActivity extends Activity {
 
 	String FBemail="";
-	//private String fbemailinside;
+	
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

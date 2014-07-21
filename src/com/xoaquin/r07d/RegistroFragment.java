@@ -170,6 +170,7 @@ public class RegistroFragment extends Fragment {
     		
     		ParseQuery<ParseObject> query = ParseQuery.getQuery(ntu);
 	        query.whereEqualTo("fechadbp", fca);
+	        query.orderByAscending("updatedAt");
 	        query.fromLocalDatastore();
 	        query.findInBackground(new FindCallback<ParseObject>() {
 	            public void done(List<ParseObject> obs, ParseException e) {
@@ -203,6 +204,7 @@ public class RegistroFragment extends Fragment {
 	                   }else{  //HACE QUERY A NETWORK
 	               		ParseQuery<ParseObject> queryn = ParseQuery.getQuery(ntu);
 	        	        queryn.whereEqualTo("fechadbp", fca);
+	        	        queryn.orderByAscending("updatedAt");
 	        	        queryn.findInBackground(new FindCallback<ParseObject>() {
 	        	            public void done(List<ParseObject> obs, ParseException e) {
 	        	                if (e == null) {
