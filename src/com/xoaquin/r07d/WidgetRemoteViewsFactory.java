@@ -58,6 +58,8 @@ private void updateWidgetListView()
       
 //LLENADO INFO DEL WIDGET
 	 
+  //op sin RED
+	 
        ParseQuery<ParseObject> query = ParseQuery.getQuery(nombretablausuario);
        query.whereEqualTo("fechadbp", fecha);
        query.fromLocalDatastore();
@@ -79,7 +81,37 @@ private void updateWidgetListView()
 		e.printStackTrace();
 	}
        
-      
+ //op sin RED fin
+  	 
+       
+/*op con RED
+
+	   ParseQuery<ParseObject> query = ParseQuery.getQuery(nombretablausuario);
+       query.whereEqualTo("fechadbp", fecha);
+       
+       try {
+		List<ParseObject> obs=query.find();
+		
+		if(obs.size()>0){
+		     String[] widgetFruitsArray={obs.get(obs.size()-1).getString("qmhDdbp")};
+		     List<String> convertedToList = new ArrayList<String>(Arrays.asList(widgetFruitsArray));
+			 this.widgetList = convertedToList;
+	   }else{
+		     String[] widgetFruitsArray={context.getString(R.string.mtl)};
+		     List<String> convertedToList = new ArrayList<String>(Arrays.asList(widgetFruitsArray));
+			 this.widgetList = convertedToList;
+	   }
+		
+	} catch (ParseException e) {
+		
+		     e.printStackTrace();
+		     String[] widgetFruitsArray={context.getString(R.string.errcon)};
+	         List<String> convertedToList = new ArrayList<String>(Arrays.asList(widgetFruitsArray));
+		     this.widgetList = convertedToList;
+		
+	}       
+       
+*///op con RED fin       
        
        
 
