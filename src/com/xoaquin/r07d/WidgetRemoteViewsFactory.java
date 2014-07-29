@@ -8,13 +8,11 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 
-import com.parse.ParseException;
-import com.parse.ParseObject;
-import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.util.Log;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService.RemoteViewsFactory;
@@ -58,7 +56,7 @@ private void updateWidgetListView()
       
 //LLENADO INFO DEL WIDGET
 	 
-  //op sin RED
+  /*op sin RED
 	 
        ParseQuery<ParseObject> query = ParseQuery.getQuery(nombretablausuario);
        query.whereEqualTo("fechadbp", fecha);
@@ -81,7 +79,7 @@ private void updateWidgetListView()
 		e.printStackTrace();
 	}
        
- //op sin RED fin
+ *///op sin RED fin
   	 
        
 /*op con RED
@@ -112,6 +110,17 @@ private void updateWidgetListView()
 	}       
        
 *///op con RED fin       
+       
+
+ //op con prefs
+   
+         SharedPreferences sharedPrefr = context.getSharedPreferences("myprefswidget", Context.MODE_PRIVATE);
+         String[] widgetFruitsArray={sharedPrefr.getString(fecha, context.getString(R.string.mtl))};
+	     List<String> convertedToList = new ArrayList<String>(Arrays.asList(widgetFruitsArray));
+		 this.widgetList = convertedToList;
+       
+ //op con prefs
+       
        
        
 

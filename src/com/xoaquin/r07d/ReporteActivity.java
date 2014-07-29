@@ -44,7 +44,6 @@ import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.DatePickerDialog.OnDateSetListener;
-import android.app.backup.BackupManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -75,7 +74,6 @@ public class ReporteActivity extends Activity {
 	private String spdfop="",spdfopi="",ntu="";
 	private static ProgressBar pb;
 
-	BackupManager bm;
 	ParseUser cu;
 	private Boolean b;
 	
@@ -98,8 +96,7 @@ public class ReporteActivity extends Activity {
 		
 		pb=(ProgressBar) findViewById(R.id.progressBar1);
 		
-		bm= new BackupManager(this);
-		
+				
 		cu=ParseUser.getCurrentUser();
 		b=isNetworkAvailable();
 		
@@ -178,7 +175,7 @@ public class ReporteActivity extends Activity {
 			final Calendar c2 = Calendar.getInstance();
 			mYear = c2.get(Calendar.YEAR);
 			mMonth = c2.get(Calendar.MONTH);
-	       mMonth=mMonth+1;
+	        mMonth=mMonth+1;
 	       
 	       
 	       
@@ -298,7 +295,7 @@ public class ReporteActivity extends Activity {
 		editor.putString("noml", et2.getText().toString());
 		editor.putString("mdl", et3.getText().toString());
 		editor.commit();
-        bm.dataChanged(); // llamado a backupmanager....  en un futuro incierto....
+       
 	
 		//Guardando Backup persistente en PARSEUSER
         

@@ -18,6 +18,7 @@ import android.app.DialogFragment;
 import android.app.Fragment;
 import android.app.TimePickerDialog;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -368,6 +369,14 @@ public class RegistroFragment extends Fragment {
 		
 		b=isNetworkAvailable();
     	
+		
+		//GUARDANDO QMHD EN PREFERENCIAS PARA WIDGET
+				
+		SharedPreferences sharedPref = getActivity().getSharedPreferences("myprefswidget", Context.MODE_PRIVATE);
+		SharedPreferences.Editor editor = sharedPref.edit();
+		editor.clear();
+		editor.putString(fca, et2.getText().toString());
+		editor.commit();
 		
 		
 		//GUARDAR / ACTUALIZAR DATOS EN DB PARSE
