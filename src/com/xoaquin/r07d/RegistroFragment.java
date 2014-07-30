@@ -374,7 +374,6 @@ public class RegistroFragment extends Fragment {
 				
 		SharedPreferences sharedPref = getActivity().getSharedPreferences("myprefswidget", Context.MODE_PRIVATE);
 		SharedPreferences.Editor editor = sharedPref.edit();
-		editor.clear();
 		editor.putString(fca, et2.getText().toString());
 		editor.commit();
 		
