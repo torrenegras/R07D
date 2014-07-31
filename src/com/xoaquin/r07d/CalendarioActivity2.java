@@ -366,7 +366,7 @@ private class AsyncTaskRunner extends AsyncTask<Integer, Integer, Integer> {
 //FUNCION LLAMADO PARSE PARA OBTENER LISTA DE DIAS COMPLETADOS EN ESE MES/A�O
     public String[] listadiascompletados(int mescalf,int aniocalf){
 	  
-     String[] res= new String[31];
+    
     	
 	 String nmcomp=String.valueOf(mescalf+1);
      if((mescalf+1)<10){nmcomp="0"+nmcomp;}
@@ -383,8 +383,8 @@ private class AsyncTaskRunner extends AsyncTask<Integer, Integer, Integer> {
      }
      
      try {
-    	 		List<ParseObject> objects=query.find();
-    
+    	 	List<ParseObject> objects=query.find();
+    	 	   String[] res= new String[objects.size()];
 	           int i=0;
                while(i<objects.size()){
             	   if(objects.get(i).getString("lbdbp").length()>0)   //si se ha hecho lectura biblica
@@ -400,12 +400,13 @@ private class AsyncTaskRunner extends AsyncTask<Integer, Integer, Integer> {
                  
 	  
           } catch (ParseException e1 ) {  //falla query 
-            	 int i=0;
-            	 res[i]= getString(R.string.errcon)+"...";
-            	 return res;
+            	 
+            	 String[] res2= new String[1];
+            	 res2[0]= getString(R.string.errcon)+"...";
+            	 return res2;
           }  
           
-         //return res;  //AQUI ESTABA ANTES EL RETURN
+        
    }
 
 
