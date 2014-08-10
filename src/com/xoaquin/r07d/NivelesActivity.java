@@ -1,5 +1,5 @@
 
-//ACTIVIDAD DE VISUALIZACION DE NIVELES , PUNTAJES Y GUARDADO DE PUNTOS EN PARSE
+//ACTIVIDAD DE VISUALIZACION DE NIVELES , PUNTAJES Y GUARDADO DE PUNTOS EN PARSE ACTIVADO CON PUSH MENSUAL
 
 package com.xoaquin.r07d;
 
@@ -190,10 +190,11 @@ public class NivelesActivity extends Activity {
 	                   {   	                   
 	                	   
 	                	   ParseObject o=obs.get(0);
-	                	   int pun= Integer.valueOf(o.get("puntaje").toString());
+	                	   //int pun= Integer.valueOf(o.get("puntaje").toString());
+	                	   int pun = o.getInt("puntajeint");
 	                	   pun=pun+puntajemespasado;
 	         			   b.setText(String.valueOf(pun));
-	         			   o.put("puntaje", String.valueOf(pun));
+	         			   o.put("puntajeint", pun);
 	        			   o.pinInBackground(m2,new SaveCallback(){ //guardando tambien en Local Datastore
 
 	             				@Override
