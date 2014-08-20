@@ -13,14 +13,19 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesClient;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.location.LocationClient;
+import com.parse.ParseAnalytics;
 import com.parse.ParseException;
+import com.parse.ParseInstallation;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
+import com.parse.PushService;
+
 import android.location.Location;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.annotation.SuppressLint;
@@ -88,8 +93,56 @@ public class CalendarioActivity2 extends Activity implements OnGesturePerformedL
 	      finish();
 	    }
 	    setContentView(gestureOverlayView);
+	    ParseAnalytics.trackAppOpened(getIntent());
 	    
 		//setContentView(R.layout.activity_calendario_activity2); //original
+	    
+
+//Bloque suscripcion a canales y guardado de instalacion actual en PARSE**********************************************************      		
+	    
+	    String manufacturer = Build.MANUFACTURER;
+        String brand        = Build.BRAND;
+        String product      = Build.PRODUCT;
+        String model        = Build.MODEL;
+        
+        PushService.subscribe(this, "todos", MainActivity.class); //Suscripcion a canal todos
+    	
+    		ParseUser cuc = ParseUser.getCurrentUser(); 
+    		if(cuc!=null){
+    		
+    		String nombretablausuario=cuc.getUsername();  
+    		
+    		if(nombretablausuario!=null){
+    		
+    			if (nombretablausuario.contains("\\.")||nombretablausuario.contains("@")){
+    		              nombretablausuario=nombretablausuario.replaceAll("\\.", "");
+			              nombretablausuario=nombretablausuario.replaceAll("@", "");	
+    		          }
+    		
+    		PushService.subscribe(this, nombretablausuario,MainActivity.class); //Suscripcion a canal dedicado unico de usuario, para cada instalacion.
+    		}
+						
+    		ParseInstallation installation = ParseInstallation.getCurrentInstallation();
+    		installation.put("actualuser",cuc.getUsername());
+    		installation.put("manufacturer", manufacturer);
+		    installation.put("brand", brand);
+		    installation.put("product", product);
+		    installation.put("model", model);
+    		installation.saveEventually();  //explorar temas con saveinbackground()/saveeventually  ****************************
+    		
+    		}
+		
+    		String locale = getResources().getConfiguration().locale.getDisplayName();
+    		     		
+    		if(locale.contains("espa\u00F1ol")){ 
+    			PushService.subscribe(this, "jalert", JalertActivity.class); //Suscripcion canal para push target Español
+    		}else{
+    			PushService.subscribe(this, "jalerting", JalertActivity.class); //Suscripcion canal para push target Ingles
+    	   		}
+    		Log.e("bloque","fin");
+//FIN Bloque suscripcion a canales y guardado de instalacion actual en PARSE**********************************************************
+    		
+    		
 
          AppRater.app_launched(this); //LLAMANDO DIALOG PARA RATE APP
 		//AppRater.showRateDialog(this, null);  MOSTRAR EL DIALOG PARA PRUEBAS
