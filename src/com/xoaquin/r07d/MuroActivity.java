@@ -118,6 +118,7 @@ private class AsyncTaskRunner2 extends AsyncTask<Context, Void, CustomAdapter> {
 	protected void onPreExecute() {
 		
 		ProgressBar pbr=new ProgressBar(MuroActivity.this,null,android.R.attr.progressBarStyleLarge);
+		pbr.getIndeterminateDrawable().setColorFilter(0xFF8d665f, android.graphics.PorterDuff.Mode.MULTIPLY);
 		progressDialog=ProgressDialog.show(MuroActivity.this,null,null);
         progressDialog.setContentView(pbr);//(new ProgressBar(MuroActivity.this));
         progressDialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);

@@ -300,7 +300,7 @@ public class CalendarioActivity2 extends Activity implements OnGesturePerformedL
 private class AsyncTaskRunner extends AsyncTask<Integer, Integer, Integer> {	
 	
 	protected void onPreExecute() {
-		
+		pb.getIndeterminateDrawable().setColorFilter(0xFF8d665f, android.graphics.PorterDuff.Mode.MULTIPLY);
 		pb.setVisibility(View.VISIBLE);
 	}
 	

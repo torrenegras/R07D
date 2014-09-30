@@ -51,7 +51,7 @@
           android:layout_weight="1"
           android:gravity="bottom|end"
           android:text="@string/BYJ"
-          android:textColor="#fffffe"
+          android:textColor="#8d665f"
           android:textSize="15sp" />
 
 </LinearLayout>

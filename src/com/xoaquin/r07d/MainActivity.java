@@ -7,6 +7,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
+import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -42,8 +43,12 @@ public static String correoglobal;
 		b1.setTypeface(kepf);
 		t.setTypeface(kepf);
         
-	
-        
+	//Ejemplo de animacion en view
+     b1.setAlpha(0f);
+	 ObjectAnimator animation1 = ObjectAnimator.ofFloat(b1,"alpha", 1f);
+     animation1.setDuration(5000);
+	 animation1.start();
+		      
     //Estadisticas en PARSE
     ParseAnalytics.trackAppOpened(getIntent());
  
@@ -97,7 +102,7 @@ public static String correoglobal;
 						startActivity(new Intent(i));
 						finish();
 						}
-						}, secondsDelayed * 1500);
+						}, secondsDelayed * 6000);
 						
 					} else {  //NO HAY USER EN CACHE
 					  
@@ -107,7 +112,7 @@ public static String correoglobal;
 					                        startActivity(new Intent(MainActivity.this, LoginActivity.class));
 					                        finish();
 					                }
-					        }, secondsDelayed * 1500);
+					        }, secondsDelayed * 6000);
 						
 						
 					}
