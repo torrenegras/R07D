@@ -50,8 +50,7 @@ public static String correoglobal;
 	 animation1.start();
 		      
     //Estadisticas en PARSE
-    ParseAnalytics.trackAppOpened(getIntent());
- 
+      ParseAnalytics.trackAppOpenedInBackground(getIntent());
     
 			//NOTIFICACION EN AREA DE NOTIFICACIONES
 			

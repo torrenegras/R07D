@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.xoaquin.r07d"
-    android:versionCode="77"
-    android:versionName="Priscila" >
+    android:versionCode="79"
+    android:versionName="Raquel" >
 
     <uses-sdk
         android:minSdkVersion="14"
@@ -38,7 +38,7 @@
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
+                
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -159,6 +159,18 @@
             android:label="@string/title_activity_niveles_menu" 
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
         </activity>
+    
+    
+     <receiver android:name="com.parse.ParsePushBroadcastReceiver" android:exported="false">
+  <intent-filter>
+     <action android:name="com.parse.push.intent.RECEIVE" />
+     <action android:name="com.parse.push.intent.OPEN" />
+     <action android:name="com.parse.push.intent.DELETE" />
+   </intent-filter>
+ </receiver>
+ 
+     
+    
     </application>
 
 </manifest>

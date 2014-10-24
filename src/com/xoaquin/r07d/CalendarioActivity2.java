@@ -13,14 +13,12 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesClient;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.location.LocationClient;
-import com.parse.ParseAnalytics;
 import com.parse.ParseException;
 import com.parse.ParseInstallation;
 import com.parse.ParseObject;
+import com.parse.ParsePush;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
-import com.parse.PushService;
-
 import android.location.Location;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -93,7 +91,7 @@ public class CalendarioActivity2 extends Activity implements OnGesturePerformedL
 	      finish();
 	    }
 	    setContentView(gestureOverlayView);
-	    ParseAnalytics.trackAppOpened(getIntent());
+	   
 	    
 		//setContentView(R.layout.activity_calendario_activity2); //original
 	    
@@ -105,8 +103,8 @@ public class CalendarioActivity2 extends Activity implements OnGesturePerformedL
         String product      = Build.PRODUCT;
         String model        = Build.MODEL;
         
-        PushService.subscribe(this, "todos", MainActivity.class); //Suscripcion a canal todos
-    	
+        //PushService.subscribe(this, "todos", MainActivity.class); //Suscripcion a canal todos
+          ParsePush.subscribeInBackground("todos");
     		ParseUser cuc = ParseUser.getCurrentUser(); 
     		if(cuc!=null){
     		
@@ -119,7 +117,8 @@ public class CalendarioActivity2 extends Activity implements OnGesturePerformedL
 			              nombretablausuario=nombretablausuario.replaceAll("@", "");	
     		          }
     		
-    		PushService.subscribe(this, nombretablausuario,MainActivity.class); //Suscripcion a canal dedicado unico de usuario, para cada instalacion.
+    		//PushService.subscribe(this, nombretablausuario,MainActivity.class); //Suscripcion a canal dedicado unico de usuario, para cada instalacion.
+    	    ParsePush.subscribeInBackground(nombretablausuario);
     		}
 						
     		ParseInstallation installation = ParseInstallation.getCurrentInstallation();
@@ -135,9 +134,11 @@ public class CalendarioActivity2 extends Activity implements OnGesturePerformedL
     		String locale = getResources().getConfiguration().locale.getDisplayName();
     		     		
     		if(locale.contains("espa\u00F1ol")){ 
-    			PushService.subscribe(this, "jalert", JalertActivity.class); //Suscripcion canal para push target Español
+    			//PushService.subscribe(this, "jalert", JalertActivity.class); //Suscripcion canal para push target Español
+    			 ParsePush.subscribeInBackground("jalert");
     		}else{
-    			PushService.subscribe(this, "jalerting", JalertActivity.class); //Suscripcion canal para push target Ingles
+    			//PushService.subscribe(this, "jalerting", JalertActivity.class); //Suscripcion canal para push target Ingles
+    			 ParsePush.subscribeInBackground("jalerting");
     	   		}
     		Log.e("bloque","fin");
 //FIN Bloque suscripcion a canales y guardado de instalacion actual en PARSE**********************************************************

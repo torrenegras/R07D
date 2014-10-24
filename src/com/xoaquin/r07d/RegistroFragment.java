@@ -247,7 +247,7 @@ public class RegistroFragment extends Fragment {
 	        	                	pb.setVisibility(View.GONE);
 		        	                tdrc.setClickable(true);
 	        	               
-	        	                	Toast.makeText(getActivity(), getString(R.string.errcon)+"N "+e.toString(), Toast.LENGTH_LONG).show();
+	        	                	Toast.makeText(getActivity(), getString(R.string.errcon)+" NETWORK "+e.toString(), Toast.LENGTH_LONG).show();
 	        	                	
 	        	                }
 	        	            }
@@ -257,17 +257,79 @@ public class RegistroFragment extends Fragment {
 	                   }
 	                   
 	                	
-	                } else {//SI FALLA QUERY DATASTORE
-	                	pb.setVisibility(View.GONE);
- 	                    tdrc.setClickable(true);
+	                } else {//ES RARO SOLO EN ALGUNOS TELEFONOS PASA, PERO SI FALLA QUERY DATASTORE (TIPICAMENTE EN INSTALACIONES NUEVAS(FECHAS PASADAS), O HACIA EL FUTURO DONDE NO HAY RECORDS EN EL DATASTORE SACA ERROR)
 	                	
-	                	Toast.makeText(getActivity(), getString(R.string.errcon)+"D "+e.toString(), Toast.LENGTH_LONG).show();
-	                	
-	                }
-	            }
+	                
+	                	//HACE QUERY A NETWORK 2,  SI SACA ERROR QUERY DE DATASTORE POR CUALQUIER MOTIVO
+	                	ParseQuery<ParseObject> queryn = ParseQuery.getQuery(ntu);
+	        	        queryn.whereEqualTo("fechadbp", fca);
+	        	        queryn.orderByAscending("updatedAt");
+	        	        queryn.findInBackground(new FindCallback<ParseObject>() {
+	        	            public void done(List<ParseObject> obs, ParseException e) {
+	        	                if (e == null) {
+	        	                   
+	        	                	if (obs.size()>0)
+	        	                   {   	                   
+	        	                		
+	        	                	bhi.setText(obs.get(obs.size()-1).getString("horaidbp"));   //obs.size()-1  es el ultimo indice en caso de que haya mas de 1 resultado en query, sucede si hay repetidos, pasa cuando se guarda en offline repetidamente
+	        	                	bhf.setText(obs.get(obs.size()-1).getString("horafdbp"));   
+	        	                	et1.setText(obs.get(obs.size()-1).getString("lbdbp"));   
+	        	                	et2.setText(obs.get(obs.size()-1).getString("qmhDdbp"));   
+	        	                	et3.setText(obs.get(obs.size()-1).getString("adgdbp"));   
+	        	                	et4.setText(obs.get(obs.size()-1).getString("ldndbp"));   
+	        	                	et5.setText(obs.get(obs.size()-1).getString("peidbp"));
+	        	                	
+	        	                	if(et3.getText().toString().length()>0||et4.getText().toString().length()>0||et5.getText().toString().length()>0){visibles();tb.setChecked(true);}
+	        	                	
+	        	                	if(obs.get(obs.size()-1).getString("aopdbp").equals("true")){cb6.setChecked(true);}else{cb6.setChecked(false);}  
+	        	                	if(obs.get(obs.size()-1).getString("aopidbp").equals("true")){cb7.setChecked(true);}else{cb7.setChecked(false);}   
+	        	                	if (obs.get(obs.size()-1).getString("opldbp").equals("true")){cb1.setChecked(true);visibles();tb.setChecked(true);}else{cb1.setChecked(false);}   
+	        	                	if (obs.get(obs.size()-1).getString("coodbp").equals("true")){cb2.setChecked(true);visibles();tb.setChecked(true);}else{cb2.setChecked(false);}   
+	        	                	if (obs.get(obs.size()-1).getString("mgcdbp").equals("true")){cb3.setChecked(true);visibles();tb.setChecked(true);}else{cb3.setChecked(false);}   
+	        	                	if(obs.get(obs.size()-1).getString("opddbp").equals("true")){ cb4.setChecked(true);visibles();tb.setChecked(true);}else{cb4.setChecked(false);}
+	        	                	if (obs.get(obs.size()-1).getString("oplcodbp").equals("true")){cb5.setChecked(true);visibles();tb.setChecked(true);}else{cb5.setChecked(false);}   
+	        	                   
+	        	                	
+	        	                    pb.setVisibility(View.GONE);
+	        	                    tdrc.setClickable(true);
+	        	                   
+	        	                   }else{  //NO HAY NINGUN OBJETO EN NINGUN LADO
+	        	                
+	        	                	   pb.setVisibility(View.GONE);
+		        	                   tdrc.setClickable(true);
+	        	                   
+	        	                   }
+	        	                   
+	        	                	
+	        	                } else {//SI FALLA QUERY NETWORK 2
+	        	                	pb.setVisibility(View.GONE);
+		        	                tdrc.setClickable(true);
+	        	               
+	        	                	Toast.makeText(getActivity(), getString(R.string.errcon)+" NETWORK "+e.toString(), Toast.LENGTH_LONG).show();
+	        	                	
+	        	                }
+	        	            }
 
-	        });
-    	}//else CACHE PROPIO
+	        	        });
+	                
+	                
+	                	/*ANTIGUO THROW DE ERROR
+	                	pb.setVisibility(View.GONE);
+    	                tdrc.setClickable(true);
+	               
+	                	Toast.makeText(getActivity(), getString(R.string.errcon)+" DATASTORE "+e.toString(), Toast.LENGTH_LONG).show();
+	                	*/
+	                
+	                }//FIN ELSE FALLA QUERY DATASTORE
+	       
+	                
+	            
+	            } // public void done query localdatastore
+
+	        }); //QUERY LOCALDATASTORE
+    	
+    	
+    	}//else CACHE PROPIO rDO
     	
     	
             
