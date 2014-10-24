@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.xoaquin.r07d"
-    android:versionCode="79"
+    android:versionCode="80"
     android:versionName="Raquel" >
 
     <uses-sdk
@@ -161,13 +161,15 @@
         </activity>
     
     
-     <receiver android:name="com.parse.ParsePushBroadcastReceiver" android:exported="false">
-  <intent-filter>
-     <action android:name="com.parse.push.intent.RECEIVE" />
-     <action android:name="com.parse.push.intent.OPEN" />
-     <action android:name="com.parse.push.intent.DELETE" />
-   </intent-filter>
- </receiver>
+    <receiver
+            android:name="com.xoaquin.r07d.MyCustomReceiver3"
+            android:exported="false" >
+            <intent-filter>
+                <action android:name="com.parse.push.intent.RECEIVE" />
+                <action android:name="com.parse.push.intent.DELETE" />
+                <action android:name="com.parse.push.intent.OPEN" />
+            </intent-filter>
+        </receiver>
  
      
     
