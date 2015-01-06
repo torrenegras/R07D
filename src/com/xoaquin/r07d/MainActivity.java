@@ -86,7 +86,9 @@ public static String correoglobal;
 						 ParseInstallation installation = ParseInstallation.getCurrentInstallation();
 						 String locale = getResources().getConfiguration().locale.getDisplayName();
 			   		     currentUser.put("locale", locale);
+			   		     if(installation.getString("appVersion")!=null){
 			   		     currentUser.put("version", installation.getString("appVersion"));
+			   		     }
 			   		     currentUser.saveEventually();
 			   		     
 						final String correocu=currentUser.getEmail();
