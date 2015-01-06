@@ -134,7 +134,7 @@ public class CalendarioActivity2 extends Activity implements OnGesturePerformedL
     		String locale = getResources().getConfiguration().locale.getDisplayName();
     		     		
     		if(locale.contains("espa\u00F1ol")){ 
-    			//PushService.subscribe(this, "jalert", JalertActivity.class); //Suscripcion canal para push target Español
+    			//PushService.subscribe(this, "jalert", JalertActivity.class); //Suscripcion canal para push target Espaï¿½ol
     			 ParsePush.subscribeInBackground("jalert");
     		}else{
     			//PushService.subscribe(this, "jalerting", JalertActivity.class); //Suscripcion canal para push target Ingles
@@ -146,8 +146,8 @@ public class CalendarioActivity2 extends Activity implements OnGesturePerformedL
     		
 
          AppRater.app_launched(this); //LLAMANDO DIALOG PARA RATE APP
-		//AppRater.showRateDialog(this, null);  MOSTRAR EL DIALOG PARA PRUEBAS
-	    //JalertActivity.showRateDialog(this, null); MOSTRAR DIALOG PARA PRUEBAS
+		//AppRater.showRateDialog(this, null);  //MOSTRAR EL DIALOG DE EVALUACION DE APP PARA PRUEBAS
+	    //JalertActivity.showRateDialog(this, null); //MOSTRAR DIALOG DE ENVIO DE INFORME AL LIDER..PARA PRUEBAS
 	    
 	    b=isNetworkAvailable();
 	    

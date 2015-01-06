@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.xoaquin.r07d"
-    android:versionCode="80"
-    android:versionName="Raquel" >
+    android:versionCode="81"
+    android:versionName="Sofonias" >
 
     <uses-sdk
         android:minSdkVersion="14"
@@ -171,7 +171,11 @@
             </intent-filter>
         </receiver>
  
-     
+      <receiver android:name="com.xoaquin.r07d.MyCustomReceiver4" >
+            <intent-filter>
+                <action android:name="com.xoaquin.r07d.FM" />
+            </intent-filter>
+        </receiver>
     
     </application>
 

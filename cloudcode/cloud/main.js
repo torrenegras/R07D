@@ -32,7 +32,8 @@ if (dd==ld){
   expiration_time: new Date(aa, mm+1, 3),
   channels: [ "jalert"],
   data: {
-    alert: "Recordar Enviar R07D! Bendiciones!"
+    alert: "Recordar Enviar R07D! Bendiciones!",
+    action:"com.xoaquin.r07d.FM"
   }
 }, {
   success: function() {
@@ -49,7 +50,8 @@ if (dd==ld){
   expiration_time: new Date(aa, mm+1, 3),
   channels: [ "jalerting"],
   data: {
-    alert: "R07D Send Reminder! Blessings!"
+    alert: "R07D Send Reminder! Blessings!",
+    action:"com.xoaquin.r07d.FM"
   }
 }, {
   success: function() {
