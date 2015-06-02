@@ -115,7 +115,8 @@
             android:background="@drawable/fbhdeng"
             android:onClick="onclickconectarseFB"
             android:textColor="#ffffff"
-            android:textSize="22sp" />
+            android:textSize="22sp"
+            android:visibility="gone" />
         
         <Button
             android:id="@+id/button3"

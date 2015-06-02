@@ -5,45 +5,15 @@ package com.xoaquin.r07d;
 
 import java.util.Arrays;
 import java.util.HashMap;
-
-import com.facebook.Request;
-import com.facebook.Response;
-import com.facebook.Session;
-import com.facebook.model.GraphUser;
 import com.parse.FunctionCallback;
 import com.parse.LogInCallback;
 import com.parse.ParseCloud;
 import com.parse.ParseException;
 import com.parse.ParseFacebookUtils;
 import com.parse.ParseInstallation;
-import com.parse.ParseFacebookUtils.Permissions;
 import com.parse.ParseUser;
 import com.parse.RequestPasswordResetCallback;
 import com.parse.SignUpCallback;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -332,7 +302,9 @@ public void onclickconectarseFB(View view) {
 	 Boolean b=isNetworkAvailable();
 	 if(b){
 		 
-	  
+	
+		 
+/*Comentando FB antiguo		 
 	ParseFacebookUtils.logIn(Arrays.asList("email", Permissions.Friends.ABOUT_ME),this, new LogInCallback() {
 		  @Override
 		  public void done(ParseUser user, ParseException err) {
@@ -470,7 +442,22 @@ public void onclickconectarseFB(View view) {
 		    }
 		  }
 		});
-	
+	*/
+	 
+		 ParseFacebookUtils.logInWithReadPermissionsInBackground(this, /*permissions*/Arrays.asList("email", "dd"), new LogInCallback() {
+			  @Override
+			  public void done(ParseUser user, ParseException err) {
+			    if (user == null) {
+			      Log.d("MyApp", "Uh oh. The user cancelled the Facebook login.");
+			    } else if (user.isNew()) {
+			      Log.d("MyApp", "User signed up and logged in through Facebook!");
+			    } else {
+			      Log.d("MyApp", "User logged in through Facebook!");
+			    }
+			  }
+			});
+	 
+	 
 	 }else{ // si no hay internet
 		 Toast.makeText(LoginActivity.this, getString(R.string.ncon)+"...", Toast.LENGTH_LONG).show(); 
     	 pb.setVisibility(View.INVISIBLE);
@@ -553,14 +540,20 @@ public void onclickdesc(View view) {
 	    return activeNetworkInfo != null && activeNetworkInfo.isConnected();
 	}
 	
-	
+	/*Comentando FB antiguo
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 	  super.onActivityResult(requestCode, resultCode, data);
 	  ParseFacebookUtils.finishAuthentication(requestCode, resultCode, data);
 	 
 	}
+	*/
 	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+	  super.onActivityResult(requestCode, resultCode, data);
+	  ParseFacebookUtils.onActivityResult(requestCode, resultCode, data);
+	}
 	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
