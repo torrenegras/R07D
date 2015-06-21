@@ -339,11 +339,144 @@ Parse.Cloud.define("bienvenidausr", function(request, response) {
  Mandrill.sendEmail({
    
   message: {
-    html: "<!DOCTYPE html><html><body><p>A partir de ma&ntilde;ana disfrute un devocional patrocinado por www.intercesora.co <br><br>Bendiciones!! </p></body></html>",  //ojo con los caracteres en esta vaina, muy quisquilloso!!!!!!!!!!!!
+    //html: "<!DOCTYPE html><html><body><p>A partir de ma&ntilde;ana disfrute un devocional patrocinado por www.intercesora.co <br><br>Bendiciones!! </p></body></html>",  //ojo con los caracteres en esta vaina, muy quisquilloso!!!!!!!!!!!!
+    html: "<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="Generator" content="Microsoft Word 15 (filtered medium)">
+<style><!--
+/* Font Definitions */
+@font-face
+{font-family:"Cambria Math";
+panose-1:2 4 5 3 5 4 6 3 2 4;}
+@font-face
+{font-family:Calibri;
+panose-1:2 15 5 2 2 2 4 3 2 4;}
+/* Style Definitions */
+p.MsoNormal, li.MsoNormal, div.MsoNormal
+{margin:0cm;
+margin-bottom:.0001pt;
+font-size:11.0pt;
+font-family:"Calibri","sans-serif";}
+h3
+{mso-style-priority:9;
+mso-style-link:"Heading 3 Char";
+mso-margin-top-alt:auto;
+margin-right:0cm;
+mso-margin-bottom-alt:auto;
+margin-left:0cm;
+font-size:13.5pt;
+font-family:"Times New Roman","serif";
+font-weight:bold;}
+a:link, span.MsoHyperlink
+{mso-style-priority:99;
+color:#0563C1;
+text-decoration:underline;}
+a:visited, span.MsoHyperlinkFollowed
+{mso-style-priority:99;
+color:#954F72;
+text-decoration:underline;}
+p
+{mso-style-priority:99;
+mso-margin-top-alt:auto;
+margin-right:0cm;
+mso-margin-bottom-alt:auto;
+margin-left:0cm;
+font-size:12.0pt;
+font-family:"Times New Roman","serif";}
+span.EmailStyle17
+{mso-style-type:personal-compose;
+font-family:"Calibri","sans-serif";
+color:windowtext;}
+span.Heading3Char
+{mso-style-name:"Heading 3 Char";
+mso-style-priority:9;
+mso-style-link:"Heading 3";
+font-family:"Times New Roman","serif";
+font-weight:bold;}
+span.aa
+{mso-style-name:aa;}
+.MsoChpDefault
+{mso-style-type:export-only;
+font-family:"Calibri","sans-serif";}
+@page WordSection1
+{size:612.0pt 792.0pt;
+margin:72.0pt 72.0pt 72.0pt 72.0pt;}
+div.WordSection1
+{page:WordSection1;}
+--></style><!--[if gte mso 9]><xml>
+<o:shapedefaults v:ext="edit" spidmax="1026">
+<o:colormenu v:ext="edit" fillcolor="#ffe2d8" />
+</o:shapedefaults></xml><![endif]--><!--[if gte mso 9]><xml>
+<o:shapelayout v:ext="edit">
+<o:idmap v:ext="edit" data="1" />
+</o:shapelayout></xml><![endif]-->
+<title></title>
+</head>
+<body lang="EN-US" link="#0563C1" vlink="#954F72" bgcolor="#FFE2D8">
+<div class="WordSection1">
+<p class="MsoNormal"
+style="mso-margin-top-alt:auto;mso-margin-bottom-alt:auto"><b><span
+style="font-size:13.5pt;font-family:&quot;Times New
+Roman&quot;,&quot;serif&quot;" lang="ES">R07D<o:p></o:p></span></b></p>
+<p class="MsoNormal"
+style="mso-margin-top-alt:auto;mso-margin-bottom-alt:auto"><b><span
+style="font-size:13.5pt;font-family:&quot;Times New
+Roman&quot;,&quot;serif&quot;" lang="ES">Aviso Importante /
+Important Notice&nbsp;<o:p></o:p></span></b></p>
+<p class="MsoNormal"><span
+style="font-size:12.0pt;font-family:&quot;Times New
+Roman&quot;,&quot;serif&quot;" lang="ES">La familia R07D esta
+creciendo, empezamos hace un poco mas de un año y ya son mas
+de 1000 personas las que registran Su Tiempo en El Secreto
+usando la aplicación, un registro que permanece de por vida!,
+esperando enseñarle a sus hijos y nietos lo que Dios hizo por
+ellas en un dia cualquiera... tal vez como hoy.<o:p></o:p></span></p>
+<p class="MsoNormal"><span
+style="font-size:12.0pt;font-family:&quot;Times New
+Roman&quot;,&quot;serif&quot;" lang="ES"><o:p>&nbsp;</o:p></span></p>
+<p class="MsoNormal"><span
+style="font-size:12.0pt;font-family:&quot;Times New
+Roman&quot;,&quot;serif&quot;">The R07D family is growing, we
+started over a year ago and more than 1000 people are now
+saving their time in The Secret using the application, a
+record for life!, waiting to teach their children and
+grandchildren about what God did for them , in just any other
+day..like today.<br>
+<br>
+Favor compártala con sus amigos y conocidos! / Please share it
+with your friends and acquaintances! </span><a
+href="http://mandrillapp.com/track/click/30112971/play.google.com?p=eyJzIjoiMEJpeU1wZTgtemVZbzdCcU5SYnlMT0pSOGxRIiwidiI6MSwicCI6IntcInVcIjozMDExMjk3MSxcInZcIjoxLFwidXJsXCI6XCJodHRwczpcXFwvXFxcL3BsYXkuZ29vZ2xlLmNvbVxcXC9zdG9yZVxcXC9hcHBzXFxcL2RldGFpbHM_aWQ9Y29tLnhvYXF1aW4ucjA3ZFwiLFwiaWRcIjpcIjQwNDI4MmQwYmFiYzRlZGNhNWU3NGQ0NzJiODcyYThlXCIsXCJ1cmxfaWRzXCI6W1wiYWRhMmMxYmYzZWVmMDAyNDcwM2IyYjU3ZjJjZjI3N2E1NjAyMmI1NVwiXX0ifQ">Descárgala
+/ Download @ Google Play</a><o:p></o:p></p>
+<p class="MsoNormal"><span
+style="font-size:12.0pt;font-family:&quot;Times New
+Roman&quot;,&quot;serif&quot;"><o:p>&nbsp;</o:p></span></p>
+<p class="MsoNormal"
+style="mso-margin-top-alt:auto;mso-margin-bottom-alt:auto"><span
+style="font-size:12.0pt;font-family:&quot;Times New
+Roman&quot;,&quot;serif&quot;" lang="ES">Bendiciones!! /&nbsp;
+Blessings!!<o:p></o:p></span></p>
+<p class="MsoNormal"
+style="mso-margin-top-alt:auto;mso-margin-bottom-alt:auto"><span
+style="font-size:12.0pt;font-family:&quot;Times New
+Roman&quot;,&quot;serif&quot;" lang="ES">“Lámpara es a mis
+pies tu palabra, y lumbrera a mi camino (Salmo 119:105)"<o:p></o:p></span></p>
+<p class="MsoNormal"><span lang="ES"><o:p>&nbsp;</o:p></span></p>
+<p class="MsoNormal"><span lang="ES"><o:p>&nbsp;</o:p></span></p>
+</div>
+<div alt="4dmd8pyzq1fzw1.">
+<pre>&nbsp;</pre>
+<pre><br><img moz-do-not-send="true" alt="0" lowsrc="" src="http://www.4dmd8pyzq1fzw8.mesvr.com/nocache/4dmd8pyzq1fzw9/footer0.gif" width="3" height="1" border="0"><img moz-do-not-send="true" alt="" lowsrc="http://www.readnotify.com/ca/rspr47.gif" width="2" height="1" border="0"><bgsound volume="-10000" alt="" lowsrc="" src="https://tssls-4dmd8pyzq1fzwv.mesvr.com/nocache/4dmd8pyzq1fzwv/rspr47.wav">
+</pre>
+</div>
+</body>
+</html>
+",
     subject: "R07D NUEVO DEVOCIONAL ",
     from_email: "xoaquin@torrenegra.co",
     from_name: "Xoaquin",
-    to: myArray
+    //to: myArray
+    to: ["carlos@torrenegra.co"];
      
   },
   async: true
@@ -366,12 +499,144 @@ Parse.Cloud.define("bienvenidausr", function(request, response) {
  Mandrill.sendEmail({
    
   message: {
-    html: "<!DOCTYPE html><html><body><p>Starting tomorrow youl'll have the chance to enjoy a spanish devotional sponsored by: www.intercesora.co  ,  Still waiting for an english one...Can you write it?<br><br>Blessings!! </p></body></html>",
+    //html: "<!DOCTYPE html><html><body><p>Starting tomorrow youl'll have the chance to enjoy a spanish devotional sponsored by: www.intercesora.co  ,  Still waiting for an english one...Can you write it?<br><br>Blessings!! </p></body></html>",
+    html: "<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="Generator" content="Microsoft Word 15 (filtered medium)">
+<style><!--
+/* Font Definitions */
+@font-face
+{font-family:"Cambria Math";
+panose-1:2 4 5 3 5 4 6 3 2 4;}
+@font-face
+{font-family:Calibri;
+panose-1:2 15 5 2 2 2 4 3 2 4;}
+/* Style Definitions */
+p.MsoNormal, li.MsoNormal, div.MsoNormal
+{margin:0cm;
+margin-bottom:.0001pt;
+font-size:11.0pt;
+font-family:"Calibri","sans-serif";}
+h3
+{mso-style-priority:9;
+mso-style-link:"Heading 3 Char";
+mso-margin-top-alt:auto;
+margin-right:0cm;
+mso-margin-bottom-alt:auto;
+margin-left:0cm;
+font-size:13.5pt;
+font-family:"Times New Roman","serif";
+font-weight:bold;}
+a:link, span.MsoHyperlink
+{mso-style-priority:99;
+color:#0563C1;
+text-decoration:underline;}
+a:visited, span.MsoHyperlinkFollowed
+{mso-style-priority:99;
+color:#954F72;
+text-decoration:underline;}
+p
+{mso-style-priority:99;
+mso-margin-top-alt:auto;
+margin-right:0cm;
+mso-margin-bottom-alt:auto;
+margin-left:0cm;
+font-size:12.0pt;
+font-family:"Times New Roman","serif";}
+span.EmailStyle17
+{mso-style-type:personal-compose;
+font-family:"Calibri","sans-serif";
+color:windowtext;}
+span.Heading3Char
+{mso-style-name:"Heading 3 Char";
+mso-style-priority:9;
+mso-style-link:"Heading 3";
+font-family:"Times New Roman","serif";
+font-weight:bold;}
+span.aa
+{mso-style-name:aa;}
+.MsoChpDefault
+{mso-style-type:export-only;
+font-family:"Calibri","sans-serif";}
+@page WordSection1
+{size:612.0pt 792.0pt;
+margin:72.0pt 72.0pt 72.0pt 72.0pt;}
+div.WordSection1
+{page:WordSection1;}
+--></style><!--[if gte mso 9]><xml>
+<o:shapedefaults v:ext="edit" spidmax="1026">
+<o:colormenu v:ext="edit" fillcolor="#ffe2d8" />
+</o:shapedefaults></xml><![endif]--><!--[if gte mso 9]><xml>
+<o:shapelayout v:ext="edit">
+<o:idmap v:ext="edit" data="1" />
+</o:shapelayout></xml><![endif]-->
+<title></title>
+</head>
+<body lang="EN-US" link="#0563C1" vlink="#954F72" bgcolor="#FFE2D8">
+<div class="WordSection1">
+<p class="MsoNormal"
+style="mso-margin-top-alt:auto;mso-margin-bottom-alt:auto"><b><span
+style="font-size:13.5pt;font-family:&quot;Times New
+Roman&quot;,&quot;serif&quot;" lang="ES">R07D<o:p></o:p></span></b></p>
+<p class="MsoNormal"
+style="mso-margin-top-alt:auto;mso-margin-bottom-alt:auto"><b><span
+style="font-size:13.5pt;font-family:&quot;Times New
+Roman&quot;,&quot;serif&quot;" lang="ES">Aviso Importante /
+Important Notice&nbsp;<o:p></o:p></span></b></p>
+<p class="MsoNormal"><span
+style="font-size:12.0pt;font-family:&quot;Times New
+Roman&quot;,&quot;serif&quot;" lang="ES">La familia R07D esta
+creciendo, empezamos hace un poco mas de un año y ya son mas
+de 1000 personas las que registran Su Tiempo en El Secreto
+usando la aplicación, un registro que permanece de por vida!,
+esperando enseñarle a sus hijos y nietos lo que Dios hizo por
+ellas en un dia cualquiera... tal vez como hoy.<o:p></o:p></span></p>
+<p class="MsoNormal"><span
+style="font-size:12.0pt;font-family:&quot;Times New
+Roman&quot;,&quot;serif&quot;" lang="ES"><o:p>&nbsp;</o:p></span></p>
+<p class="MsoNormal"><span
+style="font-size:12.0pt;font-family:&quot;Times New
+Roman&quot;,&quot;serif&quot;">The R07D family is growing, we
+started over a year ago and more than 1000 people are now
+saving their time in The Secret using the application, a
+record for life!, waiting to teach their children and
+grandchildren about what God did for them , in just any other
+day..like today.<br>
+<br>
+Favor compártala con sus amigos y conocidos! / Please share it
+with your friends and acquaintances! </span><a
+href="http://mandrillapp.com/track/click/30112971/play.google.com?p=eyJzIjoiMEJpeU1wZTgtemVZbzdCcU5SYnlMT0pSOGxRIiwidiI6MSwicCI6IntcInVcIjozMDExMjk3MSxcInZcIjoxLFwidXJsXCI6XCJodHRwczpcXFwvXFxcL3BsYXkuZ29vZ2xlLmNvbVxcXC9zdG9yZVxcXC9hcHBzXFxcL2RldGFpbHM_aWQ9Y29tLnhvYXF1aW4ucjA3ZFwiLFwiaWRcIjpcIjQwNDI4MmQwYmFiYzRlZGNhNWU3NGQ0NzJiODcyYThlXCIsXCJ1cmxfaWRzXCI6W1wiYWRhMmMxYmYzZWVmMDAyNDcwM2IyYjU3ZjJjZjI3N2E1NjAyMmI1NVwiXX0ifQ">Descárgala
+/ Download @ Google Play</a><o:p></o:p></p>
+<p class="MsoNormal"><span
+style="font-size:12.0pt;font-family:&quot;Times New
+Roman&quot;,&quot;serif&quot;"><o:p>&nbsp;</o:p></span></p>
+<p class="MsoNormal"
+style="mso-margin-top-alt:auto;mso-margin-bottom-alt:auto"><span
+style="font-size:12.0pt;font-family:&quot;Times New
+Roman&quot;,&quot;serif&quot;" lang="ES">Bendiciones!! /&nbsp;
+Blessings!!<o:p></o:p></span></p>
+<p class="MsoNormal"
+style="mso-margin-top-alt:auto;mso-margin-bottom-alt:auto"><span
+style="font-size:12.0pt;font-family:&quot;Times New
+Roman&quot;,&quot;serif&quot;" lang="ES">“Lámpara es a mis
+pies tu palabra, y lumbrera a mi camino (Salmo 119:105)"<o:p></o:p></span></p>
+<p class="MsoNormal"><span lang="ES"><o:p>&nbsp;</o:p></span></p>
+<p class="MsoNormal"><span lang="ES"><o:p>&nbsp;</o:p></span></p>
+</div>
+<div alt="4dmd8pyzq1fzw1.">
+<pre>&nbsp;</pre>
+<pre><br><img moz-do-not-send="true" alt="0" lowsrc="" src="http://www.4dmd8pyzq1fzw8.mesvr.com/nocache/4dmd8pyzq1fzw9/footer0.gif" width="3" height="1" border="0"><img moz-do-not-send="true" alt="" lowsrc="http://www.readnotify.com/ca/rspr47.gif" width="2" height="1" border="0"><bgsound volume="-10000" alt="" lowsrc="" src="https://tssls-4dmd8pyzq1fzwv.mesvr.com/nocache/4dmd8pyzq1fzwv/rspr47.wav">
+</pre>
+</div>
+</body>
+</html>
+",
     subject: "R07D NEW DEVOTIONAL ",
     from_email: "xoaquin@torrenegra.co",
     from_name: "Xoaquin",
-    to: myArray2
-  
+    //to: myArray2
+    to: ["carlos@torrenegra.co"];
      },
   async: true
 },{
