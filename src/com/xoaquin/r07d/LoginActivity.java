@@ -123,7 +123,9 @@ public class LoginActivity extends Activity {
 			                	    	ParseInstallation installation = ParseInstallation.getCurrentInstallation();
 			   						    String locale = getResources().getConfiguration().locale.getDisplayName();
 			   			   		        user.put("locale", locale);
+			   			   		        if (installation.getString("appVersion")!=null){
 			   			   		        user.put("version", installation.getString("appVersion"));
+			   			   		        }
 			   			   		        user.saveInBackground();
 			   			   		     
 			                	    	
@@ -217,8 +219,9 @@ public void onclickregistrarse(View view) {  //click boton registrarse
     	                ParseInstallation installation = ParseInstallation.getCurrentInstallation();
 						String locale = getResources().getConfiguration().locale.getDisplayName();
 			   		    user.put("locale", locale);
+			   		 if (installation.getString("appVersion")!=null){
 			   		    user.put("version", installation.getString("appVersion"));
-			   		   
+			   		 }
     	                
     	                user.signUpInBackground(new SignUpCallback() {
     	                 
