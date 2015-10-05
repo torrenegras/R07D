@@ -1,21 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <lint>
+    <issue id="Assert" severity="ignore" />
     <issue id="CutPasteId" severity="ignore" />
+    <issue id="DefaultLocale" severity="ignore" />
     <issue id="ExportedReceiver">
         <ignore path="AndroidManifest.xml" />
     </issue>
     <issue id="HardcodedText">
         <ignore path="res/layout/rowlayout.xml" />
     </issue>
+    <issue id="IconColors" severity="ignore" />
+    <issue id="IconDensities" severity="ignore" />
+    <issue id="IconDipSize" severity="ignore" />
+    <issue id="IconDuplicates" severity="ignore" />
+    <issue id="IconDuplicatesConfig" severity="ignore" />
+    <issue id="IconLocation" severity="ignore" />
     <issue id="InefficientWeight">
         <ignore path="res/layout/rowlayout.xml" />
     </issue>
+    <issue id="InvalidPackage" severity="ignore" />
+    <issue id="LocaleFolder" severity="ignore" />
+    <issue id="MissingTranslation" severity="ignore" />
     <issue id="NestedScrolling">
         <ignore path="res/layout/activity_calendario_activity2.xml" />
     </issue>
     <issue id="NestedWeights">
         <ignore path="res/layout/widget_qmhd.xml" />
     </issue>
+    <issue id="OnClick" severity="ignore" />
+    <issue id="Overdraw" severity="ignore" />
     <issue id="SetJavaScriptEnabled">
         <ignore path="src/com/xoaquin/r07d/DevocionalFragment.java" />
     </issue>
@@ -25,4 +38,5 @@
     <issue id="Typos">
         <ignore path="res/values-es/strings.xml" />
     </issue>
+    <issue id="UnusedResources" severity="ignore" />
 </lint>

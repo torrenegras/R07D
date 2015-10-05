@@ -132,7 +132,7 @@ public class ReporteActivity extends Activity {
 	   	  
 	    	  
 	    	  
- //Si no hay en DB local, trae campos en archivo de preferencias, deberia funcionar con backup de google y todo en nuevas instalaciones
+ //Trae campos en archivo de preferencias o de Parse
 	    	 
 		      SharedPreferences sharedPrefr = getSharedPreferences("myprefs", Context.MODE_PRIVATE);
 	    	  
@@ -311,10 +311,12 @@ public class ReporteActivity extends Activity {
 		
         //CREACION DE REPORTES   HTML Y PDF ***************************************
 		
-		    String nombretablausuario=ntu;
+		    //cambio
+            String nombretablausuario=ntu;
  		
  		    ParseQuery<ParseObject> query = ParseQuery.getQuery(nombretablausuario); //query para buscar records de ese mes y a�o en orden ascendente
-	        query.whereEqualTo("mesdbp", mes);
+ 		    query.whereEqualTo("userdbp",nombretablausuario);
+ 		    query.whereEqualTo("mesdbp", mes);
 	        query.whereEqualTo("aniodbp", anio);
 	        query.orderByAscending("diadbp");
 	        

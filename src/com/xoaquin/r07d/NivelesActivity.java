@@ -75,7 +75,7 @@ public class NivelesActivity extends Activity {
 				
 		bn=isNetworkAvailable();
 		tv=(TextView) findViewById(R.id.textViewt);
-		tv2=(TextView) findViewById(R.id.textViewtxt);
+		tv2=(TextView) findViewById(R.id.textViewtxt1NEW);
 		tv3=(TextView) findViewById(R.id.textViewt2);
 		b=(Button) findViewById(R.id.button1);
 		L1 = (LinearLayout) findViewById(R.id.ll);
@@ -87,9 +87,7 @@ public class NivelesActivity extends Activity {
 		tv3.setTypeface(kepf);
 		b.setTypeface(kepf);
 		
-		tv2.setText(getString(R.string.puntaje));
-	
-		
+				
 		//iniciando calendario en fecha de hoy
 		 Calendar now = Calendar.getInstance(); //calendario, trayendo fecha de hoy
        // diacal = now.get(Calendar.DAY_OF_MONTH);
@@ -126,9 +124,10 @@ public class NivelesActivity extends Activity {
    	 }
    	 
    	 
-   	 
+   	    //cambio
 		ParseQuery<ParseObject> query = ParseQuery.getQuery(nombretablausuario); 
-  		query.whereEqualTo("mesdbp", m);
+		query.whereEqualTo("userdbp",nombretablausuario);
+		query.whereEqualTo("mesdbp", m);
 	    query.whereEqualTo("aniodbp", Integer.toString(aniocal)); 
 	    
 	    if (!bn){
@@ -231,7 +230,7 @@ public class NivelesActivity extends Activity {
 	        });
 	        
 		
-	        if(objetos>=5 && objetos<15){
+	        if(objetos>=0 && objetos<15){
 				  tv.setText(getString(R.string.punp));
 			      tv3.setText(getString(R.string.punp2)+" +"+String.valueOf(puntajemespasado));
 			  }

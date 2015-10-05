@@ -74,7 +74,7 @@ public class NivelesMenuActivity extends Activity {
 				
 		bn=isNetworkAvailable();
 		tv=(TextView) findViewById(R.id.textViewt);
-		tv2=(TextView) findViewById(R.id.textViewtxt);
+		tv2=(TextView) findViewById(R.id.textViewtxt1NEW);
 		tv3=(TextView) findViewById(R.id.textViewt2);
 		b=(Button) findViewById(R.id.button1);
 		L1 = (LinearLayout) findViewById(R.id.ll);
@@ -86,8 +86,7 @@ public class NivelesMenuActivity extends Activity {
 		tv3.setTypeface(kepf);
 		b.setTypeface(kepf);
 		
-		tv2.setText(getString(R.string.puntaje));
-	
+			
 		
 		//iniciando calendario en fecha de hoy
 		 Calendar now = Calendar.getInstance(); //calendario, trayendo fecha de hoy
@@ -125,9 +124,10 @@ public class NivelesMenuActivity extends Activity {
    	 }
    	 
    	 
-   	 
+   	    //cambio 
 		ParseQuery<ParseObject> query = ParseQuery.getQuery(nombretablausuario); 
-  		query.whereEqualTo("mesdbp", m);
+		query.whereEqualTo("userdbp",nombretablausuario);
+		query.whereEqualTo("mesdbp", m);
 	    query.whereEqualTo("aniodbp", Integer.toString(aniocal)); 
 	    
 	    if (!bn){
@@ -189,8 +189,8 @@ public class NivelesMenuActivity extends Activity {
 	                   {   	                   
 	                	  
 	                	   ParseObject o=obs.get(0);
-	                	   int pun= Integer.valueOf(o.get("puntaje").toString());
-	                	   
+	                	   //int pun= Integer.valueOf(o.get("puntaje").toString());
+	                	   int pun= Integer.valueOf(o.get("puntajeint").toString());
 	         			   b.setText(String.valueOf(pun));
 	         			   
 	               
@@ -213,7 +213,7 @@ public class NivelesMenuActivity extends Activity {
 	        
 		
 			  
-			  if(objetos>=5 && objetos<15){
+			  if(objetos>=0 && objetos<15){
 				  tv.setText(getString(R.string.punp));
 			      tv3.setText(getString(R.string.punp2)+" +"+String.valueOf(puntajemespasado));
 			  }
@@ -296,7 +296,7 @@ public class NivelesMenuActivity extends Activity {
 	         startActivity(android.content.Intent.createChooser(Intent, getString(R.string.shrnoti)));
 	     }
 	 
-	//CHECK NETWORK
+	       //CHECK NETWORK
 			private boolean isNetworkAvailable() { 
 				
 					ConnectivityManager connectivityManager 

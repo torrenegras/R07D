@@ -168,9 +168,10 @@ public class RegistroFragment extends Fragment {
         tdrc.setClickable(true);
         
     	}else{ //HACE QUERY A DATASTORE
-    		
+    		//cambio
     		ParseQuery<ParseObject> query = ParseQuery.getQuery(ntu);
-	        query.whereEqualTo("fechadbp", fca);
+    		query.whereEqualTo("userdbp",ntu);
+    		query.whereEqualTo("fechadbp", fca);
 	        query.orderByAscending("updatedAt");
 	        query.fromLocalDatastore();
 	        query.findInBackground(new FindCallback<ParseObject>() {
@@ -203,8 +204,10 @@ public class RegistroFragment extends Fragment {
 	                    tdrc.setClickable(true);
 	                   
 	                   }else{  //HACE QUERY A NETWORK
-	               		ParseQuery<ParseObject> queryn = ParseQuery.getQuery(ntu);
-	        	        queryn.whereEqualTo("fechadbp", fca);
+	               		//cambio
+	                	ParseQuery<ParseObject> queryn = ParseQuery.getQuery(ntu);
+	               		queryn.whereEqualTo("userdbp",ntu);
+	               		queryn.whereEqualTo("fechadbp", fca);
 	        	        queryn.orderByAscending("updatedAt");
 	        	        queryn.findInBackground(new FindCallback<ParseObject>() {
 	        	            public void done(List<ParseObject> obs, ParseException e) {
@@ -261,8 +264,10 @@ public class RegistroFragment extends Fragment {
 	                	
 	                
 	                	//HACE QUERY A NETWORK 2,  SI SACA ERROR QUERY DE DATASTORE POR CUALQUIER MOTIVO
+	                	//cambio
 	                	ParseQuery<ParseObject> queryn = ParseQuery.getQuery(ntu);
-	        	        queryn.whereEqualTo("fechadbp", fca);
+	                	queryn.whereEqualTo("userdbp",ntu);
+	                	queryn.whereEqualTo("fechadbp", fca);
 	        	        queryn.orderByAscending("updatedAt");
 	        	        queryn.findInBackground(new FindCallback<ParseObject>() {
 	        	            public void done(List<ParseObject> obs, ParseException e) {
@@ -313,12 +318,7 @@ public class RegistroFragment extends Fragment {
 	        	        });
 	                
 	                
-	                	/*ANTIGUO THROW DE ERROR
-	                	pb.setVisibility(View.GONE);
-    	                tdrc.setClickable(true);
-	               
-	                	Toast.makeText(getActivity(), getString(R.string.errcon)+" DATASTORE "+e.toString(), Toast.LENGTH_LONG).show();
-	                	*/
+	                	
 	                
 	                }//FIN ELSE FALLA QUERY DATASTORE
 	       
@@ -333,21 +333,7 @@ public class RegistroFragment extends Fragment {
     	
     	
             
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-	   
-	 
+
     		
 	        
 	  //HORA INICIO
@@ -441,9 +427,10 @@ public class RegistroFragment extends Fragment {
 		
 		
 		//GUARDAR / ACTUALIZAR DATOS EN DB PARSE
-		
-    	ParseQuery<ParseObject> query = ParseQuery.getQuery(ntu);
-        query.whereEqualTo("fechadbp", fca);
+		//cambio
+		ParseQuery<ParseObject> query = ParseQuery.getQuery(ntu);
+		query.whereEqualTo("userdbp",ntu);
+		query.whereEqualTo("fechadbp", fca);
       
         if (!b){
         	query.fromLocalDatastore();
@@ -491,7 +478,7 @@ public class RegistroFragment extends Fragment {
         		q.whereEqualTo("correo", cu.getEmail().toString());
         		q.whereEqualTo("fecha", fca);
         		q.whereEqualTo("tipo", getString(R.string.atg));
-        		//q.setCachePolicy(ParseQuery.CachePolicy.NETWORK_ELSE_CACHE);
+        		
         		if (!b){
                 	q.fromLocalDatastore();
                 }
@@ -644,7 +631,8 @@ public class RegistroFragment extends Fragment {
 	        object.put("opddbp", String.valueOf(cb4.isChecked())); 
 	        object.put("oplcodbp", String.valueOf(cb5.isChecked()));
 	        object.put("aopdbp", String.valueOf(cb6.isChecked())); 
-	        object.put("aopidbp", String.valueOf(cb7.isChecked())); 
+	        object.put("aopidbp", String.valueOf(cb7.isChecked()));
+	        object.put("userdbp",ntu);
 	        
 	       
 	      //true si hay internet,  false si no hay.
@@ -701,7 +689,8 @@ public class RegistroFragment extends Fragment {
 	 //CREAR NUEVO RECORD EN PARSE
 	 public void  crearNuevoRecordParse() {
 		 
-            ParseObject TablaUsr = new ParseObject(ntu);//se crea un nuevo elemento para introducir nuevo record en PARSE
+            //cambio
+		    ParseObject TablaUsr = new ParseObject(ntu);//se crea un nuevo elemento para introducir nuevo record en PARSE
    			
 			TablaUsr.put("fechadbp", fca); 
 	        TablaUsr.put("diadbp", dca);
@@ -720,7 +709,8 @@ public class RegistroFragment extends Fragment {
 	        TablaUsr.put("opddbp", String.valueOf(cb4.isChecked())); 
 	        TablaUsr.put("oplcodbp", String.valueOf(cb5.isChecked()));
 	        TablaUsr.put("aopdbp", String.valueOf(cb6.isChecked())); 
-	        TablaUsr.put("aopidbp", String.valueOf(cb7.isChecked())); 
+	        TablaUsr.put("aopidbp", String.valueOf(cb7.isChecked()));
+	        TablaUsr.put("userdbp",ntu);
 
 	        
 	      //true si hay internet,  false si no hay.   

@@ -3,7 +3,6 @@
 
 package com.xoaquin.r07d;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import com.parse.FunctionCallback;
 import com.parse.LogInCallback;
@@ -24,7 +23,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
-import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
@@ -78,7 +76,7 @@ public class LoginActivity extends Activity {
   		}
 		
 		
-		//trayendo ultimo correo usado para loggin
+		//trayendo ultimo correo usado para login
 		final DBAdapter db = new DBAdapter(this);  
 	     db.open(); 
 	      
@@ -102,6 +100,7 @@ public class LoginActivity extends Activity {
 	public void onclickconectarse(View view) { //click boton conectarse
 		
 		final ProgressBar pb = (ProgressBar) findViewById(R.id.progressBar1);
+		pb.getIndeterminateDrawable().setColorFilter(0xFF8d665f, android.graphics.PorterDuff.Mode.MULTIPLY);
 		pb.setVisibility(View.VISIBLE);
 		  
 			   
@@ -184,6 +183,7 @@ public void onclickregistrarse(View view) {  //click boton registrarse
 		b2.setEnabled(false);
 		
 		final ProgressBar pb = (ProgressBar) findViewById(R.id.progressBar1);
+		pb.getIndeterminateDrawable().setColorFilter(0xFF8d665f, android.graphics.PorterDuff.Mode.MULTIPLY);
 		pb.setVisibility(View.VISIBLE);
 		
 		
@@ -295,7 +295,9 @@ public void onclickregistrarse(View view) {  //click boton registrarse
 		
 		
 }//registrarse
-	
+
+
+/* CONEXION POR FACEBOOK SUSPENDIDA
 	
 public void onclickconectarseFB(View view) {
 	 final ProgressBar pb = (ProgressBar) findViewById(R.id.progressBar1);
@@ -445,9 +447,12 @@ public void onclickconectarseFB(View view) {
 		    }
 		  }
 		});
-	*/
+	
+
+
 	 
-		 ParseFacebookUtils.logInWithReadPermissionsInBackground(this, /*permissions*/Arrays.asList("email", "dd"), new LogInCallback() {
+
+		 ParseFacebookUtils.logInWithReadPermissionsInBackground(this, Arrays.asList("email", "dd"), new LogInCallback() {
 			  @Override
 			  public void done(ParseUser user, ParseException err) {
 			    if (user == null) {
@@ -461,7 +466,7 @@ public void onclickconectarseFB(View view) {
 			});
 	 
 	 
-	 }else{ // si no hay internet
+	 }else{ 
 		 Toast.makeText(LoginActivity.this, getString(R.string.ncon)+"...", Toast.LENGTH_LONG).show(); 
     	 pb.setVisibility(View.INVISIBLE);
 	 }
@@ -469,6 +474,8 @@ public void onclickconectarseFB(View view) {
 
 }
 
+
+*/
 
 
 
@@ -484,12 +491,8 @@ public void onclickdesc(View view) {
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
 		
-		
-	
-	
 	}
 	
-
 
 	
 	@Override
@@ -508,7 +511,7 @@ public void onclickdesc(View view) {
 		
 		final TextView tv3=(TextView) findViewById (R.id.textViewv1);
 		final ProgressBar pb = (ProgressBar) findViewById(R.id.progressBar1);
-		
+		pb.getIndeterminateDrawable().setColorFilter(0xFF8d665f, android.graphics.PorterDuff.Mode.MULTIPLY);
 		pb.setVisibility(View.VISIBLE);
 		tv3.setEnabled(false);
 		  

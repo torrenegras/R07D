@@ -1,10 +1,10 @@
 
-//ADAPTADOR CUSTOM PARA INFLAR LISTVIEW CON 4 TEXTBOXS EN LAYOUT. RECIBE UNA LISTA DE OBJETOS CUSTOM CON 4 TB CADA UNO.
+//ADAPTADOR CUSTOM PARA INFLAR LISTVIEW CON 4 TEXTBOXS EN LAYOUT PARA ACTIVIDAD DEL MURO. RECIBE UNA LISTA DE OBJETOS CUSTOM CON 4 TB CADA UNO.
 
 package com.xoaquin.r07d;
 
 import java.util.ArrayList;
-
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -44,7 +44,8 @@ public class CustomAdapter extends BaseAdapter {
 	      return position;
 	   }
 
-	   public View getView(int position, View convertView, ViewGroup parent) {
+	   @SuppressLint("InflateParams")
+	public View getView(int position, View convertView, ViewGroup parent) {
 	      ViewHolder holder = null;
 	      if(convertView == null) {
 	         holder = new ViewHolder();

@@ -81,6 +81,7 @@ public class CalendarioActivity2 extends Activity implements OnGesturePerformedL
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
+		//Gestos para swipe de dedos en pantalla
 		GestureOverlayView gestureOverlayView = new GestureOverlayView(this);
 	    View inflate = getLayoutInflater().inflate(R.layout.activity_calendario_activity2, null);
 	    gestureOverlayView.addView(inflate);
@@ -103,8 +104,8 @@ public class CalendarioActivity2 extends Activity implements OnGesturePerformedL
         String product      = Build.PRODUCT;
         String model        = Build.MODEL;
         
-        //PushService.subscribe(this, "todos", MainActivity.class); //Suscripcion a canal todos
-          ParsePush.subscribeInBackground("todos");
+           //Suscripcion a canal todos
+            ParsePush.subscribeInBackground("todos"); 
     		ParseUser cuc = ParseUser.getCurrentUser(); 
     		if(cuc!=null){
     		
@@ -117,7 +118,7 @@ public class CalendarioActivity2 extends Activity implements OnGesturePerformedL
 			              nombretablausuario=nombretablausuario.replaceAll("@", "");	
     		          }
     		
-    		//PushService.subscribe(this, nombretablausuario,MainActivity.class); //Suscripcion a canal dedicado unico de usuario, para cada instalacion.
+    		//Suscripcion a canal dedicado unico de usuario, para cada instalacion.
     	    ParsePush.subscribeInBackground(nombretablausuario);
     		}
 						
@@ -134,13 +135,13 @@ public class CalendarioActivity2 extends Activity implements OnGesturePerformedL
     		String locale = getResources().getConfiguration().locale.getDisplayName();
     		     		
     		if(locale.contains("espa\u00F1ol")){ 
-    			//PushService.subscribe(this, "jalert", JalertActivity.class); //Suscripcion canal para push target Espa�ol
+    			//Suscripcion canal para push target Espa�ol
     			 ParsePush.subscribeInBackground("jalert");
     		}else{
-    			//PushService.subscribe(this, "jalerting", JalertActivity.class); //Suscripcion canal para push target Ingles
+    			//Suscripcion canal para push target Ingles
     			 ParsePush.subscribeInBackground("jalerting");
     	   		}
-    		Log.e("bloque","fin");
+    		
 //FIN Bloque suscripcion a canales y guardado de instalacion actual en PARSE**********************************************************
     		
     		
@@ -426,9 +427,10 @@ private class AsyncTaskRunner extends AsyncTask<Integer, Integer, Integer> {
      if((mescalf+1)<10){nmcomp="0"+nmcomp;}
      String nycomp=String.valueOf(aniocalf);
     
-     
+     //cambio
      ParseQuery<ParseObject> query = ParseQuery.getQuery(nombretablausuario); //query para buscar records de ese mes y a�o en orden ascendente
-	 query.whereEqualTo("mesdbp", nmcomp);
+	 query.whereEqualTo("userdbp",nombretablausuario);
+     query.whereEqualTo("mesdbp", nmcomp);
      query.whereEqualTo("aniodbp", nycomp);
      query.orderByAscending("diadbp");
    
@@ -622,7 +624,7 @@ private int getBarHeight() {
 	}
 
 
-	//TRES METODOS AUTOGENERADOS PARA LA IMPLEMENTACION DE LOCATION
+	//TRES METODOS AUTOGENERADOS PARA LA IMPLEMENTACION DE LOCATION, NO SE USA, IMPLEMENTACION RESERVADA PARA FUTURO
 	@Override
 	public void onConnectionFailed(ConnectionResult arg0) {
 		// TODO Auto-generated method stub
@@ -666,7 +668,7 @@ private int getBarHeight() {
 	}
 
 	
-	//CONEXION AL CLIENTE DE POSICIONAMIENTO CUANDO LA ACTIVIDAD ES VISIBLE
+	//CONEXION AL CLIENTE DE POSICIONAMIENTO CUANDO LA ACTIVIDAD ES VISIBLE, IMPLEMENTACION RESERVADA PARA FUTURO
 	@Override
     protected void onStart() {
         super.onStart();
@@ -679,7 +681,7 @@ private int getBarHeight() {
         
     }
 
-    //DESCONEXION DEL CLIENTE AL DESAPARECER LA ACTIVIDAD
+    //DESCONEXION DEL CLIENTE AL DESAPARECER LA ACTIVIDAD,IMPLEMENTACION RESERVADA PARA FUTURO
 	@Override
     protected void onStop() {
 		 super.onStop();
@@ -717,7 +719,7 @@ private int getBarHeight() {
 
 	
 	
-	//3 METODOS COMPLEMENTARIOS PARA :  CHECK STATUS GOOGLE PLAY SERVICES PARA PODER USARLO EN GEOLOCALIZACION
+	//3 METODOS COMPLEMENTARIOS PARA :  CHECK STATUS GOOGLE PLAY SERVICES PARA PODER USARLO EN GEOLOCALIZACION, IMPLEMENTACION RESERVADA PARA FUTURO
 
 	private boolean checkPlayServices() {
 		  int status = GooglePlayServicesUtil.isGooglePlayServicesAvailable(this);
@@ -756,6 +758,7 @@ private int getBarHeight() {
 	  super.onActivityResult(requestCode, resultCode, data);
 	}
 	
+	   
 	//CHECK NETWORK
 		private boolean isNetworkAvailable() { 
 			
@@ -766,6 +769,10 @@ private int getBarHeight() {
 		}
 
 
+		
+		
+		
+		//LO QUE SE EJECUTA CON GESTOS
 		@Override
 		public void onGesturePerformed(GestureOverlayView overlay,Gesture gesture) {
 			// TODO Auto-generated method stub

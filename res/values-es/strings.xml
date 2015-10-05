@@ -79,7 +79,7 @@
     <string name="dummy_content">DUMMY\nCONTENT</string>
     <string name="titlenivel">NIVEL R07D</string>
     <string name="title_activity_niveles">NivelesActivity</string>
-    <string name="puntaje">PUNTAJE R07D</string>
+    <string name="puntaje">PUNTAJE TOTAL</string>
     <string name="pun">1000</string>
     <string name="hash">#</string>
     <string name="ol">¿Olvidó su Clave?</string>
@@ -226,12 +226,12 @@
  <string name="shrscoretext">Este es mi puntaje en #R07D, \u00BFCual es el tuyo?.. http://bit.ly/1lN7aSl</string>
  <string name="shrnoti">Compartir con</string>
  
-    <string name="punp">Usted ha hecho un buen esfuerzo, siga avanzando! Bendiciones!</string>
-    <string name="punp2">(R07D Nivel Principiante)</string>
-    <string name="punm">Usted ha hecho un buen trabajo, siga avanzando! Bendiciones!</string>
-    <string name="punm2">(R07D Nivel Intermedio)</string>
-    <string name="puna">Usted ha hecho un excelente trabajo, siga avanzando! Bendiciones!</string> 
-    <string name="puna2">(R07D Nivel Avanzado)</string> 
+    <string name="punp">Usted ha hecho un buen esfuerzo este mes, siga avanzando! Bendiciones!</string>
+    <string name="punp2">(Nivel Mensual: R07D Principiante) Puntos: </string>
+    <string name="punm">Usted ha hecho un buen trabajo este mes, siga avanzando! Bendiciones!</string>
+    <string name="punm2">(Nivel Mensual: R07D Intermedio) Puntos: </string>
+    <string name="puna">Usted ha hecho un excelente trabajo este mes, siga avanzando! Bendiciones!</string> 
+    <string name="puna2">(Nivel Mensual: R07D Avanzado) Puntos: </string> 
     
     <string name="widgettit">R07D \u00BFqmhD?</string>
     

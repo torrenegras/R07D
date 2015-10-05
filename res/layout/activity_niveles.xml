@@ -27,16 +27,26 @@
         android:textColor="#8d665f" />
 
     <TextView
-        android:id="@+id/textViewtxt"
+        android:id="@+id/textViewtxt1NEW"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="@string/app_name"
+        android:textColor="#8d665f"
+        android:textSize="50sp" />
+    
+     <TextView
+        android:id="@+id/textViewtxt2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_weight="1"
         android:gravity="center"
         android:text="@string/puntaje"
-        android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="#8d665f"
-        android:textSize="50sp" />
+        android:textSize="30sp" />
 
     <Button
         android:id="@+id/button2"

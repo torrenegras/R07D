@@ -72,9 +72,7 @@ public class RecdiaActivity2 extends FragmentActivity {
 		
 	  
 	   
-		//LLAMANDO FUNCION AUTOGUARDADO PARA CUANDO CAMBIO DE TAB
-		//RegistroFragment rf = (RegistroFragment) getFragmentManager().findFragmentById(R.id.fragments_container);
-		//rf.guardar();
+		
 		Toast.makeText(RecdiaActivity2.this, getString(R.string.augu)+"...", Toast.LENGTH_LONG).show();
 	
 		SpannableString contentUnderline = new SpannableString(getString(R.string.devr));
