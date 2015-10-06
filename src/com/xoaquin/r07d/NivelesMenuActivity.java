@@ -124,8 +124,8 @@ public class NivelesMenuActivity extends Activity {
    	 }
    	 
    	 
-   	    //cambio 
-		ParseQuery<ParseObject> query = ParseQuery.getQuery(nombretablausuario); 
+   	    //cambioschema
+		ParseQuery<ParseObject> query = ParseQuery.getQuery("main"); 
 		query.whereEqualTo("userdbp",nombretablausuario);
 		query.whereEqualTo("mesdbp", m);
 	    query.whereEqualTo("aniodbp", Integer.toString(aniocal)); 

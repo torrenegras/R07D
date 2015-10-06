@@ -342,8 +342,8 @@ Parse.Cloud.define("bienvenidausr", function(request, response) {
   message: {
     //antiguo //html: "<!DOCTYPE html><html><body><p>A partir de ma&ntilde;ana disfrute un devocional patrocinado por www.intercesora.co <br><br>Bendiciones!! </p></body></html>",  //ojo con los caracteres en esta vaina, muy quisquilloso!!!!!!!!!!!!
     //La clave esta en HTML sencillo, puesto en una sola linea, y con las comillas precedidas por \ como caracter especial OJO
-    html: "<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=UTF-8\"><title></title></head><body><h1><font color=\"#8d665f\">R07D</font></h1><h3><font color=\"#8d665f\">Aviso Importante / Important Notice </font></h3><font color=\"#8d665f\">La familia R07D esta creciendo, empezamos hace un poco mas de un año y ya son mas de 1000 personas las que registran Su Tiempo en El Secreto usando la aplicación, un registro que permanece de por vida!, esperando enseñarle a sus hijos y nietos lo que Dios hizo por ellas en un dia cualquiera...tal vez como hoy.<br><br>The R07D family is growing, we started over a year ago and more than 1000 people are now saving their time in The Secret using the application, a record for life!, waiting to teach their children and grandchildren about what God did for them , in just any other day..like today.<br><br>Favor compártala con sus amigos y conocidos! / Please share it with your friends and acquaintances! <a href=\"https://play.google.com/store/apps/details?id=com.xoaquin.r07d\">Descárgala / Download</a> <br><br>Bendiciones!! /&nbsp; Blessings!!<br><br>\“Lámpara es a mis pies tu palabra, y lumbrera a mi camino (Salmo 119:105)\"</font><br><br></body></html>",
-    subject: "R07D 1K ",
+    html: "<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=UTF-8\"><title></title></head><body><h1><font color=\"#8d665f\">R07D</font></h1><h3><font color=\"#8d665f\">Aviso Importante / Important Notice </font></h3><font color=\"#8d665f\">Cambio de esquema en Base de Datos, por favor actualice la aplicacion hoy.<br><br>Database schema change, please update the application today.<br><br><a href=\"https://play.google.com/store/apps/details?id=com.xoaquin.r07d\">Actualizar / Update</a> <br><br>Bendiciones!! /&nbsp; Blessings!!<br><br>\“Lámpara es a mis pies tu palabra, y lumbrera a mi camino (Salmo 119:105)\"</font><br><br></body></html>",
+    subject: "R07D ACTUALIZACION IMPORTANTE",
     from_email: "xoaquin@torrenegra.co",
     from_name: "Xoaquin",
     to: myArray
@@ -370,8 +370,8 @@ Parse.Cloud.define("bienvenidausr", function(request, response) {
  Mandrill.sendEmail({
    
   message: {
-    html: "<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=UTF-8\"><title></title></head><body><h1><font color=\"#8d665f\">R07D</font></h1><h3><font color=\"#8d665f\">Aviso Importante / Important Notice </font></h3><font color=\"#8d665f\">La familia R07D esta creciendo, empezamos hace un poco mas de un año y ya son mas de 1000 personas las que registran Su Tiempo en El Secreto usando la aplicación, un registro que permanece de por vida!, esperando enseñarle a sus hijos y nietos lo que Dios hizo por ellas en un dia cualquiera...tal vez como hoy.<br><br>The R07D family is growing, we started over a year ago and more than 1000 people are now saving their time in The Secret using the application, a record for life!, waiting to teach their children and grandchildren about what God did for them , in just any other day..like today.<br><br>Favor compártala con sus amigos y conocidos! / Please share it with your friends and acquaintances! <a href=\"https://play.google.com/store/apps/details?id=com.xoaquin.r07d\">Descárgala / Download</a> <br><br>Bendiciones!! /&nbsp; Blessings!!<br><br>\“Lámpara es a mis pies tu palabra, y lumbrera a mi camino (Salmo 119:105)\"</font><br><br></body></html>",
-    subject: "R07D 1K ",
+   html: "<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=UTF-8\"><title></title></head><body><h1><font color=\"#8d665f\">R07D</font></h1><h3><font color=\"#8d665f\">Aviso Importante / Important Notice </font></h3><font color=\"#8d665f\">Cambio de esquema en Base de Datos, por favor actualice la aplicacion hoy.<br><br>Database schema change, please update the application today.<br><br><a href=\"https://play.google.com/store/apps/details?id=com.xoaquin.r07d\">Actualizar / Update</a> <br><br>Bendiciones!! /&nbsp; Blessings!!<br><br>\“Lámpara es a mis pies tu palabra, y lumbrera a mi camino (Salmo 119:105)\"</font><br><br></body></html>",
+    subject: "R07D IMPORTANT UPDATE ",
     from_email: "xoaquin@torrenegra.co",
     from_name: "Xoaquin",
     to: myArray2
@@ -415,7 +415,8 @@ Parse.Cloud.define("bienvenidausr", function(request, response) {
 Parse.Cloud.job("pushavisoimportante", function(request, status) {
    
     Parse.Push.send({
-  channels: [ "todos" ],
+      //channels: [ "carlostorrenegraco" ],  //Habilitar este para pruebas y deshabilitar siguiente
+        channels: [ "todos" ],
   data: {
     action:"com.xoaquin.r07d.AVISO"
     
@@ -465,3 +466,39 @@ Parse.Cloud.job("puntajes", function(request, status) {
        }
 
 });
+
+
+//JOB PARA MODIFICACION SCHEMA DB PARSE
+  
+ Parse.Cloud.job("modDB", function(request, status) {
+   
+  var clase = Parse.Object.extend("zumilolagmailcom");
+  var query = new Parse.Query(clase);
+  query.notEqualTo("userdbp","zumilolagmailcom"); 
+ 
+ query.each(function(user) {
+       
+  //seccion de recorrido
+  
+     user.set("userdbp","zumilolagmailcom");
+   user.save();
+   
+  
+     
+ 
+    
+ }).then(function() { //si todo ok en query.each {
+     
+  
+    status.success("USUARIO A�ADIDO");
+     
+ }, function(error) {  //si algo salio mal en query.each
+     
+    status.error("ALGO SALIO MAL!!");
+  });
+ 
+ 
+  
+}); //cierre Job
+ 
+ 

@@ -168,8 +168,8 @@ public class RegistroFragment extends Fragment {
         tdrc.setClickable(true);
         
     	}else{ //HACE QUERY A DATASTORE
-    		//cambio
-    		ParseQuery<ParseObject> query = ParseQuery.getQuery(ntu);
+    		//cambioschema
+    		ParseQuery<ParseObject> query = ParseQuery.getQuery("main");
     		query.whereEqualTo("userdbp",ntu);
     		query.whereEqualTo("fechadbp", fca);
 	        query.orderByAscending("updatedAt");
@@ -204,8 +204,8 @@ public class RegistroFragment extends Fragment {
 	                    tdrc.setClickable(true);
 	                   
 	                   }else{  //HACE QUERY A NETWORK
-	               		//cambio
-	                	ParseQuery<ParseObject> queryn = ParseQuery.getQuery(ntu);
+	               		//cambioschema
+	                	ParseQuery<ParseObject> queryn = ParseQuery.getQuery("main");
 	               		queryn.whereEqualTo("userdbp",ntu);
 	               		queryn.whereEqualTo("fechadbp", fca);
 	        	        queryn.orderByAscending("updatedAt");
@@ -264,8 +264,8 @@ public class RegistroFragment extends Fragment {
 	                	
 	                
 	                	//HACE QUERY A NETWORK 2,  SI SACA ERROR QUERY DE DATASTORE POR CUALQUIER MOTIVO
-	                	//cambio
-	                	ParseQuery<ParseObject> queryn = ParseQuery.getQuery(ntu);
+	                	//cambioschema
+	                	ParseQuery<ParseObject> queryn = ParseQuery.getQuery("main");
 	                	queryn.whereEqualTo("userdbp",ntu);
 	                	queryn.whereEqualTo("fechadbp", fca);
 	        	        queryn.orderByAscending("updatedAt");
@@ -427,8 +427,8 @@ public class RegistroFragment extends Fragment {
 		
 		
 		//GUARDAR / ACTUALIZAR DATOS EN DB PARSE
-		//cambio
-		ParseQuery<ParseObject> query = ParseQuery.getQuery(ntu);
+		//cambioschema
+		ParseQuery<ParseObject> query = ParseQuery.getQuery("main");
 		query.whereEqualTo("userdbp",ntu);
 		query.whereEqualTo("fechadbp", fca);
       
@@ -689,8 +689,8 @@ public class RegistroFragment extends Fragment {
 	 //CREAR NUEVO RECORD EN PARSE
 	 public void  crearNuevoRecordParse() {
 		 
-            //cambio
-		    ParseObject TablaUsr = new ParseObject(ntu);//se crea un nuevo elemento para introducir nuevo record en PARSE
+            //cambioschema
+		    ParseObject TablaUsr = new ParseObject("main");//se crea un nuevo elemento para introducir nuevo record en PARSE
    			
 			TablaUsr.put("fechadbp", fca); 
 	        TablaUsr.put("diadbp", dca);

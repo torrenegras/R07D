@@ -427,8 +427,8 @@ private class AsyncTaskRunner extends AsyncTask<Integer, Integer, Integer> {
      if((mescalf+1)<10){nmcomp="0"+nmcomp;}
      String nycomp=String.valueOf(aniocalf);
     
-     //cambio
-     ParseQuery<ParseObject> query = ParseQuery.getQuery(nombretablausuario); //query para buscar records de ese mes y a�o en orden ascendente
+     //cambioschema
+     ParseQuery<ParseObject> query = ParseQuery.getQuery("main"); //query para buscar records de ese mes y a�o en orden ascendente
 	 query.whereEqualTo("userdbp",nombretablausuario);
      query.whereEqualTo("mesdbp", nmcomp);
      query.whereEqualTo("aniodbp", nycomp);

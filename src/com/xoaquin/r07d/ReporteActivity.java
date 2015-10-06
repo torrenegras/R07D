@@ -311,10 +311,10 @@ public class ReporteActivity extends Activity {
 		
         //CREACION DE REPORTES   HTML Y PDF ***************************************
 		
-		    //cambio
+		    //cambioschema
             String nombretablausuario=ntu;
  		
- 		    ParseQuery<ParseObject> query = ParseQuery.getQuery(nombretablausuario); //query para buscar records de ese mes y a�o en orden ascendente
+ 		    ParseQuery<ParseObject> query = ParseQuery.getQuery("main"); //query para buscar records de ese mes y a�o en orden ascendente
  		    query.whereEqualTo("userdbp",nombretablausuario);
  		    query.whereEqualTo("mesdbp", mes);
 	        query.whereEqualTo("aniodbp", anio);
