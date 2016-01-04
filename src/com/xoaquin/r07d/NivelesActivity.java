@@ -87,13 +87,6 @@ public class NivelesActivity extends Activity {
 		tv3.setTypeface(kepf);
 		b.setTypeface(kepf);
 		
-				
-		//iniciando calendario en fecha de hoy
-		 Calendar now = Calendar.getInstance(); //calendario, trayendo fecha de hoy
-       // diacal = now.get(Calendar.DAY_OF_MONTH);
-        mescal=now.get(Calendar.MONTH);
-        aniocal=now.get(Calendar.YEAR);
-		
 		
 		ParseUser cu = ParseUser.getCurrentUser();
 		if (cu != null) {
@@ -106,13 +99,21 @@ public class NivelesActivity extends Activity {
 		  // show the signup or login screen
 		}
 		
-		m=Integer.toString(mescal+1);
+				
+		//iniciando calendario en fecha de hoy
+		 Calendar now = Calendar.getInstance(); //calendario, trayendo fecha de hoy
+       
+        mescal=now.get(Calendar.MONTH);
+        aniocal=now.get(Calendar.YEAR);
+		
+	m=Integer.toString(mescal+1);
+	
    	 if(Integer.valueOf(m)<10){
    		 m="0"+m;
    	 } 
    	 m2=m;
    
-   	 if(m=="01"){ //primer mes del a�o
+   	 if(m.equals("01")){ //primer mes del a�o
    		 m="12";
    		 aniocal=aniocal-1;
    	 }else{
